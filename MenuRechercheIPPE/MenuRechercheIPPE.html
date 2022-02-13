@@ -1,10 +1,53 @@
 <!DOCTYPE html>
 <html>
-<head>
-
-</head>
-<body>
-
-
-</body>
+  <head>
+    <title>Recherche IPPE</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href ="MenuRechercheIPPE.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="testbox is-mobile">
+      <form action="/">
+        <div class="banner">
+        </div>
+        <h1 style="height:180px; text-align:center; font-size: 30px; padding-top: 10%;" >&nbsp;&nbsp;IPPE - Interrogation - Personne</h1>
+        <div class="item">
+          <label for="name">Prénom(s)<span>*</span></label>
+          <div class="name-item">
+            <input id="prenom1" type="text" name="name" placeholder="Prénom 1" />
+            <input id="prenom2" type="text" name="name" placeholder="Prénom 2" />
+          </div>
+        </div>
+        <div class="item">
+          <label for="email">Nom de famille<span>*</span></label>
+          <input id="NomFamille" type="text" name="NomFamille" placeholder="Nom de famille"/>
+        </div>
+        <div class="item">
+          <label for="bdate">Date de naissance<span>*</span></label>
+          <input id="DDN" type="date" name="DDN" required/>
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+        <div class="question">
+          <label>Sexe</label>
+          <div class="question-answer">
+            <div>
+              <input type="radio" value="homme" id="homme" name="availability"/>
+              <label for="homme" class="radio"><span>Homme</span></label>
+            </div>
+            <div>
+              <input  type="radio" value="femme" id="femme" name="availability"/>
+              <label for="femme" class="radio"><span>Femme</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="btn-block">
+          <button type="submit" href="/">Recherche</button>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>
