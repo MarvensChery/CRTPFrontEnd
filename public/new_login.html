@@ -3,14 +3,13 @@
 <head>
 	<title>Responsive Loginform</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-	<link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" href="new_login.css">
+    <link rel="stylesheet" href="/CSS/new_login.css">
     <script src="new_login.js"></script>
 </head>
 <body>
 
     <header>
-        <img src="BackgroundHeader.jfif" alt="logo" />
+        <img src="/Images/BackgroundHeader.jfif" alt="logo" />
      </header>
 
     <div class="form-modal is-multiline is-mobile">
@@ -24,7 +23,7 @@
             <form>
                 <input type="text" placeholder="No de dossier"/>
                 <input type="password" placeholder="Mot de passe"/>
-                <button type="button" class="btn login">login</button>
+                <button id="studentLogin" type="button" class="btn login">Se connecter</button>
                 <hr/>
     
             </form>
@@ -34,7 +33,7 @@
             <form>
                 <input type="text" placeholder="No d'employé"/>
                 <input type="password" placeholder="Mot de passe"/>
-                <button type="button" class="btn login">login</button>
+                <button id="teacherLogin" type="button" class="btn login">Se connecter</button>
                 <hr/>
             </form>
         </div>
@@ -50,7 +49,7 @@
     </body>
     <div class="footer-dark">
         <footer>
-                <p class="copyright">cégep de maisonneuve © 2022</p>
+                <p class="copyright">Cégep de Maisonneuve © 2022</p>
         </footer>
     </div>
 

@@ -4,7 +4,7 @@
     <title>Recherche IPPE</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link rel="stylesheet" href ="MenuRechercheIPPE.css">
+    <link rel="stylesheet" href ="/CSS/MenuRechercheIPPE.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <style>
     </style>
@@ -16,20 +16,39 @@
         </div>
         <h1 style="height:180px; text-align:center; font-size: 30px; padding-top: 10%;" >&nbsp;&nbsp;IPPE - Interrogation - Personne</h1>
         <div class="item">
+          <label for="email">Nom de famille<span>*</span></label>
+          <input id="NomFamille" type="text" name="NomFamille" placeholder="Nom de famille"/>
+        </div>
+        <div class="item">
           <label for="name">Prénom(s)<span>*</span></label>
           <div class="name-item">
             <input id="prenom1" type="text" name="name" placeholder="Prénom 1" />
             <input id="prenom2" type="text" name="name" placeholder="Prénom 2" />
           </div>
         </div>
+        
         <div class="item">
-          <label for="email">Nom de famille<span>*</span></label>
-          <input id="NomFamille" type="text" name="NomFamille" placeholder="Nom de famille"/>
-        </div>
-        <div class="item">
+          
           <label for="bdate">Date de naissance<span>*</span></label>
+          
           <input id="DDN" type="date" name="DDN" required/>
-          <i class="fas fa-calendar-alt"></i>
+          <select id="MoisDDN">
+            <option>Janvier</option>
+            <option>Février</option>
+            <option>Mars</option>
+            <option>Avril</option>
+            <option>Mai</option>
+            <option>Juin</option>
+            <option>Juillet</option>
+            <option>Aout</option>
+            <option>Octobre</option>
+            <option>Septembre</option>
+            <option>Novembre</option>
+            <option>Décembre</option>
+          </select>
+
+          
+          
         </div>
         <div class="question">
           <label>Sexe</label>

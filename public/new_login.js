@@ -15,3 +15,11 @@ function toggleteacher(){
      document.getElementById("teacher-form").style.display="none";
      document.getElementById("student-form").style.display="block";
  }
+
+document.getElementById("studentLogin").addEventListener("click", () => {
+    window.location.href="./menu";
+});
+
+document.getElementById("teacherLogin").addEventListener("click", () => {
+    window.location.href="./menu";
+});

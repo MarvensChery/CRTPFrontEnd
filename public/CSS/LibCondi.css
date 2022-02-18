@@ -12,7 +12,7 @@ html, body {
     }
     #bannerimage {
         width: 1920px;
-        background-image: url("M9Banner.jfif");
+        background-image: url("/Images/M9Banner.jfif");
         height: 172px;
         background-color: purple;
         background-position: center;
@@ -54,7 +54,7 @@ html, body {
     position: relative;
     height: 180px;
     width: 180px;
-    background-image: url("M9logo.jpg");  
+    background-image: url("/Images/M9logo.jpg");  
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;

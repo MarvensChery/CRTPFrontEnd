@@ -3,27 +3,33 @@ const path = require("path");
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.use('/appweb', express.static('appweb'));
+app.use(express.static(__dirname + "/public/"));
+app.use(express.static(__dirname + "/CSS/"))
 
 
 app.get("/login", (req, rep) => {
-    rep.sendFile(path.join(__dirname, "newpage/new_login.html"))
+    //WORKING!!
+    rep.sendFile(path.join(__dirname, "./public/new_login.html"))
 })
 
 app.get("/menu", (req, rep) => {
-    rep.sendFile(path.join(__dirname, "Menu/index2.html"));
+    //WORKING!!
+    rep.sendFile(path.join(__dirname, "./public/index2.html"));
 });
 
 app.get("/IPPE", (req, rep) => {
-    rep.sendFile(path.join(__dirname, "MenuRechercheIPPE/MenuRechercheIPPE.html"))
+    //WORKING!!
+    rep.sendFile(path.join(__dirname, "./public/MenuRechercheIPPE.html"))
 });
 
 app.get("/IPPE/resultatNegatif", (req, rep) => {
-    rep.sendFile(path.join(__dirname, "ResultatRechercheIPPE/Negatif.html"));
+    //WORKING!!
+    rep.sendFile(path.join(__dirname, "./public/Negatif.html"));
 });
 
 app.get("/IPPE/resultatLibCondi", (req,rep) => {
-    rep.sendFile(path.join(__dirname, "ResultatRechercheIPPE/LibCondi.html"));
+    //WORKING!!
+    rep.sendFile(path.join(__dirname, "./public/LibCondi.html"));
 });
 
 

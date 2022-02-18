@@ -10,6 +10,18 @@ html, body {
     color: #666;
     line-height: 22px;
     }
+    #bannerimage {
+        width: 1920px;
+        background-image: url("/Images/M9Banner.jfif");
+        height: 172px;
+        background-color: purple;
+        background-position: center;
+      }
+    .info {
+        font-size: 16px;
+        width: 50%;
+        height: 40px;
+    }
     .center {
         display: block;
         margin-left: auto;
@@ -22,20 +34,27 @@ html, body {
     justify-content: center;
     align-items: center;
     height: inherit;
-    padding: 20px;
+    padding: 5px;
     }
     form {
     width: 100%;
-    padding: 20px;
+    padding: 60px;
     border-radius: 6px;
     background: #fff;
-    box-shadow: 0 0 8px  #008bcc; 
+    box-shadow: 0 0 15px  #008bcc; 
     }
+    .form2 {
+        width: 100%;
+        padding: 20px;
+        border-radius: 6px;
+        background: #fff;
+        box-shadow: 0 0 15px  #008bcc; 
+        }
     .banner {
     position: relative;
     height: 180px;
     width: 180px;
-    background-image: url("M9logo.jpg");  
+    background-image: url("/Images/M9logo.jpg");  
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;
@@ -158,7 +177,7 @@ html, body {
     cursor: pointer;
     }
     button:hover {
-    background: #008bcc;
+    background: #063c55;
     }
     @media (min-width: 568px) {
     .name-item, .city-item {
