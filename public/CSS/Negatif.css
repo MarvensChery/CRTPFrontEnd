@@ -7,13 +7,13 @@ html, body {
     outline: none;
     font-family: Roboto, Arial, sans-serif;
     font-size: 14px;
-    color: #666;
-    line-height: 22px;
+    color: black;
+    line-height: 10px;
     }
     #bannerimage {
         width: 1920px;
         background-image: url("/Images/M9Banner.jfif");
-        height: 172px;
+        height: 135px;
         background-color: purple;
         background-position: center;
       }
@@ -52,8 +52,8 @@ html, body {
         }
     .banner {
     position: relative;
-    height: 180px;
-    width: 180px;
+    height: 135px;
+    width: 135px;
     background-image: url("/Images/M9logo.jpg");  
     background-repeat: no-repeat;
     display: flex;

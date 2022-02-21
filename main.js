@@ -27,7 +27,7 @@ app.get("/IPPE/resultatNegatif", (req, rep) => {
     rep.sendFile(path.join(__dirname, "./public/Negatif.html"));
 });
 
-app.get("/IPPE/resultatLibCondi", (req,rep) => {
+app.get("/menu/IPPE/resultatLibCondi", (req,rep) => {
     //WORKING!!
     rep.sendFile(path.join(__dirname, "./public/LibCondi.html"));
 });
