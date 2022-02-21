@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+<body>
+    <!--NAV-->
+    <section>
+        <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <nav class="navbar is-hidden-desktop">
+                <div id="navMenu" class="navbar-menu is-hidden-desktop">
+                    <div class="navbar-end">
+                        <ul class="menu-list">
+                            <li>
+                                <a href="#" class="">
+                                    <span class="icon"><i class="fa fa-home"></i></span> Acceuil
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="is-active">
+                                    <span class="icon"><i class="fa fa-table"></i></span> Navigation
+                                </a>
+            
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <span class="icon is-small"><i class="fa fa-link"></i></span> IPPE
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span class="icon is-small"><i class="fa fa-link"></i></span> Navigation2
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="">
+                                    <span class="icon"><i class="fa fa-info"></i></span> A propos
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+        <div class="hero-body">
+            <div class="has-text-centered">
+                <img src="https://www.collegesinstitutes.ca/wp-content/uploads/2015/09/c-m-logo.jpg" width="300"
+                    class="is-centered">
+                <h1>Simulation du Centre de renseignements policiers du Québec</h1>
+            </div>
+        </div>
+    </section>
+
+    <section class="main-content columns is-fullheight ">
+        <aside class="column is-2 is-fullheight section is-hidden-mobile">
+          <p class="menu-label is-hidden-touch">Navigation</p>
+          <ul class="menu-list">
+            <li>
+              <a href="#" class="">
+                <span class="icon"><i class="fa fa-home"></i></span> Acceuil
+              </a>
+            </li>
+            <li>
+              <a href="#" class="is-active">
+                <span class="icon"><i class="fa fa-table"></i></span> Nav
+              </a>
+      
+              <ul>
+                <li>
+                  <a href="#">
+                    <span class="icon is-small"><i class="fa fa-link"></i></span> IPPE
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span class="icon is-small"><i class="fa fa-link"></i></span> Nav2
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="">
+                <span class="icon"><i class="fa fa-info"></i></span> A propos
+              </a>
+            </li>
+          </ul>
+        </aside>
+    <section class="hero-body">
+        <!--box gives it the shadow-->
+        <div class="container box">
+            <h2 class="title has-text-info-dark">Interrogation personne - IPPE</h2>
+            <form class="row columns is-multiline">
+                <!--NOM-->
+                <div class="column is-12">
+                    <div class="field">
+                        <label class="label">Nom</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Nom">
+                        </div>
+                    </div>
+                </div>
+                <!--P1-->
+                <div class="column is-12">
+                    <div class="field">
+                        <label class="label">Prenom 1</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Prenom 1">
+                        </div>
+                    </div>
+                </div>
+                <!--P2-->
+                <div class="column is-12">
+                    <div class="field">
+                        <label class="label">Prenom 2</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Prenom 2">
+                        </div>
+                    </div>
+                </div>
+                <!--SEXE-->
+                <div class="column is-12">
+                    <div class="field">
+                        <label class="label">Sexe</label>
+                        <div class="select is-fullwidth">
+                            <select>
+                                <option></option>
+                                <option>F</option>
+                                <option>M</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!--DDN-->
+                <div class="column is-12">
+                    <div class="field">
+                        <label class="label">Date de naissance</label>
+                        <div class="control">
+                            <input class="input" type="date">
+                        </div>
+                    </div>
+                </div>
+                <!--BOUTON-->
+                <div class="column is-12">
+                    <input class="button is-info is-fullwidth" type="submit" value="Recherche">
+                </div>
+            </form>
+        </div>
+    </section>
+    <script src="test.js"></script>
+</body>
+<script type="text/javascript">
+    (function() {
+       var burger=document.querySelector('.burger');
+       var nav=document.querySelector('#'+burger.dataset.target);
+   
+       burger.addEventListener('click', function(){
+           burger.classList.toggle('is-active');
+           nav.classList.toggle('is-active');
+       })
+    })();
+   </script>
+   
+   
+</html>
