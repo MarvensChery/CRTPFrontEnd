@@ -5,8 +5,16 @@ const app = express();
 
 app.use(express.static("public"));
 
-app.get("/login", (req, rep) =>{
+app.get("/", (req, rep) =>{
     rep.sendFile(path.join(__dirname, "public/login/pageLoginHTML.html"))
+})
+
+app.get("/menu", (req, rep) =>{
+    rep.sendFile(path.join(__dirname, "public/ippe/test.html"))
+})
+
+app.get("/ippe", (req, rep) =>{
+    rep.sendFile(path.join(__dirname, "public/ippeinfo/ippeinfo.html"))
 })
 
 app.listen(PORT, () => {

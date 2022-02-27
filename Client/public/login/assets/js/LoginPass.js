@@ -3,30 +3,39 @@ function login() {
     let password = document.getElementById("mdp").value;
     let label_etudiant_ID = document.getElementById("nomLabel")
     let label_prof_id = document.getElementById("nomLabel")
-    fetch("http://localhost:5000/login")
+    let count = 0
+    
+    fetch("http://localhost:5000/utilisateurs")
         .then(reponse => {
             return reponse.json()
         })
         .then(login => {
+            console.log(login.length)
+            let loginlength = login.length
             login.forEach(login => {
-                console.log("dans les if")
                 if (label_etudiant_ID.innerText == "Identifiant de l'étudiant") {
                     console.log("dans etudiant")
-                    if (login.Matricule == username && login.MotDePasse == password && login.Type == "etudiants") {
-                        console.log("bon mdp")
-                    } else {
-                        console.log('mauvais mdp')
+                    console.log(count)
+                    if (login.Identifiant == username && login.MotDePasse == password && login.Etudiant == true) {
+                        window.location.href = "http://localhost:2000/menu"
                     }
-                } 
+                    else if(count === loginlength-1) {
+                        alert("Vous n'avez pas réussi a vous connecté, réessayer")
+                        document.getElementById("ID").value = ""
+                        document.getElementById("mdp").value = ""
+                    } else {count++}
+                }
                 
                 else if (label_prof_id.innerText == "Identifiant du professeur") {
                     console.log("dans prof")
-                    if (login.Matricule == username && login.MotDePasse == password && login.Type == "enseignant") {
-                        console.log("bon mdp")
-                    } else {
-                        console.log("mauvais mdp")
+                    if (login.Identifiant == username && login.MotDePasse == password && login.Etudiant == false) {
+                        window.location.href = "http://localhost:2000/menu"
                     }
-
+                    else if(count === loginlength-1) {
+                        alert("Vous n'avez pas réussi a vous connecté, réessayer")
+                        username = ""
+                        password = ""
+                    } else {count++}
                 }
             });
         })
