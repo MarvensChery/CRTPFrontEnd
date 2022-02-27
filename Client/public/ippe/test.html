@@ -18,40 +18,40 @@
             <span aria-hidden="true"></span>
         </a>
         <nav class="navbar is-hidden-desktop">
-                <div id="navMenu" class="navbar-menu is-hidden-desktop">
-                    <div class="navbar-end">
-                        <ul class="menu-list">
-                            <li>
-                                <a href="#" class="">
-                                    <span class="icon"><i class="fa fa-home"></i></span> Acceuil
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="is-active">
-                                    <span class="icon"><i class="fa fa-table"></i></span> Navigation
-                                </a>
-            
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <span class="icon is-small"><i class="fa fa-link"></i></span> IPPE
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="icon is-small"><i class="fa fa-link"></i></span> Navigation2
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#" class="">
-                                    <span class="icon"><i class="fa fa-info"></i></span> A propos
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+            <div id="navMenu" class="navbar-menu is-hidden-desktop">
+                <div class="navbar-end">
+                    <ul class="menu-list">
+                        <li>
+                            <a class="is-inactive  x" id="accueil1">
+                                <span class="icon"><i class="fa fa-home"></i></span> Acceuil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="is-inactive  x">
+                                <span class="icon"><i class="fa fa-table"></i></span> Navigation
+                            </a>
+
+                            <ul>
+                                <li>
+                                    <a id="ippe1" class="is-inactive  x">
+                                        <span class="icon is-small"><i class="fa fa-link"></i></span> IPPE
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class='is-inactive  x'>
+                                        <span class="icon is-small"><i class="fa fa-link"></i></span> Navigation2
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="is-inactive  x">
+                                <span class="icon"><i class="fa fa-info"></i></span> A propos
+                            </a>
+                        </li>
+                    </ul>
                 </div>
+            </div>
 
             </div>
         </nav>
@@ -66,112 +66,56 @@
 
     <section class="main-content columns is-fullheight ">
         <aside class="column is-2 is-fullheight section is-hidden-mobile">
-          <p class="menu-label is-hidden-touch">Navigation</p>
-          <ul class="menu-list">
-            <li>
-              <a href="#" class="">
-                <span class="icon"><i class="fa fa-home"></i></span> Acceuil
-              </a>
-            </li>
-            <li>
-              <a href="#" class="is-active">
-                <span class="icon"><i class="fa fa-table"></i></span> Nav
-              </a>
-      
-              <ul>
+            <p class="menu-label is-hidden-touch">Navigation</p>
+            <ul class="menu-list">
                 <li>
-                  <a href="#">
-                    <span class="icon is-small"><i class="fa fa-link"></i></span> IPPE
-                  </a>
+                    <a class="is-inactive x" id="accueil">
+                        <span class="icon"><i class="fa fa-home"></i></span> Accueil
+                    </a>
                 </li>
                 <li>
-                  <a href="#">
-                    <span class="icon is-small"><i class="fa fa-link"></i></span> Nav2
-                  </a>
+                    <a class="is-inactive x">
+                        <span class="icon"><i class="fa fa-table"></i></span> Nav
+                    </a>
+
+                    <ul>
+                        <li>
+                            <a id="ippe" class="is-inactive x">
+                                <span class="icon is-small"><i class="fa fa-link"></i></span> IPPE
+                            </a>
+                        </li>
+                        <li>
+                            <a class="is-inactive x">
+                                <span class="icon is-small"><i class="fa fa-link"></i></span> Nav2
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="">
-                <span class="icon"><i class="fa fa-info"></i></span> A propos
-              </a>
-            </li>
-          </ul>
+                <li>
+                    <a href="#" class="is-inactive  x">
+                        <span class="icon"><i class="fa fa-info"></i></span> A propos
+                    </a>
+                </li>
+            </ul>
         </aside>
-    <section class="hero-body">
-        <!--box gives it the shadow-->
-        <div class="container box">
-            <h2 class="title has-text-info-dark">Interrogation personne - IPPE</h2>
-            <form class="row columns is-multiline">
-                <!--NOM-->
-                <div class="column is-12">
-                    <div class="field">
-                        <label class="label">Nom</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Nom">
-                        </div>
-                    </div>
-                </div>
-                <!--P1-->
-                <div class="column is-12">
-                    <div class="field">
-                        <label class="label">Prenom 1</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Prenom 1">
-                        </div>
-                    </div>
-                </div>
-                <!--P2-->
-                <div class="column is-12">
-                    <div class="field">
-                        <label class="label">Prenom 2</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Prenom 2">
-                        </div>
-                    </div>
-                </div>
-                <!--SEXE-->
-                <div class="column is-12">
-                    <div class="field">
-                        <label class="label">Sexe</label>
-                        <div class="select is-fullwidth">
-                            <select>
-                                <option></option>
-                                <option>F</option>
-                                <option>M</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <!--DDN-->
-                <div class="column is-12">
-                    <div class="field">
-                        <label class="label">Date de naissance</label>
-                        <div class="control">
-                            <input class="input" type="date">
-                        </div>
-                    </div>
-                </div>
-                <!--BOUTON-->
-                <div class="column is-12">
-                    <input class="button is-info is-fullwidth" type="submit" value="Recherche">
-                </div>
-            </form>
+
+        <div id="carteTemplate">
+     
         </div>
-    </section>
-    <script src="test.js"></script>
+
+        <script src="test.js"></script>
 </body>
 <script type="text/javascript">
-    (function() {
-       var burger=document.querySelector('.burger');
-       var nav=document.querySelector('#'+burger.dataset.target);
-   
-       burger.addEventListener('click', function(){
-           burger.classList.toggle('is-active');
-           nav.classList.toggle('is-active');
-       })
+    (function () {
+        var burger = document.querySelector('.burger');
+        var nav = document.querySelector('#' + burger.dataset.target);
+
+        burger.addEventListener('click', function () {
+            burger.classList.toggle('is-active');
+            nav.classList.toggle('is-active');
+        })
     })();
-   </script>
-   
-   
+</script>
+
+
 </html>
