@@ -14,11 +14,6 @@ app.get('/menu', (req, rep) => {
   rep.sendFile(path.join(__dirname, 'public/ippe/test.html'));
 });
 
-app.get('/ippe', (req, rep) => {
-  
-  rep.sendFile(path.join(__dirname, 'public/ippeinfo/ippeinfo.html'));
-});
-
 app.listen(PORT, () => {
   console.log(`Mon application du côté client est en train d'exécuter sur le port http://localhost:${PORT}`);
 });

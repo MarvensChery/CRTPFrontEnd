@@ -81,7 +81,7 @@ async function menue() {
                     <div class="field">
                         <label class="label">Nom</label>
                         <div class="control">
-                            <input class="input" type="text" placeholder="Nom">
+                            <input id="nom" class="input" type="text" placeholder="Nom" required>
                         </div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@ async function menue() {
                     <div class="field">
                         <label class="label">Prenom 1</label>
                         <div class="control">
-                            <input class="input" type="text" placeholder="Prenom 1">
+                            <input id="prenom1" class="input" type="text" placeholder="Prenom 1" required>
                         </div>
                     </div>
                 </div>
@@ -99,7 +99,7 @@ async function menue() {
                     <div class="field">
                         <label class="label">Prenom 2</label>
                         <div class="control">
-                            <input class="input" type="text" placeholder="Prenom 2">
+                            <input id="prenom2" class="input" type="text" placeholder="Prenom 2" required>
                         </div>
                     </div>
                 </div>
@@ -108,10 +108,10 @@ async function menue() {
                     <div class="field">
                         <label class="label">Sexe</label>
                         <div class="select is-fullwidth">
-                            <select id='sexe' name='sexe'>
+                            <select id='sexe' name='sexe' required >
                                 <option></option>
-                                <option>F</option>
-                                <option>M</option>
+                                <option value="false">F</option>
+                                <option value="true">M</option>
                             </select>
                         </div>
                     </div>
@@ -121,7 +121,7 @@ async function menue() {
                 <div class="column is-4">
                     <label class="label">Année</label>
                     <div class="select is-fullwidth">
-                        <select id="year" name="year">
+                        <select id="year" name="year" required>
                             <option>--Choissisez l'année--</option>
                             <option value="1940">1940</option>
                             <option value="1941">1941</option>
@@ -212,17 +212,17 @@ async function menue() {
                 <div class="column is-4">
                     <label class="label">Mois</label>
                     <div class="select is-fullwidth">
-                        <select id="mois" name="mois">
+                        <select id="mois" name="mois" required>
                             <option selected value=''>--Choissisez le mois--</option>
-                            <option value='1'>Janvier</option>
-                            <option value='2'>Février</option>
-                            <option value='3'>Mars</option>
-                            <option value='4'>Avril</option>
-                            <option value='5'>Mai</option>
-                            <option value='6'>Juin</option>
-                            <option value='7'>Juillet</option>
-                            <option value='8'>Aout</option>
-                            <option value='9'>Septembre</option>
+                            <option value='01'>Janvier</option>
+                            <option value='02'>Février</option>
+                            <option value='03'>Mars</option>
+                            <option value='04'>Avril</option>
+                            <option value='05'>Mai</option>
+                            <option value='06'>Juin</option>
+                            <option value='07'>Juillet</option>
+                            <option value='08'>Aout</option>
+                            <option value='09'>Septembre</option>
                             <option value='10'>Octobre</option>
                             <option value='11'>Novembre</option>
                             <option value='12'>Décembre</option>
@@ -232,7 +232,7 @@ async function menue() {
                 <div class="column is-4">
                     <label class="label">Jours</label>
                     <div class="select is-fullwidth">
-                        <select id="jours" name="jours">
+                        <select id="jours" name="jours" required >
                             <option>--Choissisez le jour--</option>
                             <option value="01">01</option>
                             <option value="02">02</option>
@@ -270,11 +270,41 @@ async function menue() {
                 </div>
                 <!--BOUTON-->
                 <div class="column is-12">
-                    <input class="button is-info is-fullwidth" type="submit" value="Recherche">
+                    <input id="form" class="button is-info is-fullwidth" type="button" value="Recherche">
                 </div>
             </form>
         </div>
     </section>`;
+    function titleCase(string) {
+      a = '';
+      if (string === '') {
+        a = null;
+      } else {
+        a = string[0].toUpperCase() + string.slice(1).toLowerCase();
+      }
+      return a;
+    }
+
+    const btn = document.getElementById('form');
+    btn.addEventListener('click', () => {
+      // window.location.assign('../profil/profile.html');  http://127.0.0.1:5500/appweb/Client/public/ippe/test.html?sexe=&year=1959&mois=8&jours=11#
+      // nhttp://localhost:2000/ippe/${titleCase(nom.toLowerCase())}/${titleCase(prenom1.toLowerCase())}/${titleCase(prenom2.toLowerCase())}/${sexe}/${year}/${mois}/${jours}
+
+      const nom = document.getElementById('nom').value.toLowerCase();
+      const prenom1 = document.getElementById('prenom1').value.toLowerCase();
+      const prenom2 = document.getElementById('prenom2').value.toLowerCase();
+      const sexe = document.getElementById('sexe').value;
+      const year = document.getElementById('year').value;
+      const mois = document.getElementById('mois').value;
+      const jours = document.getElementById('jours').value;
+
+      if (nom === '' || jours === '' || prenom1 === '' || sexe === '' || year === "--Choissisez l'année--" || mois === '--Choissisez le mois--' || jours === '--Choissisez le jour--') {
+        alert('Merci de remplir les champs');
+      } else {
+        window.location.href = `../profil/profile.html?nom=${titleCase(nom.toLowerCase())}&prenom1=${titleCase(prenom1.toLowerCase())}&prenom2=${titleCase(prenom2)}&sexe=${sexe}&year=${year}&mois=${mois}&jours=${jours}`;
+      }
+      console.log(nom);
+    });
   });
 
   if (accueil1 != null && ippe1 != null) {
@@ -310,7 +340,7 @@ async function menue() {
                         <div class="field">
                             <label class="label">Nom</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Nom">
+                                <input id="nom" class="input" type="text" placeholder="Nom" required>
                             </div>
                         </div>
                     </div>
@@ -319,7 +349,7 @@ async function menue() {
                         <div class="field">
                             <label class="label">Prenom 1</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Prenom 1">
+                                <input id="prenom1" class="input" type="text" placeholder="Prenom 1" required>
                             </div>
                         </div>
                     </div>
@@ -328,7 +358,7 @@ async function menue() {
                         <div class="field">
                             <label class="label">Prenom 2</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Prenom 2">
+                                <input id="prenom2" class="input" type="text" placeholder="Prenom 2" required>
                             </div>
                         </div>
                     </div>
@@ -337,7 +367,7 @@ async function menue() {
                         <div class="field">
                             <label class="label">Sexe</label>
                             <div class="select is-fullwidth">
-                                <select id='sexe' name='sexe'>
+                                <select id='sexe' name='sexe' required >
                                     <option></option>
                                     <option>F</option>
                                     <option>M</option>
@@ -345,12 +375,12 @@ async function menue() {
                             </div>
                         </div>
                     </div>
-
+    
                     <!--DDN-->
                     <div class="column is-4">
                         <label class="label">Année</label>
                         <div class="select is-fullwidth">
-                            <select id="year" name="year">
+                            <select id="year" name="year" required>
                                 <option>--Choissisez l'année--</option>
                                 <option value="1940">1940</option>
                                 <option value="1941">1941</option>
@@ -441,17 +471,17 @@ async function menue() {
                     <div class="column is-4">
                         <label class="label">Mois</label>
                         <div class="select is-fullwidth">
-                            <select id="mois" name="mois">
+                            <select id="mois" name="mois" required>
                                 <option selected value=''>--Choissisez le mois--</option>
-                                <option value='1'>Janvier</option>
-                                <option value='2'>Février</option>
-                                <option value='3'>Mars</option>
-                                <option value='4'>Avril</option>
-                                <option value='5'>Mai</option>
-                                <option value='6'>Juin</option>
-                                <option value='7'>Juillet</option>
-                                <option value='8'>Aout</option>
-                                <option value='9'>Septembre</option>
+                                <option value='01'>Janvier</option>
+                                <option value='02'>Février</option>
+                                <option value='03'>Mars</option>
+                                <option value='04'>Avril</option>
+                                <option value='05'>Mai</option>
+                                <option value='06'>Juin</option>
+                                <option value='07'>Juillet</option>
+                                <option value='08'>Aout</option>
+                                <option value='09'>Septembre</option>
                                 <option value='10'>Octobre</option>
                                 <option value='11'>Novembre</option>
                                 <option value='12'>Décembre</option>
@@ -461,7 +491,7 @@ async function menue() {
                     <div class="column is-4">
                         <label class="label">Jours</label>
                         <div class="select is-fullwidth">
-                            <select id="jours" name="jours">
+                            <select id="jours" name="jours" required >
                                 <option>--Choissisez le jour--</option>
                                 <option value="01">01</option>
                                 <option value="02">02</option>
@@ -499,11 +529,42 @@ async function menue() {
                     </div>
                     <!--BOUTON-->
                     <div class="column is-12">
-                        <input class="button is-info is-fullwidth" type="submit" value="Recherche">
+                        <input id="form12" class="button is-info is-fullwidth" type="button" value="Recherche">
                     </div>
                 </form>
             </div>
         </section>`;
+
+      function titleCase(string) {
+        a = '';
+        if (string === '') {
+          a = '';
+        } else {
+          a = string[0].toUpperCase() + string.slice(1).toLowerCase();
+        }
+        return a;
+      }
+
+      const btn = document.getElementById('form12');
+      btn.addEventListener('click', () => {
+        // window.location.assign('../profil/profile.html');  http://127.0.0.1:5500/appweb/Client/public/ippe/test.html?sexe=&year=1959&mois=8&jours=11#
+
+        const nom = document.getElementById('nom').value.toLowerCase();
+        const prenom1 = document.getElementById('prenom1').value.toLowerCase();
+        const prenom2 = document.getElementById('prenom2').value.toLowerCase();
+        const sexe = document.getElementById('sexe').value;
+        const year = document.getElementById('year').value;
+        const mois = document.getElementById('mois').value;
+        const jours = document.getElementById('jours').value;
+
+        if (nom === '' || jours === '' || prenom1 === '' || sexe === '' || year === "--Choissisez l'année--" || mois === '--Choissisez le mois--' || jours === '--Choissisez le jour--') {
+          alert('Merci de remplir les champs');
+        } else {
+          window.location.href = `../profil/profile.html?nom=${titleCase(nom.toLowerCase())}&prenom1=${titleCase(prenom1.toLowerCase())}&prenom2${titleCase(prenom2).toLowerCase()}&sexe=${sexe}&year=${year}&mois=${mois}&jours=${jours}`;
+        }
+
+        console.log(nom);
+      });
     });
   } else {
     console.log('erreur');
