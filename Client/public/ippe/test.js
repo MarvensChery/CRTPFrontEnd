@@ -1,31 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-    // Get all "navbar-burger" elements
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+  // Check if there are any navbar burgers
+  if ($navbarBurgers.length > 0) {
+    // Add a click event on each of them
+    $navbarBurgers.forEach((el) => {
+      el.addEventListener('click', () => {
+        // Get the target from the "data-target" attribute
+        const { target } = el.dataset;
+        const $target = document.getElementById(target);
 
-    // Check if there are any navbar burgers
-    if ($navbarBurgers.length > 0) {
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+      });
+    });
+  }
 
-        // Add a click event on each of them
-        $navbarBurgers.forEach( el => {
-            el.addEventListener('click', () => {
+  const carteTemplate = document.getElementById('carteTemplate');
 
-                // Get the target from the "data-target" attribute
-                const target = el.dataset.target;
-                const $target = document.getElementById(target);
-
-                // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-                el.classList.toggle('is-active');
-                $target.classList.toggle('is-active');
-
-            });
-        });
-    }
-    
-    const carteTemplate  = document.getElementById('carteTemplate')
-
-
-    carteTemplate.innerHTML = `<section class="hero-body">
+  carteTemplate.innerHTML = `<section class="hero-body">
     <!--box gives it the shadow-->
     <div class="container box">
         <h2 class="title has-text-info-dark" style="text-align: center;" >Bienvenue dans notre systeme de recherche</h2>
@@ -42,22 +37,20 @@ document.addEventListener('DOMContentLoaded', () => {
             
         </form>
     </div>
-</section>`
+</section>`;
 });
 
-async function menue(){
-    const carteTemplate  = document.getElementById('carteTemplate')
-    const ippe1 = document.getElementById('ippe1')
-    const accueil1 = document.getElementById('accueil1')
+async function menue() {
+  const carteTemplate = document.getElementById('carteTemplate');
+  const ippe1 = document.getElementById('ippe1');
+  const accueil1 = document.getElementById('accueil1');
 
-    const ippe = document.getElementById('ippe')
-    const accueil = document.getElementById('accueil')
-    console.log(accueil1)
+  const ippe = document.getElementById('ippe');
+  const accueil = document.getElementById('accueil');
+  console.log(accueil1);
 
-
-
-    accueil.addEventListener('click',() =>{
-        carteTemplate.innerHTML = `<section class="hero-body">
+  accueil.addEventListener('click', () => {
+    carteTemplate.innerHTML = `<section class="hero-body">
         <!--box gives it the shadow-->
         <div class="container box">
             <h2 class="title has-text-info-dark" style="text-align: center;" >Bienvenue dans notre systeme de recherche</h2>
@@ -74,12 +67,11 @@ async function menue(){
                 
             </form>
         </div>
-    </section>`
-    });
-    
+    </section>`;
+  });
 
-    ippe.addEventListener('click',() =>{
-        carteTemplate.innerHTML =`       <section class="hero-body">
+  ippe.addEventListener('click', () => {
+    carteTemplate.innerHTML = `       <section class="hero-body">
         <!--box gives it the shadow-->
         <div class="container box">
             <h2 class="title has-text-info-dark">Interrogation personne - IPPE</h2>
@@ -282,12 +274,12 @@ async function menue(){
                 </div>
             </form>
         </div>
-    </section>`
-    })
+    </section>`;
+  });
 
-    if (accueil1 != null && ippe1 !=null) {
-        accueil1.addEventListener('click',() =>{
-            carteTemplate.innerHTML = `<section class="hero-body">
+  if (accueil1 != null && ippe1 != null) {
+    accueil1.addEventListener('click', () => {
+      carteTemplate.innerHTML = `<section class="hero-body">
             <!--box gives it the shadow-->
             <div class="container box">
                 <h2 class="title has-text-info-dark" style="text-align: center;" >Bienvenue dans notre systeme de recherche</h2>
@@ -304,12 +296,11 @@ async function menue(){
                     
                 </form>
             </div>
-        </section>`
-        });
-        
-    
-        ippe1.addEventListener('click',() =>{
-            carteTemplate.innerHTML =`       <section class="hero-body">
+        </section>`;
+    });
+
+    ippe1.addEventListener('click', () => {
+      carteTemplate.innerHTML = `       <section class="hero-body">
             <!--box gives it the shadow-->
             <div class="container box">
                 <h2 class="title has-text-info-dark">Interrogation personne - IPPE</h2>
@@ -512,30 +503,26 @@ async function menue(){
                     </div>
                 </form>
             </div>
-        </section>`
-        })
-    }else{
-        console.log('erreur')
-    }
-    
+        </section>`;
+    });
+  } else {
+    console.log('erreur');
+  }
 }
 
-
-menue()
+menue();
 
 async function animate() {
-    const allx = document.querySelectorAll('.x')
-    allx.forEach(element => {
-        
-        element.addEventListener('click',()=>{  
-            allx.forEach(x=>{
-                x.className = 'is-inactive x'
-            })
-           
-            element.className = 'is-active x'
+  const allx = document.querySelectorAll('.x');
+  allx.forEach((element) => {
+    element.addEventListener('click', () => {
+      allx.forEach((x) => {
+        x.className = 'is-inactive x';
+      });
 
-        })
+      element.className = 'is-active x';
     });
+  });
 }
 
-animate()
+animate();
