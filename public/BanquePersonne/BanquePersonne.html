@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Table IPPE Alimentation</title>
+<link rel='stylesheet' href=
+'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- custom css -->
+<style>
+    div.columns {
+    margin-top: 50px;
+    }
+
+    h1 {
+    color: #107BBF !important;
+    margin-bottom: 20px;
+
+    }
+
+    .table td {
+    font-size: 17px;
+    padding-right: 150px;
+    }
+
+    .table th {
+    font-size: 17px;
+    }
+
+    #votre-nom {
+    padding-right: 2px;
+    }
+</style>
+</head>
+
+<body>
+    <section class="hero-body">
+        <div class="hero-body">
+            <div class="has-text-centered">
+                <img src="https://www.collegesinstitutes.ca/wp-content/uploads/2015/09/c-m-logo.jpg" width="300"
+                     class="is-centered">
+                <h1>Centre de renseignements - Techniques policières</h1>
+            </div>
+        </div>
+        <!--box gives it the shadow-->
+        <div class="container box my-6">
+
+            <form class="row columns is-multiline">
+             
+                <div class='container has-text-centered'>
+                    <div class='columns is-mobile is-centered'>
+                    <div class='column is-8'>
+                        <h1 class='title' style='margin-bottom: 33px'>Table IPPE Alimentation</h1>
+                        <div class="control has-icons-left has-icons-right"></div>
+                        <label class="is-size-4" for="votre-nom">
+                            Filtrer par nom de famille :
+                            <input class="is-size-4" id="votre-nom" class="input is-hovered" name="votre-nom" type="text">
+                            <input class="button is-info" style="margin-left: 20px; margin-right: 100px" type="button" value="Filtrer">
+                        </label>
+                        <input class="button is-info is-size-5 is-rounded" type="button" value="Tous">
+                        <div>
+                        
+                        <hr> 
+                        </div>
+                        <table class='table is-bordered is-centered'>
+                        <thead >
+                            <tr>
+                            <th>Nom</th>
+                            <th>Prenom1</th>
+                            <th>Prenom2</th>
+                            <th>Categorie</th>
+                            </tr>
+                        </thead>
+                        <tbody id="BanquePersonne">
+                        </tbody>
+                        </table>
+                    </div>
+                    </div>
+                    <br>
+                </div>
+
+                <!--BOUTONS-->
+                
+                <div class="column is-3">
+                    <input class="button is-fullwidth is-info" style="margin-left: 200px;" type="button" value="Retour à la sélection d'une banque">
+                </div>
+                <div class="column is-3">
+                    <input class="button is-fullwidth is-info" style="margin-left: 450px;" type="button" value="Ajouter une personne">
+                </div>
+            </form>
+        </div>
+    </section>
+    <script type="module" src="./BanquePersonne.js"></script>
+</body>
+
+</html>
