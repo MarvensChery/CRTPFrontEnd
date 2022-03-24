@@ -30,6 +30,14 @@ app.get('/BanquePersonne', (req, res) => {
     res.sendFile(`${__dirname}/public/BanquePersonne/BanquePersonne.html`);
 });
 
+app.get('/AjouterConditions', (req, res) => {
+    res.sendFile(`${__dirname}/public/PageConditions/ConditionsAjouter.html`);
+});
+
+app.get('/ModifierConditions', (req, res) => {
+    res.sendFile(`${__dirname}/public/PageConditions/ConditionsModifier.html`);
+});
+
 app.listen(PORT, () => {
     console.log(`Mon application roule sur le port ${PORT} : http://localhost:${PORT}/`);
 });

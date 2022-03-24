@@ -13,10 +13,27 @@ async function connexion() {
     if (response.ok) {
         const data = await response.json();
 
-        sessionStorage.setItem('token', data.Etudiant);
-        sessionStorage.setItem('Matricule', data.Matricule);
-        sessionStorage.setItem('Nom', data.Nom);
-        window.location.href = './Acceuil/Acceuil.html';
+        console.log("data good")
+        console.log(document.getElementById('id').innerText)
+        console.log(data.Etudiant)
+
+        if (document.getElementById('id').innerText == 'Identification étudiant' && data.Etudiant === true) {
+            console.log("data good")
+            sessionStorage.setItem('token', data.Etudiant);
+            sessionStorage.setItem('Matricule', data.Matricule);
+            sessionStorage.setItem('Nom', data.Nom);
+            window.location.href = './Acceuil/Acceuil.html';
+
+        } else if (document.getElementById('id').innerText == 'Identification enseignant' && data.Etudiant === false) {
+            console.log("data good")
+            sessionStorage.setItem('token', data.Etudiant);
+            sessionStorage.setItem('Matricule', data.Matricule);
+            sessionStorage.setItem('Nom', data.Nom);
+            window.location.href = './Acceuil/Acceuil.html';
+        } else {
+            document.getElementById('error').innerText = 'Matricule ou mot de passe incorrect!';
+        }
+    
     } else {
         document.getElementById('error').innerText = 'Matricule ou mot de passe incorrect!';
     }
