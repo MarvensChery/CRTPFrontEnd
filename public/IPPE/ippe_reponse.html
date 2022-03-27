@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <title>Profile</title>
+    <style type="text/css" media="screen">
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        #wrapper {
+            flex: 1;
+        }
+
+        .zoom:hover {
+            transform: scale(1.1);
+        }
+
+        .shadow:hover {
+            -webkit-filter: drop-shadow(-5px 2px 5px #999999);
+        }
+
+    </style>
+</head>
+<body id="body" style="margin-left: 25px;" class="is-hidden">
+<!--NAV-->
+<section>
+    <input id="boutonretour" class="button is-info is-size-5 is-rounded" type="button" value="Retour au menu">
+    <div class="hero-body is-size-3-touch">
+        <div class="has-text-centered">
+            <img src="https://www.collegesinstitutes.ca/wp-content/uploads/2015/09/c-m-logo.jpg" width="300"
+                 class="is-centered">
+            <h1>Simulation du Centre de renseignements policiers du Québec</h1>
+        </div>
+    </div>
+</section>
+<!--Contenu-->
+<section class="hero-body">
+<!--    <aside style="display: flex; align-items: center; float: right;">-->
+<!--        <button>=></button>-->
+<!--    </aside>-->
+    <div class="container box is-size-3-touch has-text-weight-semibold">
+        <!--info-->
+        <div>
+            <h2 class="title has-text-info-dark">IPPE Interrogation - Personne</h2>
+        </div>
+        <div class="my-6">
+            <p>Demande de verification pour :</p>
+            <table class="table is-fullwidth is-hoverable">
+                <tbody id="infoippe">
+                    <!--<tr>
+                        <td>Nom :</td>
+                        <td>Lemire</td>
+                    </tr>
+                    <tr>
+                        <td>Prenom 1 :</td>
+                        <td>Jessy</td>
+                        <td>Prenom 2 :</td>
+                        <td>James</td>
+                    </tr>
+                    <tr>
+                        <td>Sexe :</td>
+                        <td>Feminin</td>
+                        <td>Date de naissance :</td>
+                        <td>10/28/1985</td>
+                    </tr>
+                    <tr>
+                        <td>Remarque :</td>
+                        <td>Wilson</td>
+                        <td>Matricule :</td>
+                        <td>3306</td>
+                    </tr>-->
+                </tbody>
+            </table>
+        </div>
+        <!--NAVIGATION BUTTONS-->
+        <div>
+            <div style="margin-right: -20px; float: right; ">
+                <img class="shadow zoom" src="../image/right-arrow4.png" id="rightarrow" style="position: fixed; height: 64px;width: 64px; top: 50%;">
+            </div>
+            <div style="float:left; margin-left: -80px;">
+                <img class="shadow zoom" src="../image/left-arrow4.png" id="leftarrow" style="position: fixed;  height: 64px;width: 64px; top: 50%;">
+            </div>
+        </div>
+        
+        <section>
+            <!--Reponses-->
+            <div class="columns is-desktop">
+                <!--Rep 1-->
+                <div id="divPremiereRep" class="column">
+                    <div class="box">
+                        <h2 id="reponse" class="title has-text-info-dark"></h2>
+                        <table class="table is-hoverable is-fullwidth">
+                            <tbody id="ippe">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--Rep 2-->
+                <div id="divDeuxiemeRep" class="column is-hidden">
+                    <div class="box">
+                        <h2 id="reponse2" class="title has-text-info-dark"></h2>
+                        <table class="table is-hoverable is-fullwidth">
+                            <tbody id="ippe2">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </section>
+</section>
+
+<!--Footer-->
+<footer class="footer is-size-4-touch">
+    <div class="content has-text-centered">
+        <p>
+            Équipe 6
+        </p>
+    </div>
+</footer>
+
+<script src="../IPPE/ippe_reponse.js">
+
+</script>
+
+</body>
+</html>

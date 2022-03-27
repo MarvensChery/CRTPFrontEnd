@@ -38,8 +38,10 @@
                 <div class="field">
                     <div class="columns">
                         <label class="label column is-1">Condition :</label>
-                        <label class="column is-2">Avoir comme adresse le</label>
-                        <input class="column input is-6" type="text">
+                        <label id = "condition" class="column is-2"></label>
+                        <input id="inputconditions1" class="column input is-4">
+                        <span id="span1" class="is-hidden"> et </span>
+                        <input id="inputconditions2" class="column input is-4 is-hidden" type="text">
                         <div></div>
                     </div>
                 </div>
@@ -47,16 +49,16 @@
 
             <!--BOUTONS-->
             <div class="column is-3 ">
-                <input class="button is-fullwidth is-info" type="button" value="Retour">
+                <input id="retour" class="button is-fullwidth is-info" type="button" value="Retour">
             </div>
             <div class="column is-3 ">
-                <input class="button is-fullwidth is-info" type="button" value="Modifier">
+                <input id="modifier" class="button is-fullwidth is-info" type="button" value="Modifier">
             </div>
             <div class="column is-3 ">
-                <input class="button is-fullwidth is-info" type="button" value="Supprimer">
+                <input id="supprimer" class="button is-fullwidth is-info" type="button" value="Supprimer">
             </div>
             <div class="column is-3 ">
-                <input class="button is-fullwidth is-info" type="button" value="Annuler">
+                <input id="annuler" class="button is-fullwidth is-info" type="button" value="Annuler">
             </div>
         </form>
     </div>
@@ -69,5 +71,6 @@
         </p>
     </div>
 </footer>
+    <script type="module" src="../PageConditions/ConditionsModifier.js"></script>
 </body>
 </html>

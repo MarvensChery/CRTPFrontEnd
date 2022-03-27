@@ -19,7 +19,7 @@
             flex: 1;
         }
 
-        select option[value=""] 
+        select option[value="1"] 
         {   
             color: #999999; 
         }
@@ -45,16 +45,19 @@
                         <label class="label column is-1">Condition :</label>
                         <div class="select">
                             <select id='Condition' name='Condition'>
-                                <option value=""  selected>Choisissez une des conditions</option>
-                                <option>Avoir comme adresse le</option>
-                                <option>Doit garder la paix et avoir bonne conduite</option>
-                                <option>Aucune consommation d'alcool ou de drogue non prescrite</option>
-                                <option>Ne pas entrer en contact avec</option>
-                                <option>Ne pas fréquenter</option>
-                                <option>Doit demeurer à cet endroit entre</option>
+                                <option value=1  selected>Choisissez une des conditions</option>
+                                <option value=2>Avoir comme adresse le</option>
+                                <option value=3>Doit garder la paix et avoir bonne conduite</option>
+                                <option value=4>Aucune consommation d'alcool ou de drogue non prescrite</option>
+                                <option value=5>Ne pas entrer en contact avec </option>
+                                <option value=6>Ne pas fréquenter </option>
+                                <option value=7>Doit demeurer à cet endroit entre</option>
                             </select>
                         </div>
-                        <input class="column input is-6 is-hidden" type="text">
+                        <input id="inputconditions1" class="column input is-6 is-hidden" type="text" placeholder="Remplissez la case">
+                        <input id="inputconditions2" class="column input is-2 is-hidden" type="text" placeholder="AAAA/MM/JJ">
+                        <span id="span1" class="is-hidden"> et </span>
+                        <input id="inputconditions3" class="column input is-2 is-hidden" type="text" placeholder="AAAA/MM/JJ">
                         <div></div>
                     </div>
                 </div>
@@ -62,16 +65,13 @@
 
             <!--BOUTONS-->
             <div class="column is-3 ">
-                <input class="button is-fullwidth is-info" type="button" value="Retour">
+                <input id="retour" class="button is-fullwidth is-info" type="button" value="Retour">
             </div>
             <div class="column is-3 ">
-                <input class="button is-fullwidth is-info" type="button" value="Modifier">
+                <input id="ajouter" class="button is-fullwidth is-info" type="button" value="Ajouter">
             </div>
             <div class="column is-3 ">
-                <input class="button is-fullwidth is-info" type="button" value="Supprimer">
-            </div>
-            <div class="column is-3 ">
-                <input class="button is-fullwidth is-info" type="button" value="Annuler">
+                <input id="annuler" class="button is-fullwidth is-info" type="button" value="Annuler">
             </div>
         </form>
     </div>
@@ -84,5 +84,7 @@
         </p>
     </div>
 </footer>
+
+<script type="module" src="../PageConditions/ConditionsAjouter.js"></script>
 </body>
 </html>

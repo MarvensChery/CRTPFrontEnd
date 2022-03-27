@@ -2,67 +2,89 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+          integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <title>Title</title>
+    <style type="text/css" media="screen">
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        #wrapper {
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
 <section class="hero-body">
-    <div class="hero-body">
+    <div class="hero-body is-size-3-touch is-size-5">
         <div class="has-text-centered">
-            <img src="https://www.collegesinstitutes.ca/wp-content/uploads/2015/09/c-m-logo.jpg" width="300" class="is-centered">
-            <h1>Centre de renseignements - Techniques policières</h1>
+            <img src="https://www.collegesinstitutes.ca/wp-content/uploads/2015/09/c-m-logo.jpg" width="300"
+                 class="is-centered">
+            <h1 class="is-info">Centre de renseignements - Techniques policières</h1>
+
         </div>
+
     </div>
-    <div class="columns is-multiline ">
+    <div class="columns is-multiline is-size-3-touch">
         <!--box gives it the shadow-->
-        <div class="column is-10 is-offset-1 box my-6">
+        <div class="column is-10 is-12-touch is-offset-1-desktop box pb-5">
             <form class="has-text-centered">
-                    <div class='is-centered'>
-                            <h1 class='title is-full'>Table IPPE Alimentation</h1>
-                            <div class="control has-icons-left has-icons-right"></div>
-                            <label for="votre-nom">Filtrer par nom de famille :
-                                <input class="is-size-5" id="votre-nom" class="input is-hovered" name="votre-nom" type="text">
-                            </label>
-                            <input id="filtrer" class="button is-info" type="button" value="Filtrer">
-                            <input id="tous" class="button is-info is-size-6 is-rounded" type="button" value="Tous">
-
-                            <div>
-                                <hr>
-                            </div>
-
-                        <div class="column is-10 is-offset-1">
-                            <table class='table is-fullwidth is-bordered is-centered'>
-                                <thead >
-                                <tr>
-                                    <th>Nom</th>
-                                    <th>Prenom1</th>
-                                    <th>Prenom2</th>
-                                    <th>Categorie</th>
-                                </tr>
-                                </thead>
-                                <tbody id="BanquePersonne">
-                                </tbody>
-                            </table>
-                        </div>
-
+                <div class='is-centered'>
+                    <h1 class='title is-1-touch is-full my-6'>Table IPPE Alimentation</h1>
+                    <div class="columns is-multiline">
+                        <label class="column is-3-desktop is-offset-1-desktop is-6-touch" for="votre-nom">Filtrer par
+                            nom de famille:</label>
+                        <input class="column input is-hovered is-size-6 is-size-4-touch is-4-desktop is-5-touch mr-6"
+                               id="votre-nom" name="votre-nom" type="text">
                     </div>
-                    <br>
-
-                <div class="columns">
-                <!--BOUTONS-->
-
-                <div class="column is-4" >
-                    <input class="button is-fullwidth is-info" type="button" value="Retour à la sélection d'une banque">
+                    <div>
+                        <hr>
+                    </div>
+                    <div class="column is-10 is-offset-1-desktop">
+                        <table class='table is-fullwidth is-bordered is-centered my-5'>
+                            <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prenom1</th>
+                                <th>Prenom2</th>
+                                <th>Categorie</th>
+                            </tr>
+                            </thead>
+                            <tbody id="BanquePersonne">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="column is-4 is-offset-4">
-                    <input  class="button is-fullwidth is-info" type="button" value="Ajouter une personne">
-                </div>
+                <br>
+                <div class="columns px-3 mb-4">
+                    <!--BOUTONS-->
+
+                    <div class="column is-4 is-offset-1-desktop is-6-touch">
+                        <input id="boutonretour" class="button is-fullwidth is-info is-size-4-touch is-rounded" type="button"
+                               value="Retour à la sélection d'une banque">
+                    </div>
+                    <div class="column is-4 is-offset-2-desktop is-6-touch">
+                        <input class="button is-fullwidth is-info is-size-4-touch is-rounded" type="button"
+                               value="Ajouter une personne">
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 </section>
+<!--Footer-->
+<footer class="footer is-size-3-touch">
+    <div class="content has-text-centered">
+        <p>
+            Équipe 6
+        </p>
+    </div>
+</footer>
 <script type="module" src="./BanquePersonne.js"></script>
 </body>
 </html>

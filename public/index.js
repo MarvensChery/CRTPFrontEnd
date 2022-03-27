@@ -1,6 +1,12 @@
+const switch1 = document.getElementById('switch1');
+switch1.onclick = function(){
+  switch1.classList.toggle('cliquer')
+  professeurOUetudiant();
+}
+
 async function connexion() {
-    const identifiant = document.getElementById('username').value;
-    const motDePasse = document.getElementById('password').value;
+    const identifiant = document.getElementById('ID').value;
+    const motDePasse = document.getElementById('mdp').value;
 
     const connection = { identifiant, motDePasse };
 
@@ -9,23 +15,18 @@ async function connexion() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(connection),
     });
-
+    
     if (response.ok) {
         const data = await response.json();
 
-        console.log("data good")
-        console.log(document.getElementById('id').innerText)
-        console.log(data.Etudiant)
 
-        if (document.getElementById('id').innerText == 'Identification étudiant' && data.Etudiant === true) {
-            console.log("data good")
+        if (document.getElementById('switch1').className == "switch-button" && data.Etudiant === true) {
             sessionStorage.setItem('token', data.Etudiant);
             sessionStorage.setItem('Matricule', data.Matricule);
             sessionStorage.setItem('Nom', data.Nom);
             window.location.href = './Acceuil/Acceuil.html';
 
-        } else if (document.getElementById('id').innerText == 'Identification enseignant' && data.Etudiant === false) {
-            console.log("data good")
+        } else if (document.getElementById('switch1').className == 'switch-button cliquer' && data.Etudiant === false) {
             sessionStorage.setItem('token', data.Etudiant);
             sessionStorage.setItem('Matricule', data.Matricule);
             sessionStorage.setItem('Nom', data.Nom);
@@ -39,11 +40,18 @@ async function connexion() {
     }
 }
 
-window.onload = function bouton() {
-    const BtnEt = document.getElementById('BtnEtudiant');
-    const BtnEn = document.getElementById('BtnEnseignant');
+document.getElementById('co').addEventListener('click', connexion)
 
-    BtnEt.addEventListener('click', () => { document.getElementById('id').innerText = 'Identification étudiant'; });
-    BtnEn.addEventListener('click', () => { document.getElementById('id').innerText = 'Identification enseignant'; });
-    document.getElementById('connection').addEventListener('click', async () => { await connexion(); });
-};
+
+function professeurOUetudiant(){
+
+    if(switch1.className === 'switch-button cliquer'){
+        document.getElementById('nomLabel').innerText = 'Identifiant du professeur'
+        document.getElementById('mdpLabel').innerText = 'Mot de passe du professeur'
+        document.getElementById('img').src = './image/logoSansText.png'
+    }else{
+        document.getElementById('nomLabel').innerText = "Identifiant de l'étudiant"
+        document.getElementById('mdpLabel').innerText = "Mot de passe du l'étudiant"
+        document.getElementById('img').src = './image/etudiant.png'
+    }
+}
