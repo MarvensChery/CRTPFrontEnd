@@ -1,3 +1,11 @@
+import {
+    Matricule,Nom
+  } from '../commun.js';
+
+if(Matricule == null || Nom == null){
+    window.location.href = `http://localhost:5000`
+  }
+
 //filter + liste personne + href link
 let personne = null;
 let BanquePersonne = document.getElementById("BanquePersonne")
@@ -76,7 +84,7 @@ async function getPersonnes() {
     }
 }
 
-document.getElementById("boutonretour").addEventListener('click', () => {
+document.getElementById("imgHome").addEventListener('click', () => {
     window.location.href = "http://localhost:5000/Acceuil/Acceuil.html"
 })
 

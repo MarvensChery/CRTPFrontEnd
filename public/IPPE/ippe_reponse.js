@@ -1,4 +1,7 @@
 window.addEventListener('DOMContentLoaded', async () => {
+    document.getElementById("imgHome").addEventListener('click', () => {
+        window.location.href = "http://localhost:5000/Acceuil/Acceuil.html"
+    })
     const urlParams = new URLSearchParams(window.location.search);
     //obtenir la valeur d'un paramètre
     const nomFamille = urlParams.get('nomFamille');

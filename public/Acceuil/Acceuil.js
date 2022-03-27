@@ -24,7 +24,13 @@ if ($navbarBurgers.length > 0) {
 
     });
   });
+  
 }
+
+if(Matricule == null || Nom == null){
+  window.location.href = `http://localhost:5000`
+}
+
 document.getElementById('texteChangeant').innerHTML =' Bienvenue dans notre systeme de recherche'
 
 

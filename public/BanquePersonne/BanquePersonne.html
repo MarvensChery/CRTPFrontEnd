@@ -17,10 +17,17 @@
         #wrapper {
             flex: 1;
         }
+        .zoom:hover {
+            transform: scale(1.1);
+        }
+
+        .shadow:hover {
+            -webkit-filter: drop-shadow(-5px 2px 5px #999999);
+        }
     </style>
 </head>
 <body>
-<section class="hero-body">
+<section class="hero-body is-size-4">
     <div class="hero-body is-size-3-touch is-size-5">
         <div class="has-text-centered">
             <img src="https://www.collegesinstitutes.ca/wp-content/uploads/2015/09/c-m-logo.jpg" width="300"
@@ -46,13 +53,14 @@
                         <hr>
                     </div>
                     <div class="column is-10 is-offset-1-desktop">
-                        <table class='table is-fullwidth is-bordered is-centered my-5'>
+                        <table class='table is-striped is-fullwidth is-bordered is-centered my-5'>
                             <thead>
                             <tr>
-                                <th>Nom</th>
-                                <th>Prenom1</th>
-                                <th>Prenom2</th>
-                                <th>Categorie</th>
+                                <th class="is-info">Nom</th>
+                                <th class="is-info">Prenom1</th>
+                                <th class="is-info">Prenom2</th>
+                                <th class="is-info">Categorie</th>
+                                <th style="border:none;"><a href='${link}'><i class="fas fa-user-plus"></i></a></th>
                             </tr>
                             </thead>
                             <tbody id="BanquePersonne">
@@ -60,20 +68,23 @@
                         </table>
                     </div>
                 </div>
-                <br>
-                <div class="columns px-3 mb-4">
-                    <!--BOUTONS-->
+<!--                <div class="columns px-3 mb-4">-->
+<!--                    &lt;!&ndash;BOUTONS&ndash;&gt;-->
 
-                    <div class="column is-4 is-offset-1-desktop is-6-touch">
-                        <input id="boutonretour" class="button is-fullwidth is-info is-size-4-touch is-rounded" type="button"
-                               value="Retour à la sélection d'une banque">
-                    </div>
-                    <div class="column is-4 is-offset-2-desktop is-6-touch">
-                        <input class="button is-fullwidth is-info is-size-4-touch is-rounded" type="button"
-                               value="Ajouter une personne">
-                    </div>
-                </div>
+<!--                    <div class="column is-4 is-offset-1-desktop is-6-touch">-->
+<!--                        <input class="button is-fullwidth is-info is-size-4-touch is-rounded" type="button"-->
+<!--                               value="Retour à la sélection d'une banque">-->
+<!--                    </div>-->
+<!--                    <div class="column is-4 is-offset-2-desktop is-6-touch">-->
+<!--                        <input class="button is-fullwidth is-info is-size-4-touch is-rounded" type="button"-->
+<!--                               value="Ajouter une personne">-->
+<!--                    </div>-->
+<!--                </div>-->
             </form>
+        <!--BUTTON HOME-->
+            <div>
+                <img id="imgHome" class="shadow zoom" src="../image/home.png" style="height: 64px;width: 64px; float:left; margin-top: -50px; margin-bottom: -100px;">
+            </div>
         </div>
     </div>
 </section>
