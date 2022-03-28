@@ -69,7 +69,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             
               `;
 
-                        ippe.innerHTML = dataippe;
+                        ippe2.innerHTML = dataippe2;
                         break;
 
                     case 'Sous observation':
@@ -94,7 +94,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             
               `;
 
-                        ippe.innerHTML = dataippe;
+                        ippe2.innerHTML = dataippe2;
                         break;
 
                     case 'Accusé':
@@ -118,7 +118,7 @@ window.addEventListener('DOMContentLoaded', async () => {
               <!--condtions-->
               `;
 
-                        ippe.innerHTML = dataippe;
+                        ippe2.innerHTML = dataippe2;
                         break;
 
                     case 'Probation':
@@ -155,7 +155,7 @@ window.addEventListener('DOMContentLoaded', async () => {
               </tr>
               `;
 
-                        ippe.innerHTML = dataippe;
+                        ippe2.innerHTML = dataippe2;
                         break;
 
                     case 'Libération Conditionnelle':
@@ -198,7 +198,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             </tr>
               `;
 
-                        ippe.innerHTML = dataippe2;
+                        ippe2.innerHTML = dataippe2;
                         break;
 
                     case 'Disparu':
@@ -308,6 +308,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                         break;
                 }
             }
+            return ''
         }
 
         function formatterFPS() {
@@ -686,6 +687,6 @@ function clickleftarrow() {
 rightarrow.addEventListener('click', clickrightarrow)
 leftarrow.addEventListener('click', clickleftarrow)
 
-document.getElementById("boutonretour").addEventListener('click', () => {
+document.getElementById("imgHome").addEventListener('click', () => {
     window.location.href = "http://localhost:5000/Acceuil/Acceuil.html"
 })
