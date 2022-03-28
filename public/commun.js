@@ -53,7 +53,7 @@ function menuON(){  //Fonction qui fait apparaitre le menu
   document.getElementById('menuNav').innerHTML = `<nav class="navbar ">
   <div class="navbar-brand">
     <a class="navbar-item" >
-      <img src="https://media.discordapp.net/attachments/927002688888131606/956803614402297866/logom9.png?width=512&height=128" id="logo" alt="Logo m9" width="112" height="40">
+      <img src="https://media.discordapp.net/attachments/927002688888131606/956803614402297866/logom9.png?width=512&height=128" id="logo" class="zoom" alt="Logo m9" width="112" height="40">
     </a>
 
     <div class="navbar-burger burger" id="nav" data-target="navmnenu1">
@@ -216,7 +216,7 @@ function menuON(){  //Fonction qui fait apparaitre le menu
           <p class="control" id="deco">
             <a class="button " ">
               <span class="icon">
-              <i class="fas fa-sign-out-alt"></i></span>
+              <i class="fas fa-sign-out-alt"></i></i></span>
               <span>Deconnexion</span>
             </a>
           </p>
