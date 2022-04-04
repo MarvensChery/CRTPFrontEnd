@@ -2,7 +2,7 @@
 
 Projet de consultation de base de données pour les étudiants de Technique policière.
 
-Dans le cadre du cours de Projet 2 - 4D1, le premier projet à réaliser ,dans le cadre de ce cours, est de créer une application capable de répliquer l'outil de questionnement de base de données à la disposition d'un agent de l'ordre lors de ses interventions.
+Dans le cadre du cours de Projet 2 - 4D1, le premier projet à réaliser, dans le cadre de ce cours, est de créer une application capable de répliquer l'outil de questionnement de base de données à la disposition d'un agent de l'ordre lors de ses interventions.
 
 ## Cadre d'utilisation
 Cette application servira comme outil de formation au étudiants en technique policière. Il habituera l'élève à:
@@ -11,9 +11,7 @@ Cette application servira comme outil de formation au étudiants en technique po
 -Utilisé un outil de recherche de base de données 
 
 ## Colaboration
-Ce projet est réalisé par: David Déchaine, Ryma Merrouchi, Charles-Étienne Doucet et Dan Bagalwa
-Le PO : Marc Levasseur
-Le Srum Master : David Déchaine
+Ce projet est réalisé par: Nathan Lamy, Salah Eddine Ouamalich, Kassem Kandil, Tran Nguyen Johnny Huy
 
 ## Utilisation
 Téléchargez les dépendances : npm i (faire la même chose dans backend)
@@ -22,15 +20,14 @@ Ouvrir: http://localhost:5000/
 
 Pour se connecter en tant qu'étudiant: 
                 {
-                    Identifiant: 1234
-                    mot de passe: etud
-
+                    Identifiant: e1233772
+                    mot de passe: bonjour
                 }
 
 Pour se connecter en tant qu'enseignat: 
                 {
-                    Identifiant: 5678
-                    mot de passe: prof
+                    Identifiant: e1230986
+                    mot de passe: soleil
 
                 }
 
@@ -42,7 +39,6 @@ Entrez les informations suivante:
                     Pronom1 : Benoit
                     Sexe: masculain
                     Date de Naissance : 31/08/1975
-
                 }
 Appuyez sur Submit;
 
