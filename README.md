@@ -1,4 +1,4 @@
-# Projet_CRPQ_Equipe4
+# Projet_CRPQ_Equipe 6
 
 Projet de consultation de base de données pour les étudiants de Technique policière.
 
@@ -24,11 +24,10 @@ Pour se connecter en tant qu'étudiant:
                     mot de passe: bonjour
                 }
 
-Pour se connecter en tant qu'enseignat: 
+Pour se connecter en tant qu'enseignant: 
                 {
                     Identifiant: e1230986
                     mot de passe: soleil
-
                 }
 
 Appuyez sur les 3 ligne en haut à droite pour ouvrir le menu
