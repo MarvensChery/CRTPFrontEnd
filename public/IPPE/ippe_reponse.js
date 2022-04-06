@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                 reponse2.innerHTML = `***${data[0].IPPE[1].typeEvenement}***`;
 
                 let dataippe2;
-                
+
                 console.log(dataippe2)
                 console.log(data[0].IPPE[1].typeEvenement);
                 console.log(data[0].IPPE.length)
@@ -323,26 +323,39 @@ window.addEventListener('DOMContentLoaded', async () => {
             let returneddata = `<tr>
         <td><strong>Condition(s) :</strong></td>
     </tr>`;
-            if (data[0].IPPE[0].conditions === null || data[0].IPPE[0].conditions.length === 0) {
+            if (data[0].IPPE[0].conditions === null || data[0].IPPE[0].conditions.length === 0 || data[0].IPPE[0].conditions[0].idCondition === null) {
                 return ''
             } else if (data[0].IPPE[0].conditions.length > 0) {
                 data[0].IPPE[0].conditions.forEach(element => {
                     console.log(element.victime, element.frequentation, element.libelle)
-                    if (element.frequentation === null && element.victime === null) {
+                    if (element.frequentation === null && element.victime === null && element.libelle !== "Avoir comme adresse le ") {
                         returneddata += `<tr>
-                                        <td></td>
-                                        <td>${element.libelle}</td>
-                                    </tr>`
-                    } else if (element.frequentation === null && element.victime !== null) {
+                                <td></td>
+                                <td>${element.libelle}</td>
+                            </tr>`
+                    } else if (element.frequentation === null && element.victime !== null && element.libelle !== "Avoir comme adresse le ") {
                         returneddata += `<tr>
-                                        <td></td>
-                                        <td>${element.libelle} ${element.victime}</td>
-                                    </tr>`
-                    } else if (element.frequentation !== null && element.victime === null) {
+                                <td></td>
+                                <td>${element.libelle} ${element.victime}</td>
+                            </tr>`
+                    } else if (element.frequentation !== null && element.victime === null && element.libelle !== "Avoir comme adresse le ") {
                         returneddata += `<tr>
-                                        <td></td>
-                                        <td>${element.libelle} ${element.frequentation}</td>
-                                    </tr>`
+                                <td></td>
+                                <td>${element.libelle} ${element.frequentation}</td>
+                            </tr>`
+                    } else if (element.frequentation === null && element.victime === null && element.libelle === "Avoir comme adresse le ") {
+
+                        if (data[0].Adresse2 === null) {
+                            returneddata += `<tr>
+                                <td></td>
+                                <td>${element.libelle} ${data[0].Adresse1}</td>
+                            </tr>`
+                        } else if (data[0].Adresse2 !== null) {
+                            returneddata += `<tr>
+                                <td></td>
+                                <td>${element.libelle} ${data[0].Adresse1} & ${data[0].Adresse2}</td>
+                            </tr>`
+                        }
                     }
                 });
             }

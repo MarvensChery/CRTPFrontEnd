@@ -3,7 +3,7 @@ let annuler = document.getElementById('annuler');
 let retour = document.getElementById('retour');
 let supprimer = document.getElementById('supprimer');
 let inputconditions1 = document.getElementById('inputconditions1');
-const IDCONDITION = 2;
+const IDCONDITION = 82;
 
 function VerifCondition(CONDITION) {
     if (CONDITION === 'Doit garder la paix et avoir bonne conduite' || CONDITION === "Aucune consommation d'alcool ou de drogue non prescrite") {

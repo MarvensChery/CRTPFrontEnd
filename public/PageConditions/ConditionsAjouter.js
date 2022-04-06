@@ -6,8 +6,8 @@ let span1 = document.getElementById('span1');
 let ajouter = document.getElementById('ajouter');
 let annuler = document.getElementById('annuler');
 let retour = document.getElementById('retour');
-const IDPERSONNE = 3;
-const IDIPPE = 8;
+const IDPERSONNE = 5;
+const IDIPPE = 12;
 
 function changeOptionCondition() {
     let value = input.value;
