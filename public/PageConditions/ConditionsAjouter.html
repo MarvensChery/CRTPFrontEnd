@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<!--Sticks the footer to the bottom of the page,
+    Put this in CSS file after-->
+    <style type="text/css" media="screen">
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        #wrapper {
+            flex: 1;
+        }
+
+        select option[value="1"] 
+        {   
+            color: #999999; 
+        }
+    </style>
+</head>
+<body>
+<section class="hero-body">
+    <div class="hero-body">
+        <div class="has-text-centered">
+            <img src="https://www.collegesinstitutes.ca/wp-content/uploads/2015/09/c-m-logo.jpg" width="300"
+                 class="is-centered">
+            <h1>Centre de renseignements - Techniques policières</h1>
+        </div>
+    </div>
+    <!--box gives it the shadow-->
+    <div class="container box my-6">
+        <h2 class="title has-text-info-dark">AJOUT D'UNE CONDITION À RESPECTER</h2>
+        <form class="row columns is-multiline">
+            <!--Condition-->
+            <div class="column is-12 my-6">
+                <div class="field">
+                    <div class="columns">
+                        <label class="label column is-1">Condition :</label>
+                        <div class="select">
+                            <select id='Condition' name='Condition'>
+                                <option value=1  selected>Choisissez une des conditions</option>
+                                <option value=2>Avoir comme adresse le</option>
+                                <option value=3>Doit garder la paix et avoir bonne conduite</option>
+                                <option value=4>Aucune consommation d'alcool ou de drogue non prescrite</option>
+                                <option value=5>Ne pas entrer en contact avec </option>
+                                <option value=6>Ne pas fréquenter </option>
+                                <option value=7>Doit demeurer à cet endroit entre</option>
+                            </select>
+                        </div>
+                        <input id="inputconditions1" class="column input is-6 is-hidden" type="text" placeholder="Remplissez la case">
+                        <input id="inputconditions2" class="column input is-2 is-hidden" type="text" placeholder="HH:MM:SS">
+                        <span id="span1" class="is-hidden"> et </span>
+                        <input id="inputconditions3" class="column input is-2 is-hidden" type="text" placeholder="HH:MM:SS">
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--BOUTONS-->
+            <div class="column is-3 ">
+                <input id="retour" class="button is-fullwidth is-info" type="button" value="Retour">
+            </div>
+            <div class="column is-3 ">
+                <input id="ajouter" class="button is-fullwidth is-info" type="button" value="Ajouter">
+            </div>
+            <div class="column is-3 ">
+                <input id="annuler" class="button is-fullwidth is-info" type="button" value="Annuler">
+            </div>
+        </form>
+    </div>
+</section>
+<!--Footer-->
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>
+            Équipe 6
+        </p>
+    </div>
+</footer>
+
+<script type="module" src="../PageConditions/ConditionsAjouter.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <!--Sticks the footer to the bottom of the page,
+        Put this in CSS file after-->
+    <style type="text/css" media="screen">
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        #wrapper {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+<section class="hero-body">
+    <div class="hero-body">
+        <div class="has-text-centered">
+            <img src="https://www.collegesinstitutes.ca/wp-content/uploads/2015/09/c-m-logo.jpg" width="300"
+                 class="is-centered">
+            <h1>Centre de renseignements - Techniques policières</h1>
+        </div>
+    </div>
+    <!--box gives it the shadow-->
+    <div class="container box my-6">
+        <h2 class="title has-text-info-dark">MODIFICATION D'UNE CONDITION À RESPECTER</h2>
+        <form class="row columns is-multiline">
+            <!--Condition-->
+            <div class="column is-12 my-6">
+                <div class="field">
+                    <div class="columns">
+                        <label class="label column is-1">Condition :</label>
+                        <label id = "condition" class="column is-2"></label>
+                        <input id="inputconditions1" class="column input is-4">
+                        <span id="span1" class="is-hidden"> et </span>
+                        <input id="inputconditions2" class="column input is-4 is-hidden" type="text">
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--BOUTONS-->
+            <div class="column is-3 ">
+                <input id="retour" class="button is-fullwidth is-info" type="button" value="Retour">
+            </div>
+            <div class="column is-3 ">
+                <input id="modifier" class="button is-fullwidth is-info" type="button" value="Modifier">
+            </div>
+            <div class="column is-3 ">
+                <input id="supprimer" class="button is-fullwidth is-info" type="button" value="Supprimer">
+            </div>
+            <div class="column is-3 ">
+                <input id="annuler" class="button is-fullwidth is-info" type="button" value="Annuler">
+            </div>
+        </form>
+    </div>
+</section>
+<!--Footer-->
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>
+            Équipe 6
+        </p>
+    </div>
+</footer>
+    <script type="module" src="../PageConditions/ConditionsModifier.js"></script>
+</body>
+</html>

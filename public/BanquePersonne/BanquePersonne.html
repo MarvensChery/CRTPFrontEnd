@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+          integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Title</title>
+    <style type="text/css" media="screen">
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        #wrapper {
+            flex: 1;
+        }
+        .zoom:hover {
+            transform: scale(1.1);
+        }
+
+        .shadow:hover {
+            -webkit-filter: drop-shadow(-5px 2px 5px #999999);
+        }
+    </style>
+</head>
+<body>
+<section class="hero-body is-size-4">
+    <div class="hero-body is-size-3-touch is-size-5">
+        <div class="has-text-centered">
+            <img src="https://www.collegesinstitutes.ca/wp-content/uploads/2015/09/c-m-logo.jpg" width="300"
+                 class="is-centered">
+            <h1 class="is-info">Centre de renseignements - Techniques policières</h1>
+
+        </div>
+
+    </div>
+    <div class="columns is-multiline is-size-3-touch">
+        <!--box gives it the shadow-->
+        <div class="column is-10 is-12-touch is-offset-1-desktop box pb-5">
+            <form class="has-text-centered">
+                <div class='is-centered'>
+                    <h1 class='title is-1-touch is-full my-6'>Table IPPE Alimentation</h1>
+                    <div class="columns is-multiline">
+                        <label class="column is-3-desktop is-offset-1-desktop is-6-touch" for="votre-nom">Filtrer par
+                            nom de famille:</label>
+                        <input class="column input is-hovered is-size-6 is-size-4-touch is-4-desktop is-5-touch mr-6"
+                               id="votre-nom" name="votre-nom" type="text">
+                    </div>
+                    <div>
+                        <hr>
+                    </div>
+                    <div class="column is-10 is-offset-1-desktop">
+                        <table class='table is-striped is-fullwidth is-bordered is-centered my-5'>
+                            <thead>
+                            <tr>
+                                <th class="is-info">Nom</th>
+                                <th class="is-info">Prenom1</th>
+                                <th class="is-info">Prenom2</th>
+                                <th class="is-info">Categorie</th>
+                                <th style="border:none;"><a href='${link}'><i class="fas fa-user-plus"></i></a></th>
+                            </tr>
+                            </thead>
+                            <tbody id="BanquePersonne">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+<!--                <div class="columns px-3 mb-4">-->
+<!--                    &lt;!&ndash;BOUTONS&ndash;&gt;-->
+
+<!--                    <div class="column is-4 is-offset-1-desktop is-6-touch">-->
+<!--                        <input class="button is-fullwidth is-info is-size-4-touch is-rounded" type="button"-->
+<!--                               value="Retour à la sélection d'une banque">-->
+<!--                    </div>-->
+<!--                    <div class="column is-4 is-offset-2-desktop is-6-touch">-->
+<!--                        <input class="button is-fullwidth is-info is-size-4-touch is-rounded" type="button"-->
+<!--                               value="Ajouter une personne">-->
+<!--                    </div>-->
+<!--                </div>-->
+            </form>
+        <!--BUTTON HOME-->
+            <div>
+                <img id="imgHome" class="shadow zoom" src="../image/home.png" style="height: 64px;width: 64px; float:left; margin-top: -50px; margin-bottom: -100px;">
+            </div>
+        </div>
+    </div>
+</section>
+<!--Footer-->
+<footer class="footer is-size-3-touch">
+    <div class="content has-text-centered">
+        <p>
+            Équipe 6
+        </p>
+    </div>
+</footer>
+<script type="module" src="./BanquePersonne.js"></script>
+</body>
+</html>
