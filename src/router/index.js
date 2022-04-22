@@ -51,7 +51,7 @@ const routes = [
         component: ArmeView,
     },
     {
-        path: '/reponseIPPE',
+        path: '/reponseIPPE/:nomFamille/:prenom1/:prenom2/:masculin/:dateNaissance',
         name: 'reponseIPPEView',
         component: ReponseIPPEView,
     },
