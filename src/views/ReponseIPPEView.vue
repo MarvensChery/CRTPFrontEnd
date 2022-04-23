@@ -30,13 +30,17 @@
                 </table>
             </div>
             <div>
-                  <div style="margin-right: -20px; float: right; ">
+                  <div v-if="pageactuelle === 1 && reponseIPPE2type !== null"
+                  v-on:click="pageactuelle = 2" v-on:keydown="pageactuelle = 2"
+                  style="margin-right: -20px; float: right; ">
                      <img class="shadow zoom"
                      src="https://cdn.discordapp.com/attachments/755238466618523729/966048980058378240/right-arrow4.png"
                      alt="right arrow"
                      id="rightarrow" style="position: fixed; height: 64px;width: 64px; top: 50%;">
                   </div>
-                  <div style="float:left; margin-left: -80px;">
+                  <div v-if="pageactuelle === 2 && reponseIPPE2type !== null"
+                  v-on:click="pageactuelle = 1" v-on:keydown="pageactuelle = 1"
+                  style="float:left; margin-left: -80px;">
                      <img class="shadow zoom"
                      src="https://cdn.discordapp.com/attachments/755238466618523729/966048962480058458/left-arrow4.png"
                      alt="left arrow"
@@ -45,7 +49,7 @@
             </div>
             <section>
                 <div class="columns is-desktop">
-                   <div id="divPremiereRep" class="column">
+                   <div id="divPremiereRep" class="column" v-if="pageactuelle === 1">
                       <div class="box">
                             <h2 id="reponse"
                             class="title has-text-info-dark">***{{this.reponseIPPE1type}}***</h2>
@@ -115,6 +119,7 @@
                                        ? "Desorganise" : this.reponseIPPE[0].Violent === true
                                        ? "Violent" : "Aucun"}}</td>
                                     </tr>
+                                    <tr v-html="formatterConditions()"></tr>
                                  </div>
                                  <div v-if="reponseIPPE1type === 'Recherché'">
                                     <tr>
@@ -137,6 +142,7 @@
                                           <td>Numéro d'événement :</td>
                                           <td>{{this.reponseIPPE[0].IPPE[0].noEvenement}}</td>
                                     </tr>
+                                    <tr v-html="formatterConditions()"></tr>
                                  </div>
                                  <div v-if="reponseIPPE1type === 'Sous observation'">
                                     <tr>
@@ -152,9 +158,13 @@
                                           <td>{{this.reponseIPPE[0].IPPE[0].noEvenement}}</td>
                                     </tr>
                                     <tr>
-                                          <td>Dossier :</td>
+                                          <td>Dossier d'enquête:</td>
                                           <td>{{this.reponseIPPE[0].IPPE[0].dossierEnquete}}</td>
                                     </tr>
+                                    <tr><span>-</span></tr>
+                                    <tr> <td> Compléter ficher d'interpellation</td></tr>
+                                 <tr><td>Acheminer à l'unité des Renseignements criminels</td></tr>
+                                    <tr v-html="formatterConditions()"></tr>
                                  </div>
                                  <div v-if="reponseIPPE1type === 'Accusé'">
                                     <tr>
@@ -173,21 +183,150 @@
                                           <td>Numéro d'événement:</td>
                                           <td>{{this.reponseIPPE[0].IPPE[0].noEvenement}}</td>
                                     </tr>
+                                    <tr v-html="formatterConditions()"></tr>
+                                 </div>
+                                 <div v-if="reponseIPPE1type === 'Interdit'">
+                                    <tr>
+                                          <td>Nature:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[0].nature}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Cour:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[0].cour}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Numero de cause:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[0].noCause}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Nature du crime:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[0].nature}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Numéro d'événement:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[0].noEvenement}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Expiration:</td>
+                                 <td>{{this.reponseIPPE[0].IPPE[0].finSentence.split('T')[0]}}</td>
+                                    </tr>
+                                    <tr v-html="formatterConditions()"></tr>
+                                 </div>
+                                 <div v-if="this.reponseIPPE1type === 'Négatif'">
+                                 </div>
+                                 <div v-if="this.reponseIPPE1type === 'Probation'">
+                                    <tr>
+                                          <td>Cour:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[0].cour}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Numero de cause:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[0].noCause}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Nature du crime:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[0].nature}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Numéro d'événement:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[0].noEvenement}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Fin de sentence:</td>
+                                 <td>{{this.reponseIPPE[0].IPPE[0].finSentence.split('T')[0]}}</td>
+                                    </tr>
+                                    <tr v-html="formatterConditions()"></tr>
+                                    <tr>
+                                          <td>Agent de probation:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[0].agentProbation}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Telephone:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[0].telephone}}
+                                             Poste: {{this.reponseIPPE[0].IPPE[0].poste}}</td>
+                                    </tr>
+                                 </div>
+                                 <div v-if="this.reponseIPPE1type === 'Libération Conditionnelle'">
+                                    <tr>
+                                          <td>Cour:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[0].cour}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Numero de cause:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[0].noCause}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Nature du crime:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[0].natureCrime}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Numéro d'événement:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[0].noEvenement}}</td>
+                                    </tr>
+                                    <tr><td>-</td></tr>
+                                    <tr>
+                                          <td>FPS:</td>
+                                          <td>438761F</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Lieu de detention:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[0].lieuDetention}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Fin de la sentence:</td>
+                                 <td>{{this.reponseIPPE[0].IPPE[0].finSentence.split('T')[0]}}</td>
+                                    </tr>
+                                    <tr v-html="formatterConditions()"></tr>
+                                    <tr>
+                                       <td>Agent de libération conditionnelle à contacter :</td>
+                                       <td>{{this.reponseIPPE[0].IPPE[0].agentLiberation}}</td>
+                                    </tr>
+                                    <tr>
+                                       <td>Téléphone :</td>
+                                       <td>{{this.reponseIPPE[0].IPPE[0].telephone}}</td>
+                                    </tr>
                                  </div>
                                </tbody>
                             </table>
                       </div>
                    </div>
                    <!--Rep 2-->
-                   <div id="divDeuxiemeRep" class="column is-hidden">
+                   <div id="divDeuxiemeRep" class="column" v-if="pageactuelle === 2">
                       <div class="box">
-                            <h2 id="reponse2" class="title has-text-info-dark">exemple:accuse</h2>
+                            <h2 id="reponse2"
+                            class="title has-text-info-dark">***{{this.reponseIPPE2type}}***</h2>
                             <table class="table is-hoverable is-fullwidth">
                                <tbody id="ippe2">
+                                  <div v-if="reponseIPPE2type === 'Interdit'">
+                                    <tr>
+                                          <td>Nature:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[1].nature}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Cour:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[1].cour}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Numero de cause:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[1].noCause}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Nature du crime:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[1].nature}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Numéro d'événement:</td>
+                                          <td>{{this.reponseIPPE[0].IPPE[1].noEvenement}}</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Expiration:</td>
+                                 <td>{{this.reponseIPPE[0].IPPE[1].finSentence.split('T')[0]}}</td>
+                                    </tr>
+                                 </div>
                                </tbody>
                             </table>
                       </div>
-                  </div>
+                   </div>
                 </div>
              </section>
              </div>
@@ -196,7 +335,6 @@
 </template>
 
 <script>
-// noinspection JSUnusedGlobalSymbols
 export default {
     name: 'ReponseIPPEView',
     data() {
@@ -206,6 +344,7 @@ export default {
             reponseIPPE1type: null,
             reponseIPPE2type: null,
             reponseIPPE1conditions: null,
+            pageactuelle: 1,
         };
     },
     mounted() {
@@ -216,7 +355,7 @@ export default {
             console.log('getIPPE');
             console.log(this.$route.params.nomFamille);
             console.log(this.$route.params.prenom1);
-            const prenom2 = 'null' ? '' : this.$route.params.prenom2;
+            const prenom2 = this.$route.params.prenom2 === 'null' ? '' : this.$route.params.prenom2;
             console.log(prenom2);
             console.log(this.$route.params.masculin);
             console.log(this.$route.params.dateNaissance);
@@ -225,7 +364,11 @@ export default {
                 `http://localhost:3000/ippes/info?nomFamille=${this.$route.params.nomFamille}&prenom1=${this.$route.params.prenom1}&prenom2=${prenom2}&masculin=${this.$route.params.masculin}&dateNaissance=${this.$route.params.dateNaissance}`,
             );
             if (rep.ok) {
-                this.reponseIPPE = await rep.json();
+               this.reponseIPPE = await rep.json();
+               console.log(this.reponseIPPE[0].IPPE.length === 0);
+               if (this.reponseIPPE[0].IPPE.length === 0) {
+                  this.reponseIPPE1type = 'Négatif';
+               } else {
                 this.reponseIPPElength = this.reponseIPPE[0].IPPE.length;
                 this.reponseIPPE1type = this.reponseIPPE[0].IPPE[0].typeEvenement;
                 if (this.reponseIPPE[0].IPPE[1]) {
@@ -234,11 +377,58 @@ export default {
                 if (this.reponseIPPE[0].IPPE[0].conditions[0].idCondition !== null) {
                     this.reponseIPPE1conditions = this.reponseIPPE[0].IPPE[0].conditions;
                 }
+                console.log(this.reponseIPPE);
                 console.log(this.reponseIPPE1type);
                 console.log(this.reponseIPPE2type);
                 console.log(this.reponseIPPElength);
                 console.log(this.reponseIPPE1conditions);
+               }
             }
+        },
+        formatterConditions() {
+            console.log(this.reponseIPPE[0].Adresse1);
+            console.log(this.reponseIPPE1conditions);
+            let returneddata = `<tr>
+        <td><strong>Condition(s) :</strong></td>
+    </tr>`;
+            if (this.reponseIPPE1conditions === null || this.reponseIPPE1conditions.length === 0
+            || this.reponseIPPE1conditions.idCondition === null) {
+                return '';
+            } if (this.reponseIPPE1conditions.length > 0) {
+                this.reponseIPPE1conditions.forEach((element) => {
+                   console.log(element.libelle.indexOf('adresse') === -1);
+                    console.log(element.victime, element.frequentation, element.libelle);
+                    if (element.frequentation === null && element.victime === null && element.libelle.indexOf('adresse') === -1) {
+                        returneddata += `<tr>
+                                <td></td>
+                                <td>${element.libelle}</td>
+                            </tr>`;
+                    } else if (element.frequentation === null && element.victime !== null && element.libelle.indexOf('adresse') === -1) {
+                        returneddata += `<tr>
+                                <td></td>
+                                <td>${element.libelle} ${element.victime}</td>
+                            </tr>`;
+                    } else if (element.frequentation !== null && element.victime === null && element.libelle.indexOf('adresse') === -1) {
+                        returneddata += `<tr>
+                                <td></td>
+                                <td>${element.libelle} ${element.frequentation}</td>
+                            </tr>`;
+                    } else if (element.frequentation === null && element.victime === null && element.libelle.indexOf('adresse') !== -1) {
+                        if (this.reponseIPPE[0].Adresse2 !== null) {
+                            returneddata += `<tr>
+                                <td></td>
+                                <td>${element.libelle} ${this.reponseIPPE[0].Adresse1}</td>
+                            </tr>`;
+                        } else if (this.reponseIPPE[0].Adresse2 === null) {
+                            returneddata += `<tr>
+                                <td></td>
+                                <td>${element.libelle} ${this.reponseIPPE[0].Adresse1} & ${this.reponseIPPE[0].Adresse2}</td>
+                            </tr>`;
+                        }
+                    }
+                });
+            }
+            return returneddata;
         },
     },
 };
