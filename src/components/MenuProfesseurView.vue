@@ -122,6 +122,9 @@
                 <a class="navbar-item " id="banqueP" >
                 <strong>Banque de personne</strong>
                 </a>
+                <router-link :to="{name: 'objetsView'}" class="navbar-item " id="banqueP" >
+                <strong>Banque d'objets</strong>
+                </router-link>
               </div>
             </div>
           </div>

@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div id="NoEvenement" class="columns is-mobile is-multiline is-centered">
-                        <div class="column is-2">
+                        <div class="column is-3-desktop is-2-mobile">
                             <label class="has-text-black" for="NoEvent"><b>Numéro évenement</b>
                                 <span style="color: red">*</span></label><br><br>
                             <select id="NoEvent" class="select" name="NoEvent" required>
@@ -134,13 +134,14 @@
                             </select>
                         </div>
 
-                        <div class="column is-2">
+                        <div class=" is-3-desktop is-2-mobile">
                             <label class="has-text-black" for="NoSeq"><b>Numéro Séquentiel</b>
                                 <span style="color: red">*</span></label><br><br>
                             <input id="NoSeq" type="text" name="NoSeq"
                                 placeholder="Numéro Séquentiel" required/>
                         </div>`
                    </div>
+                <p style="margin-bottom: 50px;">&nbsp;</p>
                 </div>
             </div>
         </div>
@@ -157,8 +158,6 @@ export default {
 </script>
 
 <style scoped>
-<<<<<<< HEAD
-=======
 html, body {
     min-height: 100%;
     }
@@ -338,5 +337,4 @@ html, body {
     padding-bottom:5px;
     }
     }
->>>>>>> dev_Vue
 </style>
