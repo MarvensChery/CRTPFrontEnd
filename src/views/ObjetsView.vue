@@ -3,11 +3,6 @@
     <h1 class="has-text-black " style="height:135px; text-align:center; font-size: 24px;
     padding-top: 5%;">
     <b><u>LISTE D'OBJETS</u></b></h1>
-    <div class="columns is-multiline is-mobile has-text-centered">
-        <a class="column" href="#objets">Objets</a>
-        <a class="column" href="#valeurs">valeurs</a>
-        <a class="column" href="#armes">armes</a>
-    </div>
     </section>
     <div class="columns has-text-right has-text-black is-centered"
     style="padding-top: 5%; padding-right: 5%;">
@@ -31,12 +26,12 @@
                             <th>Type d'objet</th>
                             <th>Numéro d'évènement</th>
                         </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr v-for="o in filtresObjets" v-bind:key="o.idBOB">
+                        <td>{{ o.NoSerie }}</td>
+                        <td>{{ o.Marque }}</td>
+                        <td>{{ o.Modele }}</td>
+                        <td>{{ o.TypeObjet }}</td>
+                        <td>{{ o.NoEvenement }}</td>
                         <td><i class='fas fa-edit'></i></td>
                     </tr>
                 </table>
@@ -44,6 +39,9 @@
                 </a>
             </div>
     </div>
+    <h1 class="has-text-black " style="height:135px; text-align:center; font-size: 24px;
+    padding-top: 5%;">
+    <b><u>LISTE DE VALEURS</u></b></h1>
     <div class="columns has-text-right has-text-black is-centered"
     style="padding-top: 5%; padding-right: 5%;">
         <div class="select">
@@ -66,12 +64,12 @@
                         <th>Type d'évènement</th>
                         <th>Numéro d'évènement</th>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr v-for="v in filtresValeurs" v-bind:key="v.IdIBVA">
+                        <td>{{ v.Identifiant }}</td>
+                        <td>{{ v.Auteur }}</td>
+                        <td>{{ v.TypeValeur }}</td>
+                        <td>{{ v.TypeEvenement }}</td>
+                        <td>{{ v.NoEvenement }}</td>
                         <td><i class='fas fa-edit'></i></td>
                     </tr>
                 </table>
@@ -79,6 +77,9 @@
             </a>
        </div>
     </div>
+    <h1 class="has-text-black " style="height:135px; text-align:center; font-size: 24px;
+    padding-top: 5%;">
+    <b><u>LISTE D'ARMES</u></b></h1>
     <div class="columns has-text-right has-text-black is-centered"
     style="padding-top: 5%; padding-right: 5%;">
         <div class="select">
@@ -101,12 +102,12 @@
                         <th>Type d'armes</th>
                         <th>Numéro d'évènement</th>
                     </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr v-for="a in filtresArmes" v-bind:key="a.IdIBAF">
+                        <td>{{ a.NoSerie }}</td>
+                        <td>{{ a.Marque }}</td>
+                        <td>{{ a.Calibre }}</td>
+                        <td>{{ a.TypeArme }}</td>
+                        <td>{{ a.NoEvenement }}</td>
                         <td><i class='fas fa-edit'></i></td>
                     </tr>
                 </table>
@@ -181,11 +182,41 @@ export default {
         },
     },
     mounted() {
+        this.getAllArmes();
+        this.getAllObjets();
+        this.getAllValeurs();
         this.getObjetsOptions();
         this.getValeursOptions();
         this.getArmesOptions();
     },
     methods: {
+        async getAllObjets() {
+            const rep = await fetch(`${svrURL}/objets`);
+            const data = await rep.json();
+
+            if (rep.ok) {
+                console.log(data);
+                this.objets = data;
+            }
+        },
+        async getAllValeurs() {
+            const rep = await fetch(`${svrURL}/valeurs`);
+            const data = await rep.json();
+
+            if (rep.ok) {
+                console.log(data);
+                this.valeurs = data;
+            }
+        },
+        async getAllArmes() {
+            const rep = await fetch(`${svrURL}/armes`);
+            const data = await rep.json();
+
+            if (rep.ok) {
+                console.log(data);
+                this.armes = data;
+            }
+        },
         async getObjetsOptions() {
             const rep = await fetch(`${svrURL}/objets`);
             const filtresListes = await rep.json();

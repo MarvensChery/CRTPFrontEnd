@@ -125,6 +125,12 @@
                 <router-link :to="{name: 'objetsView'}" class="navbar-item " id="banqueP" >
                 <strong>Banque d'objets</strong>
                 </router-link>
+                <router-link :to="{name: 'objetsView'}" class="navbar-item " id="banqueP" >
+                <strong>Banque d'armes</strong>
+                </router-link>
+                <router-link :to="{name: 'objetsView'}" class="navbar-item " id="banqueP" >
+                <strong>Banque de valeurs</strong>
+                </router-link>
               </div>
             </div>
           </div>

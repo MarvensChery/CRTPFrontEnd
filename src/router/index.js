@@ -6,7 +6,7 @@ import PersonnesView from '@/views/PersonnesView.vue';
 import ConditionView from '@/views/ConditionView.vue';
 import PersonneView from '@/views/PersonneView.vue';
 import ObjetsView from '@/views/ObjetsView.vue';
-import ArmeView from '@/views/ArmeView.vue';
+
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
 
 const routes = [
@@ -44,11 +44,6 @@ const routes = [
         path: '/objets',
         name: 'objetsView',
         component: ObjetsView,
-    },
-    {
-        path: '/arme',
-        name: 'armeView',
-        component: ArmeView,
     },
     {
         path: '/reponseIPPE',
