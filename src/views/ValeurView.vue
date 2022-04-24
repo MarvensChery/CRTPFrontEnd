@@ -87,6 +87,8 @@
                                 <span style="color: red">*</span></label><br><br>
                             <input id="annee" type="text" name="annee" placeholder="Année"
                             v-model="annee" required/>
+                            <p id="nomError" class="help is-danger is-hidden">
+                            *Champ obligatoire : seulement des nombres sont valides</p>
                         </div>
 
                         <div class="column is-1-desktop is-2-mobile">
@@ -155,7 +157,7 @@
                                 <span style="color: red">*</span></label><br><br>
                             <input id="NoSeq" type="text" name="NoSeq"
                                 placeholder="Numéro Séquentiel" v-model="NoSeq" required/>
-                        </div>`
+                        </div>
                    </div>
                 </div>
             </div>
