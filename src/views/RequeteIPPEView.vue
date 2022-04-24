@@ -127,122 +127,122 @@
 
 <script>
 import {
-  isAnneeValide, isMoisValide, isJourValide, capitalizeFirstLetter,
+    isAnneeValide, isMoisValide, isJourValide, capitalizeFirstLetter,
 } from '@/validations';
 
 export default {
-  name: 'RequeteIPPEView',
-  data() {
-    return {
-      nom: '',
-      prenom1: '',
-      prenom2: '',
-      sexe: '',
-      annee: '',
-      mois: '',
-      jour: '',
-      isMoisValide1: '',
-      isJourValide1: '',
-      isAnneeValide1: '',
-      IsPrenom1Valide1: '',
-      IsPrenom2Valide1: '',
-      IsNomValide1: '',
-      anneError: false,
-      moisError: false,
-      jourError: false,
-      nomError: false,
-      prenomError: false,
-      prenomError2: false,
-      sexeError: false,
-    };
-  },
-
-  methods: {
-    // Fonction qui permet de vérifier si les champs sont valides
-    isValid() {
-      this.isAnneeValide1 = isAnneeValide(this.annee);
-      if (this.isAnneeValide1 === false) {
-        this.anneError = true;
-      } else {
-        this.anneError = false;
-      }
-      this.isMoisValide1 = isMoisValide(this.mois);
-      if (this.isMoisValide1 === false) {
-        this.moisError = true;
-      } else {
-        this.moisError = false;
-      }
-      this.isJourValide1 = isJourValide(this.jour);
-      if (this.isJourValide1 === false) {
-        this.jourError = true;
-      } else {
-        this.jourError = false;
-      }
-      if (this.sexe === '') {
-        this.sexeError = true;
-      } else {
-        this.sexeError = false;
-      }
-      this.IsNomValide1 = capitalizeFirstLetter(this.nom);
-      if (this.IsNomValide1 === '') {
-        this.nomError = true;
-      } else {
-        this.nomError = false;
-      }
-      this.IsPrenom1Valide1 = capitalizeFirstLetter(this.prenom1);
-      if (this.IsPrenom1Valide1 === '') {
-        this.prenomError = true;
-      } else {
-        this.prenomError = false;
-      }
-      this.IsPrenom1Valide2 = capitalizeFirstLetter(this.prenom2);
-      if (this.IsPrenom1Valide2 === '') {
-        this.prenom2 = null;
-      }
-      if (this.anneError === false && this.moisError === false
-        && this.jourError === false && this.nomError === false
-        && this.prenomError === false && this.sexeError === false) {
-        console.log('yo');
-        this.$root.$data.erreurIPPE = false;
-        this.$router.push(`/reponseIPPE/${this.nom}/${this.prenom1}/${this.prenom2}/${this.sexe}/${this.annee}-${this.mois}-${this.jour}`);
-      }
+    name: 'RequeteIPPEView',
+    data() {
+        return {
+            nom: '',
+            prenom1: '',
+            prenom2: '',
+            sexe: '',
+            annee: '',
+            mois: '',
+            jour: '',
+            isMoisValide1: '',
+            isJourValide1: '',
+            isAnneeValide1: '',
+            IsPrenom1Valide1: '',
+            IsPrenom2Valide1: '',
+            IsNomValide1: '',
+            anneError: false,
+            moisError: false,
+            jourError: false,
+            nomError: false,
+            prenomError: false,
+            prenomError2: false,
+            sexeError: false,
+        };
     },
 
-    // // S'occupe de l'affichage des messages d'erreur
-    // checkMandatoryInput(nom, prenom1, annee, mois, jour) {
-    //     // Identification de l'emplacement des messages
-    //     const msgNom = document.getElementById('nomError');
-    //     const msgPrenomUn = document.getElementById('prenom1Error');
-    //     const msgJour = document.getElementById('jourError');
-    //     const msgMois = document.getElementById('moisError');
-    //     const msgAnnee = document.getElementById('anneeError');
-    //     // Check la validité des champs
-    //     const anneeValid = isAnneeValide(annee);
-    //     const moisValid = isMoisValide(mois);
-    //     const jourValid = isJourValide(jour);
-    //     // Retourne true s'il n'y a pas d'erreur
-    //     let errorFalse = true;
-    //     // Condition champs vides
-    //     if (nom === '') {
-    //         msgNom.classList.remove('is-hidden');
-    //         errorFalse = false;
-    //     } else { msgNom.classList.add('is-hidden'); }
+    methods: {
+    // Fonction qui permet de vérifier si les champs sont valides
+        isValid() {
+            this.isAnneeValide1 = isAnneeValide(this.annee);
+            if (this.isAnneeValide1 === false) {
+                this.anneError = true;
+            } else {
+                this.anneError = false;
+            }
+            this.isMoisValide1 = isMoisValide(this.mois);
+            if (this.isMoisValide1 === false) {
+                this.moisError = true;
+            } else {
+                this.moisError = false;
+            }
+            this.isJourValide1 = isJourValide(this.jour);
+            if (this.isJourValide1 === false) {
+                this.jourError = true;
+            } else {
+                this.jourError = false;
+            }
+            if (this.sexe === '') {
+                this.sexeError = true;
+            } else {
+                this.sexeError = false;
+            }
+            this.IsNomValide1 = capitalizeFirstLetter(this.nom);
+            if (this.IsNomValide1 === '') {
+                this.nomError = true;
+            } else {
+                this.nomError = false;
+            }
+            this.IsPrenom1Valide1 = capitalizeFirstLetter(this.prenom1);
+            if (this.IsPrenom1Valide1 === '') {
+                this.prenomError = true;
+            } else {
+                this.prenomError = false;
+            }
+            this.IsPrenom1Valide2 = capitalizeFirstLetter(this.prenom2);
+            if (this.IsPrenom1Valide2 === '') {
+                this.prenom2 = null;
+            }
+            if (this.anneError === false && this.moisError === false
+        && this.jourError === false && this.nomError === false
+        && this.prenomError === false && this.sexeError === false) {
+                console.log('yo');
+                this.$root.$data.erreurIPPE = false;
+                this.$router.push(`/reponseIPPE/${this.nom}/${this.prenom1}/${this.prenom2}/${this.sexe}/${this.annee}-${this.mois}-${this.jour}`);
+            }
+        },
 
-    //     if (prenom1 === '') {
-    //         msgPrenomUn.classList.remove('is-hidden');
-    //         errorFalse = false;
-    //     } else { msgPrenomUn.classList.add('is-hidden'); }
+        // // S'occupe de l'affichage des messages d'erreur
+        // checkMandatoryInput(nom, prenom1, annee, mois, jour) {
+        //     // Identification de l'emplacement des messages
+        //     const msgNom = document.getElementById('nomError');
+        //     const msgPrenomUn = document.getElementById('prenom1Error');
+        //     const msgJour = document.getElementById('jourError');
+        //     const msgMois = document.getElementById('moisError');
+        //     const msgAnnee = document.getElementById('anneeError');
+        //     // Check la validité des champs
+        //     const anneeValid = isAnneeValide(annee);
+        //     const moisValid = isMoisValide(mois);
+        //     const jourValid = isJourValide(jour);
+        //     // Retourne true s'il n'y a pas d'erreur
+        //     let errorFalse = true;
+        //     // Condition champs vides
+        //     if (nom === '') {
+        //         msgNom.classList.remove('is-hidden');
+        //         errorFalse = false;
+        //     } else { msgNom.classList.add('is-hidden'); }
 
-    //     // s'assure que les dates entrees sont conforme
-    //     if (jour === '' || !jourValid) {
-    //         msgJour.classList.remove('is-hidden');
-    //         errorFalse = false;
-    //     } else { msgJour.classList.add('is-hidden'); }
+        //     if (prenom1 === '') {
+        //         msgPrenomUn.classList.remove('is-hidden');
+        //         errorFalse = false;
+        //     } else { msgPrenomUn.classList.add('is-hidden'); }
 
-    //     if (mois === '' || !moisValid) {
-    //         msgMois.classList.remove('is-hidden');
-    //         errorFalse = false;
-    //     } else { msgMois.classList.add('is-hidden'); }
+        //     // s'assure que les dates entrees sont conforme
+        //     if (jour === '' || !jourValid) {
+        //         msgJour.classList.remove('is-hidden');
+        //         errorFalse = false;
+        //     } else { msgJour.classList.add('is-hidden'); }
+
+        //     if (mois === '' || !moisValid) {
+        //         msgMois.classList.remove('is-hidden');
+        //         errorFalse = false;
+        //     } else { msgMois.classList.add('is-hidden'); }
 
     //     if (annee === '' || !anneeValid) {
     //         msgAnnee.classList.remove('is-hidden');
@@ -252,7 +252,7 @@ export default {
     //     }
     //     return errorFalse;
     // },
-  },
+    },
 };
 </script>
 

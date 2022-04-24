@@ -384,8 +384,8 @@ export default {
                     console.log(this.reponseIPPE1conditions);
                 }
             } else {
-               this.$root.$data.erreurIPPE = true;
-               this.$router.push('/requeteIPPE');
+                this.$root.$data.erreurIPPE = true;
+                this.$router.push('/requeteIPPE');
             }
         },
         formatterConditions() {
