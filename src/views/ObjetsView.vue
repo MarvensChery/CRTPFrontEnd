@@ -137,8 +137,9 @@
     </div>
     <div class="buttons is-centered" style="padding-top: 5%;padding-bottom: 5%;">
         <div>
-            <button id="retour" onclick="window.location.href='http://localhost:5000/menuModifier'" class="button is-info" type="button"
-            >Retour au Menu Modification</button>
+            <button v-on:click="this.$router.push({ path: '/' })"
+            class="button is-info" type="button"
+            >Retour a l'accueil</button>
         </div>
         <div>
             <button v-if="this.$route.name === 'objetsView'"
@@ -156,6 +157,7 @@
 
 <script>
 import { svrURL } from '../constantes';
+
 // noinspection JSUnusedGlobalSymbols
 export default {
     name: 'ObjetsView',

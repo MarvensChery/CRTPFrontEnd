@@ -68,8 +68,7 @@
                             <option value="Perdu">Perdu</option></select>
                         </div>
                     </div>
-                    <div id="NoEvenement" class="columns is-mobile is-multiline is-centered"
-                    style="padding-bottom: 5%;">
+                    <div id="NoEvenement" class="columns is-mobile is-multiline is-centered">
                         <div class="column is-3-desktop is-2-mobile">
                             <label class="has-text-black" for="NoEvent"><b>Numéro évenement</b>
                                 <span style="color: red">*</span></label><br><br>
@@ -87,6 +86,9 @@
                                 <span style="color: red">*</span></label><br><br>
                             <input id="annee" type="text" name="annee" placeholder="Année"
                             v-model="annee" required/>
+                            <label class="is-warning is-hidden" id="anneevalid"
+                            for="warning">
+                            <b>l'année entrée est invalide</b></label>
                         </div>
 
                         <div class="column is-1-desktop is-2-mobile">
@@ -107,8 +109,10 @@
                             <option value="10">10</option>
                             <option value="11">11</option>
                             <option value="12">12</option>
-
                             </select>
+                            <label class="is-warning is-hidden" id="moisvalid"
+                            for="warning">
+                            <b>le mois entré est invalide</b></label>
                         </div>
                         <div class="column is-1-desktop is-2-mobile">
                             <label class="has-text-black" for="ddm"><b>Jour</b><span
@@ -148,6 +152,9 @@
                             <option>30</option>
                             <option>31</option>
                             </select>
+                            <label class="is-warning is-hidden" id="jourvalid"
+                            for="warning">
+                            <b>le jour entré est invalide</b></label>
                         </div>
 
                         <div class=" is-3-desktop is-2-mobile">
@@ -155,7 +162,7 @@
                                 <span style="color: red">*</span></label><br><br>
                             <input id="NoSeq" type="text" name="NoSeq"
                                 placeholder="Numéro Séquentiel" v-model="NoSeq" required/>
-                        </div>`
+                        </div>
                    </div>
                 </div>
             </div>
@@ -180,6 +187,9 @@
 
 <script>
 import { svrURL } from '../constantes';
+import {
+    capitalize, isJourValide, isMoisValide, isAnneeValide, isDateValide,
+} from '../validations';
 
 // noinspection JSUnusedGlobalSymbols
 export default {
@@ -213,11 +223,27 @@ export default {
             else this.error = res.message;
         },
         async addValeur() {
+            if (!isJourValide(this.jour)) {
+                document.getElementById('jourvalid').classList.remove('is-hidden');
+                return;
+            }
+            if (!isMoisValide(this.mois)) {
+                document.getElementById('moisvalid').classList.remove('is-hidden');
+                return;
+            }
+            if (!isAnneeValide(this.annee)) {
+                document.getElementById('anneevalid').classList.remove('is-hidden');
+                return;
+            }
+            if (!isDateValide(this.annee, this.mois, this.jour)) {
+                this.error = 'la date entrée est invalide';
+                return;
+            }
             const formData = {
-                auteur: this.auteur,
-                NoSerie: this.Identifiant,
-                typeVa: this.TypeValeur,
-                resIBVA: this.TypeEvenement,
+                auteur: capitalize(this.auteur),
+                NoSerie: capitalize(this.Identifiant),
+                typeVa: capitalize(this.TypeValeur),
+                resIBVA: capitalize(this.TypeEvenement),
                 NoEvenement: `${this.NoEvent}-${this.annee}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
@@ -234,11 +260,27 @@ export default {
             else this.error = res.message;
         },
         async updateValeur() {
+            if (!isJourValide(this.jour)) {
+                document.getElementById('jourvalid').classList.remove('is-hidden');
+                return;
+            }
+            if (!isMoisValide(this.mois)) {
+                document.getElementById('moisvalid').classList.remove('is-hidden');
+                return;
+            }
+            if (!isAnneeValide(this.annee)) {
+                document.getElementById('anneevalid').classList.remove('is-hidden');
+                return;
+            }
+            if (!isDateValide(this.annee, this.mois, this.jour)) {
+                this.error = 'la date entrée est invalide';
+                return;
+            }
             const formData = {
-                auteur: this.auteur,
-                NoSerie: this.Identifiant,
-                typeVa: this.TypeValeur,
-                resIBVA: this.TypeEvenement,
+                auteur: capitalize(this.auteur),
+                NoSerie: capitalize(this.Identifiant),
+                typeVa: capitalize(this.TypeValeur),
+                resIBVA: capitalize(this.TypeEvenement),
                 NoEvenement: `${this.NoEvent}-${this.annee}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
@@ -260,18 +302,22 @@ export default {
 
             if (rep.ok) this.valeur = data;
 
-            this.auteur = data[0].Auteur;
-            this.Identifiant = data[0].Identifiant;
-            this.Auteur = data[0].Auteur;
-            this.TypeValeur = data[0].TypeValeur;
-            this.TypeEvenement = data[0].TypeEvenement;
+            this.auteur = capitalize(data[0].Auteur);
+            this.Identifiant = capitalize(data[0].Identifiant);
+            this.Auteur = capitalize(data[0].Auteur);
+            this.TypeValeur = capitalize(data[0].TypeValeur);
+            this.TypeEvenement = capitalize(data[0].TypeEvenement);
             const no = data[0].NoEvenement.split('-');
             [this.NoEvent, this.NoSeq] = [no[0], no[2]];
-            [this.annee, this.mois, this.jour] = [
-                no[1].substring(0, 2),
+            [this.mois, this.jour] = [
                 no[1].substring(2, 4),
                 no[1].substring(4, 6),
             ];
+            if (no[1].substring(0, 2) >= 0 && no[1].substring(0, 2) <= 22) {
+                this.annee = `20${no[1].substring(0, 2)}`;
+            } else {
+                this.annee = `19${no[1].substring(0, 2)}`;
+            }
         },
     },
 };
