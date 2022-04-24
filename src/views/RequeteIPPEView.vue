@@ -9,7 +9,8 @@
                     <div class="field">
                         <label for="nom" class="label">Nom</label>
                         <div class="control">
-                            <input id="nom" class="input" type="text" placeholder="Nom" required>
+                            <input id="nom" class="input" type="text"
+                            placeholder="Nom" v-model="nom" required>
                         </div>
                     </div>
                 </div>
@@ -19,7 +20,7 @@
                         <label for="prenom1" class="label">Prenom 1</label>
                         <div class="control">
                             <input id="prenom1" class="input" type="text"
-                            placeholder="Prenom 1" required>
+                            placeholder="Prenom 1" v-model="prenom1" required>
                         </div>
                     </div>
                 </div>
@@ -29,7 +30,7 @@
                         <label for="prenom2" class="label">Prenom 2</label>
                         <div class="control">
                             <input id="prenom2" class="input" type="text"
-                            placeholder="Prenom 2" required>
+                            placeholder="Prenom 2" v-model="prenom2" required>
                         </div>
                     </div>
                 </div>
@@ -38,7 +39,7 @@
                     <div class="field">
                         <label for="sexe" class="label">Sexe</label>
                         <div class="select is-fullwidth">
-                            <select id='sexe' name='sexe' required >
+                            <select id='sexe' name='sexe' v-model="sexe" required >
                                 <option></option>
                                 <option>F</option>
                                 <option>M</option>
@@ -52,27 +53,37 @@
                     <label for="annee" class="label">Année</label>
                         <div class="control">
                             <input id="annee" class="input" type="number"
-                            placeholder="1998" min="1910" max="2022">
+                            placeholder="1998" min="1910" max="2022" v-model="annee">
                         </div>
                 </div>
+                <!--VALIDATION ERREUR-->
+                <article v-if="anneError === true" class="column is-full message is-danger">
+                <div class="message-body">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                </article>
+
                 <div class="column is-4">
                     <label for="mois" class="label">Mois</label>
                         <div class="control">
                             <input id="mois" class="input" type="number"
-                            placeholder="08" min="1" max="12">
+                            placeholder="08" min="1" max="12" v-model="mois">
                         </div>
                 </div>
                 <div class="column is-4">
                     <label for="jours" class="label">Jours</label>
                         <div class="control">
                             <input id="jour" class="input" type="number"
-                            placeholder="02" min="1" max="12">
+                            placeholder="02" min="1" max="12" v-model="jour">
                         </div>
                 </div>
                 <!--BOUTON-->
                 <div class="column is-12">
-                    <input id="form" class="button is-info is-fullwidth"
-                    type="button" value="Recherche">
+                    <button id="form" class="button is-info is-fullwidth"
+                    type="button" value="Recherche" v-on:click="this.isValid()"
+                    v-on:keydown="this.isValid()">
+                        Recherche
+                    </button>
                 </div>
             </form>
         </div>
@@ -80,56 +91,44 @@
 </template>
 
 <script>
-import { isJourValide, isMoisValide, isAnneeValide } from '@/validations';
+import {
+    isAnneeValide,
+} from '@/validations';
 
 export default {
     name: 'RequeteIPPEView',
+    data() {
+        return {
+            nom: '',
+            prenom1: '',
+            prenom2: '',
+            sexe: '',
+            annee: '',
+            mois: '',
+            jour: '',
+            isMoisValide1: '',
+            isJourValide1: '',
+            isAnneeValide1: '',
+            IsPrenom1Valide1: '',
+            IsPrenom2Valide1: '',
+            IsNomValide1: '',
+            anneError: false,
+        };
+    },
 
     methods: {
-        // S'occupe de l'affichage des messages d'erreur
-        checkMandatoryInput(nom, prenom1, annee, mois, jour) {
-            // Identification de l'emplacement des messages
-            const msgNom = document.getElementById('nomError');
-            const msgPrenomUn = document.getElementById('prenom1Error');
-            const msgJour = document.getElementById('jourError');
-            const msgMois = document.getElementById('moisError');
-            const msgAnnee = document.getElementById('anneeError');
-            // Check la validité des champs
-            const anneeValid = isAnneeValide(annee);
-            const moisValid = isMoisValide(mois);
-            const jourValid = isJourValide(jour);
-            // Retourne true s'il n'y a pas d'erreur
-            let errorFalse = true;
-            // Condition champs vides
-            if (nom === '') {
-                msgNom.classList.remove('is-hidden');
-                errorFalse = false;
-            } else { msgNom.classList.add('is-hidden'); }
-
-            if (prenom1 === '') {
-                msgPrenomUn.classList.remove('is-hidden');
-                errorFalse = false;
-            } else { msgPrenomUn.classList.add('is-hidden'); }
-
-            // s'assure que les dates entrees sont conforme
-            if (jour === '' || !jourValid) {
-                msgJour.classList.remove('is-hidden');
-                errorFalse = false;
-            } else { msgJour.classList.add('is-hidden'); }
-
-            if (mois === '' || !moisValid) {
-                msgMois.classList.remove('is-hidden');
-                errorFalse = false;
-            } else { msgMois.classList.add('is-hidden'); }
-
-            if (annee === '' || !anneeValid) {
-                msgAnnee.classList.remove('is-hidden');
-                errorFalse = false;
+        // Fonction qui permet de vérifier si les champs sont valides
+        isValid() {
+            this.isAnneeValide1 = isAnneeValide(this.annee);
+            if (this.isAnneeValide1 === false) {
+                this.anneError = true;
             } else {
-                msgAnnee.classList.add('is-hidden');
+                this.anneError = false;
             }
-            return errorFalse;
+            this.$router.push(`/personne/${x}`);
+
         },
+    
     },
 };
 </script>

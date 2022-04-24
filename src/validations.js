@@ -38,10 +38,34 @@ function capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 
+function IsPrenom1Valide(str) {
+    if (/[^a-zA-Z]/.test(str)) {
+        return false;
+    }
+    return true;
+}
+
+function IsPrenom2Valide(str) {
+    if (/[^a-zA-Z]/.test(str)) {
+        return false;
+    }
+    return true;
+}
+
+function IsNomValide(str) {
+    if (/[^a-zA-Z]/.test(str)) {
+        return false;
+    }
+    return true;
+}
+
 export {
     isJourValide,
     isMoisValide,
     isAnneeValide,
     isDateValide,
     capitalizeFirstLetter,
+    IsPrenom1Valide,
+    IsPrenom2Valide,
+    IsNomValide,
 };

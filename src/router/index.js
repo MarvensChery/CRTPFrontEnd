@@ -36,7 +36,7 @@ const routes = [
         component: ConditionView,
     },
     {
-        path: '/personne',
+        path: '/personne/:idPersonne',
         name: 'personneView',
         component: PersonneView,
     },
@@ -51,7 +51,7 @@ const routes = [
         component: ArmeView,
     },
     {
-        path: '/reponseIPPE',
+        path: '/reponseIPPE/:nom/:prenom1/:prenom2/:dateNaissance',
         name: 'reponseIPPEView',
         component: ReponseIPPEView,
     },
