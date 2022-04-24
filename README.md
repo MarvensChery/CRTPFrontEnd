@@ -1,5 +1,6 @@
 # Projet_CRPQ_Equipe 6
 
+### Project setup
 Projet de consultation de base de données pour les étudiants de Technique policière.
 
 Dans le cadre du cours de Projet 2 - 4D1, le premier projet à réaliser, dans le cadre de ce cours, est de créer une application capable de répliquer l'outil de questionnement de base de données à la disposition d'un agent de l'ordre lors de ses interventions.
@@ -41,3 +42,22 @@ Entrez les informations suivante:
                 }
 Appuyez sur Submit;
 
+
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
