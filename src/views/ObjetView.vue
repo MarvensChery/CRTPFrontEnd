@@ -4,12 +4,12 @@
         <h1 class="has-text-black " style="height:135px; text-align:center;
         font-size: 24px; padding-top: 5%;" >
             <b>
-                <u>MODIFICATION D'UNE RÉPONSE ARME À FEU</u>
+                <u>MODIFICATION D'UNE RÉPONSE OBJET</u>
             </b>
         </h1>
         <br>
         <br>
-        <div class="box" v-if="arme">
+        <div class="box" v-if="objet">
                 <div class="success" v-if="sucess !== ''">
                     <a class="closebtn" href="/valeurs">&times;</a>
                     {{sucess}}
@@ -36,7 +36,7 @@
                         <label for="marque" class="label">Marque</label>
                         <div class="control has-icons-left has-icons-right">
                             <input id="marque" class="input" type="text" name="marque"
-                            placeholder="Marque" :value="Marque" required/>
+                            placeholder="Marque" :value="marque" required/>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
@@ -45,10 +45,10 @@
                             *Champ obligatoire : seulement des lettres et '-' sont valides</p>
                     </div>
                     <div class="field">
-                        <label for="calibre" class="label">Calibre</label>
+                        <label for="calibre" class="label">Modèle</label>
                         <div class="control has-icons-left has-icons-right">
-                            <input id="calibre" class="input" type="text" name="calibre"
-                            placeholder="Calibre" :value="Calibre" required/>
+                            <input id="modele" class="input" type="text" name="modele"
+                            placeholder="Modèle" :value="modele" required/>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
@@ -57,18 +57,24 @@
                             *Champ obligatoire : seulement des lettres et '-' sont valides</p>
                     </div>
                     <div class="field">
-                        <label for="typeArme" class="label">Type d'arme</label>
+                        <label for="typeObjet" class="label">Type d'objet</label>
                         <div class = "control">
-                            <select id="typeArme" class="select" name="typeArme"
-                            :value="typeArme" required>
+                            <select id="typeObjet" class="select" name="typeObjet"
+                                :value="typeObjet" required>
                             <option></option>
-                            <option>Révolver</option>
-                            <option>Pistolet</option>
-                            <option>Carabine</option>
-                            <option>Fusil</option>
+                            <option value="RA">RA - Appareil de son / radio / haut-parleur</option>
+                            <option value="BI">BI - Bicyclette</option>
+                            <option value="EB">EB - Équipement de bureau</option>
+                            <option value="EP">EP - Équipement photo / vidéo</option>
+                            <option value="MO">MO - Machinerie / outils</option>
+                            <option value="OR">OR - Ordinateur / Équipement informatique</option>
+                            <option value="TA">TA - Tablette informatique (Ipad et autres)</option>
+                            <option value="TL">TL - Téléphone cellulaire</option>
+                            <option value="AU">AU - Autres articles</option>
                             </select>
                         </div>
                     </div>
+
                     <div id="NoEvenement" class="columns is-mobile is-multiline is-centered">
                         <div class="column is-3-desktop is-2-mobile">
                             <label class="has-text-black" for="NoEvent"><b>Numéro évenement</b>
@@ -170,39 +176,39 @@ import { svrURL } from '../constantes';
 
 // noinspection JSUnusedGlobalSymbols
 export default {
-    name: 'ArmeView',
+    name: 'ObjetView',
     data() {
         return {
-            arme: [],
+            objet: [],
             NoSerie: '',
-            Marque: '',
-            Calibre: '',
-            typeArme: '',
-            NoEvent: '',
+            marque: '',
+            modele: '',
+            typeObjet: '',
             annee: '',
             mois: '',
             jour: '',
             NoSeq: '',
+            NoEvent: '',
             sucess: '',
             error: '',
         };
     },
     mounted() {
-        if (this.$route.path !== '/arme') {
-            this.getArme();
+        if (this.$route.path !== '/objet') {
+            this.getObjet();
         }
     },
     methods: {
-        async getArme() {
-            const rep = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, { method: 'GET' });
+        async getObjet() {
+            const rep = await fetch(`${svrURL}/objets/${this.$route.params.idObjet}`, { method: 'GET' });
             const data = await rep.json();
 
-            if (rep.ok) this.arme = data;
+            if (rep.ok) this.objet = data;
 
             this.NoSerie = data[0].NoSerie;
-            this.Marque = data[0].Marque;
-            this.Calibre = data[0].Calibre;
-            this.typeArme = data[0].TypeArme;
+            this.marque = data[0].Marque;
+            this.modele = data[0].Modele;
+            this.typeObjet = data[0].TypeObjet;
             const no = data[0].NoEvenement.split('-');
             [this.NoEvent, this.NoSeq] = [no[0], no[2]];
             [this.mois, this.jour] = [

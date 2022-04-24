@@ -6,6 +6,9 @@ import PersonnesView from '@/views/PersonnesView.vue';
 import ConditionView from '@/views/ConditionView.vue';
 import PersonneView from '@/views/PersonneView.vue';
 import ObjetsView from '@/views/ObjetsView.vue';
+import ArmeView from '@/views/ArmeView.vue';
+import ObjetView from '@/views/ObjetView.vue';
+import ValeurView from '@/views/ValeurView.vue';
 
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
 
@@ -41,10 +44,51 @@ const routes = [
         component: PersonneView,
     },
     {
+        path: '/arme/:idArme',
+        name: 'MarmeView',
+        component: ArmeView,
+    },
+    {
+        path: '/arme',
+        name: 'AarmeView',
+        component: ArmeView,
+    },
+    {
+        path: '/objet/:idObjet',
+        name: 'MobjetView',
+        component: ObjetView,
+    },
+    {
+        path: '/objet',
+        name: 'AobjetView',
+        component: ObjetView,
+    },
+    {
+        path: '/valeur/:idValeur',
+        name: 'MvaleurView',
+        component: ValeurView,
+    },
+    {
+        path: '/valeur',
+        name: 'AvaleurView',
+        component: ValeurView,
+    },
+    {
         path: '/objets',
         name: 'objetsView',
         component: ObjetsView,
     },
+    {
+        path: '/armes',
+        name: 'armesView',
+        component: ObjetsView,
+    },
+    {
+        path: '/valeurs',
+        name: 'valeursView',
+        component: ObjetsView,
+    },
+
     {
         path: '/reponseIPPE',
         name: 'reponseIPPEView',

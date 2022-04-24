@@ -1,30 +1,31 @@
 <template>
     <div class="container mb-4 is-desktop">
-      <form id="formulaireAjouter">
+      <form @submit.prevent="onSubmit">
         <h1 class="has-text-black " style="height:135px; text-align:center;
         font-size: 24px; padding-top: 5%;" >
             <b>
-                <u>MODIFICATION D'UNE RÉPONSE ARME À FEU</u>
+                <u>MODIFICATION D'UNE RÉPONSE VALEUR</u>
             </b>
         </h1>
         <br>
         <br>
-        <div class="box" v-if="arme">
-                <div class="success" v-if="sucess !== ''">
+        <div class="box" v-if="valeur">
+                <div class="success" v-if="sucess">
                     <a class="closebtn" href="/valeurs">&times;</a>
                     {{sucess}}
                 </div>
-                <div class="error" v-if="error !== ''">
+                <div class="error" v-if="error">
                     <a class="closebtn" href="/valeurs">&times;</a>
                     {{error}}
                 </div>
             <div class="columns is-centered">
                 <div class="column is-half">
                     <div class="field">
-                        <label for="noSerie" class="label">Numéro de série</label>
+                        <label for="noSerie" class="label">Numéro de série/
+                            Nom de l'oeuvre/ Numéro de cart</label>
                         <div class="control has-icons-left has-icons-right">
                             <input id="noSerie" class="input" type="text" name="noSerie"
-                            placeholder="Numéro de série" :value="NoSerie" required/>
+                            placeholder="Numéro de série" v-model="Identifiant" required/>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
@@ -33,10 +34,10 @@
                             *Champ obligatoire : seulement des lettres et '-' sont valides</p>
                     </div>
                     <div class="field">
-                        <label for="marque" class="label">Marque</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input id="marque" class="input" type="text" name="marque"
-                            placeholder="Marque" :value="Marque" required/>
+                        <label for="auteur" class="label">Auteur/Emetteur</label>
+                        <div class="control has-icons-left has-icons-right" >
+                            <input id="auteur" class="input" type="text" name="auteur"
+                            placeholder="Auteur / Emetteur" v-model="auteur" required/>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
@@ -45,36 +46,35 @@
                             *Champ obligatoire : seulement des lettres et '-' sont valides</p>
                     </div>
                     <div class="field">
-                        <label for="calibre" class="label">Calibre</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input id="calibre" class="input" type="text" name="calibre"
-                            placeholder="Calibre" :value="Calibre" required/>
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-user"></i>
-                            </span>
-                        </div>
-                        <p id="nomError" class="help is-danger is-hidden">
-                            *Champ obligatoire : seulement des lettres et '-' sont valides</p>
-                    </div>
-                    <div class="field">
-                        <label for="typeArme" class="label">Type d'arme</label>
+                        <label for="typeValeur" class="label">Type de valeur</label>
                         <div class = "control">
-                            <select id="typeArme" class="select" name="typeArme"
-                            :value="typeArme" required>
+                            <select id="typeValeur" class="select" name="typeValeur"
+                            v-model="TypeValeur" required>
                             <option></option>
-                            <option>Révolver</option>
-                            <option>Pistolet</option>
-                            <option>Carabine</option>
-                            <option>Fusil</option>
+                            <option value="Devise">Devise</option>
+                            <option value="Passeport">Passeport</option>
+                            <option value="Œuvre d'art">Œuvre d'art</option>
+                            <option value="Carte de crédit / débit">Carte de crédit / débit</option>
                             </select>
                         </div>
                     </div>
-                    <div id="NoEvenement" class="columns is-mobile is-multiline is-centered">
+                    <div class="field">
+                        <label for="resIBVA" class="label">Type d'événement valeur</label>
+                        <div class = "control">
+                            <select id="resIBVA" class="select" name="resIBVA"
+                            v-model="TypeEvenement" required>
+                            <option></option>
+                            <option value="Volé">Volé</option>
+                            <option value="Perdu">Perdu</option></select>
+                        </div>
+                    </div>
+                    <div id="NoEvenement" class="columns is-mobile is-multiline is-centered"
+                    style="padding-bottom: 5%;">
                         <div class="column is-3-desktop is-2-mobile">
                             <label class="has-text-black" for="NoEvent"><b>Numéro évenement</b>
                                 <span style="color: red">*</span></label><br><br>
                             <select id="NoEvent" class="select" name="NoEvent"
-                            :value="NoEvent"  required>
+                            v-model="NoEvent"  required>
                                 <option></option>
                                 <option>123</option>
                                 <option>302</option>
@@ -86,14 +86,14 @@
                             <label class="has-text-black" for="annee"><b>Année</b>
                                 <span style="color: red">*</span></label><br><br>
                             <input id="annee" type="text" name="annee" placeholder="Année"
-                            :value="annee" required/>
+                            v-model="annee" required/>
                         </div>
 
                         <div class="column is-1-desktop is-2-mobile">
                             <label class="has-text-black" for="ddm"><b>Mois</b><span
                                 style="color: red">*</span></label><br><br>
                             <select id="Mois" class="select" name="mois"
-                            :value="mois" required>
+                            v-model="mois" required>
                             <option></option>
                             <option value="01">01</option>
                             <option value="02">02</option>
@@ -114,7 +114,7 @@
                             <label class="has-text-black" for="ddm"><b>Jour</b><span
                                 style="color: red">*</span></label><br><br>
                             <select id="Jour" class="select" name="jour"
-                            :value="jour" required>
+                            v-model="jour" required>
                             <option></option>
                             <option>01</option>
                             <option>02</option>
@@ -154,12 +154,25 @@
                             <label class="has-text-black" for="NoSeq"><b>Numéro Séquentiel</b>
                                 <span style="color: red">*</span></label><br><br>
                             <input id="NoSeq" type="text" name="NoSeq"
-                                placeholder="Numéro Séquentiel" :value="NoSeq" required/>
+                                placeholder="Numéro Séquentiel" v-model="NoSeq" required/>
                         </div>`
                    </div>
-                <p style="margin-bottom: 50px;">&nbsp;</p>
                 </div>
             </div>
+            <div class="btn-block" >
+                <button
+                v-if="this.$route.name === 'MvaleurView'"
+                v-on:click="this.updateValeur">Modifier</button>&nbsp;
+                <button type="submit"
+                v-if="this.$route.name === 'AvaleurView'"
+                v-on:click="this.addValeur">Ajouter</button>&nbsp;
+                <button type="reset"
+                v-if="this.$route.name === 'MvaleurView'"
+                v-on:click="deleteValeur">Supprimer</button>&nbsp;
+                <button type="button"
+                    v-on:click="this.$router.push({ name: 'valeursView' })">Annuler</button>
+            </div>
+            <p style="margin-bottom: 50px;">&nbsp;</p>
         </div>
       </form>
     </div>
@@ -170,56 +183,102 @@ import { svrURL } from '../constantes';
 
 // noinspection JSUnusedGlobalSymbols
 export default {
-    name: 'ArmeView',
+    name: 'ValeurView',
     data() {
         return {
-            arme: [],
-            NoSerie: '',
-            Marque: '',
-            Calibre: '',
-            typeArme: '',
-            NoEvent: '',
+            valeur: [],
+            auteur: '',
+            Identifiant: '',
+            TypeValeur: '',
+            TypeEvenement: '',
             annee: '',
             mois: '',
             jour: '',
             NoSeq: '',
+            NoEvent: '',
             sucess: '',
             error: '',
         };
     },
     mounted() {
-        if (this.$route.path !== '/arme') {
-            this.getArme();
+        if (this.$route.path !== '/valeur') {
+            this.getValeur();
         }
     },
     methods: {
-        async getArme() {
-            const rep = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, { method: 'GET' });
+        async deleteValeur() {
+            const api = await fetch(`${svrURL}/valeurs/${this.$route.params.idValeur}`, { method: 'DELETE' });
+            const res = await api.json();
+            if (res.success) this.sucess = res.message;
+            else this.error = res.message;
+        },
+        async addValeur() {
+            const formData = {
+                auteur: this.auteur,
+                NoSerie: this.Identifiant,
+                typeVa: this.TypeValeur,
+                resIBVA: this.TypeEvenement,
+                NoEvenement: `${this.NoEvent}-${this.annee}${this.mois}${this.jour}-${this.NoSeq}`,
+            };
+
+            const api = await fetch(`${svrURL}/valeurs`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+                method: 'POST',
+                body: JSON.stringify(formData),
+            });
+            const res = await api.json();
+            if (res.success) this.sucess = res.message;
+            else this.error = res.message;
+        },
+        async updateValeur() {
+            const formData = {
+                auteur: this.auteur,
+                NoSerie: this.Identifiant,
+                typeVa: this.TypeValeur,
+                resIBVA: this.TypeEvenement,
+                NoEvenement: `${this.NoEvent}-${this.annee}${this.mois}${this.jour}-${this.NoSeq}`,
+            };
+
+            const api = await fetch(`${svrURL}/valeurs/${this.$route.params.idValeur}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+                method: 'PUT',
+                body: JSON.stringify(formData),
+            });
+            const res = await api.json();
+            if (res.success) this.sucess = res.message;
+            else this.error = res.message;
+        },
+        async getValeur() {
+            const rep = await fetch(`${svrURL}/valeurs/${this.$route.params.idValeur}`, { method: 'GET' });
             const data = await rep.json();
 
-            if (rep.ok) this.arme = data;
+            if (rep.ok) this.valeur = data;
 
-            this.NoSerie = data[0].NoSerie;
-            this.Marque = data[0].Marque;
-            this.Calibre = data[0].Calibre;
-            this.typeArme = data[0].TypeArme;
+            this.auteur = data[0].Auteur;
+            this.Identifiant = data[0].Identifiant;
+            this.Auteur = data[0].Auteur;
+            this.TypeValeur = data[0].TypeValeur;
+            this.TypeEvenement = data[0].TypeEvenement;
             const no = data[0].NoEvenement.split('-');
             [this.NoEvent, this.NoSeq] = [no[0], no[2]];
-            [this.mois, this.jour] = [
+            [this.annee, this.mois, this.jour] = [
+                no[1].substring(0, 2),
                 no[1].substring(2, 4),
                 no[1].substring(4, 6),
             ];
-            if (no[1].substring(0, 2) >= 0 && no[1].substring(0, 2) <= 22) {
-                this.annee = `20${no[1].substring(0, 2)}`;
-            } else {
-                this.annee = `19${no[1].substring(0, 2)}`;
-            }
         },
     },
 };
 </script>
 
 <style scoped>
+
 html, body {
     min-height: 100%;
     }
@@ -231,6 +290,37 @@ html, body {
     font-size: 14px;
     color: #666;
     line-height: 22px;
+    }
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .closebtn:hover {
+        color: black;
+    }
+    .error, .success {
+        border: 1px solid;
+        margin: 10px 0px;
+        padding: 15px 10px 15px 50px;
+        background-repeat: no-repeat;
+        background-position: 10px center;
+        }
+    .success {
+        color: #4F8A10;
+        background-color: #DFF2BF;
+        background-image: url('https://i.imgur.com/Q9BGTuy.png');
+    }
+    .error{
+        color: #D8000C;
+        background-color: #FFBABA;
+        background-image: url('https://i.imgur.com/GnyDvKN.png');
     }
 
     .center {

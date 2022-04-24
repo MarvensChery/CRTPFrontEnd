@@ -122,15 +122,15 @@
                 <a class="navbar-item " id="banqueP" >
                 <strong>Banque de personne</strong>
                 </a>
-                <router-link :to="{name: 'objetsView'}" class="navbar-item " id="banqueP" >
+                <a href="/objets" class="navbar-item ">
                 <strong>Banque d'objets</strong>
-                </router-link>
-                <router-link :to="{name: 'objetsView'}" class="navbar-item " id="banqueP" >
+                </a>
+                <a href="/armes" class="navbar-item ">
                 <strong>Banque d'armes</strong>
-                </router-link>
-                <router-link :to="{name: 'objetsView'}" class="navbar-item " id="banqueP" >
+                </a>
+                <a href="/valeurs" class="navbar-item ">
                 <strong>Banque de valeurs</strong>
-                </router-link>
+                </a>
               </div>
             </div>
           </div>
