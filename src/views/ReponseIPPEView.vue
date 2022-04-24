@@ -364,25 +364,25 @@ export default {
                 `http://localhost:3000/ippes/info?nomFamille=${this.$route.params.nomFamille}&prenom1=${this.$route.params.prenom1}&prenom2=${prenom2}&masculin=${this.$route.params.masculin}&dateNaissance=${this.$route.params.dateNaissance}`,
             );
             if (rep.ok) {
-               this.reponseIPPE = await rep.json();
-               console.log(this.reponseIPPE[0].IPPE.length === 0);
-               if (this.reponseIPPE[0].IPPE.length === 0) {
-                  this.reponseIPPE1type = 'Négatif';
-               } else {
-                this.reponseIPPElength = this.reponseIPPE[0].IPPE.length;
-                this.reponseIPPE1type = this.reponseIPPE[0].IPPE[0].typeEvenement;
-                if (this.reponseIPPE[0].IPPE[1]) {
-                    this.reponseIPPE2type = this.reponseIPPE[0].IPPE[1].typeEvenement;
+                this.reponseIPPE = await rep.json();
+                console.log(this.reponseIPPE[0].IPPE.length === 0);
+                if (this.reponseIPPE[0].IPPE.length === 0) {
+                    this.reponseIPPE1type = 'Négatif';
+                } else {
+                    this.reponseIPPElength = this.reponseIPPE[0].IPPE.length;
+                    this.reponseIPPE1type = this.reponseIPPE[0].IPPE[0].typeEvenement;
+                    if (this.reponseIPPE[0].IPPE[1]) {
+                        this.reponseIPPE2type = this.reponseIPPE[0].IPPE[1].typeEvenement;
+                    }
+                    if (this.reponseIPPE[0].IPPE[0].conditions[0].idCondition !== null) {
+                        this.reponseIPPE1conditions = this.reponseIPPE[0].IPPE[0].conditions;
+                    }
+                    console.log(this.reponseIPPE);
+                    console.log(this.reponseIPPE1type);
+                    console.log(this.reponseIPPE2type);
+                    console.log(this.reponseIPPElength);
+                    console.log(this.reponseIPPE1conditions);
                 }
-                if (this.reponseIPPE[0].IPPE[0].conditions[0].idCondition !== null) {
-                    this.reponseIPPE1conditions = this.reponseIPPE[0].IPPE[0].conditions;
-                }
-                console.log(this.reponseIPPE);
-                console.log(this.reponseIPPE1type);
-                console.log(this.reponseIPPE2type);
-                console.log(this.reponseIPPElength);
-                console.log(this.reponseIPPE1conditions);
-               }
             }
         },
         formatterConditions() {
@@ -396,7 +396,7 @@ export default {
                 return '';
             } if (this.reponseIPPE1conditions.length > 0) {
                 this.reponseIPPE1conditions.forEach((element) => {
-                   console.log(element.libelle.indexOf('adresse') === -1);
+                    console.log(element.libelle.indexOf('adresse') === -1);
                     console.log(element.victime, element.frequentation, element.libelle);
                     if (element.frequentation === null && element.victime === null && element.libelle.indexOf('adresse') === -1) {
                         returneddata += `<tr>
