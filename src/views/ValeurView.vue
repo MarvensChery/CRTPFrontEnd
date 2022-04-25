@@ -244,7 +244,7 @@ export default {
                 NoSerie: capitalize(this.Identifiant),
                 typeVa: capitalize(this.TypeValeur),
                 resIBVA: capitalize(this.TypeEvenement),
-                NoEvenement: `${this.NoEvent}-${this.annee}${this.mois}${this.jour}-${this.NoSeq}`,
+                NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
             const api = await fetch(`${svrURL}/valeurs`, {
@@ -281,7 +281,7 @@ export default {
                 NoSerie: capitalize(this.Identifiant),
                 typeVa: capitalize(this.TypeValeur),
                 resIBVA: capitalize(this.TypeEvenement),
-                NoEvenement: `${this.NoEvent}-${this.annee}${this.mois}${this.jour}-${this.NoSeq}`,
+                NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
             const api = await fetch(`${svrURL}/valeurs/${this.$route.params.idValeur}`, {

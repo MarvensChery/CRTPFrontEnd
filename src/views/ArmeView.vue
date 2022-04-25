@@ -218,7 +218,7 @@ export default {
                 marque: this.Marque,
                 calibre: this.Calibre,
                 typeAr: this.typeArme,
-                NoEvenement: `${this.NoEvent}-${this.annee}${this.mois}${this.jour}-${this.NoSeq}`,
+                NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
             const api = await fetch(`${svrURL}/armes`, {
@@ -239,7 +239,7 @@ export default {
                 marque: this.Marque,
                 calibre: this.Calibre,
                 typeAr: this.typeArme,
-                NoEvenement: `${this.NoEvent}-${this.annee}${this.mois}${this.jour}-${this.NoSeq}`,
+                NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
             const api = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, {
@@ -281,6 +281,7 @@ export default {
 </script>
 
 <style scoped>
+
 html, body {
     min-height: 100%;
     }
@@ -292,6 +293,37 @@ html, body {
     font-size: 14px;
     color: #666;
     line-height: 22px;
+    }
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .closebtn:hover {
+        color: black;
+    }
+    .error, .success {
+        border: 1px solid;
+        margin: 10px 0px;
+        padding: 15px 10px 15px 50px;
+        background-repeat: no-repeat;
+        background-position: 10px center;
+        }
+    .success {
+        color: #4F8A10;
+        background-color: #DFF2BF;
+        background-image: url('https://i.imgur.com/Q9BGTuy.png');
+    }
+    .error{
+        color: #D8000C;
+        background-color: #FFBABA;
+        background-image: url('https://i.imgur.com/GnyDvKN.png');
     }
 
     .center {
