@@ -223,10 +223,7 @@ export default {
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
-<<<<<<< HEAD
         async addArme() { // Permet de add une arme
-=======
-        async addArme() {
             if (this.NoSerie === '') {
                 document.getElementsByClassName('help is-danger')[0].classList.remove('is-hidden');
                 return;
@@ -255,7 +252,6 @@ export default {
                 this.error = 'la date entrée est invalide';
                 return;
             }
->>>>>>> 9cd7bb35d05b3984d0767cfaa80e0616c15e2a6f
             const formData = {
                 NoSerie: capitalize(this.NoSerie),
                 marque: capitalize(this.Marque),
@@ -276,10 +272,7 @@ export default {
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
-<<<<<<< HEAD
         async updateArme() { // Permet de Update une arme
-=======
-        async updateArme() {
             if (this.NoSerie === '') {
                 document.getElementsByClassName('help is-danger')[0].classList.remove('is-hidden');
                 return;
@@ -308,7 +301,6 @@ export default {
                 this.error = 'la date entrée est invalide';
                 return;
             }
->>>>>>> 9cd7bb35d05b3984d0767cfaa80e0616c15e2a6f
             const formData = {
                 NoSerie: capitalize(this.NoSerie),
                 marque: capitalize(this.Marque),

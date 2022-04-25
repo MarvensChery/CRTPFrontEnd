@@ -229,10 +229,7 @@ export default {
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
-<<<<<<< HEAD
         async addObjet() { // add un objet
-=======
-        async addObjet() {
             if (this.NoSerie === '') {
                 document.getElementsByClassName('help is-danger')[0].classList.remove('is-hidden');
                 return;
@@ -261,7 +258,6 @@ export default {
                 this.error = 'la date entrée est invalide';
                 return;
             }
->>>>>>> 9cd7bb35d05b3984d0767cfaa80e0616c15e2a6f
             const formData = {
                 NoSerie: capitalize(this.NoSerie),
                 marque: capitalize(this.marque),
@@ -282,10 +278,7 @@ export default {
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
-<<<<<<< HEAD
         async updateObjet() { // modifier les info d'un objet
-=======
-        async updateObjet() {
             if (this.NoSerie === '') {
                 document.getElementsByClassName('help is-danger')[0].classList.remove('is-hidden');
                 return;
@@ -298,7 +291,6 @@ export default {
                 document.getElementsByClassName('help is-danger')[2].classList.remove('is-hidden');
                 return;
             }
->>>>>>> 9cd7bb35d05b3984d0767cfaa80e0616c15e2a6f
             const formData = {
                 NoSerie: capitalize(this.NoSerie),
                 marque: capitalize(this.marque),
@@ -319,7 +311,7 @@ export default {
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
-        async getObjet() {
+        async getObjet() { // get les info d'un objet
             const rep = await fetch(`${svrURL}/objets/${this.$route.params.idObjet}`, { method: 'GET' }); // get les info d'un objet
             const data = await rep.json();
 
