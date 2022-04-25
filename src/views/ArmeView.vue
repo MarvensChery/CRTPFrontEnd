@@ -1,6 +1,6 @@
 <template>
     <div class="container mb-4 is-desktop">
-      <form id="formulaireAjouter">
+      <form @submit.prevent="onSubmit">
         <h1 class="has-text-black " style="height:135px; text-align:center;
         font-size: 24px; padding-top: 5%;" >
             <b>
@@ -10,12 +10,12 @@
         <br>
         <br>
         <div class="box" v-if="arme">
-                <div class="success" v-if="sucess !== ''">
-                    <a class="closebtn" href="/valeurs">&times;</a>
+                <div class="success" v-if="sucess">
+                    <a class="closebtn" href="/armes">&times;</a>
                     {{sucess}}
                 </div>
-                <div class="error" v-if="error !== ''">
-                    <a class="closebtn" href="/valeurs">&times;</a>
+                <div class="error" v-if="error">
+                    <a class="closebtn" href="/armes">&times;</a>
                     {{error}}
                 </div>
             <div class="columns is-centered">
@@ -24,7 +24,7 @@
                         <label for="noSerie" class="label">Numéro de série</label>
                         <div class="control has-icons-left has-icons-right">
                             <input id="noSerie" class="input" type="text" name="noSerie"
-                            placeholder="Numéro de série" :value="NoSerie" required/>
+                            placeholder="Numéro de série" v-model="NoSerie" required/>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
@@ -36,7 +36,7 @@
                         <label for="marque" class="label">Marque</label>
                         <div class="control has-icons-left has-icons-right">
                             <input id="marque" class="input" type="text" name="marque"
-                            placeholder="Marque" :value="Marque" required/>
+                            placeholder="Marque" v-model="Marque" required/>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
@@ -48,7 +48,7 @@
                         <label for="calibre" class="label">Calibre</label>
                         <div class="control has-icons-left has-icons-right">
                             <input id="calibre" class="input" type="text" name="calibre"
-                            placeholder="Calibre" :value="Calibre" required/>
+                            placeholder="Calibre" v-model="Calibre" required/>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
@@ -60,7 +60,7 @@
                         <label for="typeArme" class="label">Type d'arme</label>
                         <div class = "control">
                             <select id="typeArme" class="select" name="typeArme"
-                            :value="typeArme" required>
+                            v-model="typeArme" required>
                             <option></option>
                             <option>Révolver</option>
                             <option>Pistolet</option>
@@ -74,7 +74,7 @@
                             <label class="has-text-black" for="NoEvent"><b>Numéro évenement</b>
                                 <span style="color: red">*</span></label><br><br>
                             <select id="NoEvent" class="select" name="NoEvent"
-                            :value="NoEvent"  required>
+                            v-model="NoEvent"  required>
                                 <option></option>
                                 <option>123</option>
                                 <option>302</option>
@@ -86,14 +86,14 @@
                             <label class="has-text-black" for="annee"><b>Année</b>
                                 <span style="color: red">*</span></label><br><br>
                             <input id="annee" type="text" name="annee" placeholder="Année"
-                            :value="annee" required/>
+                            v-model="annee" required/>
                         </div>
 
                         <div class="column is-1-desktop is-2-mobile">
                             <label class="has-text-black" for="ddm"><b>Mois</b><span
                                 style="color: red">*</span></label><br><br>
                             <select id="Mois" class="select" name="mois"
-                            :value="mois" required>
+                            v-model="mois" required>
                             <option></option>
                             <option value="01">01</option>
                             <option value="02">02</option>
@@ -114,7 +114,7 @@
                             <label class="has-text-black" for="ddm"><b>Jour</b><span
                                 style="color: red">*</span></label><br><br>
                             <select id="Jour" class="select" name="jour"
-                            :value="jour" required>
+                            v-model="jour" required>
                             <option></option>
                             <option>01</option>
                             <option>02</option>
@@ -154,9 +154,22 @@
                             <label class="has-text-black" for="NoSeq"><b>Numéro Séquentiel</b>
                                 <span style="color: red">*</span></label><br><br>
                             <input id="NoSeq" type="text" name="NoSeq"
-                                placeholder="Numéro Séquentiel" :value="NoSeq" required/>
+                                placeholder="Numéro Séquentiel" v-model="NoSeq" required/>
                         </div>`
                    </div>
+                   <div class="btn-block" >
+                <button
+                v-if="this.$route.name === 'MarmeView'"
+                v-on:click="this.updateArme">Modifier</button>&nbsp;
+                <button type="submit"
+                v-if="this.$route.name === 'AarmeView'"
+                v-on:click="this.addArme">Ajouter</button>&nbsp;
+                <button type="reset"
+                v-if="this.$route.name === 'MarmeView'"
+                v-on:click="deleteArme">Supprimer</button>&nbsp;
+                <button type="button"
+                    v-on:click="this.$router.push({ name: 'armesView' })">Annuler</button>
+            </div>
                 <p style="margin-bottom: 50px;">&nbsp;</p>
                 </div>
             </div>
@@ -193,6 +206,54 @@ export default {
         }
     },
     methods: {
+        async deleteArme() {
+            const api = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, { method: 'DELETE' });
+            const res = await api.json();
+            if (res.success) this.sucess = res.message;
+            else this.error = res.message;
+        },
+        async addArme() {
+            const formData = {
+                NoSerie: this.NoSerie,
+                marque: this.Marque,
+                calibre: this.Calibre,
+                typeAr: this.typeArme,
+                NoEvenement: `${this.NoEvent}-${this.annee}${this.mois}${this.jour}-${this.NoSeq}`,
+            };
+
+            const api = await fetch(`${svrURL}/armes`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+                method: 'POST',
+                body: JSON.stringify(formData),
+            });
+            const res = await api.json();
+            if (res.success) this.sucess = res.message;
+            else this.error = res.message;
+        },
+        async updateArme() {
+            const formData = {
+                NoSerie: this.NoSerie,
+                marque: this.Marque,
+                calibre: this.Calibre,
+                typeAr: this.typeArme,
+                NoEvenement: `${this.NoEvent}-${this.annee}${this.mois}${this.jour}-${this.NoSeq}`,
+            };
+
+            const api = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+                method: 'PUT',
+                body: JSON.stringify(formData),
+            });
+            const res = await api.json();
+            if (res.success) this.sucess = res.message;
+            else this.error = res.message;
+        },
         async getArme() {
             const rep = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, { method: 'GET' });
             const data = await rep.json();
