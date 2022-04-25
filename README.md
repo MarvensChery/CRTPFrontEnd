@@ -14,28 +14,6 @@ Cette application servira comme outil de formation au étudiants en technique po
 ## Collaboration
 Ce projet est réalisé par: Ramy Naffati, Lucas Montion, Samy Issiakhem et Alexandre Ben Daia
 ***Le PO : Marc Levasseur
-
-## Comment éxécuter le FRONTEND? 
-
-
-### 1- Faites un git clone HTTP de frontend_vue dans le terminal
-
-### 2- Placez vous dans la branche frontend_vue
-
-### 3- Placez vous dans le répertoire appweb:
-
-### 4- Tapez ceci dans le terminal pour installer les dépendance
-```
-npm install
-```
-### 5- Tapez ceci dans le terminal pour lancer le projet:
-```
-npm run serve
-```
-### 6- Cliquez sur le lien localhost qui apparaitra dans le terminal
-
-
-
 ## Comment éxécuter le BACKEND? 
 
 
@@ -53,3 +31,38 @@ npm install
 ```
 node app.js
 ```
+## Lint
+
+Afin d'utiliser le linter sur tout les fichiers et corriger les erreurs la commande a taper est : 
+```
+npm run lint
+```
+
+
+## Comment éxécuter le FRONTEND? 
+
+
+### 1- Faites un git clone HTTP de frontend_vue dans le terminal
+
+### 2- Placez vous dans la branche frontend_vue
+
+### 3- Placez vous dans le répertoire appweb:
+
+### 4- Tapez ceci dans le terminal pour installer les dépendance
+```
+npm install
+```
+### 5- Tapez ceci dans le terminal pour corriger toutes les erreurs de lint:
+```
+npm run fix
+```
+### 6- Tapez ceci dans le terminal pour lancer le projet:
+```
+npm run serve
+```
+### 7- Cliquez sur le lien localhost qui apparaitra dans le terminal
+
+### 8- Cliquez sur le menu de navigation qui se situe en haut de la page et cliquer sur les banques de données valeurs, armes à feu ou objet pour pouvoir voir les listes de données
+
+
+
