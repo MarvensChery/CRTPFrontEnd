@@ -212,17 +212,17 @@ export default {
     },
     mounted() {
         if (this.$route.path !== '/valeur') {
-            this.getValeur();
+            this.getValeur(); // get les info d'une valeur au chargement de la page
         }
     },
     methods: {
-        async deleteValeur() {
+        async deleteValeur() { // delete une valeur de la liste
             const api = await fetch(`${svrURL}/valeurs/${this.$route.params.idValeur}`, { method: 'DELETE' });
             const res = await api.json();
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
-        async addValeur() {
+        async addValeur() { // ajouter une valeur à la liste
             if (!isJourValide(this.jour)) {
                 document.getElementById('jourvalid').classList.remove('is-hidden');
                 return;
@@ -259,7 +259,7 @@ export default {
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
-        async updateValeur() {
+        async updateValeur() { // modifier une valeur de la liste
             if (!isJourValide(this.jour)) {
                 document.getElementById('jourvalid').classList.remove('is-hidden');
                 return;
@@ -296,7 +296,7 @@ export default {
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
-        async getValeur() {
+        async getValeur() { // recuperer les données d'une valeur
             const rep = await fetch(`${svrURL}/valeurs/${this.$route.params.idValeur}`, { method: 'GET' });
             const data = await rep.json();
 

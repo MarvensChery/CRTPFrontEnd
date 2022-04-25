@@ -208,17 +208,17 @@ export default {
     },
     mounted() {
         if (this.$route.path !== '/objet') {
-            this.getObjet();
+            this.getObjet(); // get les fino d'un objet au chargement de la page
         }
     },
     methods: {
         async deleteObjet() {
-            const api = await fetch(`${svrURL}/objets/${this.$route.params.idObjet}`, { method: 'DELETE' });
+            const api = await fetch(`${svrURL}/objets/${this.$route.params.idObjet}`, { method: 'DELETE' }); // delete un objet
             const res = await api.json();
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
-        async addObjet() {
+        async addObjet() { // add un objet
             const formData = {
                 NoSerie: this.NoSerie,
                 marque: this.marque,
@@ -239,7 +239,7 @@ export default {
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
-        async updateObjet() {
+        async updateObjet() { // modifier les info d'un objet
             const formData = {
                 NoSerie: this.NoSerie,
                 marque: this.marque,
@@ -261,7 +261,7 @@ export default {
             else this.error = res.message;
         },
         async getObjet() {
-            const rep = await fetch(`${svrURL}/objets/${this.$route.params.idObjet}`, { method: 'GET' });
+            const rep = await fetch(`${svrURL}/objets/${this.$route.params.idObjet}`, { method: 'GET' }); // get les info d'un objet
             const data = await rep.json();
 
             if (rep.ok) this.objet = data;

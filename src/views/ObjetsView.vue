@@ -170,7 +170,7 @@ export default {
         };
     },
     computed: {
-        filtresValeurs() {
+        filtresValeurs() { // Permet de filtré les données de facon reactif
             let filtresValeurs = this.valeurs;
             const ftr = this.valeursFiltres;
             if (this.valeursFiltres !== '' && this.valValeurs !== '') {
@@ -183,7 +183,7 @@ export default {
         },
     },
     mounted() {
-        this.getAllObjets();
+        this.getAllObjets(); // Get les donnée au chargement de la page
         this.getAllOptions();
     },
     methods: {
@@ -196,7 +196,7 @@ export default {
             }
             console.log(this.valeurs);
         },
-        async getAllOptions() {
+        async getAllOptions() { // get les options (colonne) des donnée
             const rep = await fetch(`${svrURL}${this.$route.path}`);
             const filtresListes = await rep.json();
 

@@ -202,17 +202,17 @@ export default {
     },
     mounted() {
         if (this.$route.path !== '/arme') {
-            this.getArme();
+            this.getArme(); // Get les info d'une arme précise
         }
     },
     methods: {
         async deleteArme() {
-            const api = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, { method: 'DELETE' });
+            const api = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, { method: 'DELETE' }); // Permet de delete une arme
             const res = await api.json();
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
-        async addArme() {
+        async addArme() { // Permet de add une arme
             const formData = {
                 NoSerie: this.NoSerie,
                 marque: this.Marque,
@@ -233,7 +233,7 @@ export default {
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
-        async updateArme() {
+        async updateArme() { // Permet de Update une arme
             const formData = {
                 NoSerie: this.NoSerie,
                 marque: this.Marque,
@@ -254,7 +254,7 @@ export default {
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
-        async getArme() {
+        async getArme() { // Get les info d'une arme
             const rep = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, { method: 'GET' });
             const data = await rep.json();
 

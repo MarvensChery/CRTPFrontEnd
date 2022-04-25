@@ -14,83 +14,83 @@ import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
 
 const routes = [
     {
-        path: '/',
+        path: '/', // Route pour le menu
         name: 'accueil',
         component: AccueilView,
     },
     {
-        path: '/connexion',
+        path: '/connexion', // Route pour le menu connexion
         name: 'connexion',
         component: ConnexionView,
     },
     {
-        path: '/requeteIPPE',
+        path: '/requeteIPPE', // Route pour faire une interrogation personne
         name: 'requeteIPPE',
         component: RequeteIPPEView,
     },
     {
-        path: '/personnes',
+        path: '/personnes', // Route pour la liste des personne de la table IPPE
         name: 'personnesView',
         component: PersonnesView,
     },
     {
-        path: '/condition',
+        path: '/condition', // Route l'ajout d'une condition à respecter
         name: 'conditionView',
         component: ConditionView,
     },
     {
-        path: '/personne',
+        path: '/personne', // Route pour une personne
         name: 'personneView',
         component: PersonneView,
     },
     {
-        path: '/arme/:idArme',
+        path: '/arme/:idArme', // Route pour modifier ou supprimer une arme
         name: 'MarmeView',
         component: ArmeView,
     },
     {
         path: '/arme',
-        name: 'AarmeView',
+        name: 'AarmeView', // route ajouter une arme
         component: ArmeView,
     },
     {
-        path: '/objet/:idObjet',
+        path: '/objet/:idObjet', // Route pour modifier ou supprimer un objet
         name: 'MobjetView',
         component: ObjetView,
     },
     {
-        path: '/objet',
+        path: '/objet', // route ajouter un objet
         name: 'AobjetView',
         component: ObjetView,
     },
     {
-        path: '/valeur/:idValeur',
+        path: '/valeur/:idValeur', // Route pour modifier ou supprimer une valeur
         name: 'MvaleurView',
         component: ValeurView,
     },
     {
-        path: '/valeur',
+        path: '/valeur', // route ajouter une valeur
         name: 'AvaleurView',
         component: ValeurView,
     },
     {
-        path: '/objets',
+        path: '/objets', // route pour la liste des objets
         name: 'objetsView',
         component: ObjetsView,
     },
     {
-        path: '/armes',
+        path: '/armes', // route pour la liste des armes
         name: 'armesView',
         component: ObjetsView,
     },
     {
-        path: '/valeurs',
+        path: '/valeurs', // route pour la liste des valeurs
         name: 'valeursView',
         component: ObjetsView,
     },
 
     {
-        path: '/reponseIPPE',
+        path: '/reponseIPPE', // route pour la réponse d'une interrogation
         name: 'reponseIPPEView',
         component: ReponseIPPEView,
     },
