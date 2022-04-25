@@ -36,7 +36,7 @@ npm run serve
 ```
 npm install
 ```
-### 5- Tapez ceci dans le terminal pour lancer le projet:
+### 5- Tapez ceci dans le terminal pour lancer le serveur:
 ```
 node app.js
 ```
