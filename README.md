@@ -2,7 +2,7 @@
 ## Projet Client - Application Web
 ### Travail réalisé par l'équipe 5 (Lucas Montion, Samy Issiakhem, Ramy Naffati, Alexandre Ben Daia)
 
-## Comment Éxécuter le projet FRONTEND? 
+## Comment éxécuter le FRONTEND? 
 
 
 ### 1- Faites un git clone HTTP de frontend_vue dans le terminal
@@ -23,7 +23,7 @@ npm run serve
 
 
 
-## Comment Éxécuter le projet BACKEND? 
+## Comment éxécuter le BACKEND? 
 
 
 ### 1- Faite un git clone HTTP de backend_vue dans le terminal
