@@ -8,6 +8,7 @@ import PersonneView from '@/views/PersonneView.vue';
 import ObjetsView from '@/views/ObjetsView.vue';
 import ArmeView from '@/views/ArmeView.vue';
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
+import testView from '@/views/testView.vue';
 
 const routes = [
     {
@@ -31,8 +32,13 @@ const routes = [
         component: PersonnesView,
     },
     {
-        path: '/condition',
-        name: 'conditionView',
+        path: '/condition/:Idcondition',
+        name: 'conditionViewModif',
+        component: ConditionView,
+    },
+    {
+        path: '/condition/:Idpersonne',
+        name: 'conditionViewAdd',
         component: ConditionView,
     },
     {
@@ -49,6 +55,11 @@ const routes = [
         path: '/arme',
         name: 'armeView',
         component: ArmeView,
+    },
+    {
+        path: '/test',
+        name: 'test',
+        component: testView,
     },
     {
         path: '/reponseIPPE/:nomFamille/:prenom1/:prenom2/:masculin/:dateNaissance',
