@@ -4,6 +4,7 @@
 
 ## Comment Éxécuter le projet FRONTEND? 
 
+
 ### 1- Faites un git clone HTTP de frontend_vue dans le terminal
 
 ### 2- Placez vous dans la branche frontend_vue
@@ -20,7 +21,10 @@ npm run serve
 ```
 ### 6- Cliquez sur le lien localhost qui apparaitra dans le terminal
 
+
+
 ## Comment Éxécuter le projet BACKEND? 
+
 
 ### 1- Faite un git clone HTTP de backend_vue dans le terminal
 
@@ -32,7 +36,6 @@ npm run serve
 ```
 npm install
 ```
-
 ### 5- Tapez ceci dans le terminal pour lancer le projet:
 ```
 node app.js
