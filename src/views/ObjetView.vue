@@ -268,7 +268,7 @@ export default {
                 NoSerie: capitalize(this.NoSerie),
                 marque: capitalize(this.marque),
                 modele: capitalize(this.modele),
-                typeOb: capitalize(this.typeObjet),
+                typeOb: this.typeObjet,
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
@@ -317,7 +317,7 @@ export default {
                 NoSerie: capitalize(this.NoSerie),
                 marque: capitalize(this.marque),
                 modele: capitalize(this.modele),
-                typeOb: capitalize(this.typeObjet),
+                typeOb: this.typeObjet,
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
