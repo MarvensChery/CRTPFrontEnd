@@ -15,7 +15,7 @@
                     {{sucess}}
                 </div>
                 <div class="error" v-if="error">
-                    <a class="closebtn" href="/armes">&times;</a>
+                    <a class="closebtn" :href="this.$route.path">&times;</a>
                     {{error}}
                 </div>
             <div class="columns is-centered">
@@ -87,6 +87,9 @@
                                 <span style="color: red">*</span></label><br><br>
                             <input id="annee" type="text" name="annee" placeholder="Année"
                             v-model="annee" required/>
+                            <label class="has-text-danger is-hidden" id="anneevalid"
+                            for="warning">
+                            <b>l'année entrée est invalide</b></label>
                         </div>
 
                         <div class="column is-1-desktop is-2-mobile">
@@ -109,6 +112,9 @@
                             <option value="12">12</option>
 
                             </select>
+                            <label class="has-text-danger is-hidden" id="moisvalid"
+                            for="warning">
+                            <b>le mois entré est invalide</b></label>
                         </div>
                         <div class="column is-1-desktop is-2-mobile">
                             <label class="has-text-black" for="ddm"><b>Jour</b><span
@@ -148,14 +154,16 @@
                             <option>30</option>
                             <option>31</option>
                             </select>
+                            <label class="has-text-danger is-hidden" id="jourvalid"
+                            for="warning">
+                            <b>le jour entré est invalide</b></label>
                         </div>
-
                         <div class=" is-3-desktop is-2-mobile">
                             <label class="has-text-black" for="NoSeq"><b>Numéro Séquentiel</b>
                                 <span style="color: red">*</span></label><br><br>
                             <input id="NoSeq" type="text" name="NoSeq"
                                 placeholder="Numéro Séquentiel" v-model="NoSeq" required/>
-                        </div>`
+                        </div>
                    </div>
                    <div class="btn-block" >
                 <button
@@ -180,6 +188,9 @@
 
 <script>
 import { svrURL } from '../constantes';
+import {
+    capitalize, isJourValide, isMoisValide, isAnneeValide, isDateValide,
+} from '../validations';
 
 // noinspection JSUnusedGlobalSymbols
 export default {
@@ -212,12 +223,44 @@ export default {
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
+<<<<<<< HEAD
         async addArme() { // Permet de add une arme
+=======
+        async addArme() {
+            if (this.NoSerie === '') {
+                document.getElementsByClassName('help is-danger')[0].classList.remove('is-hidden');
+                return;
+            }
+            if (this.Marque === '') {
+                document.getElementsByClassName('help is-danger')[1].classList.remove('is-hidden');
+                return;
+            }
+            if (this.Calibre === '') {
+                document.getElementsByClassName('help is-danger')[2].classList.remove('is-hidden');
+                return;
+            }
+            if (!isJourValide(this.jour)) {
+                document.getElementById('jourvalid').classList.remove('is-hidden');
+                return;
+            }
+            if (!isMoisValide(this.mois)) {
+                document.getElementById('moisvalid').classList.remove('is-hidden');
+                return;
+            }
+            if (!isAnneeValide(this.annee)) {
+                document.getElementById('anneevalid').classList.remove('is-hidden');
+                return;
+            }
+            if (!isDateValide(this.annee, this.mois, this.jour)) {
+                this.error = 'la date entrée est invalide';
+                return;
+            }
+>>>>>>> 9cd7bb35d05b3984d0767cfaa80e0616c15e2a6f
             const formData = {
-                NoSerie: this.NoSerie,
-                marque: this.Marque,
+                NoSerie: capitalize(this.NoSerie),
+                marque: capitalize(this.Marque),
                 calibre: this.Calibre,
-                typeAr: this.typeArme,
+                typeAr: capitalize(this.typeArme),
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
@@ -233,12 +276,44 @@ export default {
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
+<<<<<<< HEAD
         async updateArme() { // Permet de Update une arme
+=======
+        async updateArme() {
+            if (this.NoSerie === '') {
+                document.getElementsByClassName('help is-danger')[0].classList.remove('is-hidden');
+                return;
+            }
+            if (this.Marque === '') {
+                document.getElementsByClassName('help is-danger')[1].classList.remove('is-hidden');
+                return;
+            }
+            if (this.Calibre === '') {
+                document.getElementsByClassName('help is-danger')[2].classList.remove('is-hidden');
+                return;
+            }
+            if (!isJourValide(this.jour)) {
+                document.getElementById('jourvalid').classList.remove('is-hidden');
+                return;
+            }
+            if (!isMoisValide(this.mois)) {
+                document.getElementById('moisvalid').classList.remove('is-hidden');
+                return;
+            }
+            if (!isAnneeValide(this.annee)) {
+                document.getElementById('anneevalid').classList.remove('is-hidden');
+                return;
+            }
+            if (!isDateValide(this.annee, this.mois, this.jour)) {
+                this.error = 'la date entrée est invalide';
+                return;
+            }
+>>>>>>> 9cd7bb35d05b3984d0767cfaa80e0616c15e2a6f
             const formData = {
-                NoSerie: this.NoSerie,
-                marque: this.Marque,
+                NoSerie: capitalize(this.NoSerie),
+                marque: capitalize(this.Marque),
                 calibre: this.Calibre,
-                typeAr: this.typeArme,
+                typeAr: capitalize(this.typeArme),
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 

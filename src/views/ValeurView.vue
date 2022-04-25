@@ -15,7 +15,7 @@
                     {{sucess}}
                 </div>
                 <div class="error" v-if="error">
-                    <a class="closebtn" href="/valeurs">&times;</a>
+                    <a class="closebtn" :href="this.$route.path">&times;</a>
                     {{error}}
                 </div>
             <div class="columns is-centered">
@@ -86,7 +86,7 @@
                                 <span style="color: red">*</span></label><br><br>
                             <input id="annee" type="text" name="annee" placeholder="Année"
                             v-model="annee" required/>
-                            <label class="is-warning is-hidden" id="anneevalid"
+                            <label class="has-text-danger is-hidden" id="anneevalid"
                             for="warning">
                             <b>l'année entrée est invalide</b></label>
                         </div>
@@ -110,7 +110,7 @@
                             <option value="11">11</option>
                             <option value="12">12</option>
                             </select>
-                            <label class="is-warning is-hidden" id="moisvalid"
+                            <label class="has-text-danger is-hidden" id="moisvalid"
                             for="warning">
                             <b>le mois entré est invalide</b></label>
                         </div>
@@ -152,7 +152,7 @@
                             <option>30</option>
                             <option>31</option>
                             </select>
-                            <label class="is-warning is-hidden" id="jourvalid"
+                            <label class="has-text-danger is-hidden" id="jourvalid"
                             for="warning">
                             <b>le jour entré est invalide</b></label>
                         </div>
@@ -222,7 +222,19 @@ export default {
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
+<<<<<<< HEAD
         async addValeur() { // ajouter une valeur à la liste
+=======
+        async addValeur() {
+            if (this.Identifiant === '') {
+                document.getElementsByClassName('help is-danger')[0].classList.remove('is-hidden');
+                return;
+            }
+            if (this.auteur === '') {
+                document.getElementsByClassName('help is-danger')[1].classList.remove('is-hidden');
+                return;
+            }
+>>>>>>> 9cd7bb35d05b3984d0767cfaa80e0616c15e2a6f
             if (!isJourValide(this.jour)) {
                 document.getElementById('jourvalid').classList.remove('is-hidden');
                 return;
@@ -259,7 +271,19 @@ export default {
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
+<<<<<<< HEAD
         async updateValeur() { // modifier une valeur de la liste
+=======
+        async updateValeur() {
+            if (this.Identifiant === '') {
+                document.getElementsByClassName('help is-danger')[0].classList.remove('is-hidden');
+                return;
+            }
+            if (this.auteur === '') {
+                document.getElementsByClassName('help is-danger')[1].classList.remove('is-hidden');
+                return;
+            }
+>>>>>>> 9cd7bb35d05b3984d0767cfaa80e0616c15e2a6f
             if (!isJourValide(this.jour)) {
                 document.getElementById('jourvalid').classList.remove('is-hidden');
                 return;

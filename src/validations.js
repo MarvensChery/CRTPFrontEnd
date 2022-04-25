@@ -23,6 +23,7 @@ function isAnneeValide(str) {
     return /^\d+$/.test(str);
 }
 // Check la validité de la date
+
 function isDateValide(annee, mois, jour) {
     const day = new Date(annee, mois, 0);
     const splitDate = day.toUTCString().split(' ');
@@ -33,6 +34,7 @@ function isDateValide(annee, mois, jour) {
     }
     return true;
 }
+
 // Pour convertir la permiere lettre d'un string en majuscule
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
