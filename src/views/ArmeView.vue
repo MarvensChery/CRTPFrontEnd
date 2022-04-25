@@ -29,20 +29,20 @@
                                 <i class="fas fa-user"></i>
                             </span>
                         </div>
-                        <p id="nomError" class="help is-danger is-hidden">
-                            *Champ obligatoire : seulement des lettres et '-' sont valides</p>
+                        <p class="help is-danger" v-if="NoSerieValid">
+                            {{NoSerieValid}}</p>
                     </div>
                     <div class="field">
                         <label for="marque" class="label">Marque</label>
                         <div class="control has-icons-left has-icons-right">
                             <input id="marque" class="input" type="text" name="marque"
-                            placeholder="Marque" v-model="Marque" required/>
+                            placeholder="Marque" v-model="Marque"/>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
                         </div>
-                        <p id="nomError" class="help is-danger is-hidden">
-                            *Champ obligatoire : seulement des lettres et '-' sont valides</p>
+                        <p v-if="MarqueValid" class="help is-danger">
+                            {{MarqueValid}}</p>
                     </div>
                     <div class="field">
                         <label for="calibre" class="label">Calibre</label>
@@ -53,8 +53,8 @@
                                 <i class="fas fa-user"></i>
                             </span>
                         </div>
-                        <p id="nomError" class="help is-danger is-hidden">
-                            *Champ obligatoire : seulement des lettres et '-' sont valides</p>
+                        <p v-if="CalibreValid" class="help is-danger">
+                            {{CalibreValid}}</p>
                     </div>
                     <div class="field">
                         <label for="typeArme" class="label">Type d'arme</label>
@@ -87,9 +87,9 @@
                                 <span style="color: red">*</span></label><br><br>
                             <input id="annee" type="text" name="annee" placeholder="Année"
                             v-model="annee" required/>
-                            <label class="has-text-danger is-hidden" id="anneevalid"
+                            <label class="has-text-danger"  v-if="anneValid"
                             for="warning">
-                            <b>l'année entrée est invalide</b></label>
+                            <b>{{anneValid}}</b></label>
                         </div>
 
                         <div class="column is-1-desktop is-2-mobile">
@@ -112,9 +112,9 @@
                             <option value="12">12</option>
 
                             </select>
-                            <label class="has-text-danger is-hidden" id="moisvalid"
+                            <label class="has-text-danger is-hidden" v-if="moisValid"
                             for="warning">
-                            <b>le mois entré est invalide</b></label>
+                            <b>{{moisValid}}</b></label>
                         </div>
                         <div class="column is-1-desktop is-2-mobile">
                             <label class="has-text-black" for="ddm"><b>Jour</b><span
@@ -154,9 +154,9 @@
                             <option>30</option>
                             <option>31</option>
                             </select>
-                            <label class="has-text-danger is-hidden" id="jourvalid"
+                            <label class="has-text-danger is-hidden" v-if="jourValid"
                             for="warning">
-                            <b>le jour entré est invalide</b></label>
+                            <b>{{jourValid}}</b></label>
                         </div>
                         <div class=" is-3-desktop is-2-mobile">
                             <label class="has-text-black" for="NoSeq"><b>Numéro Séquentiel</b>
@@ -209,6 +209,12 @@ export default {
             NoSeq: '',
             sucess: '',
             error: '',
+            anneValid: '',
+            moisValid: '',
+            jourValid: '',
+            NoSerieValid: '',
+            MarqueValid: '',
+            CalibreValid: '',
         };
     },
     mounted() {
@@ -225,27 +231,27 @@ export default {
         },
         async addArme() { // Permet de add une arme
             if (this.NoSerie === '') {
-                document.getElementsByClassName('help is-danger')[0].classList.remove('is-hidden');
+                this.NoSerieValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
             if (this.Marque === '') {
-                document.getElementsByClassName('help is-danger')[1].classList.remove('is-hidden');
+                this.MarqueValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
             if (this.Calibre === '') {
-                document.getElementsByClassName('help is-danger')[2].classList.remove('is-hidden');
+                this.CalibreValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
             if (!isJourValide(this.jour)) {
-                document.getElementById('jourvalid').classList.remove('is-hidden');
+                this.jourValid = 'le jour entré est invalide';
                 return;
             }
             if (!isMoisValide(this.mois)) {
-                document.getElementById('moisvalid').classList.remove('is-hidden');
+                this.moisValid = 'le mois entré est invalide';
                 return;
             }
             if (!isAnneeValide(this.annee)) {
-                document.getElementById('anneevalid').classList.remove('is-hidden');
+                this.anneValid = "l'année entrée est invalide";
                 return;
             }
             if (!isDateValide(this.annee, this.mois, this.jour)) {
@@ -274,27 +280,27 @@ export default {
         },
         async updateArme() { // Permet de Update une arme
             if (this.NoSerie === '') {
-                document.getElementsByClassName('help is-danger')[0].classList.remove('is-hidden');
+                this.NoSerieValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
             if (this.Marque === '') {
-                document.getElementsByClassName('help is-danger')[1].classList.remove('is-hidden');
+                this.MarqueValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
             if (this.Calibre === '') {
-                document.getElementsByClassName('help is-danger')[2].classList.remove('is-hidden');
+                this.CalibreValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
             if (!isJourValide(this.jour)) {
-                document.getElementById('jourvalid').classList.remove('is-hidden');
+                this.jourValid = 'le jour entré est invalide';
                 return;
             }
             if (!isMoisValide(this.mois)) {
-                document.getElementById('moisvalid').classList.remove('is-hidden');
+                this.moisValid = 'le mois entré est invalide';
                 return;
             }
             if (!isAnneeValide(this.annee)) {
-                document.getElementById('anneevalid').classList.remove('is-hidden');
+                this.anneValid = "l'année entrée est invalide";
                 return;
             }
             if (!isDateValide(this.annee, this.mois, this.jour)) {

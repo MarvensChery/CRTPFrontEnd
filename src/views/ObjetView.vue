@@ -29,8 +29,8 @@
                                 <i class="fas fa-user"></i>
                             </span>
                         </div>
-                        <p id="nomError" class="help is-danger is-hidden">
-                            *Champ obligatoire : seulement des lettres et '-' sont valides</p>
+                        <p class="help is-danger" v-if="NoSerieValid">
+                            {{NoSerieValid}}</p>
                     </div>
                     <div class="field">
                         <label for="marque" class="label">Marque</label>
@@ -41,11 +41,11 @@
                                 <i class="fas fa-user"></i>
                             </span>
                         </div>
-                        <p id="nomError" class="help is-danger is-hidden">
-                            *Champ obligatoire : seulement des lettres et '-' sont valides</p>
+                        <p v-if="MarqueValid" class="help is-danger">
+                            {{MarqueValid}}</p>
                     </div>
                     <div class="field">
-                        <label for="calibre" class="label">Modèle</label>
+                        <label for="modele" class="label">Modèle</label>
                         <div class="control has-icons-left has-icons-right">
                             <input id="modele" class="input" type="text" name="modele"
                             placeholder="Modèle" v-model="modele" required/>
@@ -53,8 +53,8 @@
                                 <i class="fas fa-user"></i>
                             </span>
                         </div>
-                        <p id="nomError" class="help is-danger is-hidden">
-                            *Champ obligatoire : seulement des lettres et '-' sont valides</p>
+                        <p v-if="modeleValid" class="help is-danger">
+                            {{modeleValid}}</p>
                     </div>
                     <div class="field">
                         <label for="typeObjet" class="label">Type d'objet</label>
@@ -93,9 +93,9 @@
                                 <span style="color: red">*</span></label><br><br>
                             <input id="annee" type="text" name="annee" placeholder="Année"
                             v-model="annee" required/>
-                            <label class="has-text-danger is-hidden" id="anneevalid"
+                            <label class="has-text-danger"  v-if="anneValid"
                             for="warning">
-                            <b>l'année entrée est invalide</b></label>
+                            <b>{{anneValid}}</b></label>
                         </div>
 
                         <div class="column is-1-desktop is-2-mobile">
@@ -118,9 +118,9 @@
                             <option value="12">12</option>
 
                             </select>
-                            <label class="has-text-danger is-hidden" id="moisvalid"
+                            <label class="has-text-danger is-hidden" v-if="moisValid"
                             for="warning">
-                            <b>le mois entré est invalide</b></label>
+                            <b>{{moisValid}}</b></label>
                         </div>
                         <div class="column is-1-desktop is-2-mobile">
                             <label class="has-text-black" for="ddm"><b>Jour</b><span
@@ -160,9 +160,9 @@
                             <option>30</option>
                             <option>31</option>
                             </select>
-                            <label class="has-text-danger is-hidden" id="jourvalid"
+                            <label class="has-text-danger is-hidden" v-if="jourValid"
                             for="warning">
-                            <b>le jour entré est invalide</b></label>
+                            <b>{{jourValid}}</b></label>
                         </div>
                         <div class=" is-3-desktop is-2-mobile">
                             <label class="has-text-black" for="NoSeq"><b>Numéro Séquentiel</b>
@@ -215,6 +215,12 @@ export default {
             NoEvent: '',
             sucess: '',
             error: '',
+            anneValid: '',
+            moisValid: '',
+            jourValid: '',
+            MarqueValid: '',
+            modeleValid: '',
+            NoSerieValid: '',
         };
     },
     mounted() {
@@ -231,27 +237,27 @@ export default {
         },
         async addObjet() { // add un objet
             if (this.NoSerie === '') {
-                document.getElementsByClassName('help is-danger')[0].classList.remove('is-hidden');
+                this.NoSerieValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
             if (this.marque === '') {
-                document.getElementsByClassName('help is-danger')[1].classList.remove('is-hidden');
+                this.MarqueValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
             if (this.modele === '') {
-                document.getElementsByClassName('help is-danger')[2].classList.remove('is-hidden');
+                this.modeleValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
             if (!isJourValide(this.jour)) {
-                document.getElementById('jourvalid').classList.remove('is-hidden');
+                this.jourValid = 'le jour entré est invalide';
                 return;
             }
             if (!isMoisValide(this.mois)) {
-                document.getElementById('moisvalid').classList.remove('is-hidden');
+                this.moisValid = 'le mois entré est invalide';
                 return;
             }
             if (!isAnneeValide(this.annee)) {
-                document.getElementById('anneevalid').classList.remove('is-hidden');
+                this.anneValid = "l'année entrée est invalide";
                 return;
             }
             if (!isDateValide(this.annee, this.mois, this.jour)) {
@@ -280,15 +286,31 @@ export default {
         },
         async updateObjet() { // modifier les info d'un objet
             if (this.NoSerie === '') {
-                document.getElementsByClassName('help is-danger')[0].classList.remove('is-hidden');
+                this.NoSerieValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
             if (this.marque === '') {
-                document.getElementsByClassName('help is-danger')[1].classList.remove('is-hidden');
+                this.MarqueValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
             if (this.modele === '') {
-                document.getElementsByClassName('help is-danger')[2].classList.remove('is-hidden');
+                this.modeleValid = '*Champ obligatoire : seulement des lettres et - sont valides';
+                return;
+            }
+            if (!isJourValide(this.jour)) {
+                this.jourValid = 'le jour entré est invalide';
+                return;
+            }
+            if (!isMoisValide(this.mois)) {
+                this.moisValid = 'le mois entré est invalide';
+                return;
+            }
+            if (!isAnneeValide(this.annee)) {
+                this.anneValid = "l'année entrée est invalide";
+                return;
+            }
+            if (!isDateValide(this.annee, this.mois, this.jour)) {
+                this.error = 'la date entrée est invalide';
                 return;
             }
             const formData = {
