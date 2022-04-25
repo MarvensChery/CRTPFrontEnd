@@ -8,6 +8,7 @@ import PersonneView from '@/views/PersonneView.vue';
 import ObjetsView from '@/views/ObjetsView.vue';
 import ArmeView from '@/views/ArmeView.vue';
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
+import FormulaireFPSView from '@/views/FormulaireFPSView.vue';
 
 const routes = [
     {
@@ -55,7 +56,11 @@ const routes = [
         name: 'reponseIPPEView',
         component: ReponseIPPEView,
     },
-
+    {
+        path: '/fps',
+        name: 'FormulaireFPSView',
+        component: FormulaireFPSView,
+    },
 ];
 
 const router = createRouter({
