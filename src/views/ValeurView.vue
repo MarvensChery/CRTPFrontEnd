@@ -21,7 +21,7 @@
                 <footer>
                     <div class='controls'>
                         <button class='button button-danger doAction'
-                                v-on:click="deleteValeur"> non  </button>
+                                v-on:click="deleteValeur"> oui  </button>
                         <button class='button button-default cancelAction'
                                 v-on:click="confimation=''"> non  </button>
                     </div>
