@@ -27,7 +27,9 @@
                             <div class="columns is-gapless">
                                 <div class="column is-11">
                                     <div class="control has-icons-left has-icons-right">
-                                        <input v-model="numeroFPS" id="inputFPS"
+                                        <input v-on:change="isNumeroValid"
+                                               v-model="numeroFPS"
+                                                id="inputFPS"
                                         class="input" type="text" placeholder="Numéro FPS"/>
                                         <span class="icon is-small is-left">
                                             <i class="fas fa-user"></i>
@@ -315,6 +317,7 @@ export default {
             IdFPS: '',
             message: '',
             messagerr: '',
+            reg: /^[0-9]{6}$/,
         };
     },
     methods: {
@@ -395,13 +398,18 @@ export default {
             };
             try {
                 const rep = await fetch(`${svrURL}/fps`, requestOptions);
-                if (rep.ok) {
-                    if (rep.ok) {
-                        this.message = rep.message;
-                    }
+                if (rep.status === 200) {
+                    this.message = 'La modification du FPS est réussi !';
+                    window.scrollTo(0, 0);
+                }
+
+                if (rep.status === 500) {
+                    this.messagerr = `Le numéro ${this.numeroFPS}H existe déjà !`;
+                    window.scrollTo(0, 0);
                 }
             } catch (error) {
-                console.log(error);
+                this.messagerr = 'Une erreur est survenu avec la base de donnée !';
+                window.scrollTo(0, 0);
             }
         },
         // Function pour effacer le formulaire lorsque nous
@@ -440,11 +448,14 @@ export default {
             };
             try {
                 const rep = await fetch(`${svrURL}/fps/${this.IdFPS}`, requestOptions);
-                if (rep.ok) {
-                    this.message = rep.message;
+                if (rep.status === 200) {
+                    this.message = `La suppression du ${this.numeroFPS} FPS est réussi !`;
+                    window.scrollTo(0, 0);
+                    setTimeout(() => this.$router.push('accueil'), 2000);
                 }
             } catch (error) {
-                console.log(error);
+                this.messagerr = 'Une erreur est survenu avec la base de donnée !';
+                window.scrollTo(0, 0);
             }
         },
         // Fonction Pour modifier les donnés de la base de
@@ -488,11 +499,26 @@ export default {
 
             try {
                 const rep = await fetch(`${svrURL}/fps/${this.$route.query.idFps}`, requestOptions);
-                if (rep.ok) {
-                    this.message = rep.message;
+                console.log(rep.status);
+                if (rep.status === 200) {
+                    this.message = `La modifcation du ${this.numeroFPS} FPS est réussi !`;
+                    window.scrollTo(0, 0);
+                }
+
+                if (rep.status === 500) {
+                    this.messagerr = "La modification n'a pas pu être fait !";
+                    window.scrollTo(0, 0);
                 }
             } catch (error) {
-                console.log(error);
+                this.messagerr = 'Une erreur est survenu avec la base de donnée !';
+                window.scrollTo(0, 0);
+            }
+        },
+        isNumeroValid() {
+            if (this.reg.test(this.numeroFPS)) {
+                console.log('true');
+            } else {
+                console.log('false');
             }
         },
     },
