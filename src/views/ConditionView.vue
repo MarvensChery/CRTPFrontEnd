@@ -6,9 +6,11 @@
     <h2 class="title has-text-info-dark" v-if="IDCONDITION !== undefined">
       MODIFICATION D'UNE CONDITION À RESPECTER
     </h2>
-    <span class="has-text-weight-bold is-6 has-text-success" v-if="message !== ''">
+    <span class="has-text-weight-bold is-6 has-text-success" v-if="message !== ''
+    && messagerr === ''">
       <i class="fa-solid fa-circle-check"></i>&nbsp;{{message}}</span>
-    <span class="has-text-weight-bold is-6 has-text-danger" v-if="messagerr !== ''">
+    <span class="has-text-weight-bold is-6 has-text-danger" v-if="messagerr !== ''
+    && message === ''">
       <i class="fa-solid fa-circle-xmark"></i>&nbsp;{{messagerr}}</span>
     <form class="row columns is-multiline">
       <!-- Html pour la page de modification condition -->
@@ -22,7 +24,8 @@
             <input
               id="inputconditions1"
               v-model="condition"
-              :class="[ChangerStyle]"
+              :class="ChangerStyle"
+              :placeholder="PlaceholderChange"
               class="column input"
             />
             <span
@@ -39,6 +42,7 @@
               :class="[
                 data[0].Libelle === 'Doit demeurer à cet endroit entre' ? '' : 'is-hidden',
               ]"
+              :placeholder="PlaceholderChange"
               type="text"
               v-model="condition2"
             />
@@ -82,22 +86,24 @@
             />
             <input
               id="inputconditions2"
-              class="column input is-2"
+              class="column input is-2 has-text-centered"
               v-model="conditions2"
               type="text"
-              placeholder="HH:MM:SS"
+              placeholder="HH:MM"
               :class="[option === '7' ? '' : 'is-hidden']"
+              @click="masquerMessage"
             />
             <span id="span1" :class="[option === '7' ? '' : 'is-hidden']"
               >&nbsp;ET&nbsp;
             </span>
             <input
               id="inputconditions3"
-              class="column input is-2"
+              class="column input is-2 has-text-centered"
               v-model="conditions3"
               type="text"
-              placeholder="HH:MM:SS"
+              placeholder="HH:MM"
               :class="[option === '7' ? '' : 'is-hidden']"
+              @click="masquerMessage"
             />
             <div></div>
           </div>
@@ -153,7 +159,8 @@
 </template>
 
 <script>
-// noinspection JSUnusedGlobalSymbols
+import { validationHeure } from '@/validations';
+
 export default {
     name: 'ConditionView',
     data() {
@@ -181,7 +188,7 @@ export default {
     computed: {
         //  Change la class de l'input dépendemment des données reçus
         ChangerStyle() {
-            if (this.list2.includes(this.data[0].Libelle)) {
+            if (this.list2.includes(this.data[0].Libelle.trim())) {
                 return 'is-hidden';
             }
             if (this.data[0].HeureDebut !== null) {
@@ -200,6 +207,11 @@ export default {
             if (this.option === '6') {
                 return 'Ex: Luigi';
             }
+            if (this.data !== '') {
+                if (this.data[0].Libelle.trim() === 'Doit demeurer à cet endroit entre') {
+                return 'HH:MM';
+            }
+            }
             return '';
         },
     },
@@ -215,6 +227,10 @@ export default {
         this.ReturnCondition();
     },
     methods: {
+      masquerMessage() {
+            this.message = '';
+            this.messagerr = '';
+        },
         // Fonction pour récupérer le texte de l'option choisie
         RecuperationTextSelect(event) {
             const Text = event.target[this.option - 1].textContent;
@@ -275,8 +291,8 @@ export default {
                     } else if (this.data[0].Libelle.trim() === 'Doit demeurer à cet endroit entre') {
                         const [, t2] = this.data[0].HeureDebut.split('T');
                         const [, e2] = this.data[0].HeureFin.split('T');
-                        this.condition2 = e2.substring(0, 8);
-                        this.condition = t2.substring(0, 8);
+                        this.condition2 = e2.substring(0, 6);
+                        this.condition = t2.substring(0, 6);
                     }
                 }
             }
@@ -311,19 +327,21 @@ export default {
                     );
                     this.message = 'La modification de la condition est réussi !';
                 } else if (conditions.trim() === 'Avoir comme adresse le') {
-                    console.log(data);
                     await fetch(
                         `http://localhost:3000/conditions/updateadresse/${data[0].IdPersonne}/${input1}`,
                         settings,
                     );
                     this.message = 'La modification de la condition est réussi !';
                 } else if (conditions.trim() === 'Doit demeurer à cet endroit entre') {
-                    console.log(data);
+                  if (validationHeure(input1) && validationHeure(input2)) {
                     await fetch(
                         `http://localhost:3000/conditions/updateheure/${data[0].Id}/${input1}/${input2}`,
                         settings,
                     );
                     this.message = 'La modification de la condition est réussi !';
+                  } else {
+                    this.messagerr = 'Veuillez écrire les heures selon le format suivant HH:MM !';
+                  }
                 } else {
                     this.messagerr = 'cette condition peut seulement etre supprimer';
                 }
@@ -390,7 +408,8 @@ export default {
                     this.messagerr = ajoutms.message;
                 }
             } else if (option === '7') {
-                const ajout = await fetch(
+              if (validationHeure(conditions2) && validationHeure(conditions3)) {
+                    const ajout = await fetch(
                     `http://localhost:3000/conditions/ajouterconditionheure/${IDPERSONNE}/${IDIPPE}/${text}/${conditions2}/${conditions3}`,
                     settings,
                 );
@@ -400,6 +419,10 @@ export default {
                 } else {
                     this.messagerr = ajoutms.message;
                 }
+                    this.message = 'La modification de la condition est réussi !';
+                  } else {
+                    this.messagerr = 'Veuillez écrire les heures selon le format suivant HH:MM !';
+                  }
             } else {
                 this.messagerr = 'Veuillez séléctionner une condition';
             }
