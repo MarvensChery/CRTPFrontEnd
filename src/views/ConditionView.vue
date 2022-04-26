@@ -27,6 +27,7 @@
               :class="ChangerStyle"
               :placeholder="PlaceholderChange"
               class="column input"
+              :maxlength="[data[0].Libelle === 'Doit demeurer à cet endroit entre' ? '5' : '']"
             />
             <span
               id="span1"
@@ -42,6 +43,7 @@
               :class="[
                 data[0].Libelle === 'Doit demeurer à cet endroit entre' ? '' : 'is-hidden',
               ]"
+              :maxlength="[data[0].Libelle === 'Doit demeurer à cet endroit entre' ? '5' : '']"
               :placeholder="PlaceholderChange"
               type="text"
               v-model="condition2"
@@ -90,6 +92,7 @@
               v-model="conditions2"
               type="text"
               placeholder="HH:MM"
+              maxlength="5"
               :class="[option === '7' ? '' : 'is-hidden']"
               @click="masquerMessage"
             />
@@ -101,6 +104,7 @@
               class="column input is-2 has-text-centered"
               v-model="conditions3"
               type="text"
+              maxlength="5"
               placeholder="HH:MM"
               :class="[option === '7' ? '' : 'is-hidden']"
               @click="masquerMessage"
