@@ -22,17 +22,22 @@
                             <i class="fa-solid fa-circle-xmark"></i>&nbsp;{{messagerr}}
                         </span>
                         <div class="field">
-                            <label for="numeroFPS" class="label">Numéro FPS: </label>
+                            <label for="inputFPS" class="label">Numéro FPS: </label>
                             <br />
                             <div class="columns is-gapless">
                                 <div class="column is-11">
                                     <div class="control has-icons-left has-icons-right">
                                         <input v-on:change="isNumeroValid"
                                                v-model="numeroFPS"
-                                                id="inputFPS"
+                                                id="inputFPS" maxlength="6"
                                         class="input" type="text" placeholder="Numéro FPS"/>
                                         <span class="icon is-small is-left">
-                                            <i class="fas fa-user"></i>
+                                            <i class="fa-solid fa-hashtag"></i>
+                                        </span>
+                                        <span class="has-text-weight-bold is-6 has-text-danger"
+                                              v-if="numeroMSG !== ''">
+                                            <i class="fa-solid fa-circle-xmark"></i>
+                                            {{numeroMSG}}
                                         </span>
                                     </div>
                                 </div>
@@ -46,32 +51,32 @@
                         <br />
 
                         <div class="field">
-                            <label for="comportement" class="label">Comportement(s): </label>
+                            <label for="comportement1">Comportement(s): </label>
 
                             <div class="columns is-multiline">
                                 <div class="column is-one-third">
                                     <label for="comportement1" class="checkbox">
                                         <input type="checkbox" value="true"
-                                        v-model="Violent" />
+                                        v-model="Violent" id="comportement1"/>
                                         Violent
                                     </label>
                                 </div>
                                 <div class="column is-two-thirds">
                                     <label for="comportement2" class="checkbox">
-                                        <input type="checkbox" value="true"
+                                        <input type="checkbox" id="comportement2" value="true"
                                         v-model="EchappeG" />
                                         Échappe à ses gardiens légaux
                                     </label>
                                 </div>
                                 <div class="column is-one-third">
-                                    <label for="comportement3" class="checkbox">
+                                    <label for="comportement3" id="comportement3" class="checkbox">
                                         <input type="checkbox" value="true"
                                         v-model="Suicidaire" />
                                         Suicidaire
                                     </label>
                                 </div>
                                 <div class="column is-one-third">
-                                    <label for="comportement4" class="checkbox">
+                                    <label for="comportement4" id="comportement4" class="checkbox">
                                         <input type="checkbox" value="true"
                                         v-model="Desequilibre" />
                                         Déséquilibré
@@ -79,7 +84,7 @@
                                 </div>
                                 <div class="column is-one-third"></div>
                                 <div class="column is-one-third">
-                                    <label for="comportement5" class="checkbox">
+                                    <label for="comportement5" id="comportement5" class="checkbox">
                                         <input type="checkbox" value="true"
                                         v-model="Contagieux" />
                                         Contagieux
@@ -89,9 +94,9 @@
                         </div>
                         <br />
 
-                        <label for="description" class="label">Description: </label>
+                        <label for="comportement1" class="label">Description: </label>
                         <div class="field">
-                            <label for="race">Race: </label>
+                            <label for="choixRace">Race: </label>
                             <div class="control">
                                 <select v-model="Race" id="choixRace" class="select"
                                 name="choixRace" required>
@@ -103,28 +108,38 @@
                                 </select>
                             </div>
                         </div>
-                        <label for="taille">Taille: </label>
+                        <label for="inputTaille">Taille (cm): </label>
                         <div class="control has-icons-left has-icons-right">
                             <input id="inputTaille" class="input" type="text"
-                            placeholder="Taille" v-model="Taille" />
+                            placeholder="Taille" v-model="Taille" maxlength="3" />
                             <span class="icon is-small is-left">
-                                <i class="fas fa-user"></i>
+                                <i class="fa-solid fa-person-arrow-up-from-line"></i>
+                            </span>
+                            <span class="has-text-weight-bold is-6 has-text-danger"
+                                  v-if="tailleMSG !== ''">
+                                            <i class="fa-solid fa-circle-xmark"></i>
+                                            {{tailleMSG}}
                             </span>
                         </div>
                         <br />
 
-                        <label for="poids">Poids: </label>
+                        <label for="inputPoids">Poids (kg): </label>
                         <div class="control has-icons-left has-icons-right">
                             <input id="inputPoids" class="input" type="text"
-                            placeholder="Poids" v-model="Poids" />
+                            placeholder="Poids" v-model="Poids" maxlength="6" />
                             <span class="icon is-small is-left">
-                                <i class="fas fa-user"></i>
+                                <i class="fa-solid fa-weight-scale"></i>
+                            </span>
+                            <span class="has-text-weight-bold is-6 has-text-danger"
+                                  v-if="poidMSG !== ''">
+                                            <i class="fa-solid fa-circle-xmark"></i>
+                                            {{poidMSG}}
                             </span>
                         </div>
                         <br />
 
                         <div class="field">
-                            <label for="yeux">Yeux: </label>
+                            <label for="choixYeux">Yeux: </label>
                             <div class="control">
                                 <select id="choixYeux" class="select"
                                 name="choixYeux" required v-model="Yeux">
@@ -137,30 +152,30 @@
                             </div>
                         </div>
 
-                        <label for="marques">Marques: </label>
+                        <label for="inputMarques">Marques: </label>
                         <div class="control has-icons-left has-icons-right">
                             <input id="inputMarques" class="input" type="text"
                             placeholder="Marques" v-model="Marques" />
                             <span class="icon is-small is-left">
-                                <i class="fas fa-user"></i>
+                                <i class="fa-solid fa-user-xmark"></i>
                             </span>
                         </div>
                         <br /><br />
 
                         <div class="field">
-                            <label for="antécédant" class="label">Antécédant(s): </label>
+                            <label for="antécédant1" class="label">Antécédant(s): </label>
 
                             <div class="columns is-multiline">
                                 <div class="column is-one-third">
                                     <label for="antécédant1" class="checkbox">
-                                        <input type="checkbox" value="true"
+                                        <input type="checkbox" value="true" id="antécédant1"
                                         v-model="Violence" />
                                         Violence
                                     </label>
                                 </div>
                                 <div class="column is-one-third">
                                     <label for="antécédant2" class="checkbox">
-                                        <input type="checkbox" value="true"
+                                        <input type="checkbox" value="true" id="antécédant2"
                                         v-model="Fraude" />
                                         Fraude
                                     </label>
@@ -168,14 +183,14 @@
                                 <div class="column is-one-third"></div>
                                 <div class="column is-one-third">
                                     <label for="antécédant3" class="checkbox">
-                                        <input type="checkbox" value="true"
+                                        <input type="checkbox" value="true" id="antécédant3"
                                         v-model="ConduiteVehicule" />
                                         Conduite véh.
                                     </label>
                                 </div>
                                 <div class="column is-one-third">
                                     <label for="antécédant4" class="checkbox">
-                                        <input type="checkbox" value="true"
+                                        <input type="checkbox" value="true" id="antécédant4"
                                         v-model="IntroEffraction" />
                                         Intro. par eff.
                                     </label>
@@ -183,14 +198,14 @@
                                 <div class="column is-one-third"></div>
                                 <div class="column is-one-third">
                                     <label for="antécédant5" class="checkbox">
-                                        <input type="checkbox" value="true"
+                                        <input type="checkbox" value="true" id="antécédant5"
                                         v-model="Sexe" />
                                         Sexe
                                     </label>
                                 </div>
                                 <div class="column is-one-third">
                                     <label for="antécédant6" class="checkbox">
-                                        <input type="checkbox" value="true"
+                                        <input type="checkbox" value="true" id="antécédant6"
                                         v-model="ArmeOffensive" />
                                         Arme Offensive
                                     </label>
@@ -198,14 +213,14 @@
                                 <div class="column is-one-third"></div>
                                 <div class="column is-one-third">
                                     <label for="antécédant7" class="checkbox">
-                                        <input type="checkbox" value="true"
+                                        <input type="checkbox" value="true" id="antécédant7"
                                         v-model="Vol" />
                                         Vol
                                     </label>
                                 </div>
                                 <div class="column is-one-third">
                                     <label for="antécédant8" class="checkbox">
-                                        <input type="checkbox" value="true"
+                                        <input type="checkbox" value="true" id="antécédant8"
                                         v-model="Drogue" />
                                         Drogue
                                     </label>
@@ -213,14 +228,14 @@
                                 <div class="column is-one-third"></div>
                                 <div class="column is-one-third">
                                     <label for="antécédant9" class="checkbox">
-                                        <input type="checkbox" value="true"
+                                        <input type="checkbox" value="true" id="antécédant9"
                                         v-model="Mefait" />
                                         Méfait
                                     </label>
                                 </div>
                                 <div class="column is-one-third">
                                     <label for="antécédant10" class="checkbox">
-                                        <input type="checkbox" value="true"
+                                        <input type="checkbox" value="true" id="antécédant10"
                                         v-model="Incendie" />
                                         Incendie
                                     </label>
@@ -228,7 +243,7 @@
                                 <div class="column is-one-third"></div>
                                 <div class="column is-one-third">
                                     <label for="antécédant11" class="checkbox">
-                                        <input type="checkbox" value="true"
+                                        <input type="checkbox" value="true" id="antécédant11"
                                         v-model="AutreInfraction" />
                                         Autre infraction
                                     </label>
@@ -284,6 +299,7 @@
 <script>
 // Lien de l'url du bakckend
 import { svrURL } from '@/constantes';
+import { isNumeroValid, isHeightValid, isWeightValid } from '@/validations';
 // noinspection JSUnusedGlobalSymbols
 export default {
     name: 'FormulaireFPSView',
@@ -317,11 +333,17 @@ export default {
             IdFPS: '',
             message: '',
             messagerr: '',
-            reg: /^[0-9]{6}$/,
+            numeroMSG: '',
+            tailleMSG: '',
+            poidMSG: '',
         };
     },
     methods: {
         // Récupération des données FPS selon l'idFPS dans l'url
+        hideMsg() {
+            this.message = '';
+            this.messagerr = '';
+        },
         async getFps() {
             if (this.$route.query.idFps !== undefined) {
                 const rep = await fetch(`${svrURL}/fps/${this.$route.query.idFps}`);
@@ -356,60 +378,86 @@ export default {
                 }
             }
         },
+        validation() {
+            let error = 0;
+            this.numeroMSG = '';
+            this.tailleMSG = '';
+            this.poidMSG = '';
+            if (!isNumeroValid(this.numeroFPS)) {
+                this.numeroMSG = 'Numéro invalide, il doit être de 6 charactères numériques !';
+                error += 1;
+            }
+            if (!isHeightValid(this.Taille)) {
+                this.tailleMSG = 'Taille invalide, il doit être de 3 charactères numériques sans virgule !';
+                error += 1;
+            }
+            if (!isWeightValid(this.Poids)) {
+                this.poidMSG = 'Poid invalide, il doit être de 2 ou 3 charactès numérique !';
+                error += 1;
+            }
+            if (error > 0) {
+                error = false;
+            } else {
+                error = true;
+            }
+            return error;
+        },
         // Function pour le post FPS
         async postFps() {
-            // constantes temporaires pour les tests de POST
-            const testID = 5;
-            // Création d'un JSON que va envoyer au backend
-            const data = JSON.stringify({
-                IdPersonne: testID,
-                NoFPS: `${this.numeroFPS}H`,
-                Violent: this.Violent,
-                Echappe: this.EchappeG,
-                Suicidaire: this.Suicidaire,
-                Desequilibre: this.Desequilibre,
-                Contagieux: this.Contagieux,
-                Violence: this.Violence,
-                Fraude: this.Fraude,
-                ConduiteVehicule: this.ConduiteVehicule,
-                IntroEffraction: this.IntroEffraction,
-                Sexe: this.Sexe,
-                ArmeOffensive: this.ArmeOffensive,
-                Vol: this.Vol,
-                Drogue: this.Drogue,
-                Mefait: this.Mefait,
-                Incendie: this.Incendie,
-                AutreInfraction: this.AutreInfraction,
-                Race: this.Race,
-                Taille: this.Taille,
-                Poids: this.Poids,
-                Yeux: this.Yeux,
-                Marques: this.Marques,
-                CD: this.CD,
-            });
-            console.log(data);
-            const myHeaders = new Headers();
-            myHeaders.append('Content-Type', 'application/json');
+            this.hideMsg();
+            if (this.validation()) {
+                // constantes temporaires pour les tests de POST
+                const testID = 5;
+                // Création d'un JSON que va envoyer au backend
+                const data = JSON.stringify({
+                    IdPersonne: testID,
+                    NoFPS: `${this.numeroFPS}H`,
+                    Violent: this.Violent,
+                    Echappe: this.EchappeG,
+                    Suicidaire: this.Suicidaire,
+                    Desequilibre: this.Desequilibre,
+                    Contagieux: this.Contagieux,
+                    Violence: this.Violence,
+                    Fraude: this.Fraude,
+                    ConduiteVehicule: this.ConduiteVehicule,
+                    IntroEffraction: this.IntroEffraction,
+                    Sexe: this.Sexe,
+                    ArmeOffensive: this.ArmeOffensive,
+                    Vol: this.Vol,
+                    Drogue: this.Drogue,
+                    Mefait: this.Mefait,
+                    Incendie: this.Incendie,
+                    AutreInfraction: this.AutreInfraction,
+                    Race: this.Race,
+                    Taille: this.Taille,
+                    Poids: this.Poids,
+                    Yeux: this.Yeux,
+                    Marques: this.Marques,
+                    CD: this.CD,
+                });
+                const myHeaders = new Headers();
+                myHeaders.append('Content-Type', 'application/json');
 
-            const requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: data,
-            };
-            try {
-                const rep = await fetch(`${svrURL}/fps`, requestOptions);
-                if (rep.status === 200) {
-                    this.message = 'La modification du FPS est réussi !';
+                const requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: data,
+                };
+                try {
+                    const rep = await fetch(`${svrURL}/fps`, requestOptions);
+                    if (rep.status === 200) {
+                        this.message = 'La modification du FPS est réussi !';
+                        window.scrollTo(0, 0);
+                    }
+
+                    if (rep.status === 500) {
+                        this.messagerr = `Le numéro ${this.numeroFPS}H existe déjà !`;
+                        window.scrollTo(0, 0);
+                    }
+                } catch (error) {
+                    this.messagerr = 'Une erreur est survenu avec la base de donnée !';
                     window.scrollTo(0, 0);
                 }
-
-                if (rep.status === 500) {
-                    this.messagerr = `Le numéro ${this.numeroFPS}H existe déjà !`;
-                    window.scrollTo(0, 0);
-                }
-            } catch (error) {
-                this.messagerr = 'Une erreur est survenu avec la base de donnée !';
-                window.scrollTo(0, 0);
             }
         },
         // Function pour effacer le formulaire lorsque nous
@@ -439,6 +487,7 @@ export default {
         // Fonction pour supprimer une FPS de la base
         // de données avec l'id dans l'url
         async delFps() {
+            this.hideMsg();
             const myHeaders = new Headers();
             myHeaders.append('Content-Type', 'application/json');
 
@@ -461,69 +510,67 @@ export default {
         // Fonction Pour modifier les donnés de la base de
         // de données avec un idFPS
         async putFps() {
-            const myHeaders = new Headers();
-            myHeaders.append('Content-Type', 'application/json');
+            this.hideMsg();
+            if (this.validation()) {
+                const myHeaders = new Headers();
+                myHeaders.append('Content-Type', 'application/json');
 
-            const data = JSON.stringify({
-                IdPersonne: 5,
-                NoFPS: `${this.numeroFPS}H`,
-                Violent: this.Violent,
-                Echappe: this.EchappeG,
-                Suicidaire: this.Suicidaire,
-                Desequilibre: this.Desequilibre,
-                Contagieux: this.Contagieux,
-                Violence: this.Violence,
-                Fraude: this.Fraude,
-                ConduiteVehicule: this.ConduiteVehicule,
-                IntroEffraction: this.IntroEffraction,
-                Sexe: this.Sexe,
-                ArmeOffensive: this.ArmeOffensive,
-                Vol: this.Vol,
-                Drogue: this.Drogue,
-                Mefait: this.Mefait,
-                Incendie: this.Incendie,
-                AutreInfraction: this.AutreInfraction,
-                Race: this.Race,
-                Taille: this.Taille,
-                Poids: this.Poids,
-                Yeux: this.Yeux,
-                Marques: this.Marques,
-                CD: this.CD,
-            });
+                const data = JSON.stringify({
+                    IdPersonne: 5,
+                    NoFPS: `${this.numeroFPS}H`,
+                    Violent: this.Violent,
+                    Echappe: this.EchappeG,
+                    Suicidaire: this.Suicidaire,
+                    Desequilibre: this.Desequilibre,
+                    Contagieux: this.Contagieux,
+                    Violence: this.Violence,
+                    Fraude: this.Fraude,
+                    ConduiteVehicule: this.ConduiteVehicule,
+                    IntroEffraction: this.IntroEffraction,
+                    Sexe: this.Sexe,
+                    ArmeOffensive: this.ArmeOffensive,
+                    Vol: this.Vol,
+                    Drogue: this.Drogue,
+                    Mefait: this.Mefait,
+                    Incendie: this.Incendie,
+                    AutreInfraction: this.AutreInfraction,
+                    Race: this.Race,
+                    Taille: this.Taille,
+                    Poids: this.Poids,
+                    Yeux: this.Yeux,
+                    Marques: this.Marques,
+                    CD: this.CD,
+                });
 
-            const requestOptions = {
-                method: 'PUT',
-                headers: myHeaders,
-                body: data,
-            };
+                const requestOptions = {
+                    method: 'PUT',
+                    headers: myHeaders,
+                    body: data,
+                };
 
-            try {
-                const rep = await fetch(`${svrURL}/fps/${this.$route.query.idFps}`, requestOptions);
-                console.log(rep.status);
-                if (rep.status === 200) {
-                    this.message = `La modifcation du ${this.numeroFPS} FPS est réussi !`;
+                try {
+                    const rep = await fetch(`${svrURL}/fps/${this.$route.query.idFps}`, requestOptions);
+                    if (rep.status === 200) {
+                        this.message = `La modifcation du ${this.numeroFPS} FPS est réussi !`;
+                        window.scrollTo(0, 0);
+                    }
+
+                    if (rep.status === 500) {
+                        this.messagerr = "La modification n'a pas pu être fait !";
+                        window.scrollTo(0, 0);
+                    }
+                } catch (error) {
+                    this.messagerr = 'Une erreur est survenu avec la base de donnée !';
                     window.scrollTo(0, 0);
                 }
-
-                if (rep.status === 500) {
-                    this.messagerr = "La modification n'a pas pu être fait !";
-                    window.scrollTo(0, 0);
-                }
-            } catch (error) {
-                this.messagerr = 'Une erreur est survenu avec la base de donnée !';
-                window.scrollTo(0, 0);
-            }
-        },
-        isNumeroValid() {
-            if (this.reg.test(this.numeroFPS)) {
-                console.log('true');
-            } else {
-                console.log('false');
             }
         },
     },
     mounted() {
         this.getFps();
+        const recaptchaScript = document.createElement('script');
+        recaptchaScript.setAttribute('src', 'https://kit.fontawesome.com/abf3ec30d1.js');
+        document.head.appendChild(recaptchaScript);
     },
 };
 </script>

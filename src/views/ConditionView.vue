@@ -7,10 +7,10 @@
       MODIFICATION D'UNE CONDITION À RESPECTER
     </h2>
     <span class="has-text-weight-bold is-6 has-text-success" v-if="message !== ''
-    && messagerr === ''">
+    ">
       <i class="fa-solid fa-circle-check"></i>&nbsp;{{message}}</span>
     <span class="has-text-weight-bold is-6 has-text-danger" v-if="messagerr !== ''
-    && message === ''">
+    ">
       <i class="fa-solid fa-circle-xmark"></i>&nbsp;{{messagerr}}</span>
     <form class="row columns is-multiline">
       <!-- Html pour la page de modification condition -->
@@ -213,8 +213,8 @@ export default {
             }
             if (this.data !== '') {
                 if (this.data[0].Libelle.trim() === 'Doit demeurer à cet endroit entre') {
-                return 'HH:MM';
-            }
+                    return 'HH:MM';
+                }
             }
             return '';
         },
@@ -231,7 +231,7 @@ export default {
         this.ReturnCondition();
     },
     methods: {
-      masquerMessage() {
+        masquerMessage() {
             this.message = '';
             this.messagerr = '';
         },
@@ -242,6 +242,7 @@ export default {
         },
         // Fonction qui supprime la condition
         async Supprimer() {
+            this.masquerMessage();
             const { IDCONDITION } = this;
             const settings = {
                 method: 'DELETE',
@@ -303,6 +304,7 @@ export default {
         },
         // Fonction pour modifier la condition
         async Modifier() {
+            this.masquerMessage();
             const reponse = await fetch(
                 `http://localhost:3000/conditions/returncondition/${this.IDCONDITION}`,
             );
@@ -337,15 +339,15 @@ export default {
                     );
                     this.message = 'La modification de la condition est réussi !';
                 } else if (conditions.trim() === 'Doit demeurer à cet endroit entre') {
-                  if (validationHeure(input1) && validationHeure(input2)) {
-                    await fetch(
-                        `http://localhost:3000/conditions/updateheure/${data[0].Id}/${input1}/${input2}`,
-                        settings,
-                    );
-                    this.message = 'La modification de la condition est réussi !';
-                  } else {
-                    this.messagerr = 'Veuillez écrire les heures selon le format suivant HH:MM !';
-                  }
+                    if (validationHeure(input1) && validationHeure(input2)) {
+                        await fetch(
+                            `http://localhost:3000/conditions/updateheure/${data[0].Id}/${input1}/${input2}`,
+                            settings,
+                        );
+                        this.message = 'La modification de la condition est réussi !';
+                    } else {
+                        this.messagerr = 'Veuillez écrire les heures selon le format suivant HH:MM !';
+                    }
                 } else {
                     this.messagerr = 'cette condition peut seulement etre supprimer';
                 }
@@ -353,6 +355,7 @@ export default {
         },
         // Fonction pour ajouter la condition
         async Ajouter() {
+            this.masquerMessage();
             const {
                 option,
                 text,
@@ -412,21 +415,21 @@ export default {
                     this.messagerr = ajoutms.message;
                 }
             } else if (option === '7') {
-              if (validationHeure(conditions2) && validationHeure(conditions3)) {
+                if (validationHeure(conditions2) && validationHeure(conditions3)) {
                     const ajout = await fetch(
-                    `http://localhost:3000/conditions/ajouterconditionheure/${IDPERSONNE}/${IDIPPE}/${text}/${conditions2}/${conditions3}`,
-                    settings,
-                );
-                ajoutms = await ajout.json();
-                if (ajout.ok) {
-                    this.message = ajoutms.message;
-                } else {
-                    this.messagerr = ajoutms.message;
-                }
+                        `http://localhost:3000/conditions/ajouterconditionheure/${IDPERSONNE}/${IDIPPE}/${text}/${conditions2}/${conditions3}`,
+                        settings,
+                    );
+                    ajoutms = await ajout.json();
+                    if (ajout.ok) {
+                        this.message = ajoutms.message;
+                    } else {
+                        this.messagerr = ajoutms.message;
+                    }
                     this.message = 'La modification de la condition est réussi !';
-                  } else {
+                } else {
                     this.messagerr = 'Veuillez écrire les heures selon le format suivant HH:MM !';
-                  }
+                }
             } else {
                 this.messagerr = 'Veuillez séléctionner une condition';
             }

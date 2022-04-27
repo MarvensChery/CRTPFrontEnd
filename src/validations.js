@@ -42,6 +42,18 @@ function validationHeure(heure) {
     /^[0-9]{2}[:][0-9]{2}$/.test(heure);
 }
 
+function isNumeroValid(numeroFPS) {
+    return /^[0-9]{6}$/.test(numeroFPS);
+}
+
+function isHeightValid(taille) {
+    return /^[0-9]{3}$/.test(taille);
+}
+
+function isWeightValid(poid) {
+    return /^[0-9]{2,3}[,][0-9]{0,2}$/.test(poid);
+}
+
 export {
     isJourValide,
     isMoisValide,
@@ -49,4 +61,7 @@ export {
     isDateValide,
     capitalizeFirstLetter,
     validationHeure,
+    isNumeroValid,
+    isHeightValid,
+    isWeightValid,
 };
