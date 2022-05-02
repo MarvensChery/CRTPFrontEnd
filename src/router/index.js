@@ -39,6 +39,23 @@ const routes = [
         component: ConditionView,
     },
     {
+        path: '/personne/:idPersonne/description',
+        name: 'descriptionPersonneView',
+        component: DescriptionPersonneView,
+    },
+    {
+        path: '/personne/:idPersonne/ippe',
+        name: 'IPPEView',
+        component: IPPEView,
+        children: [
+            {
+                path: '/personne/:idPersonne/ippe/:idIppe',
+                name: 'modifIPPEView',
+                component: IPPEView,
+            },
+        ],
+    },
+    {
         path: '/personne',
         name: 'personneView',
         component: PersonneView,
@@ -49,6 +66,11 @@ const routes = [
                 component: PersonneView,
             },
         ],
+    },
+    {
+        path: '/fps',
+        name: 'FormulaireFPSView',
+        component: FormulaireFPSView,
     },
     {
         path: '/objets',
