@@ -65,28 +65,7 @@ const routes = [
         name: 'reponseIPPEView',
         component: ReponseIPPEView,
     },
-    {
-        path: '/personne/:idPersonne/description',
-        name: 'descriptionPersonneView',
-        component: DescriptionPersonneView,
-    },
-    {
-        path: '/personne/:idPersonne/ippe',
-        name: 'IPPEView',
-        component: IPPEView,
-        children: [
-            {
-                path: '/personne/:idPersonne/ippe/:idIppe',
-                name: 'modifIPPEView',
-                component: IPPEView,
-            },
-        ],
-    },
-    {
-        path: '/fps',
-        name: 'FormulaireFPSView',
-        component: FormulaireFPSView,
-    },
+
 ];
 
 const router = createRouter({
