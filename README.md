@@ -19,12 +19,18 @@ npm run build
 npm run lint
 ```
 
+**Le PO :** Marc Levasseur
+
+**Le Srum Master :** David Déchaine
+
 ## Utilisation
-Téléchargez les dépendances : npm i (faire la même chose dans backend)
-Lancez le serveur avec : npm run start(faire la même chose dans backend)
+Téléchargez les dépendances : `npm i` (faire la même chose dans backend)
+
+Lancez le serveur avec : `npm run start`(faire la même chose dans backend(`npm run serve`))
+
 Ouvrir: http://localhost:5000/
 
-Pour se connecter en tant qu'étudiant: 
+Pour se connecter en tant qu'**étudiant**: 
                 {
                     Identifiant: e1233772
                     mot de passe: bonjour
@@ -52,17 +58,37 @@ Appuyez sur Submit;
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+    Vous pouvez désormais ajouter une personne
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Allez sur http://localhost:5000/personnes?=5 :
 
 ### Lints and fixes files
 ```
 npm run lint
 ```
+
+
+## Les Routes
+
+Get d’un événement IPPE
+
+
+    URL: /personne/{idPersonne}/ippe
+
+
+Ajout/Modification/suppresion dune personne
+
+
+    URL: /personne/{idPersonne}
+
+
+Ajout/Modification d’une adresse de personne
+
+
+    URL: /adressePersonne/{idPersonne}
+
+
+Ajout/Modification d’une description de personne
+
+
+    URL: /descriptionPersonne/{idPersonne}

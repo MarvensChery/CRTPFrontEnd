@@ -9,6 +9,8 @@ import ObjetsView from '@/views/ObjetsView.vue';
 import ArmeView from '@/views/ArmeView.vue';
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
 import testView from '@/views/testView.vue';
+import DescriptionPersonneView from '@/views/DescriptionPersonneView.vue';
+import IPPEView from '@/views/IPPEView.vue';
 
 const routes = [
     {
@@ -45,6 +47,13 @@ const routes = [
         path: '/personne',
         name: 'personneView',
         component: PersonneView,
+        children: [
+            {
+                path: '/personne/:idPersonne',
+                name: 'modifPersonneView',
+                component: PersonneView,
+            },
+        ],
     },
     {
         path: '/objets',
@@ -65,6 +74,23 @@ const routes = [
         path: '/reponseIPPE/:nomFamille/:prenom1/:prenom2/:masculin/:dateNaissance',
         name: 'reponseIPPEView',
         component: ReponseIPPEView,
+    },
+    {
+        path: '/personne/:idPersonne/description',
+        name: 'descriptionPersonneView',
+        component: DescriptionPersonneView,
+    },
+    {
+        path: '/personne/:idPersonne/ippe',
+        name: 'IPPEView',
+        component: IPPEView,
+        children: [
+            {
+                path: '/personne/:idPersonne/ippe/:idIppe',
+                name: 'modifIPPEView',
+                component: IPPEView,
+            },
+        ],
     },
 
 ];
