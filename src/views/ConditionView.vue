@@ -251,7 +251,7 @@ export default {
                 },
             };
             const reponse = await fetch(
-                `http://localhost:3000/conditions/deletecondition/${IDCONDITION}`,
+                `http://localhost:3000/conditions/${IDCONDITION}`,
                 settings,
             );
 
@@ -274,7 +274,7 @@ export default {
             const { IDCONDITION } = this;
             if (IDCONDITION !== undefined) {
                 const reponse = await fetch(
-                    `http://localhost:3000/conditions/returncondition/${IDCONDITION}`,
+                    `http://localhost:3000/conditions/${IDCONDITION}`,
                 );
 
                 if (reponse.ok) {
@@ -287,7 +287,7 @@ export default {
                     }
                     if (this.data[0].Libelle.trim() === 'Avoir comme adresse le') {
                         const reponse2 = await fetch(
-                            `http://localhost:3000/conditions/returnpersonne/${this.data[0].IdPersonne}`,
+                            `http://localhost:3000/personnes/${this.data[0].IdPersonne}`,
                         );
                         if (reponse2.ok) {
                             const data2 = await reponse2.json();
