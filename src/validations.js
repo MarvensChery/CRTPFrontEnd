@@ -88,7 +88,7 @@ function isHeightValid(taille) {
 }
 
 function isWeightValid(poid) {
-    return /^[0-9]{2,3}[,][0-9]{0,2}$/.test(poid);
+    return /^[0-9]{2,3}|[0-9]{2,3}[,][0-9]{1,2}$/.test(poid);
 }
 // Check si l'inputs du nom contient les bons characteres
 function checkNomInput(str) {

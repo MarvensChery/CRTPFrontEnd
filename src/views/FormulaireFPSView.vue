@@ -3,7 +3,7 @@
         <div class="box">
             <!--Dynamisation de la page selon si ya un paramètre
                 dans l'url -->
-            <h1 v-if="this.$route.query.idFps"
+            <h1 v-if="this.$route.params.idFPS"
                 class="title is-1-touch is-full my-6 has-text-centered">
                 MODIFICATION RÉPONSE FPS
             </h1>
@@ -261,7 +261,7 @@
                                 </div>
                             </router-link>
 
-                            <div v-if="this.$route.query.idFps" class="column is-one-third">
+                            <div v-if="this.$route.params.idFPS" class="column is-one-third">
                                 <div class="buttons is-centered">
                                     <button class="button is-info is-default"
                                     v-on:click="putFps">Modifier</button>
@@ -275,7 +275,7 @@
                                 </div>
                             </div>
 
-                            <div v-if="this.$route.query.idFps" class="column is-one-third">
+                            <div v-if="this.$route.params.idFPS" class="column is-one-third">
                                 <div class="buttons">
                                     <button class="button is-info is-default"
                                     v-on:click="delFps">Supprimer</button>
@@ -345,8 +345,8 @@ export default {
             this.messagerr = '';
         },
         async getFps() {
-            if (this.$route.query.idFps !== undefined) {
-                const rep = await fetch(`${svrURL}/fps/${this.$route.query.idFps}`);
+            if (this.$route.params.idFPS !== undefined) {
+                const rep = await fetch(`${svrURL}/fps/${this.$route.params.idFPS}`);
                 if (rep.ok) {
                     const data = await rep.json();
                     // Remplissage des input avec les données récupérer
@@ -392,7 +392,7 @@ export default {
                 error += 1;
             }
             if (!isWeightValid(this.Poids)) {
-                this.poidMSG = 'Poid invalide, il doit être de 2 ou 3 charactès numérique !';
+                this.poidMSG = 'Poid invalide, il doit être de 2 ou 3 charactès numérique suivi de 1 ou 2 charactère !';
                 error += 1;
             }
             if (error > 0) {
@@ -406,11 +406,9 @@ export default {
         async postFps() {
             this.hideMsg();
             if (this.validation()) {
-                // constantes temporaires pour les tests de POST
-                const testID = 5;
                 // Création d'un JSON que va envoyer au backend
                 const data = JSON.stringify({
-                    IdPersonne: testID,
+                    IdPersonne: this.$route.params.idPersonne,
                     NoFPS: `${this.numeroFPS}H`,
                     Violent: this.Violent,
                     Echappe: this.EchappeG,
@@ -500,7 +498,7 @@ export default {
                 if (rep.status === 200) {
                     this.message = `La suppression du ${this.numeroFPS} FPS est réussi !`;
                     window.scrollTo(0, 0);
-                    setTimeout(() => this.$router.push('accueil'), 2000);
+                    setTimeout(() => this.$router.push('/'), 2000);
                 }
             } catch (error) {
                 this.messagerr = 'Une erreur est survenu avec la base de donnée !';
@@ -515,8 +513,12 @@ export default {
                 const myHeaders = new Headers();
                 myHeaders.append('Content-Type', 'application/json');
 
+                // Code temporaire tant que le datatype de la base de donné devient un decimal
+                const string = String(this.Poids);
+                const string2 = string.replace(',', '.');
+
                 const data = JSON.stringify({
-                    IdPersonne: 5,
+                    IdPersonne: this.idPersonne,
                     NoFPS: `${this.numeroFPS}H`,
                     Violent: this.Violent,
                     Echappe: this.EchappeG,
@@ -536,7 +538,7 @@ export default {
                     AutreInfraction: this.AutreInfraction,
                     Race: this.Race,
                     Taille: this.Taille,
-                    Poids: this.Poids,
+                    Poids: Number(string2),
                     Yeux: this.Yeux,
                     Marques: this.Marques,
                     CD: this.CD,
@@ -549,7 +551,7 @@ export default {
                 };
 
                 try {
-                    const rep = await fetch(`${svrURL}/fps/${this.$route.query.idFps}`, requestOptions);
+                    const rep = await fetch(`${svrURL}/fps/${this.$route.params.idFPS}`, requestOptions);
                     if (rep.status === 200) {
                         this.message = `La modifcation du ${this.numeroFPS} FPS est réussi !`;
                         window.scrollTo(0, 0);

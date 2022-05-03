@@ -68,9 +68,16 @@ const routes = [
         ],
     },
     {
-        path: '/fps',
+        path: '/fps/:idFPS',
         name: 'FormulaireFPSView',
         component: FormulaireFPSView,
+        children: [
+            {
+                path: '/personne/:idPersonne/fps',
+                name: 'ajoutFormulaireFPSView',
+                component: FormulaireFPSView,
+            },
+        ],
     },
     {
         path: '/objets',
