@@ -49,8 +49,8 @@
                                     Redirection vers /personne/id
                                     selon la rangé que l'utilisateur clique
                                 -->
-                                <router-link :to="{ path: '/personne/',
-                                query: { idPersonne: p.IdPersonne }}">
+                                <router-link :to="{ name: 'modifPersonneView',
+                                params: { idPersonne: `${p.IdPersonne}` }}">
                                     <i class="fas fa-pen"></i>
                                 </router-link>
                             </td>
