@@ -276,6 +276,13 @@ export default {
         this.returnCondition();
     },
     methods: {
+      // Si les données sont '' retourne null pour la base de donnée
+        sendDataNull(str) {
+          if (str === '') {
+            return null;
+          }
+            return str;
+        },
         // Fonction pour masquer le message d'erreur après l'appel d'une autre fonction
         masquerMessage() {
             this.message = '';
@@ -360,13 +367,13 @@ export default {
             const data = JSON.stringify({
                 IdPersonne: this.IdPersonne,
                 IdIppe: this.IdIppe,
-                Libelle: this.Libelle,
-                Champs1: this.condition.trim(),
-                Champs2: this.condition2.trim(),
-                Adresse2: this.adresse2,
-                Ville: this.ville.trim(),
-                Province: this.province.trim(),
-                CodePostal: this.codepostal.trim(),
+                Libelle: this.sendDataNull(this.Libelle),
+                Champs1: this.sendDataNull(this.condition.trim()),
+                Champs2: this.sendDataNull(this.condition2.trim()),
+                Adresse2: this.sendDataNull(this.adresse2),
+                Ville: this.sendDataNull(this.ville.trim()),
+                Province: this.sendDataNull(this.province.trim()),
+                CodePostal: this.sendDataNull(this.codepostal.trim()),
             });
             const response = await fetch(`http://localhost:3000/conditions/${this.IdCondition}`, {
                 method: 'PUT',
@@ -398,13 +405,12 @@ export default {
             const data = JSON.stringify({
                 IdPersonne,
                 IdIppe,
-                Libelle: text.trim(),
-                Champs1: conditions1.trim(),
-                Champs2: conditions2.trim(),
-                Champs3: conditions3.trim(),
+                Libelle: this.sendDataNull(text.trim()),
+                Champs1: this.sendDataNull(conditions1.trim()),
+                Champs2: this.sendDataNull(conditions2.trim()),
+                Champs3: this.sendDataNull(conditions3.trim()),
                 Option: option,
             });
-            console.log(data);
             const response = await fetch('http://localhost:3000/conditions', {
                 method: 'POST',
                 headers: {
