@@ -75,12 +75,12 @@ const routes = [
         ],
     },
     {
-        path: '/fps/:idFPS',
+        path: '/personne/:idPersonne/fps',
         name: 'FormulaireFPSView',
         component: FormulaireFPSView,
         children: [
             {
-                path: '/personne/:idPersonne/fps',
+                path: '/personne/:idPersonne/fps/:idFPS',
                 name: 'ajoutFormulaireFPSView',
                 component: FormulaireFPSView,
             },
