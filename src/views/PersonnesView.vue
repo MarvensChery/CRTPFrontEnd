@@ -103,6 +103,16 @@ export default {
             if (rep.ok) {
                 // Si il y a aucune erreur lors du fetch, convertion en JSON
                 this.listePersonnes = await rep.json();
+                // Trie du nom de famille en ordre alphabétique
+                this.listePersonnes.sort((a, b) => {
+                    if (a.NomFamille < b.NomFamille) {
+                        return -1;
+                    }
+                    if (a.NomFamille > b.NomFamille) {
+                        return 1;
+                    }
+                    return 0;
+                });
             } else if (rep.status === 404) {
                 this.message = 'Aucune personne est enregistré dans la base de donnée';
             } else if (rep.status === 500) {
@@ -124,16 +134,6 @@ export default {
                     ),
                 );
             }
-            /* Ajout d'un if ici lorsque d'un nouveau nouveau filtre pour une future MÀJ
-            * Ex:
-            * if (this.filtreX !== '' {
-            * personneFiltre = personneFiltre.filter(
-            *     (personne) => personne.X.includes(
-            *         this.filtrePersonnes,
-            *      ),
-            * };
-            *
-            * */
             // Retour dans du nouveau JSON filtré
             return personneFiltre;
         },

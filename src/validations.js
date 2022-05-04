@@ -74,19 +74,22 @@ function verifieMarques(str) {
 function verifieGiletPantalonAutreVetement(str) {
     return /^[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî,-\s]{0,50}$/.test(str);
 }
-
+// Vérifie que l'heure est dans le format 00:00
+// ,donc 2 nombres suivie d'un 2 points et encore 2 nombres
 function validationHeure(heure) {
     /^[0-9]{2}[:][0-9]{2}$/.test(heure);
 }
-
+// Vérifie que le NuméroFPS sois
 function isNumeroValid(numeroFPS) {
     return /^[0-9]{6}$/.test(numeroFPS);
 }
 
+// Vérifie que la taille sois de 3 chiffres
 function isHeightValid(taille) {
     return /^[0-9]{3}$/.test(taille);
 }
-
+// Vérifie que le poids de 2 à 3 chiffres avant la virgule
+// et que la virgule et les 1 à 2 chiffre après sois optionnel
 function isWeightValid(poid) {
     return /^[0-9]{2,3}|[0-9]{2,3}[,][0-9]{1,2}$/.test(poid);
 }
