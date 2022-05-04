@@ -18,6 +18,10 @@
                     <hr>
                 </div>
                 <div class="column is-10 is-offset-1-desktop">
+                    <span class="has-text-weight-bold is-6 has-text-danger"
+                          v-if="message !== ''">
+                            <i class="fa-solid fa-circle-xmark"></i>&nbsp;{{message}}
+                        </span>
                     <table class='table is-striped is-fullwidth is-bordered is-centered my-5'>
                         <thead>
                         <tr>
@@ -85,7 +89,7 @@ export default {
             listePersonnes: [],
             // String du filtre que l'utilisateur entre dans le champ de texte
             filtrePersonnes: '',
-            id: '',
+            message: '',
         };
     },
     mounted() {
@@ -99,6 +103,10 @@ export default {
             if (rep.ok) {
                 // Si il y a aucune erreur lors du fetch, convertion en JSON
                 this.listePersonnes = await rep.json();
+            } else if (rep.status === 404) {
+                this.message = 'Aucune personne est enregistré dans la base de donnée';
+            } else if (rep.status === 500) {
+                this.message = "L'application n'arrvie pas atteindre la base de donnée";
             }
         },
     },
