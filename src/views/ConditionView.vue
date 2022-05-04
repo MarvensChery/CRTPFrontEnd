@@ -19,7 +19,7 @@
           <div class="columns" v-if="data !== ''">
             <label for="Condition" class="label column is-1">Condition :</label>
             <label for="Condition à modifier" class="column is-4"
-              >{{ data[0].Libelle }}
+              >{{ Libelle }}
             </label>
             <input
               id="inputconditions1"
@@ -27,12 +27,12 @@
               :class="changerStyle"
               :placeholder="placeholderChange"
               class="column input"
-              :maxlength="[data[0].Libelle === 'Doit demeurer à cet endroit entre' ? '5' : '']"
+              :maxlength="[Libelle === 'Doit demeurer à cet endroit entre' ? '5' : '']"
             />
             <span
               id="span1"
               :class="[
-                data[0].Libelle === 'Doit demeurer à cet endroit entre' ? '' : 'is-hidden',
+                Libelle === 'Doit demeurer à cet endroit entre' ? '' : 'is-hidden',
               ]"
             >
               et
@@ -41,16 +41,56 @@
               v-if="data[0].HeureFin !== null"
               class="column input is-2"
               :class="[
-                data[0].Libelle === 'Doit demeurer à cet endroit entre' ? '' : 'is-hidden',
+                Libelle === 'Doit demeurer à cet endroit entre' ? '' : 'is-hidden',
               ]"
-              :maxlength="[data[0].Libelle === 'Doit demeurer à cet endroit entre' ? '5' : '']"
+              :maxlength="[Libelle === 'Doit demeurer à cet endroit entre' ? '5' : '']"
               :placeholder="placeholderChange"
               type="text"
               v-model="condition2"
             />
+            <br>
             <div></div>
           </div>
         </div>
+        <div class="columns" :class="[
+                Libelle === 'Avoir comme adresse le' ? '' : 'is-hidden',
+              ]">
+          <div class="column is-6">
+          <label for="Adresse2" class="label">Adresse2</label>
+          <input
+              class="column input"
+              id="Adresse2"
+              type="text"
+              v-model="adresse2"
+            /></div>
+            <div class="column is-2">
+            <label for="Ville" class="label">Ville</label>
+          <input
+              class="column input"
+              id="Ville"
+              type="text"
+              v-model="ville"
+            /></div>
+            <div class="column is-1">
+            <label for="Province" class="label">Province</label>
+          <input
+              class="column input"
+              maxlength="2"
+              id="Province"
+              type="text"
+              v-model="province"
+            /></div>
+            <div class="column is-2">
+            <label for="Postal" class="label">Code Postal</label>
+          <input
+              class="column input"
+              maxlength="7"
+              id="Postal"
+              type="text"
+              v-model="codepostal"
+            /></div>
+        </div>
+
         <!-- Html pour la page d'ajout condition -->
         <div class="field" v-if="IdCondition === undefined">
           <div class="columns">
@@ -187,12 +227,17 @@ export default {
             IdCondition: '',
             message: '',
             messagerr: '',
+            Libelle: '',
+            adresse2: '',
+            ville: '',
+            province: '',
+            codepostal: '',
         };
     },
     computed: {
         //  Change la class de l'input dépendemment des données reçus
         changerStyle() {
-            if (this.list2.includes(this.data[0].Libelle.trim())) {
+            if (this.list2.includes(this.Libelle)) {
                 return 'is-hidden';
             }
             if (this.data[0].HeureDebut !== null) {
@@ -212,7 +257,7 @@ export default {
                 return 'Ex: Luigi';
             }
             if (this.data !== '') {
-                if (this.data[0].Libelle.trim() === 'Doit demeurer à cet endroit entre') {
+                if (this.Libelle === 'Doit demeurer à cet endroit entre') {
                     return 'HH:MM';
                 }
             }
@@ -280,23 +325,27 @@ export default {
                 );
                 if (reponse.ok) {
                     this.data = await reponse.json();
-                    const { Libelle } = this.data[0];
+                    this.Libelle = this.data[0].Libelle.trim();
                     this.IdPersonne = this.data[0].IdPersonne;
-                    if (Libelle.trim() === 'Ne pas entrer en contact avec') {
+                    if (this.Libelle === 'Ne pas entrer en contact avec') {
                         this.condition = this.data[0].Victime;
                     }
-                    if (Libelle.trim() === 'Ne pas fréquenter') {
+                    if (this.Libelle === 'Ne pas fréquenter') {
                         this.condition = this.data[0].Frequentation;
                     }
-                    if (Libelle.trim() === 'Avoir comme adresse le') {
+                    if (this.Libelle === 'Avoir comme adresse le') {
                         const reponse2 = await fetch(
                             `http://localhost:3000/personnes/${this.IdPersonne}`,
                         );
                         if (reponse2.ok) {
                             const data2 = await reponse2.json();
                             this.condition = data2[0].Adresse1;
+                            this.adresse2 = data2[0].Adresse2;
+                            this.ville = data2[0].Ville;
+                            this.province = data2[0].Province;
+                            this.codepostal = data2[0].CodePostal;
                         }
-                    } else if (Libelle.trim() === 'Doit demeurer à cet endroit entre') {
+                    } else if (this.Libelle === 'Doit demeurer à cet endroit entre') {
                         const [, t2] = this.data[0].HeureDebut.split('T');
                         const [, e2] = this.data[0].HeureFin.split('T');
                         this.condition2 = e2.substring(0, 6);
@@ -311,9 +360,13 @@ export default {
             const data = JSON.stringify({
                 IdPersonne: this.IdPersonne,
                 IdIppe: this.IdIppe,
-                Libelle: this.data[0].Libelle.trim(),
+                Libelle: this.Libelle,
                 Champs1: this.condition.trim(),
                 Champs2: this.condition2.trim(),
+                Adresse2: this.adresse2,
+                Ville: this.ville.trim(),
+                Province: this.province.trim(),
+                CodePostal: this.codepostal.trim(),
             });
             const response = await fetch(`http://localhost:3000/conditions/${this.IdCondition}`, {
                 method: 'PUT',
