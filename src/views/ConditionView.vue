@@ -14,11 +14,11 @@
       <i class="fa-solid fa-circle-xmark"></i>&nbsp;{{messagerr}}</span>
     <form class="row columns is-multiline">
       <!-- Html pour la page de modification condition -->
-      <div class="column is-12 my-6">
+      <div class="column is-12 my-5">
         <div class="field" v-if="IdCondition !== undefined">
           <div class="columns" v-if="data !== ''">
             <label for="Condition" class="label column is-1">Condition :</label>
-            <label for="Condition à modifier" class="column is-4"
+            <label for="Condition à modifier" class="column is-5"
               >{{ Libelle }}
             </label>
             <input
@@ -48,59 +48,17 @@
               type="text"
               v-model="condition2"
             />
-            <br>
             <div></div>
           </div>
         </div>
-        <div class="columns" :class="[
-                Libelle === 'Avoir comme adresse le' ? '' : 'is-hidden',
-              ]">
-          <div class="column is-6">
-          <label for="Adresse2" class="label">Adresse2</label>
-          <input
-              class="column input"
-              id="Adresse2"
-              type="text"
-              v-model="adresse2"
-            /></div>
-            <div class="column is-2">
-            <label for="Ville" class="label">Ville</label>
-          <input
-              class="column input"
-              id="Ville"
-              type="text"
-              v-model="ville"
-            /></div>
-            <div class="column is-1">
-            <label for="Province" class="label">Province</label>
-          <input
-              class="column input"
-              maxlength="2"
-              id="Province"
-              type="text"
-              v-model="province"
-            /></div>
-            <div class="column is-2">
-            <label for="Postal" class="label">Code Postal</label>
-          <input
-              class="column input"
-              maxlength="7"
-              id="Postal"
-              type="text"
-              v-model="codepostal"
-            /></div>
-        </div>
-
         <!-- Html pour la page d'ajout condition -->
-        <div class="field" v-if="IdCondition === undefined">
-          <div class="columns">
+          <div class="columns" v-if="IdCondition === undefined">
             <label for="Condition" class="label column is-1">Condition :</label>
             <div class="select">
               <select
                 id="Condition"
                 name="Condition"
                 v-model="option"
-                v-if="IdCondition === undefined"
                 @change="recuperationTextSelect"
               >
                 <option value="1" selected>
@@ -149,12 +107,49 @@
               :class="[option === '7' ? '' : 'is-hidden']"
               @click="masquerMessage"
             />
-            <div></div>
           </div>
         </div>
-      </div>
-
+      <div class="columns" :class="[
+                Libelle === 'Avoir comme adresse le' || option === '2' ? '' : 'is-hidden',
+              ]">
+              <div class="column is-3"></div>
+          <div class="column is-6">
+          <label for="Adresse2" class="label">Adresse2</label>
+          <input
+              class="column input"
+              id="Adresse2"
+              type="text"
+              v-model="adresse2"
+            /></div>
+            <div class="column is-2">
+            <label for="Ville" class="label">Ville</label>
+          <input
+              class="column input"
+              id="Ville"
+              type="text"
+              v-model="ville"
+            /></div>
+            <div class="column is-1">
+            <label for="Province" class="label">Province</label>
+          <input
+              class="column input"
+              maxlength="2"
+              id="Province"
+              type="text"
+              v-model="province"
+            /></div>
+            <div class="column is-2">
+            <label for="Postal" class="label">Code Postal</label>
+          <input
+              class="column input"
+              maxlength="7"
+              id="Postal"
+              type="text"
+              v-model="codepostal"
+            /></div>
+        </div></form> <br>
       <!--BOUTONS-->
+      <div class="columns">
       <div class="column is-3">
         <input
           class="button is-fullwidth is-info"
@@ -197,8 +192,7 @@
           v-on:click="annuler()"
           value="Annuler"
         />
-      </div>
-    </form>
+      </div></div>
   </div>
 </template>
 
@@ -243,7 +237,7 @@ export default {
             if (this.data[0].HeureDebut !== null) {
                 return 'is-2';
             }
-            return 'is-4';
+            return 'is-5';
         },
         //  modifier le placeholder de l'input dépendemment de l'option choisie
         placeholderChange() {
@@ -409,6 +403,10 @@ export default {
                 Champs1: this.sendDataNull(conditions1.trim()),
                 Champs2: this.sendDataNull(conditions2.trim()),
                 Champs3: this.sendDataNull(conditions3.trim()),
+                Adresse2: this.sendDataNull(this.adresse2),
+                Ville: this.sendDataNull(this.ville.trim()),
+                Province: this.sendDataNull(this.province.trim()),
+                CodePostal: this.sendDataNull(this.codepostal.trim()),
                 Option: option,
             });
             const response = await fetch('http://localhost:3000/conditions', {
