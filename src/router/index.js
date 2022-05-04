@@ -34,14 +34,21 @@ const routes = [
         component: PersonnesView,
     },
     {
-        path: '/condition',
-        name: 'conditionView',
-        component: ConditionView,
-    },
-    {
         path: '/personne/:idPersonne/description',
         name: 'descriptionPersonneView',
         component: DescriptionPersonneView,
+    },
+    {
+        path: '/personne/:idPersonne/ippe/:idIppe/condition',
+        name: 'ajoutConditionView',
+        component: ConditionView,
+        children: [
+            {
+                path: '/personne/:idPersonne/ippe/:idIppe/condition/:idCondition',
+                name: 'conditionView',
+                component: ConditionView,
+            },
+        ],
     },
     {
         path: '/personne/:idPersonne/ippe',

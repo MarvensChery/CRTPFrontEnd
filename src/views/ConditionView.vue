@@ -1,9 +1,9 @@
 <template>
   <div class="container box my-6">
-    <h2 class="title has-text-info-dark" v-if="IDCONDITION === undefined">
+    <h2 class="title has-text-info-dark" v-if="IdCondition === undefined">
       AJOUT D'UNE CONDITION À RESPECTER
     </h2>
-    <h2 class="title has-text-info-dark" v-if="IDCONDITION !== undefined">
+    <h2 class="title has-text-info-dark" v-if="IdCondition !== undefined">
       MODIFICATION D'UNE CONDITION À RESPECTER
     </h2>
     <span class="has-text-weight-bold is-6 has-text-success" v-if="message !== ''
@@ -15,7 +15,7 @@
     <form class="row columns is-multiline">
       <!-- Html pour la page de modification condition -->
       <div class="column is-12 my-6">
-        <div class="field" v-if="IDCONDITION !== undefined">
+        <div class="field" v-if="IdCondition !== undefined">
           <div class="columns" v-if="data !== ''">
             <label for="Condition" class="label column is-1">Condition :</label>
             <label for="Condition à modifier" class="column is-4"
@@ -24,8 +24,8 @@
             <input
               id="inputconditions1"
               v-model="condition"
-              :class="ChangerStyle"
-              :placeholder="PlaceholderChange"
+              :class="changerStyle"
+              :placeholder="placeholderChange"
               class="column input"
               :maxlength="[data[0].Libelle === 'Doit demeurer à cet endroit entre' ? '5' : '']"
             />
@@ -44,7 +44,7 @@
                 data[0].Libelle === 'Doit demeurer à cet endroit entre' ? '' : 'is-hidden',
               ]"
               :maxlength="[data[0].Libelle === 'Doit demeurer à cet endroit entre' ? '5' : '']"
-              :placeholder="PlaceholderChange"
+              :placeholder="placeholderChange"
               type="text"
               v-model="condition2"
             />
@@ -52,7 +52,7 @@
           </div>
         </div>
         <!-- Html pour la page d'ajout condition -->
-        <div class="field" v-if="IDCONDITION === undefined">
+        <div class="field" v-if="IdCondition === undefined">
           <div class="columns">
             <label for="Condition" class="label column is-1">Condition :</label>
             <div class="select">
@@ -60,8 +60,8 @@
                 id="Condition"
                 name="Condition"
                 v-model="option"
-                v-if="IDCONDITION === undefined"
-                @change="RecuperationTextSelect"
+                v-if="IdCondition === undefined"
+                @change="recuperationTextSelect"
               >
                 <option value="1" selected>
                   Choisissez une des conditions
@@ -83,7 +83,7 @@
               class="column input is-6"
               v-model="conditions1"
               type="text"
-              :placeholder="PlaceholderChange"
+              :placeholder="placeholderChange"
               :class="[list1.includes(option) ? '' : 'is-hidden']"
             />
             <input
@@ -120,33 +120,33 @@
           class="button is-fullwidth is-info"
           type="button"
           value="Retour"
-          v-on:click="Retour()"
+          v-on:click="retour()"
         />
       </div>
-      <div class="column is-3" v-if="IDCONDITION === undefined">
+      <div class="column is-3" v-if="IdCondition === undefined">
         <input
           id="ajouter"
           class="button is-fullwidth is-info"
           type="button"
           value="Ajouter"
-          v-on:click="Ajouter()"
+          v-on:click="ajouter()"
         />
       </div>
-      <div class="column is-3" v-if="IDCONDITION !== undefined">
+      <div class="column is-3" v-if="IdCondition !== undefined">
         <input
           id="modifier"
           class="button is-fullwidth is-info"
           type="button"
           value="Modifier"
-          v-on:click="Modifier()"
+          v-on:click="modifier()"
         />
       </div>
-      <div class="column is-3" v-if="IDCONDITION !== undefined">
+      <div class="column is-3" v-if="IdCondition !== undefined">
         <input
           class="button is-fullwidth is-info"
           type="button"
           value="Supprimer"
-          v-on:click="Supprimer()"
+          v-on:click="supprimer()"
         />
       </div>
       <div class="column is-3">
@@ -154,7 +154,7 @@
           id="annuler"
           class="button is-fullwidth is-info"
           type="button"
-          v-on:click="Annuler()"
+          v-on:click="annuler()"
           value="Annuler"
         />
       </div>
@@ -163,7 +163,7 @@
 </template>
 
 <script>
-import { validationHeure } from '@/validations';
+//  import { validationHeure } from '@/validations';
 
 export default {
     name: 'ConditionView',
@@ -182,16 +182,16 @@ export default {
             conditions1: '',
             conditions2: '',
             conditions3: '',
-            IDPERSONNE: '',
-            IDIPPE: '',
-            IDCONDITION: '',
+            IdPersonne: '',
+            IdIppe: '',
+            IdCondition: '',
             message: '',
             messagerr: '',
         };
     },
     computed: {
         //  Change la class de l'input dépendemment des données reçus
-        ChangerStyle() {
+        changerStyle() {
             if (this.list2.includes(this.data[0].Libelle.trim())) {
                 return 'is-hidden';
             }
@@ -200,8 +200,8 @@ export default {
             }
             return 'is-4';
         },
-        //  Modifier le placeholder de l'input dépendemment de l'option choisie
-        PlaceholderChange() {
+        //  modifier le placeholder de l'input dépendemment de l'option choisie
+        placeholderChange() {
             if (this.option === '2') {
                 return 'Ex: 1090 Rue Deschamp';
             }
@@ -225,25 +225,26 @@ export default {
         const recaptchaScript = document.createElement('script');
         recaptchaScript.setAttribute('src', 'https://kit.fontawesome.com/abf3ec30d1.js');
         document.head.appendChild(recaptchaScript);
-        this.IDPERSONNE = this.$route.query.IdPersonne;
-        this.IDIPPE = this.$route.query.IdIPPE;
-        this.IDCONDITION = this.$route.query.IdCondition;
-        this.ReturnCondition();
+        this.IdPersonne = this.$route.params.idPersonne;
+        this.IdIppe = this.$route.params.idIppe;
+        this.IdCondition = this.$route.params.idCondition;
+        this.returnCondition();
     },
     methods: {
+        // Fonction pour masquer le message d'erreur après l'appel d'une autre fonction
         masquerMessage() {
             this.message = '';
             this.messagerr = '';
         },
         // Fonction pour récupérer le texte de l'option choisie
-        RecuperationTextSelect(event) {
+        recuperationTextSelect(event) {
             const Text = event.target[this.option - 1].textContent;
             this.text = Text;
         },
         // Fonction qui supprime la condition
-        async Supprimer() {
+        async supprimer() {
             this.masquerMessage();
-            const { IDCONDITION } = this;
+            const { IdCondition } = this;
             const settings = {
                 method: 'DELETE',
                 headers: {
@@ -251,49 +252,51 @@ export default {
                 },
             };
             const reponse = await fetch(
-                `http://localhost:3000/conditions/${IDCONDITION}`,
+                `http://localhost:3000/conditions/${IdCondition}`,
                 settings,
             );
-
+            const rep = await reponse.json();
             if (reponse.ok) {
-                this.message = reponse.message;
+                this.message = rep.message;
+                setTimeout(() => this.$router.push({ name: 'modifIPPEView' }), 2000);
+            } else {
+                this.messagerr = rep.message;
             }
         },
         // Fonction pour le bouton annuler
-        Annuler() {
-            this.option = '1';
-            this.condition = '';
-            this.condition2 = '';
+        annuler() {
+            this.$router.go(0);
         },
         // Fonction pour le bouton retour
-        Retour() {
-            window.location.href = '/personne';
+        retour() {
+            this.$router.push({ name: 'modifIPPEView' });
         },
         // Fonction pour récupérer la condition
-        async ReturnCondition() {
-            const { IDCONDITION } = this;
-            if (IDCONDITION !== undefined) {
+        async returnCondition() {
+            const { IdCondition } = this;
+            if (IdCondition !== undefined) {
                 const reponse = await fetch(
-                    `http://localhost:3000/conditions/${IDCONDITION}`,
+                    `http://localhost:3000/conditions/${IdCondition}`,
                 );
-
                 if (reponse.ok) {
                     this.data = await reponse.json();
-                    if (this.data[0].Libelle.trim() === 'Ne pas entrer en contact avec') {
+                    const { Libelle } = this.data[0];
+                    this.IdPersonne = this.data[0].IdPersonne;
+                    if (Libelle.trim() === 'Ne pas entrer en contact avec') {
                         this.condition = this.data[0].Victime;
                     }
-                    if (this.data[0].Libelle.trim() === 'Ne pas fréquenter') {
+                    if (Libelle.trim() === 'Ne pas fréquenter') {
                         this.condition = this.data[0].Frequentation;
                     }
-                    if (this.data[0].Libelle.trim() === 'Avoir comme adresse le') {
+                    if (Libelle.trim() === 'Avoir comme adresse le') {
                         const reponse2 = await fetch(
-                            `http://localhost:3000/personnes/${this.data[0].IdPersonne}`,
+                            `http://localhost:3000/personnes/${this.IdPersonne}`,
                         );
                         if (reponse2.ok) {
                             const data2 = await reponse2.json();
                             this.condition = data2[0].Adresse1;
                         }
-                    } else if (this.data[0].Libelle.trim() === 'Doit demeurer à cet endroit entre') {
+                    } else if (Libelle.trim() === 'Doit demeurer à cet endroit entre') {
                         const [, t2] = this.data[0].HeureDebut.split('T');
                         const [, e2] = this.data[0].HeureFin.split('T');
                         this.condition2 = e2.substring(0, 6);
@@ -303,58 +306,32 @@ export default {
             }
         },
         // Fonction pour modifier la condition
-        async Modifier() {
+        async modifier() {
             this.masquerMessage();
-            const reponse = await fetch(
-                `http://localhost:3000/conditions/returncondition/${this.IDCONDITION}`,
-            );
-
-            if (reponse.ok) {
-                const data = await reponse.json();
-                const conditions = this.data[0].Libelle;
-                const input1 = this.condition;
-                const input2 = this.condition2;
-                const settings = {
-                    method: 'PUT',
-                    headers: {
-                        Accept: 'application/json',
-                    },
-                };
-                if (conditions.trim() === 'Ne pas entrer en contact avec') {
-                    await fetch(
-                        `http://localhost:3000/conditions/updatevictime/${data[0].Id}/${input1}`,
-                        settings,
-                    );
-                    this.message = 'La modification de la condition est réussi !';
-                } else if (conditions.trim() === 'Ne pas fréquenter') {
-                    await fetch(
-                        `http://localhost:3000/conditions/updatefrequentation/${data[0].Id}/${input1}`,
-                        settings,
-                    );
-                    this.message = 'La modification de la condition est réussi !';
-                } else if (conditions.trim() === 'Avoir comme adresse le') {
-                    await fetch(
-                        `http://localhost:3000/conditions/updateadresse/${data[0].IdPersonne}/${input1}`,
-                        settings,
-                    );
-                    this.message = 'La modification de la condition est réussi !';
-                } else if (conditions.trim() === 'Doit demeurer à cet endroit entre') {
-                    if (validationHeure(input1) && validationHeure(input2)) {
-                        await fetch(
-                            `http://localhost:3000/conditions/updateheure/${data[0].Id}/${input1}/${input2}`,
-                            settings,
-                        );
-                        this.message = 'La modification de la condition est réussi !';
-                    } else {
-                        this.messagerr = 'Veuillez écrire les heures selon le format suivant HH:MM !';
-                    }
-                } else {
-                    this.messagerr = 'cette condition peut seulement etre supprimer';
-                }
+            const data = JSON.stringify({
+                IdPersonne: this.IdPersonne,
+                IdIppe: this.IdIppe,
+                Libelle: this.data[0].Libelle.trim(),
+                Champs1: this.condition.trim(),
+                Champs2: this.condition2.trim(),
+            });
+            const response = await fetch(`http://localhost:3000/conditions/${this.IdCondition}`, {
+                method: 'PUT',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: data,
+            });
+            const rep = await response.json();
+            if (response.ok) {
+                this.message = rep.message;
+            } else {
+                this.messagerr = rep.message;
             }
         },
         // Fonction pour ajouter la condition
-        async Ajouter() {
+        async ajouter() {
             this.masquerMessage();
             const {
                 option,
@@ -362,76 +339,32 @@ export default {
                 conditions1,
                 conditions2,
                 conditions3,
-                IDPERSONNE,
-                IDIPPE,
+                IdPersonne,
+                IdIppe,
             } = this;
-            const settings = {
+            const data = JSON.stringify({
+                IdPersonne,
+                IdIppe,
+                Libelle: text.trim(),
+                Champs1: conditions1.trim(),
+                Champs2: conditions2.trim(),
+                Champs3: conditions3.trim(),
+                Option: option,
+            });
+            console.log(data);
+            const response = await fetch('http://localhost:3000/conditions', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
+                    'Content-Type': 'application/json',
                 },
-            };
-            let ajoutms;
-            if (option === '3' || option === '4') {
-                const ajout = await fetch(
-                    `http://localhost:3000/conditions/ajoutercondition/${IDPERSONNE}/${IDIPPE}/${text}`,
-                    settings,
-                );
-                ajoutms = await ajout.json();
-                if (ajout.ok) {
-                    this.message = ajoutms.message;
-                }
-            } else if (option === '2') {
-                const ajout = await fetch(
-                    `http://localhost:3000/conditions/ajouterconditionadresse/${IDIPPE}/${`${text} `}/${IDPERSONNE}/${conditions1}`,
-                    settings,
-                );
-                ajoutms = await ajout.json();
-                if (ajout.ok) {
-                    this.message = ajoutms.message;
-                } else {
-                    this.messagerr = ajoutms.message;
-                }
-            } else if (option === '5') {
-                const ajout = await fetch(
-                    `http://localhost:3000/conditions/ajouterconditionvictime/${IDPERSONNE}/${IDIPPE}/${`${text} `}/${conditions1}`,
-                    settings,
-                );
-                ajoutms = await ajout.json();
-                if (ajout.ok) {
-                    this.message = ajoutms.message;
-                } else {
-                    this.messagerr = ajoutms.message;
-                }
-            } else if (option === '6') {
-                const ajout = await fetch(
-                    `http://localhost:3000/conditions/ajouterconditionfrequentation/${IDPERSONNE}/${IDIPPE}/${`${text} `}/${conditions1}`,
-                    settings,
-                );
-                ajoutms = await ajout.json();
-                if (ajout.ok) {
-                    this.message = ajoutms.message;
-                } else {
-                    this.messagerr = ajoutms.message;
-                }
-            } else if (option === '7') {
-                if (validationHeure(conditions2) && validationHeure(conditions3)) {
-                    const ajout = await fetch(
-                        `http://localhost:3000/conditions/ajouterconditionheure/${IDPERSONNE}/${IDIPPE}/${text}/${conditions2}/${conditions3}`,
-                        settings,
-                    );
-                    ajoutms = await ajout.json();
-                    if (ajout.ok) {
-                        this.message = ajoutms.message;
-                    } else {
-                        this.messagerr = ajoutms.message;
-                    }
-                    this.message = 'La modification de la condition est réussi !';
-                } else {
-                    this.messagerr = 'Veuillez écrire les heures selon le format suivant HH:MM !';
-                }
+                body: data,
+            });
+            const rep = await response.json();
+            if (response.ok) {
+                this.message = rep.message;
             } else {
-                this.messagerr = 'Veuillez séléctionner une condition';
+                this.messagerr = rep.message;
             }
         },
     },
