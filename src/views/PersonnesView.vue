@@ -48,7 +48,7 @@
                             <td>{{p.Prenom1}}</td>
                             <td>{{p.Prenom2}}</td>
                             <td>{{p.TypePersonne}}</td>
-                            <td style="border:none; background-color: transparent">
+                            <td id="tdButton">
                                 <!--
                                     Redirection vers /personne/id
                                     selon la rangé que l'utilisateur clique
@@ -68,9 +68,7 @@
         <div>
             <!-- Redirection vers l'accueil lorsque nous cliquons sur l'image home-->
             <router-link v-bind:to="{path: '/'}">
-                <img id="imgHome" class="shadow zoom" src="/images/home.png" alt="Accueil"
-                     style="height: 64px;width: 64px; float:left; margin-top: -50px;
-                     margin-bottom: -100px;">
+                <img id="imgHome" class="shadow zoom" src="/images/home.png" alt="Accueil">
             </router-link>
         </div>
     </div>
@@ -146,6 +144,16 @@ export default {
             display: flex;
             min-height: 100vh;
             flex-direction: column;
+        }
+        #imgHome {
+            height: 64px;
+            width: 64px;
+            float: left;
+            margin-top: -50px;
+            margin-bottom: -100px;
+        }
+        #tdButton {
+            border: none;
         }
 
         #wrapper {

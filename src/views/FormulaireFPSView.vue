@@ -18,8 +18,8 @@
                             <i class="fa-solid fa-circle-check"></i>&nbsp;{{message}}
                         </span>
                         <span class="has-text-weight-bold is-6 has-text-danger"
-                        v-if="messagerr !== ''">
-                            <i class="fa-solid fa-circle-xmark"></i>&nbsp;{{messagerr}}
+                        v-if="errorMsg !== ''">
+                            <i class="fa-solid fa-circle-xmark"></i>&nbsp;{{errorMsg}}
                         </span>
                         <div class="field">
                             <label for="inputFPS" class="label">Numéro FPS: </label>
@@ -332,7 +332,7 @@ export default {
             CD: '',
             IdFPS: '',
             message: '',
-            messagerr: '',
+            errorMsg: '',
             numeroMSG: '',
             tailleMSG: '',
             poidMSG: '',
@@ -342,7 +342,7 @@ export default {
         // Récupération des données FPS selon l'idFPS dans l'url
         hideMsg() {
             this.message = '';
-            this.messagerr = '';
+            this.errorMsg = '';
         },
         async getFps() {
             if (this.$route.params.idFPS !== undefined) {
@@ -449,11 +449,11 @@ export default {
                     }
 
                     if (rep.status === 500) {
-                        this.messagerr = `Le numéro ${this.numeroFPS}H existe déjà !`;
+                        this.errorMsg = `Le numéro ${this.numeroFPS}H existe déjà !`;
                         window.scrollTo(0, 0);
                     }
                 } catch (error) {
-                    this.messagerr = 'Une erreur est survenu avec la base de donnée !';
+                    this.errorMsg = 'Une erreur est survenu avec la base de donnée !';
                     window.scrollTo(0, 0);
                 }
             }
@@ -501,7 +501,7 @@ export default {
                     setTimeout(() => this.$router.push('/'), 2000);
                 }
             } catch (error) {
-                this.messagerr = 'Une erreur est survenu avec la base de donnée !';
+                this.errorMsg = 'Une erreur est survenu avec la base de donnée !';
                 window.scrollTo(0, 0);
             }
         },
@@ -514,8 +514,10 @@ export default {
                 myHeaders.append('Content-Type', 'application/json');
 
                 // Code temporaire tant que le datatype de la base de donné devient un decimal
-                const string = String(this.Poids);
-                const string2 = string.replace(',', '.');
+                // Passage du poid int en string
+                const poidsToString = String(this.Poids);
+                // Remplacer le virgule en point pour rendre le passage en int possible
+                const poidPeriod = poidsToString.replace(',', '.');
 
                 const data = JSON.stringify({
                     IdPersonne: this.idPersonne,
@@ -538,7 +540,7 @@ export default {
                     AutreInfraction: this.AutreInfraction,
                     Race: this.Race,
                     Taille: this.Taille,
-                    Poids: Number(string2),
+                    Poids: Number(poidPeriod),
                     Yeux: this.Yeux,
                     Marques: this.Marques,
                     CD: this.CD,
@@ -558,11 +560,11 @@ export default {
                     }
 
                     if (rep.status === 500) {
-                        this.messagerr = "La modification n'a pas pu être fait !";
+                        this.errorMsg = "La modification n'a pas pu être fait !";
                         window.scrollTo(0, 0);
                     }
                 } catch (error) {
-                    this.messagerr = 'Une erreur est survenu avec la base de donnée !';
+                    this.errorMsg = 'Une erreur est survenu avec la base de donnée !';
                     window.scrollTo(0, 0);
                 }
             }

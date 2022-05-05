@@ -270,11 +270,11 @@ export default {
         this.returnCondition();
     },
     methods: {
-      // Si les données sont '' retourne null pour la base de donnée
+        // Si les données sont '' retourne null pour la base de donnée
         sendDataNull(str) {
-          if (str === '') {
-            return null;
-          }
+            if (str === '') {
+                return null;
+            }
             return str;
         },
         // Fonction pour masquer le message d'erreur après l'appel d'une autre fonction
