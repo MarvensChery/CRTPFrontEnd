@@ -133,21 +133,16 @@ export default {
         this.ReturnCondition();
     },
     methods: {
-        async test() {
-            console.log(this.Condition);
-        },
         async ReturnCondition() {
             if (this.$route.params.Idcondition) {
                 const reponse = await fetch(`http://localhost:3000/conditions/${this.$route.params.Idcondition}`);
                 if (reponse.ok) {
                     this.Condition = await reponse.json();
-                    console.log(this.Condition);
                 }
             } else {
                 const reponse = await fetch(`http://localhost:3000/conditions/returnidippe/${this.$route.params.Idpersonne}`);
                 if (reponse.ok) {
                     this.Condition = await reponse.json();
-                    console.log(this.Condition);
                 }
             }
         },

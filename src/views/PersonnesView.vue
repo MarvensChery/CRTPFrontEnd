@@ -48,8 +48,8 @@
                     <td v-else>Null</td>
                     <td>{{ personne.TypePersonne }}</td>
                     <td style="border: none" >
-                      <i class="fas fa-pen"  v-on:click="go(personne.IdPersonne)"
-                      v-on:keydown="go(Personne.IdPerson)"></i>
+                      <i class="fas fa-pen"  v-on:click="goPageModifierPersonnes(personne.IdPersonne)"
+                      v-on:keydown="goPageModifierPersonnes(Personne.IdPerson)"></i>
                     </td>
                   </tr>
                 </tbody>
@@ -81,6 +81,9 @@
 
 <script>
 // noinspection JSUnusedGlobalSymbols
+
+import { svrURL } from '@/constantes';
+
 export default {
     name: 'PersonnesView',
     data() {
@@ -102,14 +105,13 @@ export default {
     },
     mounted() {
         this.getPersonnes();
-        console.log(this.tableauPersonne);
     },
     methods: {
-        go(x) {
-            this.$router.push(`/personne/${x}`);
+        goPageModifierPersonnes(id) {
+            this.$router.push(`/personne/${id}`);
         },
         async getPersonnes() {
-            const rep = await fetch('http://localhost:3000/personnes');
+            const rep = await fetch(`${svrURL}/personnes`);
             if (rep.ok) {
                 const json = await rep.json();
                 this.tableauPersonne = json;
