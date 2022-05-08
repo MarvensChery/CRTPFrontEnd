@@ -9,9 +9,9 @@
     <span class="has-text-weight-bold is-6 has-text-success" v-if="message !== ''
     ">
       <i class="fa-solid fa-circle-check"></i>&nbsp;{{message}}</span>
-    <span class="has-text-weight-bold is-6 has-text-danger" v-if="messagerr !== ''
+    <span class="has-text-weight-bold is-6 has-text-danger" v-if="messageError !== ''
     ">
-      <i class="fa-solid fa-circle-xmark"></i>&nbsp;{{messagerr}}</span>
+      <i class="fa-solid fa-circle-xmark"></i>&nbsp;{{messageError}}</span>
     <form class="row columns is-multiline">
       <!-- Html pour la page de modification condition -->
       <div class="column is-12 my-5">
@@ -198,6 +198,7 @@
 
 <script>
 //  import { validationHeure } from '@/validations';
+import { svrURL } from '@/constantes';
 
 export default {
     name: 'ConditionView',
@@ -220,7 +221,7 @@ export default {
             IdIppe: '',
             IdCondition: '',
             message: '',
-            messagerr: '',
+            messageError: '',
             Libelle: '',
             adresse2: '',
             ville: '',
@@ -280,7 +281,7 @@ export default {
         // Fonction pour masquer le message d'erreur après l'appel d'une autre fonction
         masquerMessage() {
             this.message = '';
-            this.messagerr = '';
+            this.messageError = '';
         },
         // Fonction pour récupérer le texte de l'option choisie
         recuperationTextSelect(event) {
@@ -298,7 +299,7 @@ export default {
                 },
             };
             const reponse = await fetch(
-                `http://localhost:3000/conditions/${IdCondition}`,
+                `${svrURL}/conditions/${IdCondition}`,
                 settings,
             );
             const rep = await reponse.json();
@@ -306,7 +307,7 @@ export default {
                 this.message = rep.message;
                 setTimeout(() => this.$router.push({ name: 'modifIPPEView' }), 2000);
             } else {
-                this.messagerr = rep.message;
+                this.messageError = rep.message;
             }
         },
         // Fonction pour le bouton annuler
@@ -322,7 +323,7 @@ export default {
             const { IdCondition } = this;
             if (IdCondition !== undefined) {
                 const reponse = await fetch(
-                    `http://localhost:3000/conditions/${IdCondition}`,
+                    `${svrURL}/conditions/${IdCondition}`,
                 );
                 if (reponse.ok) {
                     this.data = await reponse.json();
@@ -336,7 +337,7 @@ export default {
                     }
                     if (this.Libelle === 'Avoir comme adresse le') {
                         const reponse2 = await fetch(
-                            `http://localhost:3000/personnes/${this.IdPersonne}`,
+                            `${svrURL}/personnes/${this.IdPersonne}`,
                         );
                         if (reponse2.ok) {
                             const data2 = await reponse2.json();
@@ -352,7 +353,10 @@ export default {
                         this.condition2 = e2.substring(0, 6);
                         this.condition = t2.substring(0, 6);
                     }
-                }
+                } else {
+                const rep = await reponse.json();
+                this.messageError = rep.message;
+            }
             }
         },
         // Fonction pour modifier la condition
@@ -369,7 +373,7 @@ export default {
                 Province: this.sendDataNull(this.province.trim()),
                 CodePostal: this.sendDataNull(this.codepostal.trim()),
             });
-            const response = await fetch(`http://localhost:3000/conditions/${this.IdCondition}`, {
+            const response = await fetch(`${svrURL}/conditions/${this.IdCondition}`, {
                 method: 'PUT',
                 headers: {
                     Accept: 'application/json',
@@ -381,7 +385,7 @@ export default {
             if (response.ok) {
                 this.message = rep.message;
             } else {
-                this.messagerr = rep.message;
+                this.messageError = rep.message;
             }
         },
         // Fonction pour ajouter la condition
@@ -409,7 +413,7 @@ export default {
                 CodePostal: this.sendDataNull(this.codepostal.trim()),
                 Option: option,
             });
-            const response = await fetch('http://localhost:3000/conditions', {
+            const response = await fetch(`${svrURL}/conditions`, {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -421,7 +425,7 @@ export default {
             if (response.ok) {
                 this.message = rep.message;
             } else {
-                this.messagerr = rep.message;
+                this.messageError = rep.message;
             }
         },
     },
