@@ -354,9 +354,9 @@ export default {
                         this.condition = t2.substring(0, 6);
                     }
                 } else {
-                const rep = await reponse.json();
-                this.messageError = rep.message;
-            }
+                    const rep = await reponse.json();
+                    this.messageError = rep.message;
+                }
             }
         },
         // Fonction pour modifier la condition
