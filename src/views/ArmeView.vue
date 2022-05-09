@@ -12,7 +12,7 @@
         <div class='dialog-ovelay' v-if="confimation">
             <div class='dialog'>
                 <header>
-                    <h3> confirmation </h3>
+                    <h3> Confirmation </h3>
                     <i class='fa fa-close'></i>
                 </header>
                 <div class='dialog-msg'>
@@ -21,9 +21,9 @@
                 <footer>
                     <div class='controls'>
                         <button class='button button-danger doAction'
-                                v-on:click="deleteArme"> oui  </button>
+                                v-on:click="deleteArme"> Oui  </button>
                         <button class='button button-default cancelAction'
-                                v-on:click="confimation=''"> non  </button>
+                                v-on:click="confimation=''"> Non  </button>
                     </div>
                 </footer>
             </div>
@@ -180,7 +180,7 @@
                         <div class=" is-3-desktop is-2-mobile">
                             <label class="has-text-black" for="NoSeq"><b>Numéro Séquentiel</b>
                                 <span style="color: red">*</span></label><br><br>
-                            <input id="NoSeq" type="text" name="NoSeq"
+                            <input maxlength="4" id="NoSeq" type="text" name="NoSeq"
                                 placeholder="Numéro Séquentiel" v-model="NoSeq" required/>
                         </div>
                    </div>

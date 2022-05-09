@@ -12,7 +12,7 @@
         <div class='dialog-ovelay' v-if="confimation">
             <div class='dialog'>
                 <header>
-                    <h3> confirmation </h3>
+                    <h3> Confirmation </h3>
                     <i class='fa fa-close'></i>
                 </header>
                 <div class='dialog-msg'>
@@ -21,9 +21,9 @@
                 <footer>
                     <div class='controls'>
                         <button class='button button-danger doAction'
-                                v-on:click="deleteObjet"> oui  </button>
+                                v-on:click="deleteObjet"> Oui  </button>
                         <button class='button button-default cancelAction'
-                                v-on:click="confimation=''"> non  </button>
+                                v-on:click="confimation=''"> Non  </button>
                     </div>
                 </footer>
             </div>
@@ -110,7 +110,8 @@
                         <div class="column is-2-desktop is-2-mobile">
                             <label class="has-text-black" for="annee"><b>Année</b>
                                 <span style="color: red">*</span></label><br><br>
-                            <input id="annee" type="text" name="annee" placeholder="Année"
+                            <input maxlength="2" id="annee"
+                            type="text" name="annee" placeholder="Année"
                             v-model="annee" required/>
                             <label class="has-text-danger"  v-if="anneValid"
                             for="warning">
@@ -186,7 +187,7 @@
                         <div class=" is-3-desktop is-2-mobile">
                             <label class="has-text-black" for="NoSeq"><b>Numéro Séquentiel</b>
                                 <span style="color: red">*</span></label><br><br>
-                            <input id="NoSeq" type="text" name="NoSeq"
+                            <input maxlength="4" id="NoSeq" type="text" name="NoSeq"
                                 placeholder="Numéro Séquentiel" v-model="NoSeq" required/>
                         </div>
                             <div class="btn-block" >
