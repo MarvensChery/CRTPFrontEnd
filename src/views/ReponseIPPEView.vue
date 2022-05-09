@@ -370,24 +370,16 @@ export default {
         };
     },
     mounted() {
-        this.getshows();
+        this.getIppeReponse();
     },
     methods: {
-        async getshows() {
-            console.log('getIPPE');
-            console.log(this.$route.params.nomFamille);
-            console.log(this.$route.params.prenom1);
+        async getIppeReponse() {
             const prenom2 = this.$route.params.prenom2 === 'null' ? '' : this.$route.params.prenom2;
-            console.log(prenom2);
-            console.log(this.$route.params.masculin);
-            console.log(this.$route.params.dateNaissance);
-            // eslint-disable-next-line
       const rep = await fetch(
                 `http://localhost:3000/ippes/info?nomFamille=${this.$route.params.nomFamille}&prenom1=${this.$route.params.prenom1}&prenom2=${prenom2}&masculin=${this.$route.params.masculin}&dateNaissance=${this.$route.params.dateNaissance}`,
             );
             if (rep.ok) {
                 this.reponseIPPE = await rep.json();
-                console.log(this.reponseIPPE[0].IPPE.length === 0);
                 if (this.reponseIPPE[0].IPPE.length === 0) {
                     this.reponseIPPE1type = 'Négatif';
                 } else {
@@ -399,11 +391,6 @@ export default {
                     if (this.reponseIPPE[0].IPPE[0].conditions[0].idCondition !== null) {
                         this.reponseIPPE1conditions = this.reponseIPPE[0].IPPE[0].conditions;
                     }
-                    console.log(this.reponseIPPE);
-                    console.log(this.reponseIPPE1type);
-                    console.log(this.reponseIPPE2type);
-                    console.log(this.reponseIPPElength);
-                    console.log(this.reponseIPPE1conditions);
                 }
             } else {
                 this.$root.$data.erreurIPPE = true;
@@ -411,8 +398,6 @@ export default {
             }
         },
         formatterConditions() {
-            console.log(this.reponseIPPE[0].Adresse1);
-            console.log(this.reponseIPPE1conditions);
             let returneddata = `<tr>
         <td><strong>Condition(s) :</strong></td>
     </tr>`;
@@ -422,8 +407,6 @@ export default {
             }
             if (this.reponseIPPE1conditions.length > 0) {
                 this.reponseIPPE1conditions.forEach((element) => {
-                    console.log(element.libelle.indexOf('adresse') === -1);
-                    console.log(element.victime, element.frequentation, element.libelle);
                     if (element.frequentation === null && element.victime === null && element.libelle.indexOf('adresse') === -1) {
                         returneddata += `<tr>
                                 <td>${element.libelle}</td>
