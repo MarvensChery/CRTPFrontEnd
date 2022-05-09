@@ -43,8 +43,7 @@
             <img class="shadow zoom"
                  src="https://cdn.discordapp.com/attachments/755238466618523729/966048980058378240/right-arrow4.png"
                  alt="right arrow"
-                 id="rightarrow" style="position: fixed;
-                             height: 64px;width: 64px; top: 50%;">
+                 id="rightarrow">
           </div>
           <div v-if="pageactuelle === 2 && reponseIPPE2type !== null"
                v-on:click="pageactuelle = 1" v-on:keydown="pageactuelle = 1"
@@ -52,8 +51,7 @@
             <img class="shadow zoom"
                  src="https://cdn.discordapp.com/attachments/755238466618523729/966048962480058458/left-arrow4.png"
                  alt="left arrow"
-                 id="leftarrow" style="position: fixed;
-                             height: 64px;width: 64px; top: 50%;">
+                 id="leftarrow">
           </div>
         </div>
         <section>
@@ -480,5 +478,19 @@ body {
 
 .shadow:hover {
   -webkit-filter: drop-shadow(-5px 2px 5px #999999);
+}
+
+#rightarrow {
+    position: fixed;
+    height: 64px;
+    width: 64px;
+    top: 50%;
+}
+
+#leftarrow {
+    position: fixed;
+    height: 64px;
+    width: 64px;
+    top: 50%;
 }
 </style>
