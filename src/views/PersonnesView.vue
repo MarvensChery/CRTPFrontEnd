@@ -32,8 +32,10 @@
                     <th class="is-info">Prenom1</th>
                     <th class="is-info">Prenom2</th>
                     <th class="is-info">Categorie</th>
-                    <th style="border: none">
-                      <i class="fas fa-user-plus"></i>
+                    <th class="borderNone">
+                        <router-link to="/personne">
+                            <i class="fas fa-user-plus"></i>
+                        </router-link>
                     </th>
                   </tr>
                 </thead>
@@ -47,7 +49,7 @@
                     <td v-if="personne.Prenom2 !== null">{{ personne.Prenom2 }}</td>
                     <td v-else>Null</td>
                     <td>{{ personne.TypePersonne }}</td>
-                    <td style="border: none" >
+                    <td class="borderNone" >
                       <i class="fas fa-pen"
                       v-on:click="goPageModifierPersonnes(personne.IdPersonne)"
                       v-on:keydown="goPageModifierPersonnes(Personne.IdPerson)"></i>
@@ -63,16 +65,9 @@
           <router-link to="/">
             <img
               id="imgHome"
-              class="shadow zoom"
+              class="shadow zoom imgHome"
               src="/images/home.png"
               alt="Accueil"
-              style="
-                height: 64px;
-                width: 64px;
-                float: left;
-                margin-top: -50px;
-                margin-bottom: -100px;
-              "
           /></router-link>
         </div>
       </div>
@@ -149,5 +144,17 @@ body {
 
 .shadow:hover {
   -webkit-filter: drop-shadow(-5px 2px 5px #999999);
+}
+
+#imgHome {
+  height: 64px;
+  width: 64px;
+  float: left;
+  margin-top: -50px;
+  margin-bottom: -100px;
+}
+
+#borderNone {
+  border: none;
 }
 </style>
