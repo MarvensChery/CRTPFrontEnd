@@ -74,11 +74,49 @@
                             <input v-model="this.input1"
                             v-if="this.Condition[0].Libelle.replace(/\s/g,'') ==
                             'Nepasentrerencontactavec' ||
-                            this.Condition[0].Libelle.replace(/\s/g,'') == 'Nepasfréquenter' ||
-                            this.Condition[0].Libelle.replace(/\s/g,'') ==
-                            'Avoircommeadressele'"
+                            this.Condition[0].Libelle.replace(/\s/g,'') == 'Nepasfréquenter'"
                         id="inputconditions1" class="column input is-4"
                         type="text" placeholder="Remplissez la case">
+                        <div v-if="this.Condition[0].Libelle.replace(/\s/g,'') ==
+                            'Avoircommeadressele'">
+                        <input v-model="this.input1"
+                        id="inputconditions1" class="column input is-4"
+                        type="text" placeholder="Remplissez la case">
+                        <div class="column is-6">
+          <label for="Adresse2" class="label">Adresse2</label>
+          <input
+              class="column input"
+              id="Adresse2"
+              type="text"
+              v-model="adresse2"
+            /></div>
+            <div class="column is-2">
+            <label for="Ville" class="label">Ville</label>
+          <input
+              class="column input"
+              id="Ville"
+              type="text"
+              v-model="ville"
+            /></div>
+            <div class="column is-1">
+            <label for="Province" class="label">Province</label>
+          <input
+              class="column input"
+              maxlength="2"
+              id="Province"
+              type="text"
+              v-model="province"
+            /></div>
+            <div class="column is-2">
+            <label for="Postal" class="label">Code Postal</label>
+          <input
+              class="column input"
+              maxlength="7"
+              id="Postal"
+              type="text"
+              v-model="codepostal"
+            /></div>
+                        </div>
                         <input v-model="this.input2"
                         v-if="this.Condition[0].Libelle.replace(/\s/g,'') ==
                         'Doitdemeureràcetendroitentre'"
@@ -213,38 +251,31 @@ export default {
     },
 };
 </script>
-
 <style scoped>
     body {
         display: flex;
         min-height: 100vh;
         flex-direction: column;
     }
-
     #wrapper {
         flex: 1;
     }
-
     #inputconditions1 {
-        margin-top:8px;
+        margin-top:1px;
         margin-left:30px;
     }
-
     #inputconditions2 {
-        margin-top:5px;
+        margin-top:1px;
         margin-left:30px;
     }
-
     #inputconditions3 {
-        margin-top:5px;
+        margin-top:1px;
         margin-left:30px;
     }
-
     #span {
         margin-left:16px;
-        padding-top: 13px;
+        padding-top: 5px;
     }
-
     select option[value="1"]
     {
         color: #999999;
