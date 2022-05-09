@@ -48,7 +48,8 @@
                     <td v-else>Null</td>
                     <td>{{ personne.TypePersonne }}</td>
                     <td style="border: none" >
-                      <i class="fas fa-pen"  v-on:click="goPageModifierPersonnes(personne.IdPersonne)"
+                      <i class="fas fa-pen"
+                      v-on:click="goPageModifierPersonnes(personne.IdPersonne)"
                       v-on:keydown="goPageModifierPersonnes(Personne.IdPerson)"></i>
                     </td>
                   </tr>
