@@ -344,6 +344,13 @@ export default {
             this.message = '';
             this.errorMsg = '';
         },
+        // Si les données sont '' retourne null pour la base de donnée
+        sendDataNull(str) {
+            if (str === '') {
+                return null;
+            }
+            return str;
+        },
         async getFps() {
             if (this.$route.params.idFPS !== undefined) {
                 const rep = await fetch(`${svrURL}/fps/${this.$route.params.idFPS}`);
@@ -410,28 +417,28 @@ export default {
                 const data = JSON.stringify({
                     IdPersonne: this.$route.params.idPersonne,
                     NoFPS: `${this.numeroFPS}H`,
-                    Violent: this.Violent,
-                    Echappe: this.EchappeG,
-                    Suicidaire: this.Suicidaire,
-                    Desequilibre: this.Desequilibre,
-                    Contagieux: this.Contagieux,
-                    Violence: this.Violence,
-                    Fraude: this.Fraude,
-                    ConduiteVehicule: this.ConduiteVehicule,
-                    IntroEffraction: this.IntroEffraction,
-                    Sexe: this.Sexe,
-                    ArmeOffensive: this.ArmeOffensive,
-                    Vol: this.Vol,
-                    Drogue: this.Drogue,
-                    Mefait: this.Mefait,
-                    Incendie: this.Incendie,
-                    AutreInfraction: this.AutreInfraction,
-                    Race: this.Race,
+                    Violent: this.sendDataNull(this.Violent),
+                    Echappe: this.sendDataNull(this.EchappeG),
+                    Suicidaire: this.sendDataNull(this.Suicidaire),
+                    Desequilibre: this.sendDataNull(this.Desequilibre),
+                    Contagieux: this.sendDataNull(this.Contagieux),
+                    Violence: this.sendDataNull(this.Violence),
+                    Fraude: this.sendDataNull(this.Fraude),
+                    ConduiteVehicule: this.sendDataNull(this.ConduiteVehicule),
+                    IntroEffraction: this.sendDataNull(this.IntroEffraction),
+                    Sexe: this.sendDataNull(this.Sexe),
+                    ArmeOffensive: this.sendDataNull(this.ArmeOffensive),
+                    Vol: this.sendDataNull(this.Vol),
+                    Drogue: this.sendDataNull(this.Drogue),
+                    Mefait: this.sendDataNull(this.Mefait),
+                    Incendie: this.sendDataNull(this.Incendie),
+                    AutreInfraction: this.sendDataNull(this.AutreInfraction),
+                    Race: this.sendDataNull(this.Race),
                     Taille: this.Taille,
                     Poids: this.Poids,
-                    Yeux: this.Yeux,
-                    Marques: this.Marques,
-                    CD: this.CD,
+                    Yeux: this.sendDataNull(this.Yeux),
+                    Marques: this.sendDataNull(this.Marques),
+                    CD: this.sendDataNull(this.CD),
                 });
                 const myHeaders = new Headers();
                 myHeaders.append('Content-Type', 'application/json');
