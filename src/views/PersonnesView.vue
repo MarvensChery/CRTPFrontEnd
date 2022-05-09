@@ -47,12 +47,12 @@
                     <td>{{ personne.NomFamille }}</td>
                     <td>{{ personne.Prenom1 }}</td>
                     <td v-if="personne.Prenom2 !== null">{{ personne.Prenom2 }}</td>
-                    <td v-else>Null</td>
+                    <td v-else></td>
                     <td>{{ personne.TypePersonne }}</td>
                     <td class="borderNone" >
                       <i class="fas fa-pen"
                       v-on:click="goPageModifierPersonnes(personne.IdPersonne)"
-                      v-on:keydown="goPageModifierPersonnes(Personne.IdPerson)"></i>
+                      v-on:keydown="goPageModifierPersonnes(personne.IdPersonne)"></i>
                     </td>
                   </tr>
                 </tbody>
