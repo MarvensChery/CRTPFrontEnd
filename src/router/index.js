@@ -34,13 +34,13 @@ const routes = [
         component: PersonnesView,
     },
     {
-        path: '/condition/:Idcondition',
-        name: 'conditionViewModif',
+        path: '/personne/:idPersonne/ippe/:idIppe/condition',
+        name: 'ajoutConditionView',
         component: ConditionView,
     },
     {
-        path: '/condition/:Idpersonne',
-        name: 'conditionViewAdd',
+        path: '/condition/:idCondition',
+        name: 'conditionView',
         component: ConditionView,
     },
     {

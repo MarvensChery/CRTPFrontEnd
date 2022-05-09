@@ -1,6 +1,6 @@
 <template>
 <div calss="section">
-        <div v-if="this.$route.params.Idpersonne" class="container box my-6">
+        <div v-if="this.$route.params.idPersonne" class="container box my-6">
         <h2 class="title has-text-info-dark">AJOUT D'UNE CONDITION À RESPECTER</h2>
         <form class="row columns is-multiline">
             <!--Condition-->
@@ -61,7 +61,7 @@
             </div>
         </form>
     </div>
-    <div v-if="this.$route.params.Idcondition" class="container box my-6">
+    <div v-if="this.$route.params.idCondition" class="container box my-6">
         <h2 class="title has-text-info-dark">MODIFICATION D'UNE CONDITION</h2>
         <form class="row columns is-multiline">
             <!--Condition-->
@@ -99,7 +99,7 @@
                 <input id="retour" class="button is-fullwidth is-info" type="button" value="Retour">
             </div>
             <div class="column is-3 ">
-        <input v-on:click="boutonmodifier()" id="modifier" class="button is-fullwidth is-info"
+        <input v-on:click="modifier()" id="modifier" class="button is-fullwidth is-info"
         type="button"
                 value="Modifier">
             </div>
@@ -115,7 +115,7 @@
 </template>
 
 <script>
-
+import { svrURL } from '@/constantes';
 // noinspection JSUnusedGlobalSymbols
 export default {
     name: 'ConditionView',
@@ -123,7 +123,6 @@ export default {
         return {
             key: '',
             Condition: [],
-            info: [],
             input1: '',
             input2: '',
             input3: '',
@@ -133,89 +132,69 @@ export default {
         this.ReturnCondition();
     },
     methods: {
+        sendDataNull(str) {
+            if (str === '') {
+                return null;
+            }
+            return str;
+        },
         async ReturnCondition() {
-            if (this.$route.params.Idcondition) {
-                const reponse = await fetch(`http://localhost:3000/conditions/${this.$route.params.Idcondition}`);
-                if (reponse.ok) {
-                    this.Condition = await reponse.json();
-                }
-            } else {
-                const reponse = await fetch(`http://localhost:3000/conditions/returnidippe/${this.$route.params.Idpersonne}`);
+            if (this.$route.params.idCondition) {
+                const reponse = await fetch(`${svrURL}/conditions/${this.$route.params.idCondition}`);
                 if (reponse.ok) {
                     this.Condition = await reponse.json();
                 }
             }
         },
-        async boutonmodifier() {
-            const settings = {
+        async modifier() {
+            const data = JSON.stringify({
+                IdPersonne: this.Condition[0].IdPersonne,
+                IdIppe: this.Condition[0].IdIppe,
+                Libelle: this.sendDataNull(this.Condition[0].Libelle),
+                input1: this.sendDataNull(this.input1.trim()),
+                input2: this.sendDataNull(this.input2.trim()),
+                input3: this.sendDataNull(this.input3.trim()),
+            });
+            const response = await fetch(`${svrURL}/conditions/${this.Condition[0].IdCondition}`, {
                 method: 'PUT',
                 headers: {
                     Accept: 'application/json',
+                    'Content-Type': 'application/json',
                 },
-            };
-            if (this.Condition[0].Libelle.replace(/\s/g, '') === 'Avoircommeadressele') {
-                await fetch(`http://localhost:3000/conditions/updateconditionadresse/${this.Condition[0].IdPersonne}/${this.input1}`, settings);
-                alert('condition modifier');
-            } else if (this.Condition[0].Libelle.replace(/\s/g, '') === 'Nepasentrerencontactavec') {
-                await fetch(`http://localhost:3000/conditions/updateconditionvictime/${this.$route.params.Idcondition}/${this.input1}`, settings);
-                alert('condition modifier');
-            } else if (this.Condition[0].Libelle.replace(/\s/g, '') === 'Nepasfréquenter') {
-                await fetch(`http://localhost:3000/conditions/updatefrequentation/${this.$route.params.Idcondition}/${this.input1}`, settings);
-                alert('condition modifier');
-            } else if (this.Condition[0].Libelle.replace(/\s/g, '') === 'Doitdemeureràcetendroitentre') {
-                await fetch(`http://localhost:3000/conditions/updateheure/${this.$route.params.Idcondition}/${this.input2}/${this.input3}`, settings);
-                alert('condition modifier');
+                body: data,
+            });
+            await response.json();
+            if (response.ok) {
+                alert('oui');
             } else {
-                alert('cette condition peut seulement etre supprimer');
+                alert('non');
             }
         },
         async boutonajouter() {
-            const settings = {
+            const data = JSON.stringify({
+                IdPersonne: this.$route.params.idPersonne,
+                IdIppe: this.$route.params.idIppe,
+                Libelle: this.sendDataNull(this.key),
+                input1: this.sendDataNull(this.input1.trim()),
+                input2: this.sendDataNull(this.input2.trim()),
+                input3: this.sendDataNull(this.input3.trim()),
+                Option: this.sendDataNull(this.key.trim()),
+            });
+            const response = await fetch(`${svrURL}/conditions`, {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
+                    'Content-Type': 'application/json',
                 },
-            };
-            if (this.key.replace(/\s/g, '') === 'Doitgarderlapaixetavoirbonneconduite' || this.key.replace(/\s/g, '') === "Aucuneconsommationd'alcooloudedroguenonprescrite") {
-                const ajout = await fetch(`http://localhost:3000/conditions/ajoutercondition/${this.$route.params.Idpersonne}/${this.Condition[0].IdIPPE}/${this.key}`, settings);
-                if (ajout.ok) {
-                    alert('Condition Ajouter');
-                } else {
-                    console.error('ERROR');
-                }
-            } else if (this.key.replace(/\s/g, '') === 'Avoircommeadressele') {
-                const ajout = await fetch(`http://localhost:3000/conditions/ajouterconditionadresse/${this.Condition[0].IdIPPE}/${this.key}/${this.$route.params.Idpersonne}/${this.input1}`, settings);
-                if (ajout.ok) {
-                    alert('Condition Ajouter');
-                } else {
-                    console.error('ERROR');
-                }
-            } else if (this.key.replace(/\s/g, '') === 'Nepasentrerencontactavec') {
-                const ajout = await fetch(`http://localhost:3000/conditions/ajouterconditionvictime/${this.$route.params.Idpersonne}/${this.Condition[0].IdIPPE}/${this.key}/${this.input1}`, settings);
-                if (ajout.ok) {
-                    alert('Condition Ajouter');
-                } else {
-                    console.error('ERROR');
-                }
-            } else if (this.key.replace(/\s/g, '') === 'Nepasfréquenter') {
-                const ajout = await fetch(`http://localhost:3000/conditions/ajouterconditionfrequentation/${this.$route.params.Idpersonne}/${this.Condition[0].IdIPPE}/${this.key}/${this.input1}`, settings);
-                if (ajout.ok) {
-                    alert('Condition Ajouter');
-                } else {
-                    console.error('ERROR');
-                }
-            } else if (this.key.replace(/\s/g, '') === 'Doitdemeureràcetendroitentre') {
-                const ajout = await fetch(`http://localhost:3000/conditions/ajouterconditionheure/${this.$route.params.Idpersonne}/${this.Condition[0].IdIPPE}/${this.key}/${this.input2}/${this.input3}`, settings);
-                if (ajout.ok) {
-                    alert('Condition Ajouter');
-                } else {
-                    console.error('ERROR');
-                }
+                body: data,
+            });
+            await response.json();
+            if (response.ok) {
+                alert('oui');
             } else {
-                alert('cette condition peut seulement etre supprimer');
+                alert('non');
             }
         },
-
         async boutonsupprimer() {
             const settings = {
                 method: 'DELETE',
@@ -223,10 +202,12 @@ export default {
                     Accept: 'application/json',
                 },
             };
-            const reponse = await fetch(`http://localhost:3000/conditions/deletecondition/${this.$route.params.Idcondition}`, settings);
+            const reponse = await fetch(`${svrURL}/conditions/${this.$route.params.idCondition}`, settings);
 
             if (reponse.ok) {
-                alert('condition supprimer');
+                setTimeout(() => this.$router.push({ name: 'modifIPPEView' }), 2000);
+            } else {
+                alert('error');
             }
         },
     },
