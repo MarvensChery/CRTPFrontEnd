@@ -1,13 +1,7 @@
 <template>
   <div class="container box my-6">
-    <h2 class="title has-text-info-dark" v-if="IdCondition === undefined">
-      AJOUT D'UNE CONDITION À RESPECTER
-    </h2>
-    <h2 class="title has-text-info-dark" v-if="IdCondition !== undefined">
-      MODIFICATION D'UNE CONDITION À RESPECTER
-    </h2>
-    <span class="has-text-weight-bold is-6 has-text-success" v-if="message !== ''
-    ">
+    <h2 class="title has-text-info-dark">{{title}}</h2>
+    <span class="has-text-weight-bold is-6 has-text-success" v-if="message !== ''">
       <i class="fa-solid fa-circle-check"></i>&nbsp;{{message}}</span>
     <span class="has-text-weight-bold is-6 has-text-danger" v-if="messageError !== ''
     ">
@@ -18,8 +12,7 @@
         <div class="field" v-if="IdCondition !== undefined">
           <div class="columns" v-if="data !== ''">
             <label for="Condition" class="label column is-1">Condition :</label>
-            <label for="Condition à modifier" class="column is-5"
-              >{{ Libelle }}
+            <label for="Condition à modifier" class="column is-5">{{ Libelle }}
             </label>
             <input
               id="inputconditions"
@@ -78,7 +71,7 @@
             </div>
             <input
               id="inputconditions1"
-              class="column input is-6"
+              class="column input is-5"
               v-model="conditions1"
               type="text"
               :placeholder="placeholderChange"
@@ -94,9 +87,8 @@
               :class="[option === '7' ? '' : 'is-hidden']"
               @click="masquerMessage"
             />
-            <span id="span1" :class="[option === '7' ? '' : 'is-hidden']"
-              >&nbsp;ET&nbsp;
-            </span>
+            <label for="inputconditions3" :class="[option === '7' ? '' : 'is-hidden']"
+            class="label has-text-centered column is-narrow is-size-6">Et</label>
             <input
               id="inputconditions3"
               class="column input is-2 has-text-centered"
@@ -230,6 +222,12 @@ export default {
         };
     },
     computed: {
+        title() {
+          if (this.IdCondition !== undefined) {
+            return "MODIFICATION D'UNE CONDITION À RESPECTER";
+          }
+          return "AJOUT D'UNE CONDITION À RESPECTER";
+        },
         //  Change la class de l'input dépendemment des données reçus
         changerStyle() {
             if (this.list2.includes(this.Libelle)) {
@@ -441,6 +439,13 @@ body {
 #wrapper {
   flex: 1;
 }
+
+#inputconditions1 {
+        margin-left:30px;
+    }
+#inputconditions2 {
+        margin-left:30px;
+    }
 
 select option[value="1"] {
   color: #999999;
