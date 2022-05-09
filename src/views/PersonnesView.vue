@@ -33,7 +33,9 @@
                     <th class="is-info">Prenom2</th>
                     <th class="is-info">Categorie</th>
                     <th class="borderNone">
-                      <i class="fas fa-user-plus"></i>
+                        <router-link to="/personne">
+                            <i class="fas fa-user-plus"></i>
+                        </router-link>
                     </th>
                   </tr>
                 </thead>
