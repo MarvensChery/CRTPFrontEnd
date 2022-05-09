@@ -1,94 +1,52 @@
-# Application CRTP
-## Projet Client - Application Web
+# Projet CRPQ
+## Application Cliente Web
 
-### Project setup
+
 Projet de consultation de base de données pour les étudiants de Technique policière.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Dans le cadre du cours de Projet 2 - 4D1, le projet consiste à réaliser à développer une application capable de simuler l'outil d'interrogation de base de données à la disposition d'un agent de l'ordre lors de ses interventions.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Cadre d'utilisation
+Cette application servira comme outil de formation auz étudiants en Technique policière. Il permettra à l'étudiant de:
+- Utiliser un outil de recherche de base de données
+- Se familiariser avec les informations récoltées lors d'une interpellation
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-**Le PO :** Marc Levasseur
-
-**Le Srum Master :** David Déchaine
+## Collaborateurs
+**Ce projet est développé par:**
+* Dan Bagalwa
+* David Déchaine
+* Charles-Étienne Doucet
+* Ryma Merrouchi
+* Kassem Kandil
+* Nathan Lamy
+* Salah Eddine Ouamalich
+* Tran Nguyen Johnny Huy
+**PO :** Marc Levasseur.
 
 ## Utilisation
-Téléchargez les dépendances : `npm i` (faire la même chose dans backend)
-
-Lancez le serveur avec : `npm run start`(faire la même chose dans backend(`npm run serve`))
-
-Ouvrir: http://localhost:5000/
-
-Pour se connecter en tant qu'**étudiant**: 
-                {
-                    Identifiant: e1233772
-                    mot de passe: bonjour
-                }
-
-Pour se connecter en tant qu'enseignant: 
-                {
-                    Identifiant: e1230986
-                    mot de passe: soleil
-                }
-
-Appuyez sur les 3 ligne en haut à droite pour ouvrir le menu
-Appuyez sur IPPE-Recherche de personnes
-Entrez les informations suivante: 
-                {
-                    Nom : Ducharme
-                    Pronom1 : Benoit
-                    Sexe: masculain
-                    Date de Naissance : 31/08/1975
-                }
-Appuyez sur Submit;
-
-
+Installation de toutes les dependances:
 ```
 npm install
 ```
 
-    Vous pouvez désormais ajouter une personne
-
-Allez sur http://localhost:5000/personnes?=5 :
-
-### Lints and fixes files
+Détection des erreurs de lint:
 ```
 npm run lint
 ```
 
+Correction des erreurs de lint:
+```
+npm run fix
+```
 
-## Les Routes
+Compilation et lancement de l'application en développement:
+```
+npm run serve
+```
 
-Get d’un événement IPPE
-
-
-    URL: /personne/{idPersonne}/ippe
-
-
-Ajout/Modification/suppresion dune personne
-
-
-    URL: /personne/{idPersonne}
-
-
-Ajout/Modification d’une adresse de personne
+Compilation de l'application en production:
+```
+npm run build
+```
 
 
-    URL: /adressePersonne/{idPersonne}
-
-
-Ajout/Modification d’une description de personne
-
-
-    URL: /descriptionPersonne/{idPersonne}
