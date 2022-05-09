@@ -202,56 +202,10 @@ export default {
             if (this.anneError === false && this.moisError === false
         && this.jourError === false && this.nomError === false
         && this.prenomError === false && this.sexeError === false) {
-                console.log('yo');
                 this.$root.$data.erreurIPPE = false;
                 this.$router.push(`/reponseIPPE/${this.nom}/${this.prenom1}/${this.prenom2}/${this.sexe}/${this.annee}-${this.mois}-${this.jour}`);
             }
         },
-
-        // // S'occupe de l'affichage des messages d'erreur
-        // checkMandatoryInput(nom, prenom1, annee, mois, jour) {
-        //     // Identification de l'emplacement des messages
-        //     const msgNom = document.getElementById('nomError');
-        //     const msgPrenomUn = document.getElementById('prenom1Error');
-        //     const msgJour = document.getElementById('jourError');
-        //     const msgMois = document.getElementById('moisError');
-        //     const msgAnnee = document.getElementById('anneeError');
-        //     // Check la validité des champs
-        //     const anneeValid = isAnneeValide(annee);
-        //     const moisValid = isMoisValide(mois);
-        //     const jourValid = isJourValide(jour);
-        //     // Retourne true s'il n'y a pas d'erreur
-        //     let errorFalse = true;
-        //     // Condition champs vides
-        //     if (nom === '') {
-        //         msgNom.classList.remove('is-hidden');
-        //         errorFalse = false;
-        //     } else { msgNom.classList.add('is-hidden'); }
-
-        //     if (prenom1 === '') {
-        //         msgPrenomUn.classList.remove('is-hidden');
-        //         errorFalse = false;
-        //     } else { msgPrenomUn.classList.add('is-hidden'); }
-
-        //     // s'assure que les dates entrees sont conforme
-        //     if (jour === '' || !jourValid) {
-        //         msgJour.classList.remove('is-hidden');
-        //         errorFalse = false;
-        //     } else { msgJour.classList.add('is-hidden'); }
-
-        //     if (mois === '' || !moisValid) {
-        //         msgMois.classList.remove('is-hidden');
-        //         errorFalse = false;
-        //     } else { msgMois.classList.add('is-hidden'); }
-
-    //     if (annee === '' || !anneeValid) {
-    //         msgAnnee.classList.remove('is-hidden');
-    //         errorFalse = false;
-    //     } else {
-    //         msgAnnee.classList.add('is-hidden');
-    //     }
-    //     return errorFalse;
-    // },
     },
 };
 </script>
