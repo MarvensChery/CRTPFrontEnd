@@ -4,7 +4,8 @@
         <h1 class="has-text-black " style="height:135px; text-align:center;
         font-size: 24px; padding-top: 5%;" >
             <b>
-                <u>MODIFICATION D'UNE RÉPONSE OBJET</u>
+                <u v-if="isNaN(this.$route.params.idObjet)">AJOUT D'UNE RÉPONSE OBJET</u>
+                <u v-else>MODIFICATION D'UNE RÉPONSE OBJET</u>
             </b>
         </h1>
         <br>
