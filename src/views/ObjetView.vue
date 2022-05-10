@@ -3,8 +3,8 @@
       <form id="formulaireAjouter" @submit.prevent="handler($event)">
         <h1 class="has-text-black " style="height:135px; text-align:center;
         font-size: 24px; padding-top: 5%"><b>
-            <u v-if="idArme!==-1">MODIFICATION D'UNE RÉPONSE ARME À FEU</u>
-            <u v-else>AJOUT D'UNE RÉPONSE ARME À FEU</u></b></h1>
+            <u v-if="idObjet!==-1">MODIFICATION D'UNE RÉPONSE OBJET</u>
+            <u v-else>AJOUT D'UNE RÉPONSE OBJET</u></b></h1>
           <div class="block has-text-centered has-background-danger" v-if="errorMessage!== ''">
               <p><strong class="has-text-white">{{ this.errorMessage }}</strong></p>
           </div>
@@ -14,11 +14,11 @@
         <div class="box">
             <div class="columns is-centered">
                 <div class="column is-half">
-                    <div class="field" v-if="idArme!==-1">
-                            <label for="idArme" class="label is-hidden">idArme</label>
+                    <div class="field" v-if="idObjet!==-1">
+                            <label for="idObjet" class="label is-hidden">idObjet</label>
                             <div class="control">
-                                <input id="idArme" class="input is-hidden" type="number"
-                                       placeholder="idArme" name="idArme" v-model="idArme" readonly>
+                                <input id="idObjet" class="input is-hidden" type="number"
+                                        name="idObjet" v-model="idObjet" readonly>
                         </div>
                     </div>
                     <div class="field">
@@ -26,7 +26,7 @@
                         <div class="control has-icons-left has-icons-right">
                             <input id="noSerie" class="input" type="text" name="noSerie"
                             placeholder="Numéro de série" required
-                            v-model="arme.noSerie"/>
+                            v-model="objet.noSerie"/>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
@@ -39,7 +39,7 @@
                         <div class="control has-icons-left has-icons-right">
                             <input id="marque" class="input" type="text" name="marque"
                             placeholder="Marque"
-                            v-model="arme.marque" required/>
+                            v-model="objet.marque" required/>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
@@ -48,11 +48,11 @@
                             *Champ obligatoire : seulement des lettres et '-' sont valides</p>
                     </div>
                     <div class="field">
-                        <label for="calibre" class="label">Calibre</label>
+                        <label for="modele" class="label">Modèle</label>
                         <div class="control has-icons-left has-icons-right">
-                            <input id="calibre" class="input" type="text" name="calibre"
-                            placeholder="Calibre" required
-                            v-model="arme.calibre"/>
+                            <input id="modele" class="input" type="text" name="modele"
+                            placeholder="Modèle" required
+                            v-model="objet.modele"/>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
@@ -61,21 +61,30 @@
                             *Champ obligatoire : seulement des lettres et '-' sont valides</p>
                     </div>
                     <div class="field">
-                        <label for="typeArme" class="label">Type d'arme</label>
+                        <label for="typeObjet" class="label">Type d'objet</label>
                         <div class = "control">
-                            <select id="typeArme" class="select" name="typeArme" required
-                                    v-model="arme.typeArme">
-                            <option></option>
-                            <option>Révolver</option>
-                            <option>Pistolet</option>
-                            <option>Carabine</option>
-                            <option>Fusil</option>
+                            <select id="typeObjet" class="select" name="typeObjet" required
+                                    v-model="objet.typeObjet">
+                            <option value="" disabled selected></option>
+                            <option value="RA" id="RA">RA Appareil de son / radio
+                             / haut-parleur</option>
+                            <option value="BI" id="BI">BI Bicyclette</option>
+                            <option value="EB" id="EB">EB Équipement de bureau</option>
+                            <option value="EP" id="EP">EP Équipement photo / vidéo</option>
+                            <option value="MO" id="MO">MO Machinerie / outils</option>
+                            <option value="OR" id="OR">OR Ordinateur
+                             / Équipement informatique</option>
+                            <option value="TA" id="TA">TA Tablette informatique
+                             (Ipad et autres)</option>
+                            <option value="TL" id="TL">TL Téléphone cellulaire</option>
+                            <option value="AU" id="AU">AU Autres articles</option>
                             </select>
                         </div>
                     </div>
                     <div class="field" style="padding-bottom: 20px">
                     <label for="NoEvenement" class="label">Numéro d'évenement</label>
-                    <div id="NoEvenement" class="columns is-mobile is-multiline is-centered">
+                    <div id="NoEvenement" class="columns is-mobile is-multiline is-centered"
+                         style="padding-top: 10px; padding-left: 10px">
                         <div class="field has-addons">
                             <div class="select">
                                 <select id="NoCours" name="NoCours" required
@@ -121,20 +130,19 @@
                     <div class="buttons">
                         <input type="submit" class="button has-text-weight-bold is-link"
                                id="retour" value="Retour"
-                               @click.prevent="this.$router.push('/armes')">
+                               @click.prevent="this.$router.push('/objets')">
                         <input  type="submit" class="button has-text-weight-bold is-primary"
                                 id="modifier"
                                 value="Modifier" @click="setEvent('modifier')"
-                                v-if="idArme !==-1">
+                                v-if="idObjet !==-1">
                         <input type="reset" class="button has-text-weight-bold is-warning"
-                                id="annuler" @click="resetVariable" value="Annuler">
+                               id="annuler" @click="resetVariable" value="Annuler">
                         <input class="button has-text-weight-bold is-primary" type="submit"
                                id="ajouter" value="Ajouter" @click="setEvent('ajouter')"
-                               v-if="idArme===-1">
+                               v-if="idObjet===-1">
                         <input class="js-modal-trigger button has-text-weight-bold is-danger"
                                 data-target="modal-js-example" @click.prevent="showModal = true"
-                                id="suppr"
-                                v-if="idArme !==-1" value="Supprimer">
+                                id="suppr" value="Supprimer" v-if="idObjet !==-1">
                     </div>
                 </div>
             </div>
@@ -152,9 +160,10 @@
                     Voulez-vous vraiment supprimer cette entrée?
                 </section>
                 <footer class="modal-card-foot">
-                    <input class="button has-text-weight-bold is-danger" id="supprimer"
-                            @click.prevent="handlerSupprimer" value="Supprimer">
-                    <input class="button" @click.prevent="showModal = false" value="Retour">
+                    <button class="button has-text-weight-bold is-danger" id="supprimer"
+                            @click.prevent="handlerSupprimer">Supprimer
+                    </button>
+                    <button class="button" @click.prevent="showModal = false">Retour</button>
                 </footer>
             </div>
         </div>
@@ -167,19 +176,19 @@
 import { svrURL } from '@/constantes';
 
 export default {
-    name: 'ArmeView',
+    name: 'objetView',
     data() {
         return {
-            idArme: -1,
+            idObjet: -1,
             btnCliquee: null,
             loaded: false,
             errorMessage: '',
             successMessage: '',
-            arme: {
+            objet: {
                 noSerie: '',
                 marque: '',
-                calibre: '',
-                typeArme: '',
+                modele: '',
+                typeObjet: '',
             },
             noEvenement: {
                 NoCours: '',
@@ -214,7 +223,7 @@ export default {
                 } else if (this.btnCliquee === 'modifier') {
                     method = 'PUT';
                 }
-                fetch(`${svrURL}/armes`, { method, body: formData })
+                fetch(`${svrURL}/objets`, { method, body: formData })
                     .then((res) => res.json())
                     .then((resJson) => {
                         if (resJson.success) {
@@ -246,25 +255,25 @@ export default {
             this.btnCliquee = null;
             this.errorMessage = '';
             this.successMessage = '';
-            this.getArme();
+            this.getObjet();
         },
         setId() {
-            if (this.$route.params.idArme !== undefined) {
-                this.idArme = this.$route.params.idArme;
+            if (this.$route.params.idObjet !== undefined) {
+                this.idObjet = this.$route.params.idObjet;
             }
             this.loaded = true;
         },
-        getArme() {
+        getObjet() {
             this.setId();
-            if (this.idArme !== -1) {
-                fetch(`${svrURL}/armes/${this.idArme}`)
+            if (this.idObjet !== -1) {
+                fetch(`${svrURL}/objets/${this.idObjet}`)
                     .then((res) => res.json())
                     .then((resJson) => {
                         this.errorMessage = resJson.message;
-                        this.arme.noSerie = resJson[0].NoSerie;
-                        this.arme.calibre = resJson[0].Calibre;
-                        this.arme.marque = resJson[0].Marque;
-                        this.arme.typeArme = resJson[0].TypeArme;
+                        this.objet.noSerie = resJson[0].NoSerie;
+                        this.objet.modele = resJson[0].Modele;
+                        this.objet.marque = resJson[0].Marque;
+                        this.objet.typeObjet = resJson[0].TypeObjet;
                         const noEvenement = resJson[0].NoEvenement.split('-');
                         const AAMMJJ = [];
                         AAMMJJ.push(noEvenement[1].slice(0, 2));
@@ -277,12 +286,12 @@ export default {
                             this.noEvenement.sequenceChiffres] = noEvenement;
                     })
                     .catch(() => {
-                        this.errorMessage = 'Cette arme n\'est pas répertoriée';
+                        this.errorMessage = 'Cet objet n\'est pas répertorié';
                     });
             }
         },
         handlerSupprimer() {
-            fetch(`${svrURL}/armes/${this.idArme}`, { method: 'DELETE' })
+            fetch(`${svrURL}/objets/${this.idObjet}`, { method: 'DELETE' })
                 .then((res) => res.json())
                 .then((resJson) => {
                     if (resJson.success) {
@@ -298,7 +307,7 @@ export default {
         },
     },
     mounted() {
-        this.getArme();
+        this.getObjet();
     },
 };
 </script>
@@ -306,8 +315,9 @@ export default {
 <style scoped>
 html, body {
     min-height: 100%;
-    }
-    body, div, form, input, select, textarea, label {
+}
+
+body, div, form, input, select, textarea, label {
     padding: 0;
     margin: 0;
     outline: none;
@@ -315,29 +325,31 @@ html, body {
     font-size: 14px;
     color: #666;
     line-height: 22px;
-    }
+}
 
-    .center {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 
-      }
+}
 
-    .testbox {
+.testbox {
     display: flex;
     justify-content: center;
     align-items: center;
     height: inherit;
     padding: 20px;
-    }
-    form {
+}
+
+form {
     width: 100%;
     padding: 20px;
     border-radius: 6px;
     background: #fff;
-    }
-    .banner {
+}
+
+.banner {
     position: relative;
     height: 135px;
     width: 135px;
@@ -347,82 +359,99 @@ html, body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    float:left;
-    }
-    .banner::after {
+    float: left;
+}
+
+.banner::after {
     content: "";
     background-color: rgba(0, 0, 0, 0.2);
     position: absolute;
     width: 100%;
     height: 100%;
-    }
-    input, select, textarea {
+}
+
+input, select, textarea {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
-    }
-    input {
+}
+
+input {
     width: calc(100% - 10px);
     padding: 5px;
-    }
-    textarea {
+}
+
+textarea {
     width: calc(100% - 12px);
     padding: 5px;
-    }
-    .item:hover p,
-    .item:hover i,
-    .question:hover p,
-    .question label:hover,
-    input:hover::placeholder select:hover::placeholder {
+}
+
+.item:hover p,
+.item:hover i,
+.question:hover p,
+.question label:hover,
+input:hover::placeholder select:hover::placeholder {
     color: #008bcc;
-    }
-    .item input:hover, .item select:hover, .item textarea:hover {
+}
+
+.item input:hover, .item select:hover, .item textarea:hover {
     border: 1px solid transparent;
     box-shadow: 0 0 3px 0 #008bcc;
     color: #008bcc;
-    }
-    .item {
+}
+
+.item {
     position: relative;
     margin: 10px 0;
-    }
-    .item span {
+}
+
+.item span {
     color: red;
-    }
-    input[type="date"]::-webkit-inner-spin-button {
+}
+
+input[type="date"]::-webkit-inner-spin-button {
     display: none;
-    }
-    .item i, input[type="date"]::-webkit-calendar-picker-indicator {
+}
+
+.item i, input[type="date"]::-webkit-calendar-picker-indicator {
     position: absolute;
     font-size: 20px;
     color: #008bcc;
-    }
-    .item i {
+}
+
+.item i {
     right: 1%;
     top: 30px;
     z-index: 1;
-    }
-    [type="date"]::-webkit-calendar-picker-indicator {
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
     right: 1%;
     z-index: 2;
     opacity: 0;
     cursor: pointer;
-    }
-    input[type=radio], input[type=checkbox]  {
+}
+
+input[type=radio], input[type=checkbox] {
     display: none;
-    }
-    label.radio {
+}
+
+label.radio {
     position: relative;
     display: inline-block;
     margin: 5px 20px 15px 0;
     cursor: pointer;
-    }
-    .question span {
+}
+
+.question span {
     margin-left: 30px;
-    }
-    .question-answer label {
+}
+
+.question-answer label {
     display: block;
-    }
-    label.radio:before {
+}
+
+label.radio:before {
     content: "";
     position: absolute;
     left: 0;
@@ -430,11 +459,13 @@ html, body {
     height: 17px;
     border-radius: 50%;
     border: 2px solid #ccc;
-    }
-    input[type=radio]:checked + label:before, label.radio:hover:before {
+}
+
+input[type=radio]:checked + label:before, label.radio:hover:before {
     border: 2px solid #008bcc;
-    }
-    label.radio:after {
+}
+
+label.radio:after {
     content: "";
     position: absolute;
     top: 6px;
@@ -446,15 +477,18 @@ html, body {
     border-right: none;
     transform: rotate(-45deg);
     opacity: 0;
-    }
-    input[type=radio]:checked + label:after {
+}
+
+input[type=radio]:checked + label:after {
     opacity: 1;
-    }
-    .btn-block {
+}
+
+.btn-block {
     margin-top: 10px;
     text-align: center;
-    }
-    button {
+}
+
+button {
     width: 130px;
     padding: 10px;
     border: none;
@@ -463,24 +497,30 @@ html, body {
     font-size: 16px;
     color: #fff;
     cursor: pointer;
-    }
-    button:hover {
+}
+
+button:hover {
     background: #008bcc;
-    }
-    @media (min-width: 568px) {
+}
+
+@media (min-width: 568px) {
     .name-item, .city-item {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
+
     .name-item input, .name-item div {
-    width: calc(50% - 20px);
+        width: calc(50% - 20px);
     }
+
     .name-item div input {
-    width:97%;}
+        width: 97%;
+    }
+
     .name-item div label {
-    display:block;
-    padding-bottom:5px;
+        display: block;
+        padding-bottom: 5px;
     }
-    }
+}
 </style>

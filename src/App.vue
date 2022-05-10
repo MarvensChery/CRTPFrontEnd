@@ -1,6 +1,6 @@
 <template>
     <div>
-        <MenuProfesseurView/>
+        <MenuProfesseurView v-if="Professeur === true"/>
         <HeaderView/>
         <router-view/>
     </div>
@@ -14,9 +14,9 @@ import HeaderView from '@/components/HeaderView.vue';
 export default {
     name: 'App',
     components: { MenuProfesseurView, HeaderView },
-    // this.$root.$data.erreurIPPE
     data() {
         return {
+            Professeur: true,
             erreurIPPE: false,
         };
     },

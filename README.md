@@ -17,6 +17,12 @@ Cette application servira comme outil de formation auz étudiants en Technique p
 * David Déchaine
 * Charles-Étienne Doucet
 * Ryma Merrouchi
+
+* Amzert, Karim - E2069838
+* Cambray, Bastien - E1920614
+* Khendaf, Bilal - E1730934
+* Phung, Truong Sang Mario - E2066576
+
 * Kassem Kandil
 * Nathan Lamy
 * Salah Eddine Ouamalich
@@ -48,5 +54,14 @@ Compilation de l'application en production:
 ```
 npm run build
 ```
+### Links
+Page de base : 
+http://localhost:8080/
 
+Menu étudiant :
+http://localhost:8080/etudiant
 
+Paga ajout d'une réponse objet, valeurs & armes :
+- http://localhost:8080/objet
+- http://localhost:8080/valeur
+- http://localhost:8080/arme
