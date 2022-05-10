@@ -97,6 +97,8 @@ const routes = [
         path: '/objets',
         name: 'objetsView',
         component: ObjetsView,
+    },
+    {
         path: '/reponseIPPE',
         name: 'reponseIPPEView',
         component: ReponseIPPEView,

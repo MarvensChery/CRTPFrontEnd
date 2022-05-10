@@ -114,14 +114,6 @@ function isHeightValid(taille) {
 function isWeightValid(poid) {
     return /^[0-9]{2,3}$/.test(poid);
 }
-// Check si l'inputs du nom contient les bons characteres
-function checkNomInput(str) {
-    return /^[a-zA-Z\- ÄäÖöÉéÈèÜüÊêÛûÎî]+$/.test(str);
-}
-// Check si l'inputs des Prenom contiennent les bons characteres
-function checkPrenomInput(str) {
-    return /^[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî]+$/.test(str);
-}
 
 // Check si l'inputs du nom et Prenom contiennent les bons characteres
 function checkNomPrenomInput(str) {
@@ -151,4 +143,6 @@ export {
     checkPrenomInput,
     chekHour,
     verifieProvince,
+    checkNomPrenomInput,
+    verifieAdresse2,
 };
