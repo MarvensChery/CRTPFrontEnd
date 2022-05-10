@@ -37,6 +37,18 @@ function isDateValide(annee, mois, jour) {
 function capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
+// Pour valider l'heure
+function chekHour(str) {
+    return /^\d{1,2}:\d{2}([ap]m)?$/.test(str);
+}
+// Check si l'inputs du nom contient les bons characteres
+function checkNomInput(str) {
+    return /^[a-zA-Z\- ÄäÖöÉéÈèÜüÊêÛûÎî]+$/.test(str);
+}
+// Check si l'inputs des Prenom contiennent les bons characteres
+function checkPrenomInput(str) {
+    return /^[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî]+$/.test(str);
+}
 // Vérifie que le numéro de téléphone est juste 10 chiffres
 function verifieNumTel(str) {
     return /^[0-9]{10}$/.test(str);
@@ -59,9 +71,9 @@ function verifieAdresse2(str) {
 function verifieVille(str) {
     return /^[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî-\s]{0,50}$/.test(str);
 }
-// Vérifie que la province a un maximum de 2 caracthères
+// Vérifie que la province a un maximum de 50 caracthères
 function verifieProvince(str) {
-    return /^[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî-\s]{2}$/.test(str);
+    return /^[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî-\s]{0,50}$/.test(str);
 }
 // Vérifie que le code postal est une lettre, un chiffre,
 // une lettre, un espace, un chiffre, une lettre, un chiffre
@@ -137,7 +149,6 @@ export {
     verifieGiletPantalonAutreVetement,
     checkNomInput,
     checkPrenomInput,
-    checkNomPrenomInput,
+    chekHour,
     verifieProvince,
-    verifieAdresse2,
 };
