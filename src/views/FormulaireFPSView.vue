@@ -307,27 +307,27 @@ export default {
         return {
             // Lien de chaque input avec un v-model
             numeroFPS: '',
-            Violent: '',
-            EchappeG: '',
-            Suicidaire: '',
-            Desequilibre: '',
-            Contagieux: '',
+            Violent: false,
+            EchappeG: false,
+            Suicidaire: false,
+            Desequilibre: false,
+            Contagieux: false,
             Race: '',
             Taille: null,
             Poids: null,
             Yeux: '',
             Marques: '',
-            Violence: '',
-            Fraude: '',
-            ConduiteVehicule: '',
-            IntroEffraction: '',
-            Sexe: '',
-            ArmeOffensive: '',
-            Vol: '',
-            Drogue: '',
-            Mefait: '',
-            Incendie: '',
-            AutreInfraction: '',
+            Violence: false,
+            Fraude: false,
+            ConduiteVehicule: false,
+            IntroEffraction: false,
+            Sexe: false,
+            ArmeOffensive: false,
+            Vol: false,
+            Drogue: false,
+            Mefait: false,
+            Incendie: false,
+            AutreInfraction: false,
             idPersonne: '',
             CD: '',
             IdFPS: '',
@@ -389,35 +389,41 @@ export default {
                     this.CD = data[0].CD;
                     this.IdFPS = data[0].IdFPS;
                 }
+                if (rep.status === 404) {
+                    this.errorMsg = 'Le FPS que vous tentez de rejoindre est introuvable !';
+                    setTimeout(() => this.$router.push('/personnes'), 3000);
+                }
             }
         },
         validation() {
-            let error = 0;
+            // variable qui determine si tous les éléments important sont là
+            let checks = 0;
             this.numeroMSG = '';
             this.tailleMSG = '';
             this.poidMSG = '';
-            // Permet de laisser la taille et poid vide
-            if (this.Poids === null || this.Taille === null) {
+            // Permet de verifier si le num. est valide
+            if (isNumeroValid(this.numeroFPS)) {
+                checks += 1;
+            } else {
+                this.numeroMSG = 'Numéro invalide, il doit être de 6 charactères numériques !';
+            }
+            if (this.Taille === null || this.Taille === '' || isHeightValid(this.Taille)) {
+                checks += 1;
+            } else {
+                this.tailleMSG = 'Taille invalide, il doit être de 3 charactères numériques sans virgule !';
+            }
+            if (this.Poids === null || this.Poids === '' || isWeightValid(this.Poids)) {
+                checks += 1;
+            } else {
+                this.poidMSG = 'Poid invalide, il doit être de 2 ou 3 charactès numérique sans virgule !';
+            }
+            // lorsque les trois éléments non falcultatif sont valide retourne un true
+            if (checks === 3) {
                 return true;
             }
-            if (!isNumeroValid(this.numeroFPS)) {
-                this.numeroMSG = 'Numéro invalide, il doit être de 6 charactères numériques !';
-                error += 1;
-            }
-            if (!isHeightValid(this.Taille)) {
-                this.tailleMSG = 'Taille invalide, il doit être de 3 charactères numériques sans virgule !';
-                error += 1;
-            }
-            if (!isWeightValid(this.Poids)) {
-                this.poidMSG = 'Poid invalide, il doit être de 2 ou 3 charactès numérique sans virgule !';
-                error += 1;
-            }
-            if (error > 0) {
-                error = false;
-            } else {
-                error = true;
-            }
-            return error;
+            // Redirige l'utilisateur vers le formulaires
+            window.scroll(0, 300);
+            return false;
         },
         // Function pour le post FPS
         async postFps() {
