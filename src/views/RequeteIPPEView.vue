@@ -84,14 +84,14 @@
           <label for="mois" class="label">Mois</label>
           <div class="control">
             <input id="mois" class="input" type="number"
-                   placeholder="08" min="1" max="12" v-model="mois">
+                   placeholder="7" min="1" max="12" v-model="mois">
           </div>
         </div>
         <div class="column is-4">
           <label for="jour" class="label">Jours</label>
           <div class="control">
             <input id="jour" class="input" type="number"
-                   placeholder="02" min="1" max="12" v-model="jour">
+                   placeholder="8" min="1" max="12" v-model="jour">
           </div>
         </div>
         <!--VALIDATION ERREUR-->
