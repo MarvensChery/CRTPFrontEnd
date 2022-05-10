@@ -357,6 +357,9 @@
 </template>
 
 <script>
+
+import { svrURL } from '@/constantes';
+
 export default {
     name: 'ReponseIPPEView',
     data() {
@@ -375,8 +378,8 @@ export default {
     methods: {
         async getIppeReponse() {
             const prenom2 = this.$route.params.prenom2 === 'null' ? '' : this.$route.params.prenom2;
-      const rep = await fetch(
-                `http://localhost:3000/ippes/info?nomFamille=${this.$route.params.nomFamille}&prenom1=${this.$route.params.prenom1}&prenom2=${prenom2}&masculin=${this.$route.params.masculin}&dateNaissance=${this.$route.params.dateNaissance}`,
+            const rep = await fetch(
+                `${svrURL}/ippes/info?nomFamille=${this.$route.params.nomFamille}&prenom1=${this.$route.params.prenom1}&prenom2=${prenom2}&masculin=${this.$route.params.masculin}&dateNaissance=${this.$route.params.dateNaissance}`,
             );
             if (rep.ok) {
                 this.reponseIPPE = await rep.json();
