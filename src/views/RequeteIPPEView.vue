@@ -58,8 +58,8 @@
             <div class="select is-fullwidth">
               <select id='sexe' name='sexe' v-model="sexe" required >
                 <option value="" disabled></option>
-                <option value="false">F</option>
-                <option value="true">M</option>
+                <option value="false">Féminin</option>
+                <option value="true">Masculin</option>
               </select>
             </div>
           </div>
@@ -141,12 +141,6 @@ export default {
             annee: '',
             mois: '',
             jour: '',
-            isMoisValide1: '',
-            isJourValide1: '',
-            isAnneeValide1: '',
-            IsPrenom1Valide1: '',
-            IsPrenom2Valide1: '',
-            IsNomValide1: '',
             anneError: false,
             moisError: false,
             jourError: false,
@@ -160,20 +154,17 @@ export default {
     methods: {
     // Fonction qui permet de vérifier si les champs sont valides
         isValid() {
-            this.isAnneeValide1 = isAnneeValide(this.annee);
-            if (this.isAnneeValide1 === false) {
+            if (isAnneeValide(this.annee) === false) {
                 this.anneError = true;
             } else {
                 this.anneError = false;
             }
-            this.isMoisValide1 = isMoisValide(this.mois);
-            if (this.isMoisValide1 === false) {
+            if (isMoisValide(this.mois) === false) {
                 this.moisError = true;
             } else {
                 this.moisError = false;
             }
-            this.isJourValide1 = isJourValide(this.jour);
-            if (this.isJourValide1 === false) {
+            if (isJourValide(this.jour) === false) {
                 this.jourError = true;
             } else {
                 this.jourError = false;
@@ -183,20 +174,17 @@ export default {
             } else {
                 this.sexeError = false;
             }
-            this.IsNomValide1 = capitalizeFirstLetter(this.nom);
-            if (this.IsNomValide1 === '') {
+            if (capitalizeFirstLetter(this.nom) === '') {
                 this.nomError = true;
             } else {
                 this.nomError = false;
             }
-            this.IsPrenom1Valide1 = capitalizeFirstLetter(this.prenom1);
-            if (this.IsPrenom1Valide1 === '') {
+            if (capitalizeFirstLetter(this.prenom1) === '') {
                 this.prenomError = true;
             } else {
                 this.prenomError = false;
             }
-            this.IsPrenom1Valide2 = capitalizeFirstLetter(this.prenom2);
-            if (this.IsPrenom1Valide2 === '') {
+            if (capitalizeFirstLetter(this.prenom2) === '') {
                 this.prenom2 = null;
             }
             if (this.anneError === false && this.moisError === false
