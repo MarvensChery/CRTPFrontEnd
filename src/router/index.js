@@ -5,12 +5,20 @@ import RequeteIPPEView from '@/views/RequeteIPPEView.vue';
 import PersonnesView from '@/views/PersonnesView.vue';
 import ConditionView from '@/views/ConditionView.vue';
 import PersonneView from '@/views/PersonneView.vue';
-import ObjetsView from '@/views/ObjetsView.vue';
+import ObjetView from '@/views/ObjetView.vue';
 import ArmeView from '@/views/ArmeView.vue';
 import ObjetView from '@/views/ObjetView.vue';
 import ValeurView from '@/views/ValeurView.vue';
 
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
+import ValeurView from '@/views/ValeurView.vue';
+import EtudiantView from '@/views/EtudiantView.vue';
+import SAAQView from '@/views/SAAQView.vue';
+import ArmesView from '@/views/ArmesView.vue';
+import ValeursView from '@/views/ValeursView.vue';
+import ObjetsView from '@/views/ObjetsView.vue';
+import DescriptionPersonneView from '@/views/DescriptionPersonneView.vue';
+import IPPEView from '@/views/IPPEView.vue';
 
 const routes = [
     {
@@ -42,8 +50,16 @@ const routes = [
         path: '/personne', // Route pour une personne
         name: 'personneView',
         component: PersonneView,
+        children: [
+            {
+                path: '/personne/:idPersonne',
+                name: 'modifPersonneView',
+                component: PersonneView,
+            },
+        ],
     },
     {
+<<<<<<< HEAD
         path: '/arme/:idArme', // Route pour modifier ou supprimer une arme
         name: 'MarmeView',
         component: ArmeView,
@@ -75,10 +91,52 @@ const routes = [
     },
     {
         path: '/objets', // route pour la liste des objets
+=======
+        path: '/reponseIPPE',
+        name: 'reponseIPPEView',
+        component: ReponseIPPEView,
+    },
+    {
+        path: '/etudiant',
+        name: 'etudiant',
+        component: EtudiantView,
+    },
+    {
+        path: '/arme',
+        alias: '/arme/:idArme',
+        name: 'armeView',
+        component: ArmeView,
+    },
+    {
+        path: '/valeur',
+        alias: '/valeur/:idValeur',
+        name: 'valeurView',
+        component: ValeurView,
+    },
+    {
+        path: '/objet',
+        alias: '/objet/:idObjet',
+        name: 'objetView',
+        component: ObjetView,
+    },
+    {
+        path: '/armes',
+        name: 'armesView',
+        component: ArmesView,
+    },
+    {
+        path: '/valeurs',
+        name: 'valeursView',
+        component: ValeursView,
+    },
+    {
+        path: '/objets',
+>>>>>>> dev_Vue
         name: 'objetsView',
         component: ObjetsView,
     },
     {
+<<<<<<< HEAD
         path: '/armes', // route pour la liste des armes
         name: 'armesView',
         component: ObjetsView,
@@ -93,6 +151,28 @@ const routes = [
         path: '/reponseIPPE', // route pour la réponse d'une interrogation
         name: 'reponseIPPEView',
         component: ReponseIPPEView,
+=======
+        path: '/SAAQ',
+        name: 'SAAQView',
+        component: SAAQView,
+    },
+    {
+        path: '/personne/:idPersonne/description',
+        name: 'descriptionPersonneView',
+        component: DescriptionPersonneView,
+    },
+    {
+        path: '/personne/:idPersonne/ippe',
+        name: 'IPPEView',
+        component: IPPEView,
+        children: [
+            {
+                path: '/personne/:idPersonne/ippe/:idIppe',
+                name: 'modifIPPEView',
+                component: IPPEView,
+            },
+        ],
+>>>>>>> dev_Vue
     },
 
 ];
