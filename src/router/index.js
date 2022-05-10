@@ -5,9 +5,15 @@ import RequeteIPPEView from '@/views/RequeteIPPEView.vue';
 import PersonnesView from '@/views/PersonnesView.vue';
 import ConditionView from '@/views/ConditionView.vue';
 import PersonneView from '@/views/PersonneView.vue';
-import ObjetsView from '@/views/ObjetsView.vue';
+import ObjetView from '@/views/ObjetView.vue';
 import ArmeView from '@/views/ArmeView.vue';
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
+import ValeurView from '@/views/ValeurView.vue';
+import EtudiantView from '@/views/EtudiantView.vue';
+import SAAQView from '@/views/SAAQView.vue';
+import ArmesView from '@/views/ArmesView.vue';
+import ValeursView from '@/views/ValeursView.vue';
+import ObjetsView from '@/views/ObjetsView.vue';
 import testView from '@/views/testView.vue';
 import DescriptionPersonneView from '@/views/DescriptionPersonneView.vue';
 import IPPEView from '@/views/IPPEView.vue';
@@ -56,12 +62,18 @@ const routes = [
         ],
     },
     {
-        path: '/objets',
-        name: 'objetsView',
-        component: ObjetsView,
+        path: '/reponseIPPE',
+        name: 'reponseIPPEView',
+        component: ReponseIPPEView,
+    },
+    {
+        path: '/etudiant',
+        name: 'etudiant',
+        component: EtudiantView,
     },
     {
         path: '/arme',
+        alias: '/arme/:idArme',
         name: 'armeView',
         component: ArmeView,
     },
@@ -74,6 +86,38 @@ const routes = [
         path: '/reponseIPPE/:nomFamille/:prenom1/:prenom2/:masculin/:dateNaissance',
         name: 'reponseIPPEView',
         component: ReponseIPPEView,
+    },
+    {
+        path: '/valeur',
+        alias: '/valeur/:idValeur',
+        name: 'valeurView',
+        component: ValeurView,
+    },
+    {
+        path: '/objet',
+        alias: '/objet/:idObjet',
+        name: 'objetView',
+        component: ObjetView,
+    },
+    {
+        path: '/armes',
+        name: 'armesView',
+        component: ArmesView,
+    },
+    {
+        path: '/valeurs',
+        name: 'valeursView',
+        component: ValeursView,
+    },
+    {
+        path: '/objets',
+        name: 'objetsView',
+        component: ObjetsView,
+    },
+    {
+        path: '/SAAQ',
+        name: 'SAAQView',
+        component: SAAQView,
     },
     {
         path: '/personne/:idPersonne/description',
