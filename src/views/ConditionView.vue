@@ -6,6 +6,9 @@
     <span class="has-text-weight-bold is-6 has-text-danger" v-if="messageError !== ''
     ">
       <i class="fa-solid fa-circle-xmark"></i>&nbsp;{{messageError}}</span>
+      <span class="has-text-weight-bold is-6 has-text-danger" v-if="messageErrorFormulaire !== ''
+    ">
+      <i class="fa-solid fa-circle-xmark"></i>&nbsp;{{messageErrorFormulaire}}</span>
     <form class="row columns is-multiline">
       <!-- Html pour la page de modification condition -->
       <div class="column is-12 my-5">
@@ -22,14 +25,10 @@
               class="column input"
               :maxlength="[Libelle === 'Doit demeurer à cet endroit entre' ? '5' : '']"
             />
-            <span
-              id="span1"
-              :class="[
+            <label for="span1" :class="[
                 Libelle === 'Doit demeurer à cet endroit entre' ? '' : 'is-hidden',
               ]"
-            >
-              et
-            </span>
+            class="label has-text-centered column is-narrow is-size-6">Et</label>
             <input
               v-if="data[0].HeureFin !== null"
               class="column input is-2"
@@ -75,7 +74,7 @@
               v-model="conditions1"
               type="text"
               :placeholder="placeholderChange"
-              :class="[list1.includes(option) ? '' : 'is-hidden']"
+              :class="[['2', '5', '6'].includes(option) ? '' : 'is-hidden']"
             />
             <input
               id="inputconditions2"
@@ -189,8 +188,11 @@
 </template>
 
 <script>
-//  import { validationHeure } from '@/validations';
 import { svrURL } from '@/constantes';
+import {
+  checkNomPrenomInput, validationHeure, verifieCodePostal,
+  verifieVille, verifieProvince, verifieAdresse2,
+  } from '@/validations';
 
 export default {
     name: 'ConditionView',
@@ -198,11 +200,6 @@ export default {
         return {
             data: '',
             option: '1',
-            list1: ['2', '5', '6'],
-            list2: [
-                'Doit garder la paix et avoir bonne conduite',
-                'Aucune consommation d\'alcool ou de drogue non prescrite',
-            ],
             text: '',
             condition: '',
             condition2: '',
@@ -214,6 +211,7 @@ export default {
             IdCondition: '',
             message: '',
             messageError: '',
+            messageErrorFormulaire: '',
             Libelle: '',
             adresse2: '',
             ville: '',
@@ -230,7 +228,11 @@ export default {
         },
         //  Change la class de l'input dépendemment des données reçus
         changerStyle() {
-            if (this.list2.includes(this.Libelle)) {
+          const list2 = [
+                'Doit garder la paix et avoir bonne conduite',
+                'Aucune consommation d\'alcool ou de drogue non prescrite',
+            ];
+            if (list2.includes(this.Libelle)) {
                 return 'is-hidden';
             }
             if (this.data[0].HeureDebut !== null) {
@@ -244,10 +246,10 @@ export default {
                 return 'Ex: 1090 Rue Deschamp';
             }
             if (this.option === '5') {
-                return 'Ex: Mario';
+                return 'Ex: Mario Ancelotti';
             }
             if (this.option === '6') {
-                return 'Ex: Luigi';
+                return 'Ex: Luigi Donnaruma';
             }
             if (this.data !== '') {
                 if (this.Libelle === 'Doit demeurer à cet endroit entre') {
@@ -269,6 +271,77 @@ export default {
         this.returnCondition();
     },
     methods: {
+      checkNomPrenom() {
+        if (checkNomPrenomInput(this.condition) && (this.Libelle === 'Ne pas fréquenter'
+        || this.Libelle === 'Ne pas entrer en contact avec')) {
+          return true;
+        }
+        if (checkNomPrenomInput(this.conditions1) && (this.option === '5' || this.option === '6')) {
+          return true;
+        }
+        if (this.option !== '5' && this.option !== '6' && this.Libelle !== 'Ne pas fréquenter'
+        && this.Libelle !== 'Ne pas entrer en contact avec') {
+          return true;
+        }
+        this.messageErrorFormulaire = 'Le nom et prénom doivent être sous la forme suivante : Vincent Leblanc';
+        return false;
+      },
+      checkHeure() {
+        if (validationHeure(this.conditions2) && validationHeure(this.conditions3) && this.option === '7') {
+          return true;
+        }
+        if (validationHeure(this.condition) && validationHeure(this.condition2) && this.Libelle === 'Doit demeurer à cet endroit entre') {
+          return true;
+        }
+        if (this.option !== '7' && this.Libelle !== 'Doit demeurer à cet endroit entre') {
+          return true;
+        }
+        this.messageErrorFormulaire = 'Les heures doivent être sous la forme suivante : HH:MM';
+        return false;
+      },
+      checkCodePostal() {
+        if (verifieCodePostal(this.codepostal) && (this.option === '2' || this.Libelle === 'Avoir comme adresse le')) {
+          return true;
+        }
+        if (this.option !== '2' && this.Libelle !== 'Avoir comme adresse le') {
+          return true;
+        }
+        this.messageErrorFormulaire = 'Le code postal doivent être sous la forme suivante : A1A 1A1';
+        return false;
+      },
+      checkVille() {
+        if (verifieVille(this.ville) && (this.option === '2' || this.Libelle === 'Avoir comme adresse le')) {
+          return true;
+        }
+        if (this.option !== '2' && this.Libelle !== 'Avoir comme adresse le') {
+          return true;
+        }
+        this.messageErrorFormulaire = "Le champ entré pour la ville n'est pas approprié";
+        return false;
+      },
+      checkProvince() {
+        if (verifieProvince(this.province) && (this.option === '2' || this.Libelle === 'Avoir comme adresse le')) {
+          return true;
+        }
+        if (this.option !== '2' && this.Libelle !== 'Avoir comme adresse le') {
+          return true;
+        }
+        this.messageErrorFormulaire = "Le champ entré pour la ville n'est pas approprié";
+        return false;
+      },
+      checkAdresse() {
+        if (verifieAdresse2(this.conditions1) && this.option === '2') {
+          return true;
+        }
+        if (verifieAdresse2(this.condition) && this.Libelle === 'Avoir comme adresse le') {
+          return true;
+        }
+        if (this.option !== '2' && this.Libelle !== 'Avoir comme adresse le') {
+          return true;
+        }
+        this.messageErrorFormulaire = "L'adresse doit commencer par un ou plusieurs chiffres, ex : 705 rue Notre-Dame";
+        return false;
+      },
         // Si les données sont '' retourne null pour la base de donnée
         sendDataNull(str) {
             if (str === '') {
@@ -280,6 +353,7 @@ export default {
         masquerMessage() {
             this.message = '';
             this.messageError = '';
+            this.messageErrorFormulaire = '';
         },
         // Fonction pour récupérer le texte de l'option choisie
         recuperationTextSelect(event) {
@@ -339,17 +413,17 @@ export default {
                         );
                         if (reponse2.ok) {
                             const data2 = await reponse2.json();
-                            this.condition = data2[0].Adresse1;
+                            this.condition = data2[0].Adresse1.trim();
                             this.adresse2 = data2[0].Adresse2;
-                            this.ville = data2[0].Ville;
-                            this.province = data2[0].Province;
-                            this.codepostal = data2[0].CodePostal;
+                            this.ville = data2[0].Ville.trim();
+                            this.province = data2[0].Province.trim();
+                            this.codepostal = data2[0].CodePostal.trim();
                         }
                     } else if (this.Libelle === 'Doit demeurer à cet endroit entre') {
                         const [, t2] = this.data[0].HeureDebut.split('T');
                         const [, e2] = this.data[0].HeureFin.split('T');
-                        this.condition2 = e2.substring(0, 6);
-                        this.condition = t2.substring(0, 6);
+                        this.condition2 = e2.substring(0, 5);
+                        this.condition = t2.substring(0, 5);
                     }
                 } else {
                     const rep = await reponse.json();
@@ -360,10 +434,12 @@ export default {
         // Fonction pour modifier la condition
         async modifier() {
             this.masquerMessage();
-            const data = JSON.stringify({
+            if (this.checkNomPrenom() && this.checkHeure() && this.checkCodePostal()
+            && this.checkVille() && this.checkProvince() && this.checkAdresse()) {
+                const data = JSON.stringify({
                 IdPersonne: this.IdPersonne,
                 IdIppe: this.IdIppe,
-                Libelle: this.sendDataNull(this.Libelle),
+                Libelle: this.sendDataNull(this.Libelle.trim()),
                 Champs1: this.sendDataNull(this.condition.trim()),
                 Champs2: this.sendDataNull(this.condition2.trim()),
                 Adresse2: this.sendDataNull(this.adresse2),
@@ -385,10 +461,15 @@ export default {
             } else {
                 this.messageError = rep.message;
             }
+            } else {
+              console.log('Erreur');
+            }
         },
         // Fonction pour ajouter la condition
         async ajouter() {
             this.masquerMessage();
+            if (this.checkNomPrenom() && this.checkHeure() && this.checkCodePostal()
+            && this.checkVille() && this.checkProvince() && this.checkAdresse()) {
             const {
                 option,
                 text,
@@ -397,6 +478,10 @@ export default {
                 conditions3,
                 IdPersonne,
                 IdIppe,
+                adresse2,
+                ville,
+                province,
+                codepostal,
             } = this;
             const data = JSON.stringify({
                 IdPersonne,
@@ -405,10 +490,10 @@ export default {
                 Champs1: this.sendDataNull(conditions1.trim()),
                 Champs2: this.sendDataNull(conditions2.trim()),
                 Champs3: this.sendDataNull(conditions3.trim()),
-                Adresse2: this.sendDataNull(this.adresse2),
-                Ville: this.sendDataNull(this.ville.trim()),
-                Province: this.sendDataNull(this.province.trim()),
-                CodePostal: this.sendDataNull(this.codepostal.trim()),
+                Adresse2: this.sendDataNull(adresse2),
+                Ville: this.sendDataNull(ville.trim()),
+                Province: this.sendDataNull(province.trim()),
+                CodePostal: this.sendDataNull(codepostal.trim()),
                 Option: option,
             });
             const response = await fetch(`${svrURL}/conditions`, {
@@ -425,6 +510,7 @@ export default {
             } else {
                 this.messageError = rep.message;
             }
+        }
         },
     },
 };

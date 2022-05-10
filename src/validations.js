@@ -49,9 +49,19 @@ function verifieNumPermis(str) {
 function verifieAdresse(str) {
     return /^.{0,50}$/.test(str);
 }
+
+// Vérifie que l'adresse commence par un chiffre a un maximum de 50 caracthères
+function verifieAdresse2(str) {
+    return /^[0-9]{1,6}\s[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî-\s]{0,50}$/.test(str);
+}
+
 // Vérifie que la ville a un maximum de 50 caracthères
 function verifieVille(str) {
     return /^[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî-\s]{0,50}$/.test(str);
+}
+// Vérifie que la province a un maximum de 2 caracthères
+function verifieProvince(str) {
+    return /^[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî-\s]{2}$/.test(str);
 }
 // Vérifie que le code postal est une lettre, un chiffre,
 // une lettre, un espace, un chiffre, une lettre, un chiffre
@@ -77,7 +87,7 @@ function verifieGiletPantalonAutreVetement(str) {
 // Vérifie que l'heure est dans le format 00:00
 // ,donc 2 nombres suivie d'un 2 points et encore 2 nombres
 function validationHeure(heure) {
-    /^[0-9]{2}[:][0-9]{2}$/.test(heure);
+    return /^[0-9]{2}[:][0-9]{2}$/.test(heure);
 }
 // Vérifie que le NuméroFPS sois
 function isNumeroValid(numeroFPS) {
@@ -101,6 +111,11 @@ function checkPrenomInput(str) {
     return /^[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî]+$/.test(str);
 }
 
+// Check si l'inputs du nom et Prenom contiennent les bons characteres
+function checkNomPrenomInput(str) {
+    return /^[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî]{0,20}[' '][a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî]{0,20}$/.test(str);
+}
+
 export {
     isJourValide,
     isMoisValide,
@@ -122,4 +137,7 @@ export {
     verifieGiletPantalonAutreVetement,
     checkNomInput,
     checkPrenomInput,
+    checkNomPrenomInput,
+    verifieProvince,
+    verifieAdresse2,
 };
