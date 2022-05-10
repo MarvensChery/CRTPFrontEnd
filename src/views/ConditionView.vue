@@ -190,9 +190,9 @@
 <script>
 import { svrURL } from '@/constantes';
 import {
-  checkNomPrenomInput, validationHeure, verifieCodePostal,
-  verifieVille, verifieProvince, verifieAdresse2,
-  } from '@/validations';
+    checkNomPrenomInput, validationHeure, verifieCodePostal,
+    verifieVille, verifieProvince, verifieAdresse2,
+} from '@/validations';
 
 export default {
     name: 'ConditionView',
@@ -228,7 +228,7 @@ export default {
         },
         //  Change la class de l'input dépendemment des données reçus
         changerStyle() {
-          const list2 = [
+            const list2 = [
                 'Doit garder la paix et avoir bonne conduite',
                 'Aucune consommation d\'alcool ou de drogue non prescrite',
             ];
@@ -271,77 +271,77 @@ export default {
         this.returnCondition();
     },
     methods: {
-      checkNomPrenom() {
-        if (checkNomPrenomInput(this.condition) && (this.Libelle === 'Ne pas fréquenter'
+        checkNomPrenom() {
+            if (checkNomPrenomInput(this.condition) && (this.Libelle === 'Ne pas fréquenter'
         || this.Libelle === 'Ne pas entrer en contact avec')) {
-          return true;
-        }
-        if (checkNomPrenomInput(this.conditions1) && (this.option === '5' || this.option === '6')) {
-          return true;
-        }
-        if (this.option !== '5' && this.option !== '6' && this.Libelle !== 'Ne pas fréquenter'
+                return true;
+            }
+            if (checkNomPrenomInput(this.conditions1) && (this.option === '5' || this.option === '6')) {
+                return true;
+            }
+            if (this.option !== '5' && this.option !== '6' && this.Libelle !== 'Ne pas fréquenter'
         && this.Libelle !== 'Ne pas entrer en contact avec') {
-          return true;
-        }
-        this.messageErrorFormulaire = 'Le nom et prénom doivent être sous la forme suivante : Vincent Leblanc';
-        return false;
-      },
-      checkHeure() {
-        if (validationHeure(this.conditions2) && validationHeure(this.conditions3) && this.option === '7') {
-          return true;
-        }
-        if (validationHeure(this.condition) && validationHeure(this.condition2) && this.Libelle === 'Doit demeurer à cet endroit entre') {
-          return true;
-        }
-        if (this.option !== '7' && this.Libelle !== 'Doit demeurer à cet endroit entre') {
-          return true;
-        }
-        this.messageErrorFormulaire = 'Les heures doivent être sous la forme suivante : HH:MM';
-        return false;
-      },
-      checkCodePostal() {
-        if (verifieCodePostal(this.codepostal) && (this.option === '2' || this.Libelle === 'Avoir comme adresse le')) {
-          return true;
-        }
-        if (this.option !== '2' && this.Libelle !== 'Avoir comme adresse le') {
-          return true;
-        }
-        this.messageErrorFormulaire = 'Le code postal doivent être sous la forme suivante : A1A 1A1';
-        return false;
-      },
-      checkVille() {
-        if (verifieVille(this.ville) && (this.option === '2' || this.Libelle === 'Avoir comme adresse le')) {
-          return true;
-        }
-        if (this.option !== '2' && this.Libelle !== 'Avoir comme adresse le') {
-          return true;
-        }
-        this.messageErrorFormulaire = "Le champ entré pour la ville n'est pas approprié";
-        return false;
-      },
-      checkProvince() {
-        if (verifieProvince(this.province) && (this.option === '2' || this.Libelle === 'Avoir comme adresse le')) {
-          return true;
-        }
-        if (this.option !== '2' && this.Libelle !== 'Avoir comme adresse le') {
-          return true;
-        }
-        this.messageErrorFormulaire = "Le champ entré pour la ville n'est pas approprié";
-        return false;
-      },
-      checkAdresse() {
-        if (verifieAdresse2(this.conditions1) && this.option === '2') {
-          return true;
-        }
-        if (verifieAdresse2(this.condition) && this.Libelle === 'Avoir comme adresse le') {
-          return true;
-        }
-        if (this.option !== '2' && this.Libelle !== 'Avoir comme adresse le') {
-          return true;
-        }
-        this.messageErrorFormulaire = "L'adresse doit commencer par un ou plusieurs chiffres, ex : 705 rue Notre-Dame";
-        return false;
-      },
+                return true;
+            }
+            this.messageErrorFormulaire = 'Le nom et prénom doivent être sous la forme suivante : Vincent Leblanc';
+            return false;
+        },
+        checkHeure() {
+            if (validationHeure(this.conditions2) && validationHeure(this.conditions3) && this.option === '7') {
+                return true;
+            }
+            if (validationHeure(this.condition) && validationHeure(this.condition2) && this.Libelle === 'Doit demeurer à cet endroit entre') {
+                return true;
+            }
+            if (this.option !== '7' && this.Libelle !== 'Doit demeurer à cet endroit entre') {
+                return true;
+            }
+            this.messageErrorFormulaire = 'Les heures doivent être sous la forme suivante : HH:MM';
+            return false;
+        },
+        checkCodePostal() {
+            if (verifieCodePostal(this.codepostal) && (this.option === '2' || this.Libelle === 'Avoir comme adresse le')) {
+                return true;
+            }
+            if (this.option !== '2' && this.Libelle !== 'Avoir comme adresse le') {
+                return true;
+            }
+            this.messageErrorFormulaire = 'Le code postal doivent être sous la forme suivante : A1A 1A1';
+            return false;
+        },
+        checkVille() {
+            if (verifieVille(this.ville) && (this.option === '2' || this.Libelle === 'Avoir comme adresse le')) {
+                return true;
+            }
+            if (this.option !== '2' && this.Libelle !== 'Avoir comme adresse le') {
+                return true;
+            }
+            this.messageErrorFormulaire = "Le champ entré pour la ville n'est pas approprié";
+            return false;
+        },
+        checkProvince() {
+            if (verifieProvince(this.province) && (this.option === '2' || this.Libelle === 'Avoir comme adresse le')) {
+                return true;
+            }
+            if (this.option !== '2' && this.Libelle !== 'Avoir comme adresse le') {
+                return true;
+            }
+            this.messageErrorFormulaire = "Le champ entré pour la ville n'est pas approprié";
+            return false;
+        },
+        checkAdresse() {
+            if (verifieAdresse2(this.conditions1) && this.option === '2') {
+                return true;
+            }
+            if (verifieAdresse2(this.condition) && this.Libelle === 'Avoir comme adresse le') {
+                return true;
+            }
+            if (this.option !== '2' && this.Libelle !== 'Avoir comme adresse le') {
+                return true;
+            }
+            this.messageErrorFormulaire = "L'adresse doit commencer par un ou plusieurs chiffres, ex : 705 rue Notre-Dame";
+            return false;
+        },
         // Si les données sont '' retourne null pour la base de donnée
         sendDataNull(str) {
             if (str === '') {
@@ -437,32 +437,32 @@ export default {
             if (this.checkNomPrenom() && this.checkHeure() && this.checkCodePostal()
             && this.checkVille() && this.checkProvince() && this.checkAdresse()) {
                 const data = JSON.stringify({
-                IdPersonne: this.IdPersonne,
-                IdIppe: this.IdIppe,
-                Libelle: this.sendDataNull(this.Libelle.trim()),
-                Champs1: this.sendDataNull(this.condition.trim()),
-                Champs2: this.sendDataNull(this.condition2.trim()),
-                Adresse2: this.sendDataNull(this.adresse2),
-                Ville: this.sendDataNull(this.ville.trim()),
-                Province: this.sendDataNull(this.province.trim()),
-                CodePostal: this.sendDataNull(this.codepostal.trim()),
-            });
-            const response = await fetch(`${svrURL}/conditions/${this.IdCondition}`, {
-                method: 'PUT',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: data,
-            });
-            const rep = await response.json();
-            if (response.ok) {
-                this.message = rep.message;
+                    IdPersonne: this.IdPersonne,
+                    IdIppe: this.IdIppe,
+                    Libelle: this.sendDataNull(this.Libelle.trim()),
+                    Champs1: this.sendDataNull(this.condition.trim()),
+                    Champs2: this.sendDataNull(this.condition2.trim()),
+                    Adresse2: this.sendDataNull(this.adresse2),
+                    Ville: this.sendDataNull(this.ville.trim()),
+                    Province: this.sendDataNull(this.province.trim()),
+                    CodePostal: this.sendDataNull(this.codepostal.trim()),
+                });
+                const response = await fetch(`${svrURL}/conditions/${this.IdCondition}`, {
+                    method: 'PUT',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: data,
+                });
+                const rep = await response.json();
+                if (response.ok) {
+                    this.message = rep.message;
+                } else {
+                    this.messageError = rep.message;
+                }
             } else {
-                this.messageError = rep.message;
-            }
-            } else {
-              console.log('Erreur');
+                console.log('Erreur');
             }
         },
         // Fonction pour ajouter la condition
@@ -470,47 +470,47 @@ export default {
             this.masquerMessage();
             if (this.checkNomPrenom() && this.checkHeure() && this.checkCodePostal()
             && this.checkVille() && this.checkProvince() && this.checkAdresse()) {
-            const {
-                option,
-                text,
-                conditions1,
-                conditions2,
-                conditions3,
-                IdPersonne,
-                IdIppe,
-                adresse2,
-                ville,
-                province,
-                codepostal,
-            } = this;
-            const data = JSON.stringify({
-                IdPersonne,
-                IdIppe,
-                Libelle: this.sendDataNull(text.trim()),
-                Champs1: this.sendDataNull(conditions1.trim()),
-                Champs2: this.sendDataNull(conditions2.trim()),
-                Champs3: this.sendDataNull(conditions3.trim()),
-                Adresse2: this.sendDataNull(adresse2),
-                Ville: this.sendDataNull(ville.trim()),
-                Province: this.sendDataNull(province.trim()),
-                CodePostal: this.sendDataNull(codepostal.trim()),
-                Option: option,
-            });
-            const response = await fetch(`${svrURL}/conditions`, {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: data,
-            });
-            const rep = await response.json();
-            if (response.ok) {
-                this.message = rep.message;
-            } else {
-                this.messageError = rep.message;
+                const {
+                    option,
+                    text,
+                    conditions1,
+                    conditions2,
+                    conditions3,
+                    IdPersonne,
+                    IdIppe,
+                    adresse2,
+                    ville,
+                    province,
+                    codepostal,
+                } = this;
+                const data = JSON.stringify({
+                    IdPersonne,
+                    IdIppe,
+                    Libelle: this.sendDataNull(text.trim()),
+                    Champs1: this.sendDataNull(conditions1.trim()),
+                    Champs2: this.sendDataNull(conditions2.trim()),
+                    Champs3: this.sendDataNull(conditions3.trim()),
+                    Adresse2: this.sendDataNull(adresse2),
+                    Ville: this.sendDataNull(ville.trim()),
+                    Province: this.sendDataNull(province.trim()),
+                    CodePostal: this.sendDataNull(codepostal.trim()),
+                    Option: option,
+                });
+                const response = await fetch(`${svrURL}/conditions`, {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: data,
+                });
+                const rep = await response.json();
+                if (response.ok) {
+                    this.message = rep.message;
+                } else {
+                    this.messageError = rep.message;
+                }
             }
-        }
         },
     },
 };
