@@ -88,10 +88,9 @@ function isNumeroValid(numeroFPS) {
 function isHeightValid(taille) {
     return /^[0-9]{3}$/.test(taille);
 }
-// Vérifie que le poids de 2 à 3 chiffres avant la virgule
-// et que la virgule et les 1 à 2 chiffre après sois optionnel
+// Vérifie que le poids de 2 à 3 chiffres
 function isWeightValid(poid) {
-    return /^[0-9]{2,3}|[0-9]{2,3}[,][0-9]{1,2}$/.test(poid);
+    return /^[0-9]{2,3}$/.test(poid);
 }
 // Check si l'inputs du nom contient les bons characteres
 function checkNomInput(str) {

@@ -223,10 +223,10 @@ export default {
     },
     computed: {
         title() {
-          if (this.IdCondition !== undefined) {
-            return "MODIFICATION D'UNE CONDITION À RESPECTER";
-          }
-          return "AJOUT D'UNE CONDITION À RESPECTER";
+            if (this.IdCondition !== undefined) {
+                return "MODIFICATION D'UNE CONDITION À RESPECTER";
+            }
+            return "AJOUT D'UNE CONDITION À RESPECTER";
         },
         //  Change la class de l'input dépendemment des données reçus
         changerStyle() {

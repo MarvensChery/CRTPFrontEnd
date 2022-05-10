@@ -126,7 +126,7 @@
                         <label for="inputPoids">Poids (kg): </label>
                         <div class="control has-icons-left has-icons-right">
                             <input id="inputPoids" class="input" type="text"
-                            placeholder="Poids" v-model="Poids" maxlength="6" />
+                            placeholder="Poids" v-model="Poids" maxlength="3" />
                             <span class="icon is-small is-left">
                                 <i class="fa-solid fa-weight-scale"></i>
                             </span>
@@ -313,8 +313,8 @@ export default {
             Desequilibre: '',
             Contagieux: '',
             Race: '',
-            Taille: '',
-            Poids: '',
+            Taille: null,
+            Poids: null,
             Yeux: '',
             Marques: '',
             Violence: '',
@@ -350,6 +350,12 @@ export default {
                 return null;
             }
             return str;
+        },
+        sendDataBool(input) {
+            if (input) {
+                return 1;
+            }
+            return 0;
         },
         async getFps() {
             if (this.$route.params.idFPS !== undefined) {
@@ -390,6 +396,10 @@ export default {
             this.numeroMSG = '';
             this.tailleMSG = '';
             this.poidMSG = '';
+            // Permet de laisser la taille et poid vide
+            if (this.Poids === null || this.Taille === null) {
+                return true;
+            }
             if (!isNumeroValid(this.numeroFPS)) {
                 this.numeroMSG = 'Numéro invalide, il doit être de 6 charactères numériques !';
                 error += 1;
@@ -399,7 +409,7 @@ export default {
                 error += 1;
             }
             if (!isWeightValid(this.Poids)) {
-                this.poidMSG = 'Poid invalide, il doit être de 2 ou 3 charactès numérique suivi de 1 ou 2 charactère !';
+                this.poidMSG = 'Poid invalide, il doit être de 2 ou 3 charactès numérique sans virgule !';
                 error += 1;
             }
             if (error > 0) {
@@ -417,28 +427,28 @@ export default {
                 const data = JSON.stringify({
                     IdPersonne: this.$route.params.idPersonne,
                     NoFPS: `${this.numeroFPS}H`,
-                    Violent: this.sendDataNull(this.Violent),
-                    Echappe: this.sendDataNull(this.EchappeG),
-                    Suicidaire: this.sendDataNull(this.Suicidaire),
-                    Desequilibre: this.sendDataNull(this.Desequilibre),
-                    Contagieux: this.sendDataNull(this.Contagieux),
-                    Violence: this.sendDataNull(this.Violence),
-                    Fraude: this.sendDataNull(this.Fraude),
-                    ConduiteVehicule: this.sendDataNull(this.ConduiteVehicule),
-                    IntroEffraction: this.sendDataNull(this.IntroEffraction),
-                    Sexe: this.sendDataNull(this.Sexe),
-                    ArmeOffensive: this.sendDataNull(this.ArmeOffensive),
-                    Vol: this.sendDataNull(this.Vol),
-                    Drogue: this.sendDataNull(this.Drogue),
-                    Mefait: this.sendDataNull(this.Mefait),
-                    Incendie: this.sendDataNull(this.Incendie),
-                    AutreInfraction: this.sendDataNull(this.AutreInfraction),
+                    Violent: this.sendDataBool(this.Violent),
+                    Echappe: this.sendDataBool(this.EchappeG),
+                    Suicidaire: this.sendDataBool(this.Suicidaire),
+                    Desequilibre: this.sendDataBool(this.Desequilibre),
+                    Contagieux: this.sendDataBool(this.Contagieux),
+                    Violence: this.sendDataBool(this.Violence),
+                    Fraude: this.sendDataBool(this.Fraude),
+                    ConduiteVehicule: this.sendDataBool(this.ConduiteVehicule),
+                    IntroEffraction: this.sendDataBool(this.IntroEffraction),
+                    Sexe: this.sendDataBool(this.Sexe),
+                    ArmeOffensive: this.sendDataBool(this.ArmeOffensive),
+                    Vol: this.sendDataBool(this.Vol),
+                    Drogue: this.sendDataBool(this.Drogue),
+                    Mefait: this.sendDataBool(this.Mefait),
+                    Incendie: this.sendDataBool(this.Incendie),
+                    AutreInfraction: this.sendDataBool(this.AutreInfraction),
                     Race: this.sendDataNull(this.Race),
-                    Taille: this.Taille,
-                    Poids: this.Poids,
+                    Taille: this.sendDataNull(this.Taille),
+                    Poids: this.sendDataNull(this.Poids),
                     Yeux: this.sendDataNull(this.Yeux),
                     Marques: this.sendDataNull(this.Marques),
-                    CD: this.sendDataNull(this.CD),
+                    CD: this.CD,
                 });
                 const myHeaders = new Headers();
                 myHeaders.append('Content-Type', 'application/json');
@@ -451,7 +461,7 @@ export default {
                 try {
                     const rep = await fetch(`${svrURL}/fps`, requestOptions);
                     if (rep.status === 200) {
-                        this.message = 'La modification du FPS est réussi !';
+                        this.message = `L'ajout du numéro FPS ${this.numeroFPS}H est réussi !`;
                         window.scrollTo(0, 0);
                     }
 
@@ -503,9 +513,9 @@ export default {
             try {
                 const rep = await fetch(`${svrURL}/fps/${this.IdFPS}`, requestOptions);
                 if (rep.status === 200) {
-                    this.message = `La suppression du ${this.numeroFPS} FPS est réussi !`;
+                    this.message = `La suppression du FPS ${this.numeroFPS}H est réussi !`;
                     window.scrollTo(0, 0);
-                    setTimeout(() => this.$router.push('/'), 2000);
+                    setTimeout(() => this.$router.push('/personnes'), 2000);
                 }
             } catch (error) {
                 this.errorMsg = 'Une erreur est survenu avec la base de donnée !';
@@ -520,36 +530,30 @@ export default {
                 const myHeaders = new Headers();
                 myHeaders.append('Content-Type', 'application/json');
 
-                // Code temporaire tant que le datatype de la base de donné devient un decimal
-                // Passage du poid int en string
-                const poidsToString = String(this.Poids);
-                // Remplacer le virgule en point pour rendre le passage en int possible
-                const poidPeriod = poidsToString.replace(',', '.');
-
                 const data = JSON.stringify({
-                    IdPersonne: this.idPersonne,
+                    IdPersonne: this.$route.params.idPersonne,
                     NoFPS: `${this.numeroFPS}H`,
-                    Violent: this.Violent,
-                    Echappe: this.EchappeG,
-                    Suicidaire: this.Suicidaire,
-                    Desequilibre: this.Desequilibre,
-                    Contagieux: this.Contagieux,
-                    Violence: this.Violence,
-                    Fraude: this.Fraude,
-                    ConduiteVehicule: this.ConduiteVehicule,
-                    IntroEffraction: this.IntroEffraction,
-                    Sexe: this.Sexe,
-                    ArmeOffensive: this.ArmeOffensive,
-                    Vol: this.Vol,
-                    Drogue: this.Drogue,
-                    Mefait: this.Mefait,
-                    Incendie: this.Incendie,
-                    AutreInfraction: this.AutreInfraction,
-                    Race: this.Race,
-                    Taille: this.Taille,
-                    Poids: Number(poidPeriod),
-                    Yeux: this.Yeux,
-                    Marques: this.Marques,
+                    Violent: this.sendDataBool(this.Violent),
+                    Echappe: this.sendDataBool(this.EchappeG),
+                    Suicidaire: this.sendDataBool(this.Suicidaire),
+                    Desequilibre: this.sendDataBool(this.Desequilibre),
+                    Contagieux: this.sendDataBool(this.Contagieux),
+                    Violence: this.sendDataBool(this.Violence),
+                    Fraude: this.sendDataBool(this.Fraude),
+                    ConduiteVehicule: this.sendDataBool(this.ConduiteVehicule),
+                    IntroEffraction: this.sendDataBool(this.IntroEffraction),
+                    Sexe: this.sendDataBool(this.Sexe),
+                    ArmeOffensive: this.sendDataBool(this.ArmeOffensive),
+                    Vol: this.sendDataBool(this.Vol),
+                    Drogue: this.sendDataBool(this.Drogue),
+                    Mefait: this.sendDataBool(this.Mefait),
+                    Incendie: this.sendDataBool(this.Incendie),
+                    AutreInfraction: this.sendDataBool(this.AutreInfraction),
+                    Race: this.sendDataNull(this.Race),
+                    Taille: this.sendDataNull(this.Taille),
+                    Poids: this.sendDataNull(this.Poids),
+                    Yeux: this.sendDataNull(this.Yeux),
+                    Marques: this.sendDataNull(this.Marques),
                     CD: this.CD,
                 });
 
@@ -562,7 +566,7 @@ export default {
                 try {
                     const rep = await fetch(`${svrURL}/fps/${this.$route.params.idFPS}`, requestOptions);
                     if (rep.status === 200) {
-                        this.message = `La modifcation du ${this.numeroFPS} FPS est réussi !`;
+                        this.message = `La modifcation du FPS ${this.numeroFPS}H est réussi !`;
                         window.scrollTo(0, 0);
                     }
 
