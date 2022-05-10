@@ -17,6 +17,7 @@ export default {
     data() {
         return {
             Professeur: true,
+            erreurIPPE: false,
         };
     },
 };

@@ -39,6 +39,10 @@ function isDateValide(annee, mois, jour) {
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
+// Pour valider l'heure
+function chekHour(str) {
+    return /^\d{1,2}:\d{2}([ap]m)?$/.test(str);
+}
 // Check si l'inputs du nom contient les bons characteres
 function checkNomInput(str) {
     return /^[a-zA-Z\- ÄäÖöÉéÈèÜüÊêÛûÎî]+$/.test(str);
@@ -61,6 +65,10 @@ function verifieAdresse(str) {
 }
 // Vérifie que la ville a un maximum de 50 caracthères
 function verifieVille(str) {
+    return /^[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî-\s]{0,50}$/.test(str);
+}
+// Vérifie que la province a un maximum de 50 caracthères
+function verifieProvince(str) {
     return /^[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî-\s]{0,50}$/.test(str);
 }
 // Vérifie que le code postal est une lettre, un chiffre,
@@ -105,5 +113,10 @@ export {
     verifieGiletPantalonAutreVetement,
     checkNomInput,
     checkPrenomInput,
+<<<<<<< HEAD
+>>>>>>> dev_Vue
+=======
+    chekHour,
+    verifieProvince,
 >>>>>>> dev_Vue
 };

@@ -17,6 +17,7 @@ import SAAQView from '@/views/SAAQView.vue';
 import ArmesView from '@/views/ArmesView.vue';
 import ValeursView from '@/views/ValeursView.vue';
 import ObjetsView from '@/views/ObjetsView.vue';
+import testView from '@/views/testView.vue';
 import DescriptionPersonneView from '@/views/DescriptionPersonneView.vue';
 import IPPEView from '@/views/IPPEView.vue';
 
@@ -42,7 +43,16 @@ const routes = [
         component: PersonnesView,
     },
     {
+<<<<<<< HEAD
         path: '/condition', // Route l'ajout d'une condition à respecter
+=======
+        path: '/personne/:idPersonne/ippe/:idIppe/condition',
+        name: 'ajoutConditionView',
+        component: ConditionView,
+    },
+    {
+        path: '/condition/:idCondition',
+>>>>>>> dev_Vue
         name: 'conditionView',
         component: ConditionView,
     },
@@ -106,6 +116,16 @@ const routes = [
         alias: '/arme/:idArme',
         name: 'armeView',
         component: ArmeView,
+    },
+    {
+        path: '/test',
+        name: 'test',
+        component: testView,
+    },
+    {
+        path: '/reponseIPPE/:nomFamille/:prenom1/:prenom2/:masculin/:dateNaissance',
+        name: 'reponseIPPEView',
+        component: ReponseIPPEView,
     },
     {
         path: '/valeur',
