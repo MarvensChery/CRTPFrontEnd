@@ -423,11 +423,11 @@ export default {
                                 <td>${element.libelle} ${element.frequentation}</td>
                             </tr>`;
                     } else if (element.frequentation === null && element.victime === null && element.libelle.indexOf('adresse') !== -1) {
-                        if (this.reponseIPPE[0].Adresse2 !== null) {
+                        if (this.reponseIPPE[0].Adresse2 === null || this.reponseIPPE[0].Adresse2 === 'null') {
                             returneddata += `<tr>
                                 <td>${element.libelle} ${this.reponseIPPE[0].Adresse1}</td>
                             </tr>`;
-                        } else if (this.reponseIPPE[0].Adresse2 === null) {
+                        } else if (this.reponseIPPE[0].Adresse2 !== null) {
                             returneddata += `<tr>
                                 <td>${element.libelle} ${this.reponseIPPE[0].Adresse1} & ${this.reponseIPPE[0].Adresse2}</td>
                             </tr>`;
