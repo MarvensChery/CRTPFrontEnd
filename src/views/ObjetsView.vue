@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
     <div v-if="this.$route.name === 'objetsView'">
         <h1 class="has-text-black " style="height:135px; text-align:center; font-size: 24px;">
         <b><u>LISTE D'OBJETS</u></b></h1>
@@ -160,12 +159,6 @@
 import { svrURL } from '../constantes';
 
 // noinspection JSUnusedGlobalSymbols
-=======
-    <h1 class="title is-1 has-text-centered">Page en construction</h1>
-</template>
-
-<script>
->>>>>>> dev_Vue
 export default {
     name: 'ObjetsView',
     data() {
