@@ -72,7 +72,6 @@ const routes = [
     },
     {
         path: '/arme',
-        alias: '/arme/:idArme',
         name: 'armeView',
         component: ArmeView,
         children: [

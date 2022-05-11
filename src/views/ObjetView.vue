@@ -193,13 +193,13 @@
                         </div>
                             <div class="btn-block" >
                 <button
-                v-if="this.$route.name === 'MobjetView'"
+                v-if="!isNaN(this.$route.params.idObjet)"
                 v-on:click="this.updateObjet">Modifier</button>&nbsp;
                 <button type="submit"
-                v-if="this.$route.name === 'AobjetView'"
+                v-if="isNaN(this.$route.params.idObjet)"
                 v-on:click="this.addObjet">Ajouter</button>&nbsp;
                 <button type="reset"
-                v-if="this.$route.name === 'MobjetView'"
+                v-if="!isNaN(this.$route.params.idObjet)"
                 v-on:click="confirmation">Supprimer</button>&nbsp;
                 <button type="button"
                     v-on:click="this.$router.push({ name: 'objetsView' })">Annuler</button>

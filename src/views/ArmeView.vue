@@ -1,3 +1,5 @@
+<!-- eslint-disable max-len -->
+
 <template>
     <div class="container mb-4 is-desktop">
       <form @submit.prevent="onSubmit">
@@ -196,14 +198,14 @@
                    </div>
                    <div class="btn-block" >
                 <button
-                v-if="this.$route.name === 'MarmeView'"
+                v-if="!isNaN(this.$route.params.idArme)"
                 v-on:click="this.updateArme">Modifier</button>&nbsp;
-                <button type="submit"
-                v-if="this.$route.name === 'AarmeView'"
-                v-on:click="this.addArme">Ajouter</button>&nbsp;
                 <button type="reset"
-                v-if="this.$route.name === 'MarmeView'"
+                v-if="!isNaN(this.$route.params.idArme)"
                 v-on:click="confirmation">Supprimer</button>&nbsp;
+                <button type="submit"
+                v-if="isNaN(this.$route.params.idArme)"
+                v-on:click="this.addArme">Ajouter</button>&nbsp;
                 <button type="button"
                     v-on:click="this.$router.push({ name: 'armesView' })">Annuler</button>
             </div>

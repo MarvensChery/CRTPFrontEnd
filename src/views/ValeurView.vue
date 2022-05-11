@@ -189,13 +189,13 @@
             </div>
             <div class="btn-block" >
                 <button
-                v-if="this.$route.name === 'MvaleurView'"
+                v-if="!isNaN(this.$route.params.idValeur)"
                 v-on:click="this.updateValeur">Modifier</button>&nbsp;
                 <button type="submit"
-                v-if="this.$route.name === 'AvaleurView'"
+                v-if="isNaN(this.$route.params.idValeur)"
                 v-on:click="this.addValeur">Ajouter</button>&nbsp;
                 <button type="reset"
-                v-if="this.$route.name === 'MvaleurView'"
+                v-if="!isNaN(this.$route.params.idValeur)"
                 v-on:click="confirmation">Supprimer</button>&nbsp;
                 <button type="button"
                     v-on:click="this.$router.push({ name: 'valeursView' })">Annuler</button>
