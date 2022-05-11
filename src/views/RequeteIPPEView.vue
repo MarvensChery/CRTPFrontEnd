@@ -128,7 +128,7 @@
 <script>
 import {
     isAnneeValide, isMoisValide, isJourValide, capitalize,
-} from '../validations.js';
+} from '@/validations';
 
 export default {
     name: 'RequeteIPPEView',

@@ -139,18 +139,11 @@
               </div>
               <div class="column " id="menuP">
                 <h1 class="title is-6 is-mega-menu-title"  >Menu prof</h1>
-                <a class="navbar-item " id="banqueP" >
-                <strong>Banque de personne</strong>
-                </a>
-                <a href="/objets" class="navbar-item ">
-                <strong>Banque d'objets</strong>
-                </a>
-                <a href="/armes" class="navbar-item ">
-                <strong>Banque d'armes</strong>
-                </a>
-                <a href="/valeurs" class="navbar-item ">
-                <strong>Banque de valeurs</strong>
-                </a>
+                <router-link v-bind:to="{ name: 'personnesView'}">
+                  <a class="navbar-item " id="banqueP" >
+                    <strong>Banque de personne</strong>
+                  </a>
+                </router-link>
               </div>
             </div>
           </div>

@@ -10,8 +10,10 @@ import ArmeView from '@/views/ArmeView.vue';
 
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
 import ValeurView from '@/views/ValeurView.vue';
+import EtudiantView from '@/views/EtudiantView.vue';
 import SAAQView from '@/views/SAAQView.vue';
 import ObjetsView from '@/views/ObjetsView.vue';
+import testView from '@/views/testView.vue';
 import DescriptionPersonneView from '@/views/DescriptionPersonneView.vue';
 import IPPEView from '@/views/IPPEView.vue';
 
@@ -59,55 +61,75 @@ const routes = [
         ],
     },
     {
-        path: '/arme/:idArme', // Route pour modifier ou supprimer une arme
-        name: 'MarmeView',
-        component: ArmeView,
+        path: '/reponseIPPE',
+        name: 'reponseIPPEView',
+        component: ReponseIPPEView,
+    },
+    {
+        path: '/etudiant',
+        name: 'etudiant',
+        component: EtudiantView,
     },
     {
         path: '/arme',
-        name: 'AarmeView', // route ajouter une arme
+        name: 'armeView',
         component: ArmeView,
+        children: [
+            {
+                path: '/arme/:idArme',
+                name: 'modifArmeView',
+                component: ArmeView,
+            },
+        ],
     },
     {
-        path: '/objet/:idObjet', // Route pour modifier ou supprimer un objet
-        name: 'MobjetView',
-        component: ObjetView,
+        path: '/test',
+        name: 'test',
+        component: testView,
     },
     {
-        path: '/objet', // route ajouter un objet
-        name: 'AobjetView',
-        component: ObjetView,
+        path: '/reponseIPPE/:nomFamille/:prenom1/:prenom2/:masculin/:dateNaissance',
+        name: 'reponseIPPEView',
+        component: ReponseIPPEView,
     },
     {
-        path: '/valeur/:idValeur', // Route pour modifier ou supprimer une valeur
-        name: 'MvaleurView',
+        path: '/valeur',
+        name: 'valeurView',
         component: ValeurView,
+        children: [
+            {
+                path: '/valeur/:idValeur',
+                name: 'modifValeurView',
+                component: ValeurView,
+            },
+        ],
     },
     {
-        path: '/valeur', // route ajouter une valeur
-        name: 'AvaleurView',
-        component: ValeurView,
+        path: '/objet',
+        name: 'objetView',
+        component: ObjetView,
+        children: [
+            {
+                path: '/objet/:idObjet',
+                name: 'modifObjetView',
+                component: ObjetView,
+            },
+        ],
     },
     {
-        path: '/objets', // route pour la liste des objets
-        name: 'objetsView',
-        component: ObjetsView,
-    },
-    {
-        path: '/armes', // route pour la liste des armes
+        path: '/armes',
         name: 'armesView',
         component: ObjetsView,
     },
     {
-        path: '/valeurs', // route pour la liste des valeurs
+        path: '/valeurs',
         name: 'valeursView',
         component: ObjetsView,
     },
-
     {
-        path: '/reponseIPPE', // route pour la réponse d'une interrogation
-        name: 'reponseIPPEView',
-        component: ReponseIPPEView,
+        path: '/objets',
+        name: 'objetsView',
+        component: ObjetsView,
     },
     {
         path: '/SAAQ',
