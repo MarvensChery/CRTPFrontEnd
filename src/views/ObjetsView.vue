@@ -2,6 +2,7 @@
 <<<<<<< 9fcbb467b451c5ed1057c18185f1c9cc59312c9c
 =======
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 >>>>>>> Auto stash before rebase of "refs/heads/Sprint2"
     <div v-if="this.$route.name === 'objetsView'">
@@ -15,6 +16,8 @@
                     <option v-for="i in optionsValeurs" :value="i" :key="i">{{i}}</option>
                 </select>
 =======
+=======
+>>>>>>> Stashed changes
     <div>
         <div v-if="this.$route.name === 'objetsView'">
             <h1 class="has-text-black " style="height:135px; text-align:center; font-size: 24px;">
@@ -61,6 +64,9 @@
                     </div>
                         </a>
                     </div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             </div>
         </div>
@@ -91,6 +97,7 @@
                                 <th>Numéro d'évènement</th>
                             </tr>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         <tr v-for="o in filtresValeurs" v-bind:key="o.idBOB">
                             <td>{{ o.NoSerie }}</td>
                             <td>{{ o.Marque }}</td>
@@ -107,6 +114,8 @@
                     </table>
                 </div>
 =======
+=======
+>>>>>>> Stashed changes
                             <tr v-for="v in filtresValeurs" v-bind:key="v.IdIBVA">
                                 <td>{{ v.Identifiant }}</td>
                                 <td>{{ v.Auteur }}</td>
@@ -122,11 +131,15 @@
                             </tr>
                         </table>
                     </div>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                     </a>
             </div>
             </div>
         </div>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         <div class="columns">
             <div id="detail" class="column is-centered">
@@ -155,6 +168,8 @@
                         </tr>
                     </table>
 =======
+=======
+>>>>>>> Stashed changes
         <div v-if="this.$route.path === '/armes'">
             <h1 class="has-text-black " style="height:135px; text-align:center; font-size: 24px;">
             <b><u>LISTE D'ARMES</u></b></h1>
@@ -165,11 +180,15 @@
                         <option></option>
                         <option v-for="i in optionsValeurs" :value="i" :key="i">{{i}}</option>
                     </select>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                 </div>
                 <input id="type" style="height: 40px;" placeholder="Valeur du filtre"
                 v-model="valValeurs">
             </div>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
             <input id="type" style="height: 40px;" placeholder="Valeur du filtre"
             v-model="valValeurs">
@@ -201,6 +220,8 @@
                         </tr>
                     </table>
 =======
+=======
+>>>>>>> Stashed changes
             <div class="columns">
                 <div id="detail" class="column is-centered">
                     <a id="armes">
@@ -229,6 +250,9 @@
                         </table>
                     </div>
                     </a>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                 </div>
             </div>
