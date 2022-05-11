@@ -98,10 +98,7 @@ export {
     isMoisValide,
     isAnneeValide,
     isDateValide,
-<<<<<<< HEAD
     capitalize,
-=======
-    capitalizeFirstLetter,
     verifieNumTel,
     verifieNumPermis,
     verifieAdresse,
@@ -113,10 +110,6 @@ export {
     verifieGiletPantalonAutreVetement,
     checkNomInput,
     checkPrenomInput,
-<<<<<<< HEAD
->>>>>>> dev_Vue
-=======
     chekHour,
     verifieProvince,
->>>>>>> dev_Vue
 };

@@ -7,15 +7,11 @@ import ConditionView from '@/views/ConditionView.vue';
 import PersonneView from '@/views/PersonneView.vue';
 import ObjetView from '@/views/ObjetView.vue';
 import ArmeView from '@/views/ArmeView.vue';
-import ObjetView from '@/views/ObjetView.vue';
-import ValeurView from '@/views/ValeurView.vue';
 
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
 import ValeurView from '@/views/ValeurView.vue';
 import EtudiantView from '@/views/EtudiantView.vue';
 import SAAQView from '@/views/SAAQView.vue';
-import ArmesView from '@/views/ArmesView.vue';
-import ValeursView from '@/views/ValeursView.vue';
 import ObjetsView from '@/views/ObjetsView.vue';
 import testView from '@/views/testView.vue';
 import DescriptionPersonneView from '@/views/DescriptionPersonneView.vue';
@@ -43,16 +39,12 @@ const routes = [
         component: PersonnesView,
     },
     {
-<<<<<<< HEAD
-        path: '/condition', // Route l'ajout d'une condition à respecter
-=======
         path: '/personne/:idPersonne/ippe/:idIppe/condition',
         name: 'ajoutConditionView',
         component: ConditionView,
     },
     {
         path: '/condition/:idCondition',
->>>>>>> dev_Vue
         name: 'conditionView',
         component: ConditionView,
     },
@@ -69,39 +61,6 @@ const routes = [
         ],
     },
     {
-<<<<<<< HEAD
-        path: '/arme/:idArme', // Route pour modifier ou supprimer une arme
-        name: 'MarmeView',
-        component: ArmeView,
-    },
-    {
-        path: '/arme',
-        name: 'AarmeView', // route ajouter une arme
-        component: ArmeView,
-    },
-    {
-        path: '/objet/:idObjet', // Route pour modifier ou supprimer un objet
-        name: 'MobjetView',
-        component: ObjetView,
-    },
-    {
-        path: '/objet', // route ajouter un objet
-        name: 'AobjetView',
-        component: ObjetView,
-    },
-    {
-        path: '/valeur/:idValeur', // Route pour modifier ou supprimer une valeur
-        name: 'MvaleurView',
-        component: ValeurView,
-    },
-    {
-        path: '/valeur', // route ajouter une valeur
-        name: 'AvaleurView',
-        component: ValeurView,
-    },
-    {
-        path: '/objets', // route pour la liste des objets
-=======
         path: '/reponseIPPE',
         name: 'reponseIPPEView',
         component: ReponseIPPEView,
@@ -116,6 +75,13 @@ const routes = [
         alias: '/arme/:idArme',
         name: 'armeView',
         component: ArmeView,
+        children: [
+            {
+                path: '/arme/:idArme',
+                name: 'modifArmeView',
+                component: ArmeView,
+            },
+        ],
     },
     {
         path: '/test',
@@ -129,49 +95,44 @@ const routes = [
     },
     {
         path: '/valeur',
-        alias: '/valeur/:idValeur',
         name: 'valeurView',
         component: ValeurView,
+        children: [
+            {
+                path: '/valeur/:idValeur',
+                name: 'modifValeurView',
+                component: ValeurView,
+            },
+        ],
     },
     {
         path: '/objet',
-        alias: '/objet/:idObjet',
         name: 'objetView',
         component: ObjetView,
+        children: [
+            {
+                path: '/objet/:idObjet',
+                name: 'modifObjetView',
+                component: ObjetView,
+            },
+        ],
     },
     {
         path: '/armes',
         name: 'armesView',
-        component: ArmesView,
+        component: ObjetsView,
     },
     {
         path: '/valeurs',
         name: 'valeursView',
-        component: ValeursView,
+        component: ObjetsView,
     },
     {
         path: '/objets',
->>>>>>> dev_Vue
         name: 'objetsView',
         component: ObjetsView,
     },
     {
-<<<<<<< HEAD
-        path: '/armes', // route pour la liste des armes
-        name: 'armesView',
-        component: ObjetsView,
-    },
-    {
-        path: '/valeurs', // route pour la liste des valeurs
-        name: 'valeursView',
-        component: ObjetsView,
-    },
-
-    {
-        path: '/reponseIPPE', // route pour la réponse d'une interrogation
-        name: 'reponseIPPEView',
-        component: ReponseIPPEView,
-=======
         path: '/SAAQ',
         name: 'SAAQView',
         component: SAAQView,
@@ -192,7 +153,6 @@ const routes = [
                 component: IPPEView,
             },
         ],
->>>>>>> dev_Vue
     },
 
 ];

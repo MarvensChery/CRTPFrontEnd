@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
     <div v-if="this.$route.name === 'objetsView'">
         <h1 class="has-text-black " style="height:135px; text-align:center; font-size: 24px;">
         <b><u>LISTE D'OBJETS</u></b></h1>
@@ -34,7 +33,7 @@
                             <td>{{ o.TypeObjet }}</td>
                             <td>{{ o.NoEvenement }}</td>
                             <td>
-                                <router-link :to="{ name: 'MobjetView',
+                                <router-link :to="{ name: 'modifObjetView',
                                             params: { idObjet: o.IdBOB } }">
                                 <i class='fas fa-edit'></i>
                             </router-link>
@@ -79,7 +78,7 @@
                             <td>{{ v.TypeEvenement }}</td>
                             <td>{{ v.NoEvenement }}</td>
                             <td>
-                                <router-link :to="{ name: 'MvaleurView',
+                                <router-link :to="{ name: 'modifValeurView',
                                             params: { idValeur: v.IdIBVA } }">
                                     <i class='fas fa-edit'></i>
                                 </router-link>
@@ -124,7 +123,7 @@
                             <td>{{ a.TypeArme }}</td>
                             <td>{{ a.NoEvenement }}</td>
                             <td>
-                                <router-link :to="{ name: 'MarmeView',
+                                <router-link :to="{ name: 'modifArmeView',
                                             params: { idArme: a.IdIBAF } }">
                                     <i class='fas fa-edit'></i>
                                 </router-link>
@@ -160,12 +159,6 @@
 import { svrURL } from '../constantes';
 
 // noinspection JSUnusedGlobalSymbols
-=======
-    <h1 class="title is-1 has-text-centered">Page en construction</h1>
-</template>
-
-<script>
->>>>>>> dev_Vue
 export default {
     name: 'ObjetsView',
     data() {
