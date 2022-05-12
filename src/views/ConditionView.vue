@@ -684,20 +684,21 @@ export default {
                 } else {
                     this.sucessAjout = false;
                 }
-
-                const response2 = await fetch(`${svrURL}/conditions/1`, {
-                    method: 'PUT',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: data,
-                });
-                await response2.json();
-                if (response2.ok) {
-                    this.sucessAjout = true;
-                } else {
-                    this.sucessAjout = false;
+                if (this.key.replace(/\s/g, '') === 'Avoircommeadressele') {
+                    const response2 = await fetch(`${svrURL}/conditions/1`, {
+                        method: 'PUT',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: data,
+                    });
+                    await response2.json();
+                    if (response2.ok) {
+                        this.sucessAjout = true;
+                    } else {
+                        this.sucessAjout = false;
+                    }
                 }
             }
         },
