@@ -302,7 +302,7 @@ import { svrURL } from '@/constantes';
 import { isNumeroValid, isHeightValid, isWeightValid } from '@/validations';
 // noinspection JSUnusedGlobalSymbols
 export default {
-    name: 'FormulaireFPSView',
+    name: 'FpsView',
     data() {
         return {
             // Lien de chaque input avec un v-model
@@ -391,7 +391,7 @@ export default {
                 }
                 if (rep.status === 404) {
                     this.errorMsg = 'Le FPS que vous tentez de rejoindre est introuvable !';
-                    setTimeout(() => this.$router.push('/personnes'), 3000);
+                    setTimeout(() => this.$router.push('/personne'), 3000);
                 }
             }
         },

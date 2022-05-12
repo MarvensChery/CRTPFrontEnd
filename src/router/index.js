@@ -9,7 +9,7 @@ import ObjetView from '@/views/ObjetView.vue';
 import ArmeView from '@/views/ArmeView.vue';
 
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
-import FormulaireFPSView from '@/views/FormulaireFPSView.vue';
+import FpsView from '@/views/FpsView.vue';
 import ValeurView from '@/views/ValeurView.vue';
 import EtudiantView from '@/views/EtudiantView.vue';
 import SAAQView from '@/views/SAAQView.vue';
@@ -82,13 +82,13 @@ const routes = [
     },
     {
         path: '/personne/:idPersonne/fps',
-        name: 'FormulaireFPSView',
-        component: FormulaireFPSView,
+        name: 'FpsView',
+        component: FpsView,
         children: [
             {
                 path: '/personne/:idPersonne/fps/:idFPS',
-                name: 'ajoutFormulaireFPSView',
-                component: FormulaireFPSView,
+                name: 'ajoutFpsView',
+                component: FpsView,
             },
         ],
     },
