@@ -66,7 +66,7 @@ Cette application servira comme outil de formation auz étudiants en Technique p
 ## Utilisation
 Installation de toutes les dependances:
 ```
-npm install
+npm install vue
 ```
 
 Détection des erreurs de lint:

@@ -63,6 +63,12 @@ function verifieNumPermis(str) {
 function verifieAdresse(str) {
     return /^.{0,50}$/.test(str);
 }
+
+// Vérifie que l'adresse commence par un chiffre a un maximum de 50 caracthères
+function verifieAdresse2(str) {
+    return /^[0-9]{1,6}\s[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî-\s]{0,50}$/.test(str);
+}
+
 // Vérifie que la ville a un maximum de 50 caracthères
 function verifieVille(str) {
     return /^[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî-\s]{0,50}$/.test(str);
@@ -92,13 +98,40 @@ function verifieMarques(str) {
 function verifieGiletPantalonAutreVetement(str) {
     return /^[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî,-\s]{0,50}$/.test(str);
 }
+// Vérifie que l'heure est dans le format 00:00
+// ,donc 2 nombres suivie d'un 2 points et encore 2 nombres
+function validationHeure(heure) {
+    return /^[0-9]{2}[:][0-9]{2}$/.test(heure);
+}
+// Vérifie que le NuméroFPS sois
+function isNumeroValid(numeroFPS) {
+    return /^[0-9]{6}$/.test(numeroFPS);
+}
+
+// Vérifie que la taille sois de 3 chiffres
+function isHeightValid(taille) {
+    return /^[0-9]{3}$/.test(taille);
+}
+// Vérifie que le poids de 2 à 3 chiffres
+function isWeightValid(poid) {
+    return /^[0-9]{2,3}$/.test(poid);
+}
+
+// Check si l'inputs du nom et Prenom contiennent les bons characteres
+function checkNomPrenomInput(str) {
+    return /^[a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî]{0,20}[' '][a-zA-ZÄäÖöÉéÈèÜüÊêÛûÎî]{0,20}$/.test(str);
+}
 
 export {
     isJourValide,
     isMoisValide,
     isAnneeValide,
     isDateValide,
-    capitalize,
+    capitalizeFirstLetter,
+    validationHeure,
+    isNumeroValid,
+    isHeightValid,
+    isWeightValid,
     verifieNumTel,
     verifieNumPermis,
     verifieAdresse,
@@ -112,4 +145,6 @@ export {
     checkPrenomInput,
     chekHour,
     verifieProvince,
+    checkNomPrenomInput,
+    verifieAdresse2,
 };
