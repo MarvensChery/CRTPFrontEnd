@@ -84,14 +84,14 @@
           <label for="mois" class="label">Mois</label>
           <div class="control">
             <input id="mois" class="input" type="number"
-                   placeholder="08" min="1" max="12" v-model="mois">
+                   placeholder="7" min="1" max="12" v-model="mois">
           </div>
         </div>
         <div class="column is-4">
           <label for="jour" class="label">Jours</label>
           <div class="control">
             <input id="jour" class="input" type="number"
-                   placeholder="02" min="1" max="12" v-model="jour">
+                   placeholder="8" min="1" max="12" v-model="jour">
           </div>
         </div>
         <!--VALIDATION ERREUR-->
@@ -127,7 +127,7 @@
 
 <script>
 import {
-    isAnneeValide, isMoisValide, isJourValide, capitalizeFirstLetter,
+    isAnneeValide, isMoisValide, isJourValide, capitalize,
 } from '@/validations';
 
 export default {
@@ -174,17 +174,17 @@ export default {
             } else {
                 this.sexeError = false;
             }
-            if (capitalizeFirstLetter(this.nom) === '') {
+            if (capitalize(this.nom) === '') {
                 this.nomError = true;
             } else {
                 this.nomError = false;
             }
-            if (capitalizeFirstLetter(this.prenom1) === '') {
+            if (capitalize(this.prenom1) === '') {
                 this.prenomError = true;
             } else {
                 this.prenomError = false;
             }
-            if (capitalizeFirstLetter(this.prenom2) === '') {
+            if (capitalize(this.prenom2) === '') {
                 this.prenom2 = null;
             }
             if (this.anneError === false && this.moisError === false

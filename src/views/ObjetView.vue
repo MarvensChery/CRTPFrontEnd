@@ -1,13 +1,11 @@
-<!-- eslint-disable max-len -->
-
 <template>
     <div class="container mb-4 is-desktop">
       <form @submit.prevent="onSubmit">
         <h1 class="has-text-black " style="height:135px; text-align:center;
         font-size: 24px; padding-top: 5%;" >
             <b>
-                <u v-if="isNaN(this.$route.params.idArme)">AJOUT D'UNE RÉPONSE ARME À FEU</u>
-                <u v-else>MODIFICATION D'UNE RÉPONSE ARME À FEU</u>
+                <u v-if="isNaN(this.$route.params.idObjet)">AJOUT D'UNE RÉPONSE OBJET</u>
+                <u v-else>MODIFICATION D'UNE RÉPONSE OBJET</u>
             </b>
         </h1>
         <br>
@@ -24,16 +22,16 @@
                 <footer>
                     <div class='controls'>
                         <button class='button button-danger doAction'
-                                v-on:click="deleteArme"> Oui  </button>
+                                v-on:click="deleteObjet"> Oui  </button>
                         <button class='button button-default cancelAction'
                                 v-on:click="confimation=''"> Non  </button>
                     </div>
                 </footer>
             </div>
         </div>
-        <div class="box" v-if="arme">
+        <div class="box" v-if="objet">
                 <div class="success" v-if="sucess">
-                    <a class="closebtn" href="/armes">&times;</a>
+                    <a class="closebtn" href="/objets">&times;</a>
                     {{sucess}}
                 </div>
                 <div class="error" v-if="error">
@@ -42,13 +40,6 @@
                 </div>
             <div class="columns is-centered">
                 <div class="column is-half">
-                    <div class="field" v-if="idArme!==-1">
-                            <label for="idArme" class="label is-hidden">idArme</label>
-                            <div class="control">
-                                <input id="idArme" class="input is-hidden" type="number"
-                                       placeholder="idArme" name="idArme" v-model="idArme" readonly>
-                        </div>
-                    </div>
                     <div class="field">
                         <label for="noSerie" class="label">Numéro de série</label>
                         <div class="control has-icons-left has-icons-right">
@@ -65,7 +56,7 @@
                         <label for="marque" class="label">Marque</label>
                         <div class="control has-icons-left has-icons-right">
                             <input id="marque" class="input" type="text" name="marque"
-                            placeholder="Marque" v-model="Marque"/>
+                            placeholder="Marque" v-model="marque" required/>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
@@ -74,32 +65,36 @@
                             {{MarqueValid}}</p>
                     </div>
                     <div class="field">
-                        <label for="calibre" class="label">Calibre</label>
+                        <label for="modele" class="label">Modèle</label>
                         <div class="control has-icons-left has-icons-right">
-                            <input id="calibre" class="input" type="text" name="calibre"
-                            placeholder="Calibre" v-model="Calibre" required/>
+                            <input id="modele" class="input" type="text" name="modele"
+                            placeholder="Modèle" v-model="modele" required/>
                             <span class="icon is-small is-left">
                                 <i class="fas fa-user"></i>
                             </span>
                         </div>
-                        <p v-if="CalibreValid" class="help is-danger">
-                            {{CalibreValid}}</p>
+                        <p v-if="modeleValid" class="help is-danger">
+                            {{modeleValid}}</p>
                     </div>
                     <div class="field">
-                        <label for="typeArme" class="label">Type d'arme</label>
+                        <label for="typeObjet" class="label">Type d'objet</label>
                         <div class = "control">
-                            <select id="typeArme" class="select" name="typeArme"
-                            v-model="typeArme" required>
+                            <select id="typeObjet" class="select" name="typeObjet"
+                                v-model="typeObjet" required>
                             <option></option>
-                            <option>Révolver</option>
-                            <option>Pistolet</option>
-                            <option>Carabine</option>
-                            <option>Fusil</option>
+                            <option value="RA">RA - Appareil de son / radio / haut-parleur</option>
+                            <option value="BI">BI - Bicyclette</option>
+                            <option value="EB">EB - Équipement de bureau</option>
+                            <option value="EP">EP - Équipement photo / vidéo</option>
+                            <option value="MO">MO - Machinerie / outils</option>
+                            <option value="OR">OR - Ordinateur / Équipement informatique</option>
+                            <option value="TA">TA - Tablette informatique (Ipad et autres)</option>
+                            <option value="TL">TL - Téléphone cellulaire</option>
+                            <option value="AU">AU - Autres articles</option>
                             </select>
                         </div>
                     </div>
-                    <div class="field" style="padding-bottom: 20px">
-                    <label for="NoEvenement" class="label">Numéro d'évenement</label>
+
                     <div id="NoEvenement" class="columns is-mobile is-multiline is-centered">
                         <div class="column is-3-desktop is-2-mobile">
                             <label class="has-text-black" for="NoEvent"><b>Numéro évenement</b>
@@ -107,17 +102,18 @@
                             <select id="NoEvent" class="select" name="NoEvent"
                             v-model="NoEvent"  required>
                                 <option></option>
-                                <option>123</option>
-                                <option>302</option>
-                                <option>108</option>
+                                <option value="123">123</option>
+                                <option value="302">302</option>
+                                <option value="108">108</option>
                             </select>
                         </div>
 
                         <div class="column is-2-desktop is-2-mobile">
                             <label class="has-text-black" for="annee"><b>Année</b>
                                 <span style="color: red">*</span></label><br><br>
-                            <input id="annee" type="text" name="annee" placeholder="2022"
-                            maxlength="4" v-model="annee" required/>
+                            <input maxlength="4" id="annee"
+                            type="text" name="annee" placeholder="2022"
+                            v-model="annee" required/>
                             <label class="has-text-danger"  v-if="anneValid"
                             for="warning">
                             <b>{{anneValid}}</b></label>
@@ -126,7 +122,7 @@
                         <div class="column is-1-desktop is-2-mobile">
                             <label class="has-text-black" for="ddm"><b>Mois</b><span
                                 style="color: red">*</span></label><br><br>
-                            <input id="Mois" class="input" type="number" maxlength="2"
+                            <input id="mois" class="input" type="number" maxlength="2"
                             placeholder="02" min="1" max="12" v-model="mois" required>
                             <label class="has-text-danger is-hidden" v-if="moisValid"
                             for="warning">
@@ -147,108 +143,88 @@
                             <input maxlength="4" id="NoSeq" type="text" name="NoSeq"
                                 placeholder="Numéro Séquentiel" v-model="NoSeq" required/>
                         </div>
-                   </div>
-                   <div class="btn-block" >
+                            <div class="btn-block" >
                 <button
-                v-if="!isNaN(this.$route.params.idArme)"
-                v-on:click="this.updateArme">Modifier</button>&nbsp;
-                <button type="reset"
-                v-if="!isNaN(this.$route.params.idArme)"
-                v-on:click="confirmation">Supprimer</button>&nbsp;
+                v-if="!isNaN(this.$route.params.idObjet)"
+                v-on:click="this.updateObjet">Modifier</button>&nbsp;
                 <button type="submit"
-                v-if="isNaN(this.$route.params.idArme)"
-                v-on:click="this.addArme">Ajouter</button>&nbsp;
+                v-if="isNaN(this.$route.params.idObjet)"
+                v-on:click="this.addObjet">Ajouter</button>&nbsp;
+                <button type="reset"
+                v-if="!isNaN(this.$route.params.idObjet)"
+                v-on:click="confirmation">Supprimer</button>&nbsp;
                 <button type="button"
-                    v-on:click="this.$router.push({ name: 'armesView' })">Annuler</button>
+                    v-on:click="this.$router.push({ name: 'objetsView' })">Annuler</button>
             </div>
+                   </div>
                 <p style="margin-bottom: 50px;">&nbsp;</p>
                 </div>
             </div>
         </div>
-        </div>
       </form>
-        <div class="modal is-active" v-show="showModal" @close="showModal = false">
-            <div class="modal-background"></div>
-            <div class="modal-card">
-                <header class="modal-card-head">
-                    <p class="modal-card-title">Confirmation de suppression</p>
-                    <button class="delete" aria-label="close"
-                            @click.prevent="showModal = false"></button>
-                </header>
-                <section class="modal-card-body">
-                    Voulez-vous vraiment supprimer cette entrée?
-                </section>
-                <footer class="modal-card-foot">
-                    <input class="button has-text-weight-bold is-danger" id="supprimer"
-                            @click.prevent="handlerSupprimer" value="Supprimer">
-                    <input class="button" @click.prevent="showModal = false" value="Retour">
-                </footer>
-            </div>
-        </div>
     </div>
 </template>
 
 <script>
-import { svrURL } from '@/constantes';
+import { svrURL } from '../constantes';
 import {
     capitalize, isJourValide, isMoisValide, isAnneeValide, isDateValide,
 } from '../validations';
 
 // noinspection JSUnusedGlobalSymbols
-
 export default {
-    name: 'ArmeView',
+    name: 'ObjetView',
     data() {
         return {
-            arme: [],
+            objet: [],
             NoSerie: '',
-            Marque: '',
-            Calibre: '',
-            typeArme: '',
-            NoEvent: '',
+            marque: '',
+            modele: '',
+            typeObjet: '',
             annee: '',
             mois: '',
             jour: '',
             NoSeq: '',
+            NoEvent: '',
             sucess: '',
             error: '',
             anneValid: '',
             moisValid: '',
             jourValid: '',
-            NoSerieValid: '',
             MarqueValid: '',
-            CalibreValid: '',
+            modeleValid: '',
+            NoSerieValid: '',
             confimation: '',
         };
     },
     mounted() {
-        if (this.$route.path !== '/arme') {
-            this.getArme(); // Get les info d'une arme précise
+        if (this.$route.path !== '/objet') {
+            this.getObjet(); // get les fino d'un objet au chargement de la page
         }
     },
     methods: {
         confirmation() {
             this.confimation = 'validation';
         },
-        async deleteArme() {
-            const api = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, { method: 'DELETE' }); // Permet de delete une arme
+        async deleteObjet() {
+            const api = await fetch(`${svrURL}/objets/${this.$route.params.idObjet}`, { method: 'DELETE' }); // delete un objet
             const res = await api.json();
             if (res.success) {
                 this.sucess = res.message;
                 this.confimation = '';
             } else this.error = res.message;
         },
-        async addArme() { // Permet de add une arme
+        async addObjet() { // add un objet
             if (this.NoSerie === '') {
                 this.NoSerieValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
-            if (this.Marque === '') {
+            if (this.marque === '') {
                 this.MarqueValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
-            if (this.Calibre === '') {
-                this.CalibreValid = '*Champ obligatoire : seulement des lettres et - sont valides';
+            if (this.modele === '') {
+                this.modeleValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
             if (!isJourValide(this.jour)) {
@@ -271,13 +247,13 @@ export default {
             this.mois = this.mois.toString().length === 1 ? `0${this.mois}` : this.mois;
             const formData = {
                 NoSerie: capitalize(this.NoSerie),
-                marque: capitalize(this.Marque),
-                calibre: this.Calibre,
-                typeAr: capitalize(this.typeArme),
+                marque: capitalize(this.marque),
+                modele: capitalize(this.modele),
+                typeOb: this.typeObjet,
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
-            const api = await fetch(`${svrURL}/armes`, {
+            const api = await fetch(`${svrURL}/objets`, {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
@@ -289,17 +265,17 @@ export default {
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
-        async updateArme() { // Permet de Update une arme
+        async updateObjet() { // modifier les info d'un objet
             if (this.NoSerie === '') {
                 this.NoSerieValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
-            if (this.Marque === '') {
+            if (this.marque === '') {
                 this.MarqueValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
-            if (this.Calibre === '') {
-                this.CalibreValid = '*Champ obligatoire : seulement des lettres et - sont valides';
+            if (this.modele === '') {
+                this.modeleValid = '*Champ obligatoire : seulement des lettres et - sont valides';
                 return;
             }
             if (!isJourValide(this.jour)) {
@@ -322,13 +298,13 @@ export default {
             this.mois = this.mois.toString().length === 1 ? `0${this.mois}` : this.mois;
             const formData = {
                 NoSerie: capitalize(this.NoSerie),
-                marque: capitalize(this.Marque),
-                calibre: this.Calibre,
-                typeAr: capitalize(this.typeArme),
+                marque: capitalize(this.marque),
+                modele: capitalize(this.modele),
+                typeOb: this.typeObjet,
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
-            const api = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, {
+            const api = await fetch(`${svrURL}/objets/${this.$route.params.idObjet}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
@@ -340,16 +316,16 @@ export default {
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
         },
-        async getArme() { // Get les info d'une arme
-            const rep = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, { method: 'GET' });
+        async getObjet() { // get les info d'un objet
+            const rep = await fetch(`${svrURL}/objets/${this.$route.params.idObjet}`, { method: 'GET' }); // get les info d'un objet
             const data = await rep.json();
 
-            if (rep.ok) this.arme = data;
+            if (rep.ok) this.objet = data;
 
             this.NoSerie = data[0].NoSerie;
-            this.Marque = data[0].Marque;
-            this.Calibre = data[0].Calibre;
-            this.typeArme = data[0].TypeArme;
+            this.marque = data[0].Marque;
+            this.modele = data[0].Modele;
+            this.typeObjet = data[0].TypeObjet;
             const no = data[0].NoEvenement.split('-');
             [this.NoEvent, this.NoSeq] = [no[0], no[2]];
             [this.mois, this.jour] = [
@@ -388,77 +364,77 @@ html, body {
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.50);
     z-index: 999999
-}
-.dialog-ovelay .dialog {
-    width: 400px;
-    margin: 100px auto 0;
-    background-color: #fff;
-    box-shadow: 0 0 20px rgba(0,0,0,.2);
-    border-radius: 3px;
-    overflow: hidden
-}
-.dialog-ovelay .dialog header {
-    padding: 10px 8px;
-    background-color: #f6f7f9;
-    border-bottom: 1px solid #e5e5e5
-}
-.dialog-ovelay .dialog header h3 {
-    font-size: 14px;
-    margin: 0;
-    color: #555;
-    display: inline-block
-}
-.dialog-ovelay .dialog header .fa-close {
-    float: right;
-    color: #c4c5c7;
-    cursor: pointer;
-    transition: all .5s ease;
-    padding: 0 2px;
-    border-radius: 1px
-}
-.dialog-ovelay .dialog header .fa-close:hover {
-    color: #b9b9b9
-}
-.dialog-ovelay .dialog header .fa-close:active {
-    box-shadow: 0 0 5px #673AB7;
-    color: #a2a2a2
-}
-.dialog-ovelay .dialog .dialog-msg {
-    padding: 12px 10px
-}
-.dialog-ovelay .dialog .dialog-msg p{
-    margin: 0;
-    font-size: 15px;
-    color: #333
-}
-.dialog-ovelay .dialog footer {
-    border-top: 1px solid #e5e5e5;
-    padding: 8px 10px
-}
-.dialog-ovelay .dialog footer .controls {
-    direction: rtl
-}
-.dialog-ovelay .dialog footer .controls .button {
-    padding: 5px 15px;
-    border-radius: 3px
-}
-.button {
-  cursor: pointer
-}
-.button-default {
-    background-color: rgb(248, 248, 248);
-    border: 1px solid rgba(204, 204, 204, 0.5);
-    color: #5D5D5D;
-}
-.button-danger {
-    background-color: #f44336;
-    border: 1px solid #d32f2f;
-    color: #f5f5f5
-}
-.link {
-  padding: 5px 10px;
-  cursor: pointer
-}
+    }
+    .dialog-ovelay .dialog {
+        width: 400px;
+        margin: 100px auto 0;
+        background-color: #fff;
+        box-shadow: 0 0 20px rgba(0,0,0,.2);
+        border-radius: 3px;
+        overflow: hidden
+    }
+    .dialog-ovelay .dialog header {
+        padding: 10px 8px;
+        background-color: #f6f7f9;
+        border-bottom: 1px solid #e5e5e5
+    }
+    .dialog-ovelay .dialog header h3 {
+        font-size: 14px;
+        margin: 0;
+        color: #555;
+        display: inline-block
+    }
+    .dialog-ovelay .dialog header .fa-close {
+        float: right;
+        color: #c4c5c7;
+        cursor: pointer;
+        transition: all .5s ease;
+        padding: 0 2px;
+        border-radius: 1px
+    }
+    .dialog-ovelay .dialog header .fa-close:hover {
+        color: #b9b9b9
+    }
+    .dialog-ovelay .dialog header .fa-close:active {
+        box-shadow: 0 0 5px #673AB7;
+        color: #a2a2a2
+    }
+    .dialog-ovelay .dialog .dialog-msg {
+        padding: 12px 10px
+    }
+    .dialog-ovelay .dialog .dialog-msg p{
+        margin: 0;
+        font-size: 15px;
+        color: #333
+    }
+    .dialog-ovelay .dialog footer {
+        border-top: 1px solid #e5e5e5;
+        padding: 8px 10px
+    }
+    .dialog-ovelay .dialog footer .controls {
+        direction: rtl
+    }
+    .dialog-ovelay .dialog footer .controls .button {
+        padding: 5px 15px;
+        border-radius: 3px
+    }
+    .button {
+    cursor: pointer
+    }
+    .button-default {
+        background-color: rgb(248, 248, 248);
+        border: 1px solid rgba(204, 204, 204, 0.5);
+        color: #5D5D5D;
+    }
+    .button-danger {
+        background-color: #f44336;
+        border: 1px solid #d32f2f;
+        color: #f5f5f5
+    }
+    .link {
+    padding: 5px 10px;
+    cursor: pointer
+    }
     .closebtn {
         margin-left: 15px;
         color: white;
@@ -547,7 +523,7 @@ html, body {
     .item:hover i,
     .question:hover p,
     .question label:hover,
-    input:hover::placeholder select:hover::placeholder {
+    input:hover::placeholder {
     color: #008bcc;
     }
     .item input:hover, .item select:hover, .item textarea:hover {
