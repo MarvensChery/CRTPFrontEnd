@@ -36,7 +36,7 @@ function isDateValide(annee, mois, jour) {
 }
 
 // Pour convertir la permiere lettre d'un string en majuscule
-function capitalize(str) {
+function capitalizeFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 // Pour valider l'heure
