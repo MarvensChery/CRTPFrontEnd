@@ -7,12 +7,11 @@ import ConditionView from '@/views/ConditionView.vue';
 import PersonneView from '@/views/PersonneView.vue';
 import ObjetView from '@/views/ObjetView.vue';
 import ArmeView from '@/views/ArmeView.vue';
+
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
 import ValeurView from '@/views/ValeurView.vue';
 import EtudiantView from '@/views/EtudiantView.vue';
 import SAAQView from '@/views/SAAQView.vue';
-import ArmesView from '@/views/ArmesView.vue';
-import ValeursView from '@/views/ValeursView.vue';
 import ObjetsView from '@/views/ObjetsView.vue';
 import testView from '@/views/testView.vue';
 import DescriptionPersonneView from '@/views/DescriptionPersonneView.vue';
@@ -20,22 +19,22 @@ import IPPEView from '@/views/IPPEView.vue';
 
 const routes = [
     {
-        path: '/',
+        path: '/', // Route pour le menu
         name: 'accueil',
         component: AccueilView,
     },
     {
-        path: '/connexion',
+        path: '/connexion', // Route pour le menu connexion
         name: 'connexion',
         component: ConnexionView,
     },
     {
-        path: '/requeteIPPE',
+        path: '/requeteIPPE', // Route pour faire une interrogation personne
         name: 'requeteIPPE',
         component: RequeteIPPEView,
     },
     {
-        path: '/personnes',
+        path: '/personnes', // Route pour la liste des personne de la table IPPE
         name: 'personnesView',
         component: PersonnesView,
     },
@@ -50,7 +49,7 @@ const routes = [
         component: ConditionView,
     },
     {
-        path: '/personne',
+        path: '/personne', // Route pour une personne
         name: 'personneView',
         component: PersonneView,
         children: [
@@ -73,9 +72,15 @@ const routes = [
     },
     {
         path: '/arme',
-        alias: '/arme/:idArme',
         name: 'armeView',
         component: ArmeView,
+        children: [
+            {
+                path: '/arme/:idArme',
+                name: 'modifArmeView',
+                component: ArmeView,
+            },
+        ],
     },
     {
         path: '/test',
@@ -89,25 +94,37 @@ const routes = [
     },
     {
         path: '/valeur',
-        alias: '/valeur/:idValeur',
         name: 'valeurView',
         component: ValeurView,
+        children: [
+            {
+                path: '/valeur/:idValeur',
+                name: 'modifValeurView',
+                component: ValeurView,
+            },
+        ],
     },
     {
         path: '/objet',
-        alias: '/objet/:idObjet',
         name: 'objetView',
         component: ObjetView,
+        children: [
+            {
+                path: '/objet/:idObjet',
+                name: 'modifObjetView',
+                component: ObjetView,
+            },
+        ],
     },
     {
         path: '/armes',
         name: 'armesView',
-        component: ArmesView,
+        component: ObjetsView,
     },
     {
         path: '/valeurs',
         name: 'valeursView',
-        component: ValeursView,
+        component: ObjetsView,
     },
     {
         path: '/objets',
