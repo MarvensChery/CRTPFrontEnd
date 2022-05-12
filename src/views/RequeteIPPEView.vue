@@ -127,7 +127,7 @@
 
 <script>
 import {
-    isAnneeValide, isMoisValide, isJourValide, capitalize,
+    isAnneeValide, isMoisValide, isJourValide, capitalizeFirstLetter,
 } from '@/validations';
 
 export default {
@@ -174,17 +174,17 @@ export default {
             } else {
                 this.sexeError = false;
             }
-            if (capitalize(this.nom) === '') {
+            if (capitalizeFirstLetter(this.nom) === '') {
                 this.nomError = true;
             } else {
                 this.nomError = false;
             }
-            if (capitalize(this.prenom1) === '') {
+            if (capitalizeFirstLetter(this.prenom1) === '') {
                 this.prenomError = true;
             } else {
                 this.prenomError = false;
             }
-            if (capitalize(this.prenom2) === '') {
+            if (capitalizeFirstLetter(this.prenom2) === '') {
                 this.prenom2 = null;
             }
             if (this.anneError === false && this.moisError === false

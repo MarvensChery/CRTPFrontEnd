@@ -205,9 +205,8 @@ import {
     isMoisValide,
     isAnneeValide,
     isDateValide,
-    capitalize,
     checkNomInput,
-    checkPrenomInput,
+    checkPrenomInput, capitalizeFirstLetter,
 } from '../validations.js';
 // noinspection JSUnusedGlobalSymbols
 export default {
@@ -251,15 +250,15 @@ export default {
     computed: {
         // Rajoute une majuscule au nom de famille
         capitalizeName() {
-            return capitalize(this.nomFamille);
+            return capitalizeFirstLetter(this.nomFamille);
         },
         // Rajoute une majuscule au prénom un
         capitalizeFirstNameOne() {
-            return capitalize(this.prenomUn);
+            return capitalizeFirstLetter(this.prenomUn);
         },
         // Rajoute une majuscule au prénom deux
         capitalizeFirstNameDeux() {
-            return capitalize(this.prenomDeux);
+            return capitalizeFirstLetter(this.prenomDeux);
         },
         // Vérifie la validité du nom de famille
         nomFamilleValid() {

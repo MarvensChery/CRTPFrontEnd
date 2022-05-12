@@ -191,7 +191,7 @@
 <script>
 import { svrURL } from '@/constantes';
 import {
-    capitalize, isJourValide, isMoisValide, isAnneeValide, isDateValide,
+    capitalizeFirstLetter, isJourValide, isMoisValide, isAnneeValide, isDateValide,
 } from '../validations';
 
 // noinspection JSUnusedGlobalSymbols
@@ -270,10 +270,10 @@ export default {
             this.jour = this.jour.toString().length === 1 ? `0${this.jour}` : this.jour;
             this.mois = this.mois.toString().length === 1 ? `0${this.mois}` : this.mois;
             const formData = {
-                NoSerie: capitalize(this.NoSerie),
-                marque: capitalize(this.Marque),
+                NoSerie: capitalizeFirstLetter(this.NoSerie),
+                marque: capitalizeFirstLetter(this.Marque),
                 calibre: this.Calibre,
-                typeAr: capitalize(this.typeArme),
+                typeAr: capitalizeFirstLetter(this.typeArme),
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
@@ -321,10 +321,10 @@ export default {
             this.jour = this.jour.toString().length === 1 ? `0${this.jour}` : this.jour;
             this.mois = this.mois.toString().length === 1 ? `0${this.mois}` : this.mois;
             const formData = {
-                NoSerie: capitalize(this.NoSerie),
-                marque: capitalize(this.Marque),
+                NoSerie: capitalizeFirstLetter(this.NoSerie),
+                marque: capitalizeFirstLetter(this.Marque),
                 calibre: this.Calibre,
-                typeAr: capitalize(this.typeArme),
+                typeAr: capitalizeFirstLetter(this.typeArme),
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 

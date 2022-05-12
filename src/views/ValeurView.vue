@@ -162,7 +162,7 @@
 <script>
 import { svrURL } from '../constantes';
 import {
-    capitalize, isJourValide, isMoisValide, isAnneeValide, isDateValide,
+    capitalizeFirstLetter, isJourValide, isMoisValide, isAnneeValide, isDateValide,
 } from '../validations';
 
 // noinspection JSUnusedGlobalSymbols
@@ -235,10 +235,10 @@ export default {
             this.jour = this.jour.toString().length === 1 ? `0${this.jour}` : this.jour;
             this.mois = this.mois.toString().length === 1 ? `0${this.mois}` : this.mois;
             const formData = {
-                auteur: capitalize(this.auteur),
-                NoSerie: capitalize(this.Identifiant),
-                typeVa: capitalize(this.TypeValeur),
-                resIBVA: capitalize(this.TypeEvenement),
+                auteur: capitalizeFirstLetter(this.auteur),
+                NoSerie: capitalizeFirstLetter(this.Identifiant),
+                typeVa: capitalizeFirstLetter(this.TypeValeur),
+                resIBVA: capitalizeFirstLetter(this.TypeEvenement),
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
@@ -282,10 +282,10 @@ export default {
             this.jour = this.jour.toString().length === 1 ? `0${this.jour}` : this.jour;
             this.mois = this.mois.toString().length === 1 ? `0${this.mois}` : this.mois;
             const formData = {
-                auteur: capitalize(this.auteur),
-                NoSerie: capitalize(this.Identifiant),
-                typeVa: capitalize(this.TypeValeur),
-                resIBVA: capitalize(this.TypeEvenement),
+                auteur: capitalizeFirstLetter(this.auteur),
+                NoSerie: capitalizeFirstLetter(this.Identifiant),
+                typeVa: capitalizeFirstLetter(this.TypeValeur),
+                resIBVA: capitalizeFirstLetter(this.TypeEvenement),
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
@@ -307,11 +307,11 @@ export default {
 
             if (rep.ok) this.valeur = data;
 
-            this.auteur = capitalize(data[0].Auteur);
-            this.Identifiant = capitalize(data[0].Identifiant);
-            this.Auteur = capitalize(data[0].Auteur);
-            this.TypeValeur = capitalize(data[0].TypeValeur);
-            this.TypeEvenement = capitalize(data[0].TypeEvenement);
+            this.auteur = capitalizeFirstLetter(data[0].Auteur);
+            this.Identifiant = capitalizeFirstLetter(data[0].Identifiant);
+            this.Auteur = capitalizeFirstLetter(data[0].Auteur);
+            this.TypeValeur = capitalizeFirstLetter(data[0].TypeValeur);
+            this.TypeEvenement = capitalizeFirstLetter(data[0].TypeEvenement);
             const no = data[0].NoEvenement.split('-');
             [this.NoEvent, this.NoSeq] = [no[0], no[2]];
             [this.mois, this.jour] = [
