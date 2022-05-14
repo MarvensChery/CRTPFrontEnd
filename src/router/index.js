@@ -43,11 +43,6 @@ const routes = [
         path: '/personne/:idPersonne/ippe/:idIppe/condition',
         name: 'ajoutConditionView',
         component: ConditionView,
-    },
-    {
-        path: '/condition/:idCondition',
-        name: 'conditionView',
-        component: ConditionView,
         children: [
             {
                 path: '/personne/:idPersonne/ippe/:idIppe/condition/:idCondition',
