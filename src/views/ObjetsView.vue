@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
     <div>
         <div v-if="this.$route.name === 'objetsView'">
@@ -6,7 +7,7 @@
             <div class="columns has-text-right has-text-black is-centered"
             style="padding-right: 5%; padding-bottom: 5%;">
                 <div class="select">
-                    <select v-model="valeursFiltres">
+                   <select v-model="valeursFiltres">
                         <option></option>
                         <option v-for="i in optionsValeurs" :value="i" :key="i">{{i}}</option>
                     </select>
