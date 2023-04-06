@@ -14,7 +14,6 @@ import ValeurView from '@/views/ValeurView.vue';
 import EtudiantView from '@/views/EtudiantView.vue';
 import SAAQView from '@/views/SAAQView.vue';
 import ObjetsView from '@/views/ObjetsView.vue';
-import testView from '@/views/testView.vue';
 import DescriptionPersonneView from '@/views/DescriptionPersonneView.vue';
 import IPPEView from '@/views/IPPEView.vue';
 
@@ -113,11 +112,6 @@ const routes = [
                 component: ArmeView,
             },
         ],
-    },
-    {
-        path: '/test',
-        name: 'test',
-        component: testView,
     },
     {
         path: '/reponseIPPE/:nomFamille/:prenom1/:prenom2/:masculin/:dateNaissance',

@@ -464,6 +464,7 @@ body {
 
 .shadow:hover {
   -webkit-filter: drop-shadow(-5px 2px 5px #999999);
+  filter: drop-shadow(-5px 2px 5px #999999);
 }
 
 #rightarrow {
