@@ -42,11 +42,11 @@
                 </div>
             <div class="columns is-centered">
                 <div class="column is-half">
-                    <div class="field" v-if="idArme!==-1">
+                    <div class="field" v-if="arme.idArme!==-1">
                             <label for="idArme" class="label is-hidden">idArme</label>
                             <div class="control">
                                 <input id="idArme" class="input is-hidden" type="number"
-                                       placeholder="idArme" name="idArme" v-model="idArme" readonly>
+                                       placeholder="idArme" name="idArme" v-model="arme.idArme" readonly>
                         </div>
                     </div>
                     <div class="field">
@@ -231,7 +231,7 @@ export default {
             this.confimation = 'validation';
         },
         async deleteArme() {
-            const api = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, { method: 'DELETE' }); // Permet de delete une arme
+            const api = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, { Authorization: this.$store.state.token, method: 'DELETE' }); // Permet de delete une arme
             const res = await api.json();
             if (res.success) {
                 this.sucess = res.message;
@@ -281,6 +281,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
+                    Authorization: this.$store.state.token,
                 },
                 method: 'POST',
                 body: JSON.stringify(formData),
@@ -332,6 +333,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
+                    Authorization: this.$store.state.token,
                 },
                 method: 'PUT',
                 body: JSON.stringify(formData),
@@ -341,7 +343,12 @@ export default {
             else this.error = res.message;
         },
         async getArme() { // Get les info d'une arme
-            const rep = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, { method: 'GET' });
+            const rep = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, {
+                headers: {
+                    Authorization: this.$store.state.token,
+                },
+                method: 'GET',
+            });
             const data = await rep.json();
 
             if (rep.ok) this.arme = data;

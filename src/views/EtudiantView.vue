@@ -25,36 +25,6 @@
                 <img src ="/images/ibva.png" alt="valeursView">
             </router-link>
         </div>
-        <div class=" column is-large is-info
-        has-text-centered mb-4 ml-2 mr-2 is-3-desktop is-3-tablet is-3-mobile">
-            <router-link v-bind:to="{ name: 'SAAQView'}">
-                <img src ="/images/dbq1.png" alt="dbq1">
-            </router-link>
-        </div>
-        <div class=" column is-large is-info
-        has-text-centered mb-4 ml-2 mr-2 is-3-desktop is-3-tablet is-3-mobile">
-            <router-link v-bind:to="{ name: 'SAAQView'}">
-                <img src ="/images/dbq2.png" alt="dbq2">
-            </router-link>
-        </div>
-        <div class=" column is-large is-info
-        has-text-centered mb-4 ml-2 mr-2 is-3-desktop is-3-tablet is-3-mobile">
-            <router-link v-bind:to="{ name: 'SAAQView'}">
-                <img src ="/images/dbq3.png" alt="dbq3">
-            </router-link>
-        </div>
-        <div class=" column is-large is-info
-        has-text-centered mb-4 ml-2 mr-2 is-3-desktop is-3-tablet is-3-mobile">
-            <router-link v-bind:to="{ name: 'SAAQView'}">
-                <img src ="/images/dbq4.png" alt="dbq4">
-            </router-link>
-        </div>
-        <div class=" column is-large is-info
-        has-text-centered mb-4 ml-2 mr-2 is-3-desktop is-3-tablet is-3-mobile">
-            <router-link v-bind:to="{ name: 'SAAQView'}">
-                <img src ="/images/dbq9.png" alt="dbq9">
-            </router-link>
-        </div>
     </div>
 </template>
 
@@ -63,6 +33,12 @@
 // noinspection JSUnusedGlobalSymbols
 export default {
     name: 'EtudiantView',
+    /* eslint-disable */
+  methods: {
+    deco() {
+      this.$store.state.token = '';
+    }
+  }
 };
 </script>
 

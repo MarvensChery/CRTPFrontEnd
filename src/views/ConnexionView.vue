@@ -8,7 +8,8 @@
                     <h1 class="subtitle mb-3" ><strong>Lequel des deux êtes vous ?</strong> </h1>
                 </div>
                 <div class="switch-button" id="switch1">
-                    <input id="toggle" class="switch-button-checkbox" type="checkbox" />
+                    <input id="toggle" class="switch-button-checkbox" type="checkbox"
+                    @change="toggleCheckbox"/>
                     <label for="toggle" class="switch-button-label">
                         <span class="switch-button-label-span" id="btn">Étudiant</span>
                     </label>
@@ -17,7 +18,8 @@
                     <label for="ID" class="label mt-3" id="nomLabel">
                         Identifiant de l'étudiant</label>
                     <div class="control has-icons-right">
-                        <input class="input is-info " id="ID" placeholder="00000" type="text">
+                        <input class="input is-info " id="ID"
+                        placeholder="00000" type="text" v-model="Identifiant">
                         <span class="icon is-small is-right">
                             <i class="fa fa-user"></i>
                         </span>
@@ -28,7 +30,8 @@
                     <h class="label" id="mdpLabel">Mot de passe de l'étudiant</h>
                     <div class="control has-icons-right">
                         <label for="mdp"></label>
-                        <input class="input is-info" id="mdp" placeholder="•••••••" type="password">
+                        <input class="input is-info" id="mdp" placeholder="•••••••"
+                        type="password" v-model="mdp">
                         <span class="icon is-large is-right">
                             <i class="fa fa-key"></i>
                         </span>
@@ -39,7 +42,7 @@
                     <button
                         class="button is-vcentered is-info is-outlined
                                is-medium is-rounded is-fullwidth"
-                        id="co">Se connecter</button><br>
+                        id="co" v-on:click="connect" >Se connecter</button><br>
                 </div>
                 <footer id="pied">
                     <article class="message is-info">
@@ -68,9 +71,55 @@
     </div>
 </template>
 
-<script>
+<script>/* eslint-disable */
 export default {
     name: 'ConnexionView',
+    data() {
+        return {
+          Identifiant: '',
+            mdp: '',
+            check: false,
+
+        };
+    },
+    methods: {
+
+        async connect() {
+            const url = 'http://localhost:3000/connexion';
+            const Identifiant = this.Identifiant;
+            const MotDePasse = this.mdp;
+            const body = { Identifiant, MotDePasse };
+
+            // effectuer le fetch
+            const response = await fetch(url, {
+                headers: { 'Content-Type': 'application/json' },
+                method: 'POST',
+                body: JSON.stringify(body),
+            });
+
+            // traiter la réponse
+            if (response.ok) {
+                const data = await response.json();
+                this.$store.state.token = data.token;
+                this.$root.$data.Professeur = this.check;
+                // window.location.href = '/';
+                if (this.$root.$data.Professeur == true) {this.$router.push('/')}
+                else {this.$router.push('/etudiant')}
+
+            } else {
+
+                console.error('une erreur sest produite');
+            }
+
+        },
+        toggleCheckbox() {
+          this.check = !this.check
+      this.$emit('setCheckboxVal', this.check)
+    }
+
+    },
+
+
 };
 </script>
 

@@ -1,7 +1,6 @@
 <template>
     <div>
-        <MenuProfesseurView v-if="Professeur === true"/>
-        <EtudiantView v-else/>
+        <MenuProfesseurView />
         <HeaderView/>
         <router-view/>
     </div>
@@ -10,16 +9,17 @@
 <script>
 
 import MenuProfesseurView from '@/components/MenuProfesseurView.vue';
-import EtudiantView from '@/views/EtudiantView.vue';
+// import EtudiantView from '@/views/EtudiantView.vue';
 import HeaderView from '@/components/HeaderView.vue';
 
 export default {
     name: 'App',
-    components: { MenuProfesseurView, EtudiantView, HeaderView },
+    components: { MenuProfesseurView, HeaderView },
     data() {
         return {
-            Professeur: true,
+            Professeur: false,
             erreurIPPE: false,
+
         };
     },
 };

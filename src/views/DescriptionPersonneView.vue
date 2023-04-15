@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/form-control-has-label /* eslint-disable */-->
 <template>
     <div class="container mb-4 is-desktop" v-if="personne !== null">
         <div class="box">
@@ -206,7 +207,8 @@
                     <button class="button is-info" v-on:click="retourALaPersonne">Retour</button>
                 </div>
                 <div class="column is-6">
-                    <button class="button is-info" v-on:click="updateDescription">
+                    <button class="button is-info" v-on:click="
+                    this.$router.push({ name: 'DescriptionPersonneView' })">
                         Enregistrer
                     </button>
                 </div>

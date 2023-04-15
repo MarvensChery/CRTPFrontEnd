@@ -107,7 +107,11 @@ export default {
             this.$router.push(`/personne/${id}`);
         },
         async getPersonnes() {
-            const rep = await fetch(`${svrURL}/personnes`);
+            const rep = await fetch(`${svrURL}/personnes`, {
+                headers: new Headers({
+                    Authorization: this.$store.state.token,
+                }),
+            });
             if (rep.ok) {
                 const json = await rep.json();
                 this.tableauPersonne = json;

@@ -292,7 +292,11 @@ export default {
     methods: {
         // Sauve les informations de la personne et les places dans les inputs
         async getPersonne() {
-            const response = await fetch(`${svrURL}/personnes/${this.paramId}`);
+            const response = await fetch(`${svrURL}/personnes/${this.paramId}`, {
+                headers: new Headers({
+                    Authorization: this.$store.state.token,
+                }),
+            });
             if (response.ok) {
                 this.personne = await response.json();
                 const [anneVal, moisVal, anneeVal] = this.personne[0].DateNaissance.split('-');
@@ -308,7 +312,11 @@ export default {
         },
         // Recherche si la personne possède des évênements IPPE
         async getIPPE() {
-            const response = await fetch(`${svrURL}/personnes/${this.paramId}/ippes`);
+            const response = await fetch(`${svrURL}/personnes/${this.paramId}/ippes`, {
+                headers: new Headers({
+                    Authorization: this.$store.state.token,
+                }),
+            });
             if (response.ok) {
                 this.ippe = await response.json();
             }
@@ -318,7 +326,7 @@ export default {
             let msg;
             const response = await fetch(`${svrURL}/personnes/${this.paramId}`, {
                 method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', Authorization: this.$store.state.token },
             });
             if (response.ok) {
                 msg = await response.json();
@@ -414,7 +422,7 @@ export default {
 
                 const response = await fetch(`${svrURL}/personnes/${this.paramId}`, {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', Authorization: this.$store.state.token },
                     body: JSON.stringify(body),
                 });
                 if (response.ok) {
@@ -446,7 +454,7 @@ export default {
 
                 const response = await fetch(`${svrURL}/personnes`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', Authorization: this.$store.state.token },
                     body: JSON.stringify(body),
                 });
                 if (response.ok) {
