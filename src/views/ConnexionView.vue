@@ -39,6 +39,9 @@
                     <p id="error"></p>
                 </div>
                 <div class="has-text-centered">
+                  <div class="notification is-danger is-light" v-if="connectionFailed===true">
+                    Connexion ratée
+                  </div>
                     <button
                         class="button is-vcentered is-info is-outlined
                                is-medium is-rounded is-fullwidth"
@@ -79,8 +82,12 @@ export default {
           Identifiant: '',
             mdp: '',
             check: false,
+            connectionFailed: false,
 
         };
+    },
+    async mounted(){
+      this.connectionFailed=false;
     },
     methods: {
 
@@ -99,6 +106,7 @@ export default {
 
             // traiter la réponse
             if (response.ok) {
+              this.connectionFailed=false;
                 const data = await response.json();
                 this.$store.state.token = data.token;
                 this.$root.$data.Professeur = this.check;
@@ -107,7 +115,7 @@ export default {
                 else {this.$router.push('/etudiant')}
 
             } else {
-
+              this.connectionFailed=true;
                 console.error('une erreur sest produite');
             }
 
@@ -115,9 +123,9 @@ export default {
         toggleCheckbox() {
           this.check = !this.check
       this.$emit('setCheckboxVal', this.check)
+      this.connectionFailed=false;
     }
-
-    },
+  },
 
 
 };
