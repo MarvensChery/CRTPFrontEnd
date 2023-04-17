@@ -1,21 +1,23 @@
 <template>
-  <nav class="navbar">
+  <nav class="navbar is-link">
     <div class="navbar-brand">
-      <a class="navbar-item">
+      <router-link v-bind:to="{ name: 'accueil' }">
+      <a class="navbar-item ">
         <img
           src="https://media.discordapp.net/attachments/927002688888131606/956803614402297866/logom9.png?width=512&height=128"
           id="logo" class="zoom" alt="Logo m9" width="112" height="40">
       </a>
-
-      <div class="navbar-burger burger" id="nav" data-target="navmnenu1">
+    </router-link>
+      <!-- Responsive navbar burger -->
+      <div class="navbar-burger" id="nav" data-target="navmnenu1">
         <span></span>
         <span></span>
         <span></span>
       </div>
     </div>
     <div id="navmnenu1" class="navbar-menu">
-      <div class="navbar-start" v-if="this.$root.$data.Professeur">
-        <div class="navbar-item has-dropdown is-hoverable is-mega">
+      <div class="navbar-start">
+        <div class="navbar-item has-dropdown is-hoverable is-mega" v-if="this.$store.state.token">
           <div class="navbar-link flex">
             <span>Type de Recherche et plus</span>
           </div>
@@ -37,7 +39,7 @@
                     </a>
                   </router-link>
                   <router-link v-bind:to="{ name: 'personnesView' }">
-                    <a class="navbar-item">
+                    <a class="navbar-item" v-if="this.$root.$data.Professeur">
                       <div class="navbar-content">
                         <p>
                           <strong>FPS</strong>
@@ -81,7 +83,7 @@
                     </a>
                   </router-link>
                 </div>
-                <div class="column">
+                <div class="column" v-if="this.$root.$data.Professeur">
                   <h1 class="title is-6 is-mega-menu-title">Autres recherches</h1>
                   <router-link v-bind:to="{ name: 'SAAQView' }">
                     <a class="navbar-item">
@@ -139,7 +141,7 @@
                     </a>
                   </router-link>
                 </div>
-                <div class="column " id="menuP">
+                <div class="column" id="menuP" v-if="this.$root.$data.Professeur">
                   <h1 class="title is-6 is-mega-menu-title">Menu prof</h1>
                   <router-link v-bind:to="{ name: 'personnesView' }">
                     <a class="navbar-item " id="banqueP">
@@ -151,30 +153,27 @@
             </div>
           </div>
         </div>
-        <router-link v-bind:to="{ name: 'accueil' }">
-          <a class="navbar-item " id="accueil">
-            Accueil
-          </a>
-        </router-link>
       </div>
       <div class="navbar-end">
-        <router-link v-if="!this.$root.$data.Professeur" v-bind:to="{ name: 'etudiant' }">
-          <a class="navbar-item " id="accueil">
-            Accueil
-          </a>
+        <router-link v-if="!this.$root.$data.Professeur && this.$store.state.token"
+        v-bind:to="{ name: 'etudiant' }">
+          <div class="button is-light" style="margin-top: 9px;">
+                Acceuil
+              </div>
         </router-link>
         <div class="navbar-item">
           <div class="field is-grouped">
             <p class="control">
             </p>
-            <router-link v-if="this.$store.state.token" v-on:click="deco"
-            class="button is-light is-danger" v-bind:to="{ name: 'accueil' }">
-              deconnection
+            <router-link v-if="this.$store.state.token" v-bind:to="{ name: 'accueil' }"
+            v-on:click="deco"
+              class="button is-light is-danger" >
+              Déconnection
             </router-link>
 
             <router-link v-else v-bind:to="{ name: 'connexion' }">
               <div class="button is-light is-primary">
-                connection
+                Connection
               </div>
 
             </router-link>
@@ -187,17 +186,45 @@
 </template>
 
 <script>
-export default {
-    name: 'MenuProfesseurView',
-    /* eslint-disable */
-  methods: {
-    deco() {
-      this.$store.state.token = '';
-    }
-  }
-};
+document.addEventListener('DOMContentLoaded', () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length > 0) {
+        // Add a click event on each of them
+        $navbarBurgers.forEach((el) => {
+            el.addEventListener('click', () => {
+                // Get the target from the "data-target" attribute
+                const { target } = el.dataset;
+                const $target = document.getElementById(target);
+
+                // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                el.classList.toggle('is-active');
+                $target.classList.toggle('is-active');
+            });
+        });
+    }
+});
+
+export default {
+    data() {
+        return {
+            isActive: false,
+        };
+    },
+    methods: {
+        deco() {
+            sessionStorage.removeItem('token');
+            location.reload();
+        },
+        toggleNavbar() {
+            this.isActive = !this.isActive;
+        },
+    },
+};
 </script>
 
 <style scoped>
+
 </style>
