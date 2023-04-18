@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar is-link">
+  <nav class="navbar">
     <div class="navbar-brand">
       <router-link v-bind:to="{ name: 'accueil' } " @click="closeMenu">
       <a class="navbar-item ">
@@ -60,7 +60,7 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'armesView' }">
+                  <router-link v-bind:to="{ name: 'armesView' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
