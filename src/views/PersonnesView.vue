@@ -24,7 +24,8 @@
             <div>
               <hr />
             </div>
-            <div class="column is-10 is-offset-1-desktop">
+            <div class="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop
+            is-one-third-widescreen is-one-quarter-fullhd">
               <table class="table is-striped is-fullwidth is-bordered is-centered my-5">
                 <thead>
                   <tr>
@@ -60,16 +61,7 @@
             </div>
           </div>
         </form>
-        <!--BUTTON HOME-->
-        <div>
-          <router-link to="/">
-            <img
-              id="imgHome"
-              class="shadow zoom imgHome"
-              src="/images/home.png"
-              alt="Accueil"
-          /></router-link>
-        </div>
+
       </div>
     </div>
   </div>

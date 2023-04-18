@@ -85,7 +85,7 @@
                         <p v-if="CalibreValid" class="help is-danger">
                             {{CalibreValid}}</p>
                     </div>
-                    <div class="field">
+                    <div class="field" style="margin-left: 35%;">
                         <label for="typeArme" class="label">Type d'arme</label>
                         <div class = "control">
                             <select id="typeArme" class="select" name="typeArme"
@@ -99,13 +99,12 @@
                         </div>
                     </div>
                     <div class="field" style="padding-bottom: 20px">
-                    <label for="NoEvenement" class="label">Numéro d'évenement</label>
                     <div id="NoEvenement" class="columns is-mobile is-multiline is-centered">
                         <div class="column is-3-desktop is-2-mobile">
                             <label class="has-text-black" for="NoEvent"><b>Numéro évenement</b>
                                 <span style="color: red">*</span></label><br><br>
                             <select id="NoEvent" class="select" name="NoEvent"
-                            v-model="NoEvent"  required>
+                            v-model="NoEvent" style="width: 80%;"  required>
                                 <option></option>
                                 <option>123</option>
                                 <option>302</option>

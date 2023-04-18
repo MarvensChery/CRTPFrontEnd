@@ -29,7 +29,6 @@
 </template>
 
 <script>
-
 // noinspection JSUnusedGlobalSymbols
 export default {
     name: 'EtudiantView',

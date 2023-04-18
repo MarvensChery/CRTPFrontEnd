@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar is-link">
     <div class="navbar-brand">
-      <router-link v-bind:to="{ name: 'accueil' }">
+      <router-link v-bind:to="{ name: 'accueil' } " @click="closeMenu">
       <a class="navbar-item ">
         <img
           src="https://media.discordapp.net/attachments/927002688888131606/956803614402297866/logom9.png?width=512&height=128"
@@ -9,7 +9,7 @@
       </a>
     </router-link>
       <!-- Responsive navbar burger -->
-      <div class="navbar-burger" id="nav" data-target="navmnenu1">
+      <div class="navbar-burger" id="nav" data-target="navmnenu1" >
         <span></span>
         <span></span>
         <span></span>
@@ -27,7 +27,7 @@
                 <div class="column">
                   <h1 class="title is-6 is-mega-menu-title">
                     Les recherches mise a votre disposition</h1>
-                  <router-link v-bind:to="{ name: 'requeteIPPE' }">
+                  <router-link v-bind:to="{ name: 'requeteIPPE' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content" id="ippe">
                         <p>
@@ -38,7 +38,7 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'personnesView' }">
+                  <router-link v-bind:to="{ name: 'personnesView' }" @click="closeMenu">
                     <a class="navbar-item" v-if="this.$root.$data.Professeur">
                       <div class="navbar-content">
                         <p>
@@ -49,7 +49,7 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'objetsView' }">
+                  <router-link v-bind:to="{ name: 'objetsView' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
@@ -71,7 +71,7 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'valeursView' }">
+                  <router-link v-bind:to="{ name: 'valeursView' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="column" v-if="this.$root.$data.Professeur">
                   <h1 class="title is-6 is-mega-menu-title">Autres recherches</h1>
-                  <router-link v-bind:to="{ name: 'SAAQView' }">
+                  <router-link v-bind:to="{ name: 'SAAQView' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
@@ -96,7 +96,7 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'SAAQView' }">
+                  <router-link v-bind:to="{ name: 'SAAQView' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
@@ -107,7 +107,7 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'SAAQView' }">
+                  <router-link v-bind:to="{ name: 'SAAQView' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
@@ -118,7 +118,7 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'SAAQView' }">
+                  <router-link v-bind:to="{ name: 'SAAQView' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
@@ -129,7 +129,7 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'SAAQView' }">
+                  <router-link v-bind:to="{ name: 'SAAQView' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
@@ -143,7 +143,7 @@
                 </div>
                 <div class="column" id="menuP" v-if="this.$root.$data.Professeur">
                   <h1 class="title is-6 is-mega-menu-title">Menu prof</h1>
-                  <router-link v-bind:to="{ name: 'personnesView' }">
+                  <router-link v-bind:to="{ name: 'personnesView' }" @click="closeMenu">
                     <a class="navbar-item " id="banqueP">
                       <strong>Banque de personne</strong>
                     </a>
@@ -155,29 +155,28 @@
         </div>
       </div>
       <div class="navbar-end">
+        <div class="navbar-item">
         <router-link v-if="!this.$root.$data.Professeur && this.$store.state.token"
-        v-bind:to="{ name: 'etudiant' }">
-          <div class="button is-light" style="margin-top: 9px;">
+        @click="closeMenu"
+          v-bind:to="{ name: 'etudiant' }">
+            <div class="button is-light" style="margin-right: 20px;">
                 Acceuil
               </div>
         </router-link>
-        <div class="navbar-item">
-          <div class="field is-grouped">
-            <p class="control">
-            </p>
+
             <router-link v-if="this.$store.state.token" v-bind:to="{ name: 'accueil' }"
+            @click="closeMenu"
             v-on:click="deco"
-              class="button is-light is-danger" >
+              class="button is-light is-danger"  >
               Déconnection
             </router-link>
 
-            <router-link v-else v-bind:to="{ name: 'connexion' }">
+            <router-link v-else v-bind:to="{ name: 'connexion' }" @click="closeMenu">
               <div class="button is-light is-primary">
                 Connection
               </div>
 
             </router-link>
-          </div>
         </div>
       </div>
     </div>
@@ -214,9 +213,20 @@ export default {
         };
     },
     methods: {
+        toggleMenu() {
+            const burger = document.querySelector('.navbar-burger');
+            const menu = document.querySelector('.navbar-menu');
+            burger.classList.toggle('is-active');
+            menu.classList.toggle('is-active');
+        },
+        closeMenu() {
+            const burger = document.querySelector('.navbar-burger');
+            const menu = document.querySelector('.navbar-menu');
+            burger.classList.remove('is-active');
+            menu.classList.remove('is-active');
+        },
         deco() {
-            sessionStorage.removeItem('token');
-            location.reload();
+            this.$store.state.token = '';
         },
         toggleNavbar() {
             this.isActive = !this.isActive;

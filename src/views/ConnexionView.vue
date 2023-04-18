@@ -1,7 +1,7 @@
 <template>
     <div class="columns is-vcentered">
 
-        <div class="login column is-6 ">
+        <div class="login column is-12">
             <section class="section">
                 <div class="has-text-centered">
                     <img class="login-logo" id="img" src="/images/etudiant.png" alt="logo etudiant">
@@ -14,7 +14,7 @@
                         <span class="switch-button-label-span" id="btn">Étudiant</span>
                     </label>
                   </div>
-                <div class="field ">
+                <div class="field" style="margin-left: 35%; margin-right: 35%;">
                     <label for="ID" class="label mt-3" id="nomLabel">
                         Identifiant de l'étudiant</label>
                     <div class="control has-icons-right">
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div ></div>
-                <div class="field">
+                <div class="field" style="margin-left: 35%; margin-right: 35%;">
                     <h class="label" id="mdpLabel">Mot de passe de l'étudiant</h>
                     <div class="control has-icons-right">
                         <label for="mdp"></label>
@@ -41,7 +41,7 @@
                 <div class="has-text-centered">
                     <button
                         class="button is-vcentered is-info is-outlined
-                               is-medium is-rounded is-fullwidth"
+                               is-medium is-rounded "
                         id="co" v-on:click="connect" >Se connecter</button><br>
                 </div>
                 <footer id="pied">
@@ -124,6 +124,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 @media (max-width: 800px) {
   .interactive-bg {
     display: none;
