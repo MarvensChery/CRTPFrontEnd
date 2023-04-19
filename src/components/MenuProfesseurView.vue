@@ -36,17 +36,6 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'personnesView' }">
-                    <a class="navbar-item">
-                      <div class="navbar-content">
-                        <p>
-                          <strong>FPS</strong>
-                          <br>
-                          <small>Recherche de personnes bertillones</small>
-                        </p>
-                      </div>
-                    </a>
-                  </router-link>
                   <router-link v-bind:to="{ name: 'objetsView' }">
                     <a class="navbar-item">
                       <div class="navbar-content">
@@ -76,64 +65,6 @@
                           <strong>IBVA</strong>
                           <br>
                           <small>Recherche de valeurs</small>
-                        </p>
-                      </div>
-                    </a>
-                  </router-link>
-                </div>
-                <div class="column">
-                  <h1 class="title is-6 is-mega-menu-title">Autres recherches</h1>
-                  <router-link v-bind:to="{ name: 'SAAQView' }">
-                    <a class="navbar-item">
-                      <div class="navbar-content">
-                        <p>
-                          <strong>SAAQ</strong>
-                          <br>
-                          <small>Recherche de personnes par plaque d'immatriculation</small>
-                        </p>
-                      </div>
-                    </a>
-                  </router-link>
-                  <router-link v-bind:to="{ name: 'SAAQView' }">
-                    <a class="navbar-item">
-                      <div class="navbar-content">
-                        <p>
-                          <strong>SAAQ</strong>
-                          <br>
-                          <small>Recherche Par nom,prenoms et date de naissance</small>
-                        </p>
-                      </div>
-                    </a>
-                  </router-link>
-                  <router-link v-bind:to="{ name: 'SAAQView' }">
-                    <a class="navbar-item">
-                      <div class="navbar-content">
-                        <p>
-                          <strong>SAAQ</strong>
-                          <br>
-                          <small>Recherche Par numero de dossier (permis de conduire)</small>
-                        </p>
-                      </div>
-                    </a>
-                  </router-link>
-                  <router-link v-bind:to="{ name: 'SAAQView' }">
-                    <a class="navbar-item">
-                      <div class="navbar-content">
-                        <p>
-                          <strong>SAAQ</strong>
-                          <br>
-                          <small>Recherche de vehicule</small>
-                        </p>
-                      </div>
-                    </a>
-                  </router-link>
-                  <router-link v-bind:to="{ name: 'SAAQView' }">
-                    <a class="navbar-item">
-                      <div class="navbar-content">
-                        <p>
-                          <strong>SAAQ</strong>
-                          <br>
-                          <small>Recherche par adresse</small>
                         </p>
                       </div>
                     </a>

@@ -137,13 +137,15 @@ export default {
             if (response.ok) {
               this.connectionFailed=false;
                 const data = await response.json();
-                this.store.token = data.token;
                 this.store.Professeur = this.check;
                 if (this.store.Professeur == !data.Etudiant) {
-                  if (this.store.Professeur) {console.log('ddddd'),
+                  if (this.store.Professeur) { this.store.token = await data.token,
                     this.$router.push('/')}
-                else {this.$router.push('/etudiant')}}
-
+                else {this.store.token = await data.token,this.$router.push('/etudiant')}}
+                else {
+              this.connectionFailed=true;
+                console.error('une erreur sest produite');
+            }
 
             } else {
               this.connectionFailed=true;
@@ -156,7 +158,6 @@ export default {
       this.$emit('setCheckboxVal', this.check)
       this.connectionFailed=false;
       this.store.Professeur = this.check;
-      console.log(this.store.token)
     }
   },
 
