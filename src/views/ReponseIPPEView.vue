@@ -418,7 +418,7 @@
 </template>
 
 <script>
-
+import { connexion } from '@/stores/connexionStore';
 import { svrURL } from '@/constantes';
 
 export default {
@@ -438,6 +438,11 @@ export default {
     mounted() {
         this.getIppeReponse();
     },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
+    },
     methods: {
         async getIppeReponse() {
             const prenom2 = this.$route.params.prenom2 === 'null' ? '' : this.$route.params.prenom2;
@@ -445,22 +450,25 @@ export default {
                 `${svrURL}/personnes/info?nomFamille=${this.$route.params.nomFamille}&prenom1=${this.$route.params.prenom1}&prenom2=${prenom2}&masculin=${this.$route.params.masculin}&dateNaissance=${this.$route.params.dateNaissance}`,
                 {
                     headers: {
-                        Authorization: this.$store.state.token,
+                        Authorization: this.store.token,
                     },
                 },
             );
-            if (personneInfo.ok) {
-                this.reponseIPPE = await personneInfo.json();
-                const pIPPE = await fetch(
+            if (rep.ok) {
+                this.reponseIPPE = await rep.json();
+                const repii = await fetch(
                     `${svrURL}/personnes/${this.reponseIPPE[0].IdPersonne}/ippes`,
                     {
                         headers: {
-                            Authorization: this.$store.state.token,
+                            Authorization: this.store.token,
                         },
                     },
                 );
 
-                if (!pIPPE.ok) {
+                // console.log(repi[0].TypeEvenement);
+
+                //  console.log(repi.length);
+                if (!repii.ok) {
                     this.reponseIPPE1type = 'Négatif';
                 } else {
                     this.reponseIPPE[0].IPPE = await pIPPE.json();

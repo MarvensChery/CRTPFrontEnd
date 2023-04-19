@@ -14,7 +14,7 @@
                         <span class="switch-button-label-span" id="btn">Étudiant</span>
                     </label>
                   </div>
-                <div class="field " v-if="!this.$store.state.Professeur">
+                <div class="field " v-if="!this.store.Professeur">
                     <label for="ID" class="label mt-3" id="nomLabel" >
                         Identifiant de l'étudiant</label>
                     <div class="control has-icons-right">
@@ -25,7 +25,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="field " v-if="this.$store.state.Professeur">
+                <div class="field " v-if="this.store.Professeur">
                     <label for="ID" class="label mt-3" id="nomLabel" >
                         Identifiant du Professeur</label>
                     <div class="control has-icons-right">
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div ></div>
-                <div class="field" v-if="!this.$store.state.Professeur">
+                <div class="field" v-if="!this.store.Professeur">
                     <p class="label" id="mdpLabel">Mot de passe de l'étudiant</p>
                     <div class="control has-icons-right">
                         <label for="mdp"></label>
@@ -49,7 +49,7 @@
                     </div>
                     <p id="error"></p>
                 </div>
-                <div class="field" v-if="this.$store.state.Professeur">
+                <div class="field" v-if="this.store.Professeur">
                     <p class="label" id="mdpLabel">Mot de passe du Professeur</p>
                     <div class="control has-icons-right">
                         <label for="mdp"></label>
@@ -98,6 +98,7 @@
 </template>
 
 <script>/* eslint-disable */
+import {connexion} from "@/stores/connexionStore"
 export default {
     name: 'ConnexionView',
     data() {
@@ -109,6 +110,11 @@ export default {
 
         };
     },
+    setup(){
+ const store = connexion();
+ //exposer l'objet store à la vue
+ return { store };
+ },
     async mounted(){
       this.connectionFailed=false;
     },
@@ -131,12 +137,15 @@ export default {
             if (response.ok) {
               this.connectionFailed=false;
                 const data = await response.json();
-                this.$store.state.token = data.token;
-                this.$store.state.Professeur = this.check;
-                if (this.$store.state.Professeur == !data.Etudiant) {
-                  if (this.$store.state.Professeur) {this.$router.push('/')}
-                else {this.$router.push('/etudiant')}}
-
+                this.store.Professeur = this.check;
+                if (this.store.Professeur == !data.Etudiant) {
+                  if (this.store.Professeur) { this.store.token = await data.token,
+                    this.$router.push('/')}
+                else {this.store.token = await data.token,this.$router.push('/etudiant')}}
+                else {
+              this.connectionFailed=true;
+                console.error('une erreur sest produite');
+            }
 
             } else {
               this.connectionFailed=true;
@@ -148,8 +157,7 @@ export default {
           this.check = !this.check
       this.$emit('setCheckboxVal', this.check)
       this.connectionFailed=false;
-      this.$store.state.Professeur = this.check;
-      console.log(this.$store.state.token)
+      this.store.Professeur = this.check;
     }
   },
 

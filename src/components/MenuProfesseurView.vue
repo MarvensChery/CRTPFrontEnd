@@ -14,7 +14,7 @@
       </div>
     </div>
     <div id="navmnenu1" class="navbar-menu">
-      <div class="navbar-start" v-if="this.$store.state.Professeur">
+      <div class="navbar-start" v-if="this.store.Professeur">
         <div class="navbar-item has-dropdown is-hoverable is-mega">
           <div class="navbar-link flex">
             <span>Type de Recherche et plus</span>
@@ -32,17 +32,6 @@
                           <strong>IPPE</strong>
                           <br>
                           <small>Recherche de personnes</small>
-                        </p>
-                      </div>
-                    </a>
-                  </router-link>
-                  <router-link v-bind:to="{ name: 'personnesView' }">
-                    <a class="navbar-item">
-                      <div class="navbar-content">
-                        <p>
-                          <strong>FPS</strong>
-                          <br>
-                          <small>Recherche de personnes bertillones</small>
                         </p>
                       </div>
                     </a>
@@ -81,64 +70,6 @@
                     </a>
                   </router-link>
                 </div>
-                <div class="column">
-                  <h1 class="title is-6 is-mega-menu-title">Autres recherches</h1>
-                  <router-link v-bind:to="{ name: 'SAAQView' }">
-                    <a class="navbar-item">
-                      <div class="navbar-content">
-                        <p>
-                          <strong>SAAQ</strong>
-                          <br>
-                          <small>Recherche de personnes par plaque d'immatriculation</small>
-                        </p>
-                      </div>
-                    </a>
-                  </router-link>
-                  <router-link v-bind:to="{ name: 'SAAQView' }">
-                    <a class="navbar-item">
-                      <div class="navbar-content">
-                        <p>
-                          <strong>SAAQ</strong>
-                          <br>
-                          <small>Recherche Par nom,prenoms et date de naissance</small>
-                        </p>
-                      </div>
-                    </a>
-                  </router-link>
-                  <router-link v-bind:to="{ name: 'SAAQView' }">
-                    <a class="navbar-item">
-                      <div class="navbar-content">
-                        <p>
-                          <strong>SAAQ</strong>
-                          <br>
-                          <small>Recherche Par numero de dossier (permis de conduire)</small>
-                        </p>
-                      </div>
-                    </a>
-                  </router-link>
-                  <router-link v-bind:to="{ name: 'SAAQView' }">
-                    <a class="navbar-item">
-                      <div class="navbar-content">
-                        <p>
-                          <strong>SAAQ</strong>
-                          <br>
-                          <small>Recherche de vehicule</small>
-                        </p>
-                      </div>
-                    </a>
-                  </router-link>
-                  <router-link v-bind:to="{ name: 'SAAQView' }">
-                    <a class="navbar-item">
-                      <div class="navbar-content">
-                        <p>
-                          <strong>SAAQ</strong>
-                          <br>
-                          <small>Recherche par adresse</small>
-                        </p>
-                      </div>
-                    </a>
-                  </router-link>
-                </div>
                 <div class="column " id="menuP">
                   <h1 class="title is-6 is-mega-menu-title">Menu prof</h1>
                   <router-link v-bind:to="{ name: 'personnesView' }">
@@ -158,7 +89,7 @@
         </router-link>
       </div>
       <div class="navbar-end">
-        <router-link v-if="!this.$store.state.Professeur" v-bind:to="{ name: 'etudiant' }">
+        <router-link v-if="!this.store.Professeur" v-bind:to="{ name: 'etudiant' }">
           <a class="navbar-item " id="accueil">
             Accueil
           </a>
@@ -167,7 +98,7 @@
           <div class="field is-grouped">
             <p class="control">
             </p>
-            <router-link v-if="this.$store.state.token" v-on:click="deco"
+            <router-link v-if="this.store.token" v-on:click="deco"
             class="button is-light is-danger" v-bind:to="{ name: 'accueil' }">
               deconnection
             </router-link>
@@ -187,14 +118,21 @@
 </template>
 
 <script>
+import { connexion } from '@/stores/connexionStore';
+
 export default {
     name: 'MenuProfesseurView',
     /* eslint-disable */
   methods: {
     deco() {
-      this.$store.state.token = '';
+      this.store.token = '';
     }
-  }
+  },
+  setup(){
+ const store = connexion();
+ //exposer l'objet store à la vue
+ return { store };
+ },
 
 };
 
