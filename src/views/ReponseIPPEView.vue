@@ -454,9 +454,9 @@ export default {
                     },
                 },
             );
-            if (rep.ok) {
-                this.reponseIPPE = await rep.json();
-                const repii = await fetch(
+            if (personneInfo.ok) {
+                this.reponseIPPE = await personneInfo.json();
+                const pIPPE = await fetch(
                     `${svrURL}/personnes/${this.reponseIPPE[0].IdPersonne}/ippes`,
                     {
                         headers: {
@@ -468,7 +468,7 @@ export default {
                 // console.log(repi[0].TypeEvenement);
 
                 //  console.log(repi.length);
-                if (!repii.ok) {
+                if (!pIPPE.ok) {
                     this.reponseIPPE1type = 'Négatif';
                 } else {
                     this.reponseIPPE[0].IPPE = await pIPPE.json();
