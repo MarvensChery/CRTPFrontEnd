@@ -10,7 +10,7 @@
         </h1>
         <br>
         <br>
-        <div class='dialog-ovelay' v-if="confimation">
+        <div class='dialog-ovelay' v-if="confimation"> 
             <div class='dialog'>
                 <header>
                     <h3> Confirmation </h3>

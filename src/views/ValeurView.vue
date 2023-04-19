@@ -20,7 +20,7 @@
                     <p> Voulez-vous supprimer? </p>
                 </div>
                 <footer>
-                    <div class='controls'>
+                    <div class='controls'> 
                         <button class='button button-danger doAction'
                                 v-on:click="deleteValeur"> Oui  </button>
                         <button class='button button-default cancelAction'

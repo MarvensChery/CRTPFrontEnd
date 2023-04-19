@@ -9,13 +9,13 @@
       </a>
     </router-link>
       <!-- Responsive navbar burger -->
-      <div class="navbar-burger" id="nav" data-target="navmnenu1" >
+      <div class="navbar-burger"  id="nav" data-target="navmnenu1" >
         <span></span>
         <span></span>
         <span></span>
       </div>
     </div>
-    <div id="navmnenu1" class="navbar-menu">
+    <div id="navmnenu1"  class="navbar-menu">
       <div class="navbar-start">
         <div class="navbar-item has-dropdown is-hoverable is-mega" v-if="this.$store.state.token">
           <div class="navbar-link flex">
@@ -154,8 +154,8 @@
           </div>
         </div>
       </div>
-      <div class="navbar-end">
-        <div class="navbar-item">
+      <div class="navbar-end" >
+        <div class="navbar-item" >
         <router-link v-if="!this.$root.$data.Professeur && this.$store.state.token"
         @click="closeMenu"
           v-bind:to="{ name: 'etudiant' }">

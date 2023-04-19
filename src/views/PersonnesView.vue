@@ -21,7 +21,7 @@
               <hr />
             </div>
             <div class="table-container">
-              <table class="table is-striped is-fullwidth is-bordered is-centered my-5">
+              <table class="table is-striped is-fullwidth is-bordered is-centered my-5"> 
                 <thead>
                   <tr>
                     <th class="is-info">Nom</th>

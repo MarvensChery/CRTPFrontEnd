@@ -22,7 +22,7 @@
         <div class=" column is-large is-info
         has-text-centered mb-4 ml-2 mr-2  is-3-desktop is-3-tablet is-3-mobile">
             <router-link v-bind:to="{ name: 'valeursView'}">
-                <img src ="/images/ibva.png" alt="valeursView">
+                <img src ="/images/ibva.png" alt="valeursView"> 
             </router-link>
         </div>
     </div>
