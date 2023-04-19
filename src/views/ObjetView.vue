@@ -166,11 +166,11 @@
 </template>
 
 <script>
+import { connexion } from '@/stores/connexionStore';
 import { svrURL } from '../constantes';
 import {
     capitalizeFirstLetter, isJourValide, isMoisValide, isAnneeValide, isDateValide,
 } from '../validations';
-
 // noinspection JSUnusedGlobalSymbols
 export default {
     name: 'ObjetView',
@@ -197,6 +197,11 @@ export default {
             confimation: '',
         };
     },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
+    },
     mounted() {
         if (this.$route.path !== '/objet') {
             this.getObjet(); // get les fino d'un objet au chargement de la page
@@ -207,7 +212,7 @@ export default {
             this.confimation = 'validation';
         },
         async deleteObjet() {
-            const api = await fetch(`${svrURL}/objets/${this.$route.params.idObjet}`, { Authorization: this.$store.state.token, method: 'DELETE' }); // delete un objet
+            const api = await fetch(`${svrURL}/objets/${this.$route.params.idObjet}`, { Authorization: this.store.token, method: 'DELETE' }); // delete un objet
             const res = await api.json();
             if (res.success) {
                 this.sucess = res.message;
@@ -257,7 +262,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
-                    Authorization: this.$store.state.token,
+                    Authorization: this.store.token,
                 },
                 method: 'POST',
                 body: JSON.stringify(formData),
@@ -309,7 +314,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
-                    Authorization: this.$store.state.token,
+                    Authorization: this.store.token,
                 },
                 method: 'PUT',
                 body: JSON.stringify(formData),
@@ -321,7 +326,7 @@ export default {
         async getObjet() { // get les info d'un objet
             const rep = await fetch(`${svrURL}/objets/${this.$route.params.idObjet}`, { method: 'GET' }, {
                 headers: new Headers({
-                    Authorization: this.$store.state.token,
+                    Authorization: this.store.token,
                 }),
             }); // get les info d'un objet
             const data = await rep.json();

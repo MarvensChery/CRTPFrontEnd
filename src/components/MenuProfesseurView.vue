@@ -14,7 +14,7 @@
       </div>
     </div>
     <div id="navmnenu1" class="navbar-menu">
-      <div class="navbar-start" v-if="this.$store.state.Professeur">
+      <div class="navbar-start" v-if="this.store.Professeur">
         <div class="navbar-item has-dropdown is-hoverable is-mega">
           <div class="navbar-link flex">
             <span>Type de Recherche et plus</span>
@@ -158,7 +158,7 @@
         </router-link>
       </div>
       <div class="navbar-end">
-        <router-link v-if="!this.$store.state.Professeur" v-bind:to="{ name: 'etudiant' }">
+        <router-link v-if="!this.store.Professeur" v-bind:to="{ name: 'etudiant' }">
           <a class="navbar-item " id="accueil">
             Accueil
           </a>
@@ -167,7 +167,7 @@
           <div class="field is-grouped">
             <p class="control">
             </p>
-            <router-link v-if="this.$store.state.token" v-on:click="deco"
+            <router-link v-if="this.store.token" v-on:click="deco"
             class="button is-light is-danger" v-bind:to="{ name: 'accueil' }">
               deconnection
             </router-link>
@@ -187,14 +187,21 @@
 </template>
 
 <script>
+import { connexion } from '@/stores/connexionStore';
+
 export default {
     name: 'MenuProfesseurView',
     /* eslint-disable */
   methods: {
     deco() {
-      this.$store.state.token = '';
+      this.store.token = '';
     }
-  }
+  },
+  setup(){
+ const store = connexion();
+ //exposer l'objet store à la vue
+ return { store };
+ },
 
 };
 
