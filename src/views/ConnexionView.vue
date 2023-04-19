@@ -139,8 +139,9 @@ export default {
                 const data = await response.json();
                 this.store.token = data.token;
                 this.store.Professeur = this.check;
-                if (this.Professeur == !data.Etudiant) {
-                  if (this.store.Professeur) {this.$router.push('/')}
+                if (this.store.Professeur == !data.Etudiant) {
+                  if (this.store.Professeur) {console.log('ddddd'),
+                    this.$router.push('/')}
                 else {this.$router.push('/etudiant')}}
 
 
