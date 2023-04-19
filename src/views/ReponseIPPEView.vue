@@ -135,42 +135,42 @@
                   <div v-if="reponseIPPE1type === 'Recherché'">
                     <tr>
                       <td>Mandat:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].mandat }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].Mandat }}</td>
                     </tr>
                     <tr>
                       <td>Cour:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].cour }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].Cour }}</td>
                     </tr>
                     <tr>
                       <td>Numero de mandat:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].noMandat }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].NoMandat }}</td>
                     </tr>
                     <tr>
                       <td>Nature du crime :</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].nature }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].Nature }}</td>
                     </tr>
                     <tr>
                       <td>Numéro d'événement :</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].noEvenement }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].NoEvenement }}</td>
                     </tr>
                     <table class="table is-fullwidth" v-html="formatterConditions()"></table>
                   </div>
                   <div v-if="reponseIPPE1type === 'Sous observation'">
                     <tr>
                       <td>Motif:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].motif }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].Motif }}</td>
                     </tr>
                     <tr>
                       <td>Nature du crime:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].nature }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].Nature }}</td>
                     </tr>
                     <tr>
                       <td>Numéro d'événement:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].noEvenement }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].NoEvenement }}</td>
                     </tr>
                     <tr>
                       <td>Dossier d'enquête:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].dossierEnquete }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].DossierEnquete }}</td>
                     </tr>
                     <tr><span>-</span></tr>
                     <tr>
@@ -185,47 +185,47 @@
                   <table v-if="reponseIPPE1type === 'Accusé'">
                     <tr>
                       <td>Cour:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].cour }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].Cour }}</td>
                     </tr>
                     <tr>
                       <td>Numero de cause:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].noCause }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].NoCause }}</td>
                     </tr>
                     <tr>
                       <td>Nature du crime:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].nature }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].Nature }}</td>
                     </tr>
                     <tr>
                       <td>Numéro d'événement:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].noEvenement }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].NoEvenement }}</td>
                     </tr>
                     <table class="table is-fullwidth" v-html="formatterConditions()"></table>
                   </table>
                   <div v-if="reponseIPPE1type === 'Interdit'">
                     <tr>
                       <td>Nature:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].nature }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].Nature }}</td>
                     </tr>
                     <tr>
                       <td>Cour:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].cour }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].Cour }}</td>
                     </tr>
                     <tr>
                       <td>Numero de cause:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].noCause }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].NoCause }}</td>
                     </tr>
                     <tr>
                       <td>Nature du crime:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].nature }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].Nature }}</td>
                     </tr>
                     <tr>
                       <td>Numéro d'événement:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].noEvenement }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].NoEvenement }}</td>
                     </tr>
                     <tr>
                       <td>Expiration:</td>
                       <td>
-                        {{ this.reponseIPPE[0].IPPE[0].finSentence.split('T')[0] }}
+                        {{ this.reponseIPPE[0].IPPE[0].FinSentence.split('T')[0] }}
                       </td>
                     </tr>
                     <table class="table is-fullwidth" v-html="formatterConditions()"></table>
@@ -235,52 +235,52 @@
                   <div v-if="this.reponseIPPE1type === 'Probation'">
                     <tr>
                       <td>Cour:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].cour }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].Cour }}</td>
                     </tr>
                     <tr>
                       <td>Numero de cause:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].noCause }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].NoCause }}</td>
                     </tr>
                     <tr>
                       <td>Nature du crime:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].nature }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].Nature }}</td>
                     </tr>
                     <tr>
                       <td>Numéro d'événement:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].noEvenement }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].NoEvenement }}</td>
                     </tr>
                     <tr>
                       <td>Fin de sentence:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].finSentence.split('T')[0] }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].FinSentence.split('T')[0] }}</td>
                     </tr>
                     <table class="table is-fullwidth" v-html="formatterConditions()"></table>
                     <tr>
                       <td>Agent de probation:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].agentProbation }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].AgentProbation }}</td>
                     </tr>
                     <tr>
                       <td>Telephone:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].telephone }}
-                        Poste: {{ this.reponseIPPE[0].IPPE[0].poste }}
+                      <td>{{ this.reponseIPPE[0].IPPE[0].Telephone }}
+                        Poste: {{ this.reponseIPPE[0].IPPE[0].Poste }}
                       </td>
                     </tr>
                   </div>
                   <div v-if="this.reponseIPPE1type === 'Libération Conditionnelle'">
                     <tr>
                       <td>Cour:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].cour }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].Cour }}</td>
                     </tr>
                     <tr>
                       <td>Numero de cause:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].noCause }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].NoCause }}</td>
                     </tr>
                     <tr>
                       <td>Nature du crime:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].natureCrime }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].NatureCrime }}</td>
                     </tr>
                     <tr>
                       <td>Numéro d'événement:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].noEvenement }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].NoEvenement }}</td>
                     </tr>
                     <tr>
                       <td>-</td>
@@ -291,20 +291,20 @@
                     </tr>
                     <tr>
                       <td>Lieu de detention:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].lieuDetention }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].LieuDetention }}</td>
                     </tr>
                     <tr>
                       <td>Fin de la sentence:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].finSentence.split('T')[0] }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].FinSentence.split('T')[0] }}</td>
                     </tr>
                     <table class="table is-fullwidth" v-html="formatterConditions()"></table>
                     <tr>
                       <td>Agent de libération conditionnelle à contacter :</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].agentLiberation }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].AgentLiberation }}</td>
                     </tr>
                     <tr>
                       <td>Téléphone :</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[0].telephone }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[0].Telephone }}</td>
                     </tr>
                   </div>
                   </tbody>
@@ -320,28 +320,28 @@
                   <div v-if="reponseIPPE2type === 'Interdit'">
                     <tr>
                       <td>Nature:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[1].nature }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[1].Bature }}</td>
                     </tr>
                     <tr>
                       <td>Cour:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[1].cour }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[1].Cour }}</td>
                     </tr>
                     <tr>
                       <td>Numero de cause:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[1].noCause }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[1].NoCause }}</td>
                     </tr>
                     <tr>
                       <td>Nature du crime:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[1].nature }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[1].Nature }}</td>
                     </tr>
                     <tr>
                       <td>Numéro d'événement:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[1].noEvenement }}</td>
+                      <td>{{ this.reponseIPPE[0].IPPE[1].NoEvenement }}</td>
                     </tr>
                     <tr>
                       <td>Expiration:</td>
                       <td>
-                        {{ this.reponseIPPE[0].IPPE[1].finSentence.split('T')[0] }}
+                        {{ this.reponseIPPE[0].IPPE[1].FinSentence.split('T')[0] }}
                       </td>
                     </tr>
                   </div>
@@ -379,21 +379,42 @@ export default {
         async getIppeReponse() {
             const prenom2 = this.$route.params.prenom2 === 'null' ? '' : this.$route.params.prenom2;
             const rep = await fetch(
-                `${svrURL}/ippes/info?nomFamille=${this.$route.params.nomFamille}&prenom1=${this.$route.params.prenom1}&prenom2=${prenom2}&masculin=${this.$route.params.masculin}&dateNaissance=${this.$route.params.dateNaissance}`,
+                `${svrURL}/personnes/info?nomFamille=${this.$route.params.nomFamille}&prenom1=${this.$route.params.prenom1}&prenom2=${prenom2}&masculin=${this.$route.params.masculin}&dateNaissance=${this.$route.params.dateNaissance}`,
+                {
+                headers: {
+                    Authorization: this.$store.state.token,
+                },
+            },
             );
             if (rep.ok) {
                 this.reponseIPPE = await rep.json();
-                if (this.reponseIPPE[0].IPPE.length === 0) {
+                const repii = await fetch(
+                `${svrURL}/personnes/${this.reponseIPPE[0].IdPersonne}/ippes`,
+                {
+                headers: {
+                    Authorization: this.$store.state.token,
+                },
+            },
+            );
+
+            // console.log(repi[0].TypeEvenement);
+
+             //  console.log(repi.length);
+                if (!repii.ok) {
                     this.reponseIPPE1type = 'Négatif';
                 } else {
+                    this.reponseIPPE[0].IPPE = await repii.json();
+                    console.log(this.reponseIPPE[0].IPPE.length);
+                    // console.log(repi[0].TypeEvenement);
                     this.reponseIPPElength = this.reponseIPPE[0].IPPE.length;
-                    this.reponseIPPE1type = this.reponseIPPE[0].IPPE[0].typeEvenement;
+                    this.reponseIPPE1type = this.reponseIPPE[0].IPPE[0].TypeEvenement;
+                    console.log(this.reponseIPPE1type);
                     if (this.reponseIPPE[0].IPPE[1]) {
-                        this.reponseIPPE2type = this.reponseIPPE[0].IPPE[1].typeEvenement;
+                        this.reponseIPPE2type = this.reponseIPPE[0].IPPE[1].TypeEvenement;
                     }
-                    if (this.reponseIPPE[0].IPPE[0].conditions[0].idCondition !== null) {
-                        this.reponseIPPE1conditions = this.reponseIPPE[0].IPPE[0].conditions;
-                    }
+                    // if (repi[0].conditions[0].idCondition !== null) {
+                    //     this.reponseIPPE1conditions = repi[0].conditions;
+                    // }
                 }
             } else {
                 this.$root.$data.erreurIPPE = true;

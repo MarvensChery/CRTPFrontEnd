@@ -14,7 +14,7 @@
       </div>
     </div>
     <div id="navmnenu1" class="navbar-menu">
-      <div class="navbar-start" v-if="this.$root.$data.Professeur">
+      <div class="navbar-start" v-if="this.$store.state.Professeur">
         <div class="navbar-item has-dropdown is-hoverable is-mega">
           <div class="navbar-link flex">
             <span>Type de Recherche et plus</span>
@@ -158,7 +158,7 @@
         </router-link>
       </div>
       <div class="navbar-end">
-        <router-link v-if="!this.$root.$data.Professeur" v-bind:to="{ name: 'etudiant' }">
+        <router-link v-if="!this.$store.state.Professeur" v-bind:to="{ name: 'etudiant' }">
           <a class="navbar-item " id="accueil">
             Accueil
           </a>
@@ -195,6 +195,7 @@ export default {
       this.$store.state.token = '';
     }
   }
+
 };
 
 </script>

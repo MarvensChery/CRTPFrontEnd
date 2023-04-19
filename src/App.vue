@@ -9,7 +9,6 @@
 <script>
 
 import MenuProfesseurView from '@/components/MenuProfesseurView.vue';
-// import EtudiantView from '@/views/EtudiantView.vue';
 import HeaderView from '@/components/HeaderView.vue';
 
 export default {

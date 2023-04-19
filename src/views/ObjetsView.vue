@@ -20,8 +20,7 @@
                         <a id="objets">
                         <div class="table-container">
                             <table class="table has-text-black is-fullwidth"
-                                        style="text-align:center;
-                            padding-bottom: 5%;">
+                                        style="text-align:center;padding-bottom: 5%;">
                                 <tr>
                                     <th>Numéro de Série</th>
                                     <th>Marque</th>
@@ -119,7 +118,7 @@
                                 <th>Type d'armes</th>
                                 <th>Numéro d'évènement</th>
                             </tr>
-                            <tr v-for="a in filtresValeurs" v-bind:key="a.IdIBAF">
+                            <tr v-for="a in filtresValeurs" v-bind:key="a.IdIBAF" >
                                 <td>{{ a.NoSerie }}</td>
                                 <td>{{ a.Marque }}</td>
                                 <td>{{ a.Calibre }}</td>
@@ -127,7 +126,7 @@
                                 <td>{{ a.NoEvenement }}</td>
                                 <td>
                                     <router-link :to="{ name: 'modifArmeView',
-                                                params: { idArme: a.IdIBAF } }">
+                                                params: { idArme: a.IdIBAF }  }">
                                         <i class='fas fa-edit'></i>
                                     </router-link>
                                 </td>
@@ -140,7 +139,12 @@
         </div>
         <div class="buttons is-centered" style="padding-top: 5%;padding-bottom: 5%;">
             <div>
-                <button v-on:click="this.$router.push({ path: '/' })"
+                <button v-if="(this.$root.$data.Professeur)"
+                v-on:click="this.$router.push({ path: '/' })"
+                class="button is-info" type="button"
+                >Retour a l'accueil</button>
+                <button v-if="(!this.$root.$data.Professeur)"
+                v-on:click="this.$router.push({ path: '/etudiant' })"
                 class="button is-info" type="button"
                 >Retour a l'accueil</button>
             </div>
@@ -149,7 +153,7 @@
                 v-on:click="this.$router.push({ name: 'objetView' })"
                 class="button is-info" type="sumbit">Ajouter</button>
                 <button v-if="this.$route.name === 'armesView'"
-                v-on:click="this.$router.push({ name: 'armeView' })"
+                v-on:click="this.$router.push({ name: 'armeView'})"
                 class="button is-info" type="sumbit">Ajouter</button>
                 <button v-if="this.$route.name === 'valeursView'"
                 v-on:click="this.$router.push({ name: 'valeurView' })"
