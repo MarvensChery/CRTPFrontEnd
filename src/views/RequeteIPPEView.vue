@@ -121,7 +121,20 @@
           </button>
         </div>
       </form>
+
     </div>
+    <div class="columns is-multiline is-mobile">
+      <div class="column">
+                <button v-if="(this.$root.$data.Professeur)"
+                v-on:click="this.$router.push({ path: '/' })"
+                class="button is-info is-fullwidth " type="button"
+                >Retour a l'accueil</button>
+                <button v-if="(!this.$root.$data.Professeur)"
+                v-on:click="this.$router.push({ path: '/etudiant' })"
+                class="button is-info is-fullwidth " type="button"
+                >Retour a l'accueil</button>
+            </div>
+            </div>
   </div>
 </template>
 
@@ -136,7 +149,7 @@ export default {
         return {
             nom: '',
             prenom1: '',
-            prenom2: '',
+            prenom2: null,
             sexe: '',
             annee: '',
             mois: '',
@@ -184,8 +197,10 @@ export default {
             } else {
                 this.prenomError = false;
             }
-            if (capitalizeFirstLetter(this.prenom2) === '') {
-                this.prenom2 = null;
+            if (this.prenom2) {
+                if (capitalizeFirstLetter(this.prenom2) === '') {
+                    this.prenom2 = null;
+                }
             }
             if (this.anneError === false && this.moisError === false
         && this.jourError === false && this.nomError === false

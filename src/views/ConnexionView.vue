@@ -14,8 +14,8 @@
                         <span class="switch-button-label-span" id="btn">Étudiant</span>
                     </label>
                   </div>
-                <div class="field ">
-                    <label for="ID" class="label mt-3" id="nomLabel">
+                <div class="field " v-if="!this.$store.state.Professeur">
+                    <label for="ID" class="label mt-3" id="nomLabel" >
                         Identifiant de l'étudiant</label>
                     <div class="control has-icons-right">
                         <input class="input is-info " id="ID"
@@ -25,9 +25,32 @@
                         </span>
                     </div>
                 </div>
+                <div class="field " v-if="this.$store.state.Professeur">
+                    <label for="ID" class="label mt-3" id="nomLabel" >
+                        Identifiant du Professeur</label>
+                    <div class="control has-icons-right">
+                        <input class="input is-info " id="ID"
+                        placeholder="00000" type="text" v-model="Identifiant">
+                        <span class="icon is-small is-right">
+                            <i class="fa fa-user"></i>
+                        </span>
+                    </div>
+                </div>
                 <div ></div>
-                <div class="field">
-                    <h class="label" id="mdpLabel">Mot de passe de l'étudiant</h>
+                <div class="field" v-if="!this.$store.state.Professeur">
+                    <p class="label" id="mdpLabel">Mot de passe de l'étudiant</p>
+                    <div class="control has-icons-right">
+                        <label for="mdp"></label>
+                        <input class="input is-info" id="mdp" placeholder="•••••••"
+                        type="password" v-model="mdp">
+                        <span class="icon is-large is-right">
+                            <i class="fa fa-key"></i>
+                        </span>
+                    </div>
+                    <p id="error"></p>
+                </div>
+                <div class="field" v-if="this.$store.state.Professeur">
+                    <p class="label" id="mdpLabel">Mot de passe du Professeur</p>
                     <div class="control has-icons-right">
                         <label for="mdp"></label>
                         <input class="input is-info" id="mdp" placeholder="•••••••"
@@ -39,6 +62,9 @@
                     <p id="error"></p>
                 </div>
                 <div class="has-text-centered">
+                  <div class="notification is-danger is-light" v-if="connectionFailed===true">
+                    Connexion ratée
+                  </div>
                     <button
                         class="button is-vcentered is-info is-outlined
                                is-medium is-rounded is-fullwidth"
@@ -79,8 +105,12 @@ export default {
           Identifiant: '',
             mdp: '',
             check: false,
+            connectionFailed: false,
 
         };
+    },
+    async mounted(){
+      this.connectionFailed=false;
     },
     methods: {
 
@@ -99,25 +129,29 @@ export default {
 
             // traiter la réponse
             if (response.ok) {
+              this.connectionFailed=false;
                 const data = await response.json();
                 this.$store.state.token = data.token;
-                this.$root.$data.Professeur = this.check;
-                // window.location.href = '/';
-                if (this.$root.$data.Professeur == true) {this.$router.push('/')}
-                else {this.$router.push('/etudiant')}
+                this.$store.state.Professeur = this.check;
+                if (this.$store.state.Professeur == !data.Etudiant) {
+                  if (this.$store.state.Professeur) {this.$router.push('/')}
+                else {this.$router.push('/etudiant')}}
+
 
             } else {
-
+              this.connectionFailed=true;
                 console.error('une erreur sest produite');
             }
 
         },
-        toggleCheckbox() {
+        async toggleCheckbox() {
           this.check = !this.check
       this.$emit('setCheckboxVal', this.check)
+      this.connectionFailed=false;
+      this.$store.state.Professeur = this.check;
+      console.log(this.$store.state.token)
     }
-
-    },
+  },
 
 
 };
