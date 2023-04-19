@@ -68,7 +68,8 @@
                     <div class="field">
                         <label for="typeValeur" class="label">Type de valeur</label>
                         <div class = "control">
-                            <select id="typeValeur" class="select" name="typeValeur"
+                            <select style="width: 98%;"
+                            id="typeValeur" class="select" name="typeValeur"
                             v-model="TypeValeur" required>
                             <option></option>
                             <option value="Devise">Devise</option>
@@ -81,7 +82,7 @@
                     <div class="field">
                         <label for="resIBVA" class="label">Type d'événement valeur</label>
                         <div class = "control">
-                            <select id="resIBVA" class="select" name="resIBVA"
+                            <select style="width: 98%;" id="resIBVA" class="select" name="resIBVA"
                             v-model="TypeEvenement" required>
                             <option></option>
                             <option value="Volé">Volé</option>
@@ -92,7 +93,7 @@
                         <div class="column is-3-desktop is-2-mobile">
                             <label class="has-text-black" for="NoEvent"><b>Numéro évenement</b>
                                 <span style="color: red">*</span></label><br><br>
-                            <select id="NoEvent" class="select" name="NoEvent"
+                            <select id="NoEvent" style="width: 80%;" class="select" name="NoEvent"
                             v-model="NoEvent"  required>
                                 <option></option>
                                 <option>123</option>

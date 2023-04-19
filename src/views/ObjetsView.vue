@@ -37,7 +37,7 @@
                                 <td>{{ o.NoEvenement }}</td>
                                 <td>
                                     <router-link :to="{ name: 'modifObjetView',
-                                                params: { idObjet: o.IdBOB } }">
+                                                params: { idObjet: o.IdIBOB } }">
                                     <i class='fas fa-edit'></i>
                                 </router-link>
                                 </td>
@@ -183,6 +183,8 @@ export default {
                         .includes(this.valValeurs.toLowerCase()),
                 );
             }
+
+            console.log(filtresValeurs);
             return filtresValeurs;
         },
     },
@@ -192,7 +194,11 @@ export default {
     },
     methods: {
         async getAllObjets() {
-            const rep = await fetch(`${svrURL}${this.$route.path}`);
+            const rep = await fetch(`${svrURL}${this.$route.path}`, {
+                headers: new Headers({
+                    Authorization: this.$store.state.token,
+                }),
+            });
             const data = await rep.json();
 
             if (rep.ok) {
@@ -201,7 +207,11 @@ export default {
             console.log(this.valeurs);
         },
         async getAllOptions() { // get les options (colonne) des donnée
-            const rep = await fetch(`${svrURL}${this.$route.path}`);
+            const rep = await fetch(`${svrURL}${this.$route.path}`, {
+                headers: new Headers({
+                    Authorization: this.$store.state.token,
+                }),
+            });
             const filtresListes = await rep.json();
 
             const filtres = Object.keys(filtresListes[0]);
