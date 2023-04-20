@@ -207,8 +207,7 @@
                     <button class="button is-info" v-on:click="retourALaPersonne">Retour</button>
                 </div>
                 <div class="column is-6">
-                    <button class="button is-info" v-on:click="
-                    this.$router.push({ name: 'DescriptionPersonneView' })">
+                    <button class="button is-info" v-on:click="updateDescription">
                         Enregistrer
                     </button>
                 </div>
@@ -281,7 +280,11 @@ export default {
     },
     methods: {
         async GetDescription() {
-            const rep = await fetch(`${svrURL}/personnes/${this.$route.params.idPersonne}`);
+            const rep = await fetch(`${svrURL}/personnes/${this.$route.params.idPersonne}`, {
+                headers: {
+                    Authorization: this.$store.state.token,
+                },
+            });
             if (rep.ok) {
                 this.personne = await rep.json();
 
@@ -469,9 +472,9 @@ export default {
                     Depressif: this.depressif,
                 };
                 // PUT
-                const response = await fetch(`${svrURL}/personnes/${this.$route.params.idPersonne}/description`, {
+                const response = await fetch(`${svrURL}/descriptionPersonnes/${this.$route.params.idPersonne}`, {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', Authorization: this.$store.state.token },
                     body: JSON.stringify(body),
                 });
                 if (response.ok) {
