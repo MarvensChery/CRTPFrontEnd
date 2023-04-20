@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import AccueilView from '@/views/AccueilView.vue';
 import ConnexionView from '@/views/ConnexionView.vue';
 import RequeteIPPEView from '@/views/RequeteIPPEView.vue';
+import RequeteIBAFView from '@/views/RequeteIBAFView.vue';
 import PersonnesView from '@/views/PersonnesView.vue';
 import ConditionView from '@/views/ConditionView.vue';
 import PersonneView from '@/views/PersonneView.vue';
@@ -41,6 +42,11 @@ const routes = [
         path: '/RequeteIBOB', // Route pour faire une interrogation personne
         name: 'RequeteIBOB',
         component: RequeteIBOB,
+    },
+    {
+        path: '/requeteIBAF', // Route pour faire une interrogation personne
+        name: 'RequeteIBAFView',
+        component: RequeteIBAFView,
     },
     {
         path: '/personnes', // Route pour la liste des personne de la table IPPE

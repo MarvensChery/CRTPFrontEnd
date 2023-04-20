@@ -50,13 +50,24 @@
                       </div>
                     </a>
                   </router-link>
+                  <router-link v-bind:to="{ name: 'RequeteIBAFView' }" >
+                    <a class="navbar-item">
+                      <div class="navbar-content" id="ibob">
+                        <p>
+                          <strong>IBAF</strong>
+                          <br>
+                          <small>Recherche d'armes</small>
+                        </p>
+                      </div>
+                    </a>
+                  </router-link>
                   <router-link v-bind:to="{ name: 'RequeteIBVA' }" >
                     <a class="navbar-item">
                       <div class="navbar-content" id="ibva">
                         <p>
                           <strong>IBVA</strong>
                           <br>
-                          <small>Recherche de valeurs</small>
+                          <small>Recherche de Valeur</small>
                         </p>
                       </div>
                     </a>
