@@ -8,12 +8,14 @@
             <h1 class="title is-1-touch is-full my-6">Table IPPE Alimentation</h1>
             <div class="columns is-multiline">
               <label
-                class="column is-3-desktop is-offset-1-desktop is-6-touch"
+              style=" margin-left: 30%;"
+              class="column is-3-desktop is-offset-1-desktop is-6-touch"
                 for="votre-nom"
                 >Filtrer par nom de famille:</label
               >
               <input
-                class="column input is-hovered is-size-6 is-size-4-touch
+              style=" margin-left: 30%;"
+              class="column input is-hovered is-size-6 is-size-4-touch
                  is-4-desktop is-5-touch mr-6"
                 v-model="nom"
                 id="votre-nom"
@@ -24,7 +26,7 @@
             <div>
               <hr />
             </div>
-            <div class="column is-10 is-offset-1-desktop">
+            <div class="table-container">
               <table class="table is-striped is-fullwidth is-bordered is-centered my-5">
                 <thead>
                   <tr>
@@ -61,14 +63,12 @@
           </div>
         </form>
         <!--BUTTON HOME-->
-        <div>
-          <router-link to="/">
-            <img
-              id="imgHome"
-              class="shadow zoom imgHome"
-              src="/images/home.png"
-              alt="Accueil"
-          /></router-link>
+        <div class="column is-12">
+          <button id="annuler" class="button is-danger " style="width: 30%; margin-left: 30%;"
+                  type="button" value="Annuler" v-on:click="$router.go(-1) "
+                  v-on:keydown="$router.go(-1)">
+            Annuler
+          </button>
         </div>
       </div>
     </div>
