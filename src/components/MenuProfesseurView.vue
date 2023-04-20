@@ -26,7 +26,7 @@
             <div class="container is-fluid">
               <div class="columns">
                 <div class="column">
-                  <h1 class="title is-6 is-mega-menu-title">
+                  <h1 class="title is-6 is-mega-menu-title flex">
                     Les recherches mise a votre disposition</h1>
                   <router-link v-bind:to="{ name: 'requeteIPPE' }" >
                     <a class="navbar-item">
@@ -39,35 +39,13 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'objetsView' }">
+                  <router-link v-bind:to="{ name: 'RequeteIBOB' }" >
                     <a class="navbar-item">
-                      <div class="navbar-content">
+                      <div class="navbar-content" id="ibob">
                         <p>
                           <strong>IBOB</strong>
                           <br>
-                          <small>Recherche d'objets</small>
-                        </p>
-                      </div>
-                    </a>
-                  </router-link>
-                  <router-link v-bind:to="{ name: 'IBAF' }" >
-                    <a class="navbar-item">
-                      <div class="navbar-content">
-                        <p>
-                          <strong>IBAF</strong>
-                          <br>
-                          <small>Recherche d'armes a feu</small>
-                        </p>
-                      </div>
-                    </a>
-                  </router-link>
-                  <router-link v-bind:to="{ name: 'IBVA' }">
-                    <a class="navbar-item">
-                      <div class="navbar-content">
-                        <p>
-                          <strong>IBVA</strong>
-                          <br>
-                          <small>Recherche de valeurs</small>
+                          <small>Recherche d'objet</small>
                         </p>
                       </div>
                     </a>
@@ -78,6 +56,33 @@
                   <router-link v-bind:to="{ name: 'personnesView' }" >
                     <a class="navbar-item " id="banqueP">
                       <strong>Banque de personne</strong>
+                    </a>
+                  </router-link>
+                  <router-link v-bind:to="{ name: 'objetsView' }">
+                    <a class="navbar-item">
+                      <div class="navbar-content">
+                        <p>
+                          <strong>Banque d'objets</strong>
+                        </p>
+                      </div>
+                    </a>
+                  </router-link>
+                  <router-link v-bind:to="{ name: 'IBAF' }" >
+                    <a class="navbar-item">
+                      <div class="navbar-content">
+                        <p>
+                          <strong>Banque d'armes</strong>
+                        </p>
+                      </div>
+                    </a>
+                  </router-link>
+                  <router-link v-bind:to="{ name: 'IBVA' }">
+                    <a class="navbar-item">
+                      <div class="navbar-content">
+                        <p>
+                          <strong>Banque de Valeur</strong>
+                        </p>
+                      </div>
                     </a>
                   </router-link>
                 </div>

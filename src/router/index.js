@@ -9,6 +9,7 @@ import ObjetView from '@/views/ObjetView.vue';
 import ArmeView from '@/views/ArmeView.vue';
 import IBAF from '@/views/IBAF.vue';
 import IBVA from '@/views/IBVA.vue';
+import RequeteIBOB from '@/views/RequeteIBOB.vue';
 import RequeteIBVA from '@/views/RequeteIBVA.vue';
 
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
@@ -35,6 +36,11 @@ const routes = [
         path: '/requeteIPPE', // Route pour faire une interrogation personne
         name: 'requeteIPPE',
         component: RequeteIPPEView,
+    },
+    {
+        path: '/RequeteIBOB', // Route pour faire une interrogation personne
+        name: 'RequeteIBOB',
+        component: RequeteIBOB,
     },
     {
         path: '/personnes', // Route pour la liste des personne de la table IPPE
