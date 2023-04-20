@@ -10,7 +10,7 @@
         </h1>
         <br>
         <br>
-        <div class='dialog-ovelay' v-if="confimation"> 
+        <div class='dialog-ovelay' v-if="confimation">
             <div class='dialog'>
                 <header>
                     <h3> Confirmation </h3>
@@ -99,7 +99,7 @@
                         <div class="column is-3-desktop is-2-mobile">
                             <label class="has-text-black" for="NoEvent"><b>Numéro évenement</b>
                                 <span style="color: red">*</span></label><br><br>
-                            <select id="NoEvent" style="width: 80%;" class="select" name="NoEvent"
+                            <select id="NoEvent" class="select" name="NoEvent"
                             v-model="NoEvent"  required>
                                 <option></option>
                                 <option value="123">123</option>
