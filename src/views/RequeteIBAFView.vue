@@ -57,6 +57,8 @@
 </template>
 
 <script>
+import { connexion } from '@/stores/connexionStore';
+
 export default {
     name: 'RequeteIBAFView',
     data() {
@@ -64,6 +66,11 @@ export default {
             NSerie: '',
             NSerieError: false,
         };
+    },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
     },
 
     methods: {
@@ -74,6 +81,14 @@ export default {
                 this.$router.push(`/arme/${this.NSerie}`);
             }
         },
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
+    },
+    mounted() {
+        this.checkToken();
     },
 };
 </script>

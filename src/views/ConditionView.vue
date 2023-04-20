@@ -188,6 +188,7 @@
 </template>
 
 <script>
+import { connexion } from '@/stores/connexionStore';
 import { svrURL } from '@/constantes';
 import {
     checkNomPrenomInput, validationHeure, verifieCodePostal,
@@ -219,6 +220,12 @@ export default {
             codepostal: '',
         };
     },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
+    },
+
     computed: {
         title() {
             if (this.IdCondition !== undefined) {
@@ -262,6 +269,7 @@ export default {
     // la fonction mounted appel au script pour l'icon,
     //  récupère les paramètres de la route et récupère les données
     mounted() {
+        this.checkToken();
         const recaptchaScript = document.createElement('script');
         recaptchaScript.setAttribute('src', 'https://kit.fontawesome.com/abf3ec30d1.js');
         document.head.appendChild(recaptchaScript);
@@ -271,6 +279,11 @@ export default {
         this.returnCondition();
     },
     methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
         checkNomPrenom() {
             if (checkNomPrenomInput(this.condition) && (this.Libelle === 'Ne pas fréquenter'
         || this.Libelle === 'Ne pas entrer en contact avec')) {

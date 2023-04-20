@@ -231,6 +231,7 @@ import {
     verifieMarques,
     verifieGiletPantalonAutreVetement,
 } from '@/validations';
+import { connexion } from '@/stores/connexionStore';
 
 export default {
     name: 'DescriptionPersonneView',
@@ -278,7 +279,17 @@ export default {
             ErrorAutreVetement: '',
         };
     },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
+    },
     methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
         async GetDescription() {
             const rep = await fetch(`${svrURL}/personnes/${this.$route.params.idPersonne}`, {
                 headers: {
@@ -491,6 +502,7 @@ export default {
         },
     },
     mounted() {
+        this.checkToken();
         this.GetDescription();
     },
 };

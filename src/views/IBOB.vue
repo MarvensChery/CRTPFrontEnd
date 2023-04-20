@@ -91,10 +91,16 @@ export default {
         return { store };
     },
     mounted() {
+        this.checkToken();
         this.getAllObjets(); // Get les donnée au chargement de la page
         this.getAllOptions();
     },
     methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
         async getAllObjets() {
             const rep = await fetch(`${svrURL}${this.$route.path}`, {
                 headers: new Headers({

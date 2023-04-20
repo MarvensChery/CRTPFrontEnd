@@ -243,6 +243,7 @@ export default {
         };
     },
     mounted() {
+        this.checkToken();
         if (this.paramId) {
             this.getPersonne();
             this.getIPPE();
@@ -296,6 +297,11 @@ export default {
         },
     },
     methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
         // Sauve les informations de la personne et les places dans les inputs
         async getPersonne() {
             const response = await fetch(`${svrURL}/personnes/${this.paramId}`, {
