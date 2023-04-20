@@ -54,9 +54,9 @@
                     <a class="navbar-item">
                       <div class="navbar-content" id="ibob">
                         <p>
-                          <strong>IBOB</strong>
+                          <strong>IBAF</strong>
                           <br>
-                          <small>Recherche d'objet</small>
+                          <small>Recherche d'armes</small>
                         </p>
                       </div>
                     </a>
