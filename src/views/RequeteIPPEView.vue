@@ -120,6 +120,13 @@
             Recherche
           </button>
         </div>
+        <div class="column is-12">
+          <button id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler" v-on:click="$router.go(-1) "
+                  v-on:keydown="$router.go(-1)">
+            Annuler
+          </button>
+        </div>
       </form>
     </div>
   </div>
