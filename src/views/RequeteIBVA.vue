@@ -50,7 +50,7 @@
             Recherche
           </button>
           <div class="column is-12">
-          <button id="annuler" class="button is-danger " style="width: 30%; margin-left: 30%;"
+          <button id="annuler" class="button is-danger " style="width: 30%; margin-left: 35%;"
                   type="button" value="Annuler" v-on:click="$router.go(-1) "
                   v-on:keydown="$router.go(-1)">
             Annuler
