@@ -158,6 +158,9 @@ export default {
     burger.classList.toggle('is-active');
     menu.classList.toggle('is-active');
 },
+closeMenu() {
+            this.isActive = false;
+        },
   },
   setup(){
  const store = connexion();
