@@ -203,11 +203,17 @@ export default {
         return { store };
     },
     mounted() {
+        this.checkToken();
         if (this.$route.path !== '/objet') {
             this.getObjet(); // get les fino d'un objet au chargement de la page
         }
     },
     methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
         confirmation() {
             this.confimation = 'validation';
         },

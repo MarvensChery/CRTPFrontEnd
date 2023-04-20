@@ -298,6 +298,7 @@
 
 <script>
 // Lien de l'url du bakckend
+import { connexion } from '@/stores/connexionStore';
 import { svrURL } from '@/constantes';
 import { isNumeroValid, isHeightValid, isWeightValid } from '@/validations';
 // noinspection JSUnusedGlobalSymbols
@@ -338,7 +339,18 @@ export default {
             poidMSG: '',
         };
     },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
+    },
+
     methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
         // Récupération des données FPS selon l'idFPS dans l'url
         hideMsg() {
             this.message = '';
@@ -588,6 +600,7 @@ export default {
         },
     },
     mounted() {
+        this.checkToken();
         this.getFps();
         const recaptchaScript = document.createElement('script');
         recaptchaScript.setAttribute('src', 'https://kit.fontawesome.com/abf3ec30d1.js');

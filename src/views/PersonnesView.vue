@@ -105,9 +105,15 @@ export default {
         return { store };
     },
     mounted() {
+        this.checkToken();
         this.getPersonnes();
     },
     methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
         goPageModifierPersonnes(id) {
             this.$router.push(`/personne/${id}`);
         },

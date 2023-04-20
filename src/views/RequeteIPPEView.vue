@@ -139,6 +139,7 @@
 </template>
 
 <script>
+import { connexion } from '@/stores/connexionStore';
 import {
     isAnneeValide, isMoisValide, isJourValide, capitalizeFirstLetter,
 } from '@/validations';
@@ -163,9 +164,18 @@ export default {
             sexeError: false,
         };
     },
-
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
+    },
     methods: {
-    // Fonction qui permet de vérifier si les champs sont valides
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
+        // Fonction qui permet de vérifier si les champs sont valides
         isValid() {
             if (isAnneeValide(this.annee) === false) {
                 this.anneError = true;
@@ -210,6 +220,10 @@ export default {
             }
         },
     },
+    async mounted() {
+        await this.checkToken();
+    },
+
 };
 </script>
 
