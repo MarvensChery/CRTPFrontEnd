@@ -1,7 +1,7 @@
 <template>
   <div class="hero-body ">
     <!--box gives it the shadow-->
-    <article v-if="this.$root.$data.erreurIPPE === true" class="column is-full message is-danger">
+    <article v-if="this.store.erreurIPPE === true" class="column is-full message is-danger">
           <div class="message-body">
             Erreur, la personne recherché(e) n'existe pas
           </div>

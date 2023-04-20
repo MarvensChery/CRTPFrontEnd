@@ -19,7 +19,7 @@
     </div>
     <div id="navmnenu1" class="navbar-menu" :class="{ 'is-active': isActive }">
       <div class="navbar-start">
-        <div class="navbar-item has-dropdown is-hoverable is-mega" v-if="this.$store.state.token">
+        <div class="navbar-item has-dropdown is-hoverable is-mega" v-if="this.store.token">
           <div class="navbar-link flex">
             <span>Type de Recherche et plus</span>
           </div>
@@ -74,7 +74,7 @@
                     </a>
                   </router-link>
                 </div>
-                <div class="column" id="menuP" v-if="this.$root.$data.Professeur">
+                <div class="column" id="menuP" v-if="this.store.Professeur">
                   <h1 class="title is-6 is-mega-menu-title">Menu prof</h1>
                   <router-link v-bind:to="{ name: 'personnesView' }" @click="closeMenu">
                     <a class="navbar-item " id="banqueP">
@@ -89,7 +89,7 @@
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
-        <router-link v-if="!this.$root.$data.Professeur && this.$store.state.token"
+        <router-link v-if="!this.store.Professeur && this.store.token"
         @click="closeMenu"
           v-bind:to="{ name: 'etudiant' }">
             <div class="button is-light" style="margin-right: 20px;">
@@ -97,7 +97,7 @@
               </div>
         </router-link>
 
-            <router-link v-if="this.$store.state.token" v-bind:to="{ name: 'accueil' }"
+            <router-link v-if="this.store.token" v-bind:to="{ name: 'accueil' }"
             @click="closeMenu"
             v-on:click="deco"
               class="button is-light is-danger"  >
@@ -127,16 +127,22 @@ export default {
         };
     },
     methods: {
-      deco() {
-      this.$store.state.token = '';
+        deco() {
+            this.store.token = '';
+        },
+        closeMenu() {
+            this.isActive = false;
+        },
+        toggleNavbar() {
+            this.isActive = !this.isActive;
+        },
     },
-    closeMenu() {
-      this.isActive = false;
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
     },
-    toggleNavbar() {
-      this.isActive = !this.isActive;
-    },
-    },
+
 };
 </script>
 
