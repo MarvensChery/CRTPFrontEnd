@@ -67,7 +67,7 @@
                         <p>
                           <strong>IBVA</strong>
                           <br>
-                          <small>Recherche d'objet</small>
+                          <small>Recherche de Valeur</small>
                         </p>
                       </div>
                     </a>
