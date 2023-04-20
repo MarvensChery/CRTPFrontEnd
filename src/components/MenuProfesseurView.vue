@@ -118,6 +118,8 @@
 </template>
 
 <script>
+import { connexion } from '@/stores/connexionStore';
+
 export default {
     data() {
         return {

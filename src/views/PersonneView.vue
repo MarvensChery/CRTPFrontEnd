@@ -199,6 +199,7 @@
 </template>
 
 <script>
+import { connexion } from '@/stores/connexionStore';
 import { svrURL } from '../constantes';
 import {
     isJourValide,
@@ -247,6 +248,11 @@ export default {
             this.getIPPE();
         }
     },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
+    },
     computed: {
         // Rajoute une majuscule au nom de famille
         capitalizeName() {
@@ -294,7 +300,7 @@ export default {
         async getPersonne() {
             const response = await fetch(`${svrURL}/personnes/${this.paramId}`, {
                 headers: new Headers({
-                    Authorization: this.$store.state.token,
+                    Authorization: this.store.token,
                 }),
             });
             if (response.ok) {
@@ -314,7 +320,7 @@ export default {
         async getIPPE() {
             const response = await fetch(`${svrURL}/personnes/${this.paramId}/ippes`, {
                 headers: new Headers({
-                    Authorization: this.$store.state.token,
+                    Authorization: this.store.token,
                 }),
             });
             if (response.ok) {
@@ -326,7 +332,7 @@ export default {
             let msg;
             const response = await fetch(`${svrURL}/personnes/${this.paramId}`, {
                 method: 'DELETE',
-                headers: { 'Content-Type': 'application/json', Authorization: this.$store.state.token },
+                headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
             });
             if (response.ok) {
                 msg = await response.json();
@@ -422,7 +428,7 @@ export default {
 
                 const response = await fetch(`${svrURL}/personnes/${this.paramId}`, {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json', Authorization: this.$store.state.token },
+                    headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
                     body: JSON.stringify(body),
                 });
                 if (response.ok) {
@@ -454,7 +460,7 @@ export default {
 
                 const response = await fetch(`${svrURL}/personnes`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', Authorization: this.$store.state.token },
+                    headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
                     body: JSON.stringify(body),
                 });
                 if (response.ok) {

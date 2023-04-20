@@ -188,6 +188,7 @@
 </template>
 
 <script>
+import { connexion } from '@/stores/connexionStore';
 import { svrURL } from '@/constantes';
 import {
     capitalizeFirstLetter, isJourValide, isMoisValide, isAnneeValide, isDateValide,
@@ -220,6 +221,11 @@ export default {
             confimation: '',
         };
     },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
+    },
     mounted() {
         if (this.$route.path !== '/arme') {
             this.getArme(); // Get les info d'une arme précise
@@ -230,7 +236,7 @@ export default {
             this.confimation = 'validation';
         },
         async deleteArme() {
-            const api = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, { Authorization: this.$store.state.token, method: 'DELETE' }); // Permet de delete une arme
+            const api = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, { Authorization: this.store.token, method: 'DELETE' }); // Permet de delete une arme
             const res = await api.json();
             if (res.success) {
                 this.sucess = res.message;
@@ -280,7 +286,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
-                    Authorization: this.$store.state.token,
+                    Authorization: this.store.token,
                 },
                 method: 'POST',
                 body: JSON.stringify(formData),
@@ -332,7 +338,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
-                    Authorization: this.$store.state.token,
+                    Authorization: this.store.token,
                 },
                 method: 'PUT',
                 body: JSON.stringify(formData),
@@ -344,7 +350,7 @@ export default {
         async getArme() { // Get les info d'une arme
             const rep = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, {
                 headers: {
-                    Authorization: this.$store.state.token,
+                    Authorization: this.store.token,
                 },
                 method: 'GET',
             });

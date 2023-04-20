@@ -1553,6 +1553,8 @@
   </div>
 </template>
 <script>
+import { connexion } from '@/stores/connexionStore';
+
 export default {
     name: 'IPPEView',
     /* eslint-disable vue/no-unused-components */
@@ -1597,8 +1599,14 @@ export default {
         };
     },
     mounted() {
+        if (this.store.token === '') { this.$route.push('/connexion'); }
         this.getCrime();
         this.affichageInfoPersonne();
+    },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
     },
     computed: {
         typeBouton() {

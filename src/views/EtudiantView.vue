@@ -30,14 +30,21 @@
 
 <script>
 // noinspection JSUnusedGlobalSymbols
+import { connexion } from '@/stores/connexionStore';
+
 export default {
     name: 'EtudiantView',
     /* eslint-disable */
   methods: {
     deco() {
-      this.$store.state.token = '';
+      this.store.token = '';
     }
-  }
+  },
+  setup(){
+ const store = connexion();
+ //exposer l'objet store à la vue
+ return { store };
+ },
 };
 </script>
 

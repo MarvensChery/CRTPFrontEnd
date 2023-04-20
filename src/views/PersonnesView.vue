@@ -64,7 +64,7 @@
 
 <script>
 // noinspection JSUnusedGlobalSymbols
-
+import { connexion } from '@/stores/connexionStore';
 import { svrURL } from '@/constantes';
 
 export default {
@@ -86,6 +86,11 @@ export default {
             return personneFiltrer;
         },
     },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
+    },
     mounted() {
         this.getPersonnes();
     },
@@ -96,7 +101,7 @@ export default {
         async getPersonnes() {
             const rep = await fetch(`${svrURL}/personnes`, {
                 headers: new Headers({
-                    Authorization: this.$store.state.token,
+                    Authorization: this.store.token,
                 }),
             });
             if (rep.ok) {
