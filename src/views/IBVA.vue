@@ -1,21 +1,23 @@
 <template>
-   <div v-if="this.$route.name === 'valeursView'">
-            <h1 class="has-text-black " style="height:135px; text-align:center; font-size: 24px;">
-            <b><u>LISTE DE VALEURS</u></b></h1>
-            <div class="columns has-text-right has-text-black is-centered"
-            style="padding-right: 5%;padding-bottom: 5%;">
-                <div class="select">
-                    <select v-model="valeursFiltres">
-                        <option></option>
-                        <option v-for="i in optionsValeurs" :value="i" :key="i">{{i}}</option>
-                    </select>
-                </div>
-                <input id="type" style="height: 40px;"
-                placeholder="Valeur du filtre" v-model="valValeurs">
+    <div>
+        <h1 class="has-text-black " style="height:135px; text-align:center; font-size: 24px;">
+            <b><u>LISTE DE VALEURS</u></b>
+        </h1>
+        <div class="columns has-text-right has-text-black is-centered"
+        style="padding-right: 5%;padding-bottom: 5%;">
+            <label for="valeursFiltres">Filtrer par:</label>
+            <div class="select">
+                <select v-model="valeursFiltres">
+                    <option></option>
+                    <option v-for="i in optionsValeurs" :value="i" :key="i">{{ i }}</option>
+                </select>
             </div>
-            <div class="columns">
-                <div id="detail" class="column is-centered">
-                    <a id="valeurs">
+            <input id="type" style="height: 40px;" placeholder="Valeur du filtre"
+            v-model="valValeurs">
+        </div>
+        <div class="columns">
+            <div id="detail" class="column is-centered">
+                <a id="valeurs">
                     <div class="table-container">
                         <table class="table has-text-black is-fullwidth" style="text-align:center;">
                             <tr>
@@ -32,29 +34,43 @@
                                 <td>{{ v.TypeEvenement }}</td>
                                 <td>{{ v.NoEvenement }}</td>
                                 <td>
-                                    <router-link :to="{ name: 'modifValeurView',
-                                                params: { idValeur: v.IdIBVA } }">
+                                    <router-link :to="{
+                                        name: 'modifValeurView',
+                                        params: { idValeur: v.IdIBVA }
+                                    }">
                                         <i class='fas fa-edit'></i>
                                     </router-link>
                                 </td>
                             </tr>
                         </table>
                     </div>
-                    </a>
+                </a>
             </div>
-            </div>
-        </div> <div>
-            <button v-if="this.$route.name === 'armesView'"
-                v-on:click="this.$router.push({ name: 'armeView' })"
-                class="button is-info" type="sumbit">Ajouter</button>
         </div>
+        <div class="buttons is-centered" style="padding-top: 5%;padding-bottom: 5%;">
+            <div>
+                <button v-if="(this.$root.$data.Professeur)"
+                v-on:click="this.$router.push({ path: '/' })"
+                    class="button is-info" type="button">Retour a l'accueil</button>
+                <button v-if="(!this.$root.$data.Professeur)"
+                v-on:click="this.$router.push({ path: '/etudiant' })"
+                    class="button is-info" type="button">Retour a l'accueil</button>
+            </div>
+            <div>
+                <button v-on:click="this.$router.push({ name: 'valeurView' })"
+                class="button is-info"
+                    type="sumbit">Ajouter</button>
+            </div>
+        </div>
+    </div>
 </template>
 <script>
+import { connexion } from '@/stores/connexionStore';
 import { svrURL } from '../constantes';
 
 // noinspection JSUnusedGlobalSymbols
 export default {
-    name: 'ObjetsView',
+    name: 'IBVA',
     data() {
         return {
             valeurs: [],
@@ -78,6 +94,11 @@ export default {
             return filtresValeurs;
         },
     },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
+    },
     mounted() {
         this.getAllObjets(); // Get les donnée au chargement de la page
         this.getAllOptions();
@@ -86,7 +107,7 @@ export default {
         async getAllObjets() {
             const rep = await fetch(`${svrURL}${this.$route.path}`, {
                 headers: new Headers({
-                    Authorization: this.$store.state.token,
+                    Authorization: this.store.token,
                 }),
             });
             const data = await rep.json();
@@ -99,7 +120,7 @@ export default {
         async getAllOptions() { // get les options (colonne) des donnée
             const rep = await fetch(`${svrURL}${this.$route.path}`, {
                 headers: new Headers({
-                    Authorization: this.$store.state.token,
+                    Authorization: this.store.token,
                 }),
             });
             const filtresListes = await rep.json();
@@ -114,5 +135,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

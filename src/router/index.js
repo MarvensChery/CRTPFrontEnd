@@ -7,6 +7,8 @@ import ConditionView from '@/views/ConditionView.vue';
 import PersonneView from '@/views/PersonneView.vue';
 import ObjetView from '@/views/ObjetView.vue';
 import ArmeView from '@/views/ArmeView.vue';
+import IBAF from '@/views/IBAF.vue';
+import IBVA from '@/views/IBVA.vue';
 
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
 import FpsView from '@/views/FpsView.vue';
@@ -103,7 +105,7 @@ const routes = [
     },
     {
         path: '/arme',
-        name: 'armeView',
+        name: 'ArmeView',
         component: ArmeView,
         children: [
             {
@@ -144,13 +146,20 @@ const routes = [
     },
     {
         path: '/armes',
-        name: 'armesView',
-        component: ObjetsView,
+        name: 'IBAF',
+        component: IBAF,
+        // children: [
+        //    {
+        //         path: '/armes/:idArme',
+        //        name: 'ArmeView',
+        //        component: ArmeView,
+        //   },
+        // ],
     },
     {
         path: '/valeurs',
-        name: 'valeursView',
-        component: ObjetsView,
+        name: 'IBVA',
+        component: IBVA,
     },
     {
         path: '/objets',

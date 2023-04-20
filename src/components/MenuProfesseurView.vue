@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar">
     <div class="navbar-brand">
-      <router-link v-bind:to="{ name: 'accueil' } " @click="closeMenu">
+      <router-link v-bind:to="{ name: 'accueil' } ">
       <a class="navbar-item ">
         <img
           src="https://media.discordapp.net/attachments/927002688888131606/956803614402297866/logom9.png?width=512&height=128"
@@ -9,7 +9,8 @@
       </a>
     </router-link>
       <!-- Responsive navbar burger -->
-      <div class="navbar-burger"  id="nav" data-target="navmnenu1" >
+      <div class="navbar-burger burger"  id="nav" data-target="navmnenu1"
+      @click="toggleBurger" @keydown.space="bar">
         <span></span>
         <span></span>
         <span></span>
@@ -27,7 +28,7 @@
                 <div class="column">
                   <h1 class="title is-6 is-mega-menu-title">
                     Les recherches mise a votre disposition</h1>
-                  <router-link v-bind:to="{ name: 'requeteIPPE' }" @click="closeMenu">
+                  <router-link v-bind:to="{ name: 'requeteIPPE' }" >
                     <a class="navbar-item">
                       <div class="navbar-content" id="ippe">
                         <p>
@@ -49,7 +50,7 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'armesView' }" @click="closeMenu">
+                  <router-link v-bind:to="{ name: 'IBAF' }" >
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
@@ -60,7 +61,7 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'valeursView' }" @click="closeMenu">
+                  <router-link v-bind:to="{ name: 'IBVA' }">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
@@ -74,7 +75,7 @@
                 </div>
                 <div class="column " id="menuP">
                   <h1 class="title is-6 is-mega-menu-title">Menu prof</h1>
-                  <router-link v-bind:to="{ name: 'personnesView' }" @click="closeMenu">
+                  <router-link v-bind:to="{ name: 'personnesView' }" >
                     <a class="navbar-item " id="banqueP">
                       <strong>Banque de personne</strong>
                     </a>
@@ -100,7 +101,7 @@
               deconnection
             </router-link>
 
-            <router-link v-else v-bind:to="{ name: 'connexion' }" @click="closeMenu">
+            <router-link v-else v-bind:to="{ name: 'connexion' }" >
               <div class="button is-light is-primary">
                 Connection
               </div>
@@ -109,7 +110,7 @@
         </div>
       </div>
     </div>
-
+    </div>
   </nav>
 </template>
 
@@ -122,7 +123,13 @@ export default {
   methods: {
     deco() {
       this.store.token = '';
-    }
+    },
+    toggleBurger() {
+    var burger = document.querySelector('.burger');
+    var menu = document.querySelector('.navbar-menu');
+    burger.classList.toggle('is-active');
+    menu.classList.toggle('is-active');
+},
   },
   setup(){
  const store = connexion();

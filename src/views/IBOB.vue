@@ -6,6 +6,7 @@
             <div class="columns has-text-right has-text-black is-centered"
             style="padding-right: 5%; padding-bottom: 5%;">
                 <div class="select">
+                    <label for="valeursFiltres">Filtrer par:</label>
                    <select v-model="valeursFiltres">
                         <option></option>
                         <option v-for="i in optionsValeurs" :value="i" :key="i">{{i}}</option>
@@ -56,11 +57,11 @@
 
 </template>
 <script>
+import { connexion } from '@/stores/connexionStore';
 import { svrURL } from '../constantes';
-
 // noinspection JSUnusedGlobalSymbols
 export default {
-    name: 'ObjetsView',
+    name: 'IBOB',
     data() {
         return {
             valeurs: [],
@@ -84,6 +85,11 @@ export default {
             return filtresValeurs;
         },
     },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
+    },
     mounted() {
         this.getAllObjets(); // Get les donnée au chargement de la page
         this.getAllOptions();
@@ -92,7 +98,7 @@ export default {
         async getAllObjets() {
             const rep = await fetch(`${svrURL}${this.$route.path}`, {
                 headers: new Headers({
-                    Authorization: this.$store.state.token,
+                    Authorization: this.store.token,
                 }),
             });
             const data = await rep.json();
@@ -105,7 +111,7 @@ export default {
         async getAllOptions() { // get les options (colonne) des donnée
             const rep = await fetch(`${svrURL}${this.$route.path}`, {
                 headers: new Headers({
-                    Authorization: this.$store.state.token,
+                    Authorization: this.store.token,
                 }),
             });
             const filtresListes = await rep.json();
