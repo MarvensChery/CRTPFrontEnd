@@ -1,7 +1,7 @@
 <template>
   <div class="hero-body ">
     <!--box gives it the shadow-->
-    <article v-if="this.$root.$data.erreurIPPE === true" class="column is-full message is-danger">
+    <article v-if="this.store.erreurIPPE === true" class="column is-full message is-danger">
           <div class="message-body">
             Erreur, la personne recherché(e) n'existe pas
           </div>
@@ -118,6 +118,13 @@
                   type="button" value="Recherche" v-on:click="this.isValid()"
                   v-on:keydown="this.isValid()">
             Recherche
+          </button>
+        </div>
+        <div class="column is-12">
+          <button id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler" v-on:click="$router.go(-1) "
+                  v-on:keydown="$router.go(-1)">
+            Annuler
           </button>
         </div>
       </form>
