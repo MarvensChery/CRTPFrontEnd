@@ -166,6 +166,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 @media (max-width: 800px) {
   .interactive-bg {
     display: none;

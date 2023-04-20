@@ -1,13 +1,15 @@
 <template>
   <nav class="navbar">
     <div class="navbar-brand">
-      <a class="navbar-item">
+      <router-link v-bind:to="{ name: 'accueil' } " @click="closeMenu">
+      <a class="navbar-item ">
         <img
           src="https://media.discordapp.net/attachments/927002688888131606/956803614402297866/logom9.png?width=512&height=128"
           id="logo" class="zoom" alt="Logo m9" width="112" height="40">
       </a>
-
-      <div class="navbar-burger burger" id="nav" data-target="navmnenu1">
+    </router-link>
+      <!-- Responsive navbar burger -->
+      <div class="navbar-burger"  id="nav" data-target="navmnenu1" >
         <span></span>
         <span></span>
         <span></span>
@@ -25,7 +27,7 @@
                 <div class="column">
                   <h1 class="title is-6 is-mega-menu-title">
                     Les recherches mise a votre disposition</h1>
-                  <router-link v-bind:to="{ name: 'requeteIPPE' }">
+                  <router-link v-bind:to="{ name: 'requeteIPPE' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content" id="ippe">
                         <p>
@@ -47,7 +49,7 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'armesView' }">
+                  <router-link v-bind:to="{ name: 'armesView' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
@@ -58,7 +60,7 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'valeursView' }">
+                  <router-link v-bind:to="{ name: 'valeursView' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
@@ -72,7 +74,7 @@
                 </div>
                 <div class="column " id="menuP">
                   <h1 class="title is-6 is-mega-menu-title">Menu prof</h1>
-                  <router-link v-bind:to="{ name: 'personnesView' }">
+                  <router-link v-bind:to="{ name: 'personnesView' }" @click="closeMenu">
                     <a class="navbar-item " id="banqueP">
                       <strong>Banque de personne</strong>
                     </a>
@@ -82,11 +84,6 @@
             </div>
           </div>
         </div>
-        <router-link v-bind:to="{ name: 'accueil' }">
-          <a class="navbar-item " id="accueil">
-            Accueil
-          </a>
-        </router-link>
       </div>
       <div class="navbar-end">
         <router-link v-if="!this.store.Professeur" v-bind:to="{ name: 'etudiant' }">
@@ -103,13 +100,12 @@
               deconnection
             </router-link>
 
-            <router-link v-else v-bind:to="{ name: 'connexion' }">
+            <router-link v-else v-bind:to="{ name: 'connexion' }" @click="closeMenu">
               <div class="button is-light is-primary">
-                connection
+                Connection
               </div>
 
             </router-link>
-          </div>
         </div>
       </div>
     </div>
@@ -135,8 +131,8 @@ export default {
  },
 
 };
-
 </script>
 
 <style scoped>
+
 </style>
