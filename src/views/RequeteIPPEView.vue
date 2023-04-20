@@ -198,10 +198,10 @@ export default {
                 this.prenomError = false;
             }
             if (this.prenom2) {
-              if (capitalizeFirstLetter(this.prenom2) === '') {
-                this.prenom2 = null;
+                if (capitalizeFirstLetter(this.prenom2) === '') {
+                    this.prenom2 = null;
+                }
             }
-          }
             if (this.anneError === false && this.moisError === false
         && this.jourError === false && this.nomError === false
         && this.prenomError === false && this.sexeError === false) {

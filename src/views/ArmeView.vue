@@ -3,8 +3,7 @@
 <template>
     <div class="container mb-4 is-desktop">
       <form @submit.prevent="onSubmit">
-        <h1 class="has-text-black " style="height:135px; text-align:center;
-        font-size: 24px; padding-top: 5%;" >
+        <h1 class="has-text-black " style="height:135px; text-align:center;font-size: 24px; padding-top: 5%;" >
             <b>
                 <u v-if="isNaN(this.$route.params.idArme)">AJOUT D'UNE RÉPONSE ARME À FEU</u>
                 <u v-else>MODIFICATION D'UNE RÉPONSE ARME À FEU</u>
@@ -159,7 +158,7 @@
                 v-if="isNaN(this.$route.params.idArme)"
                 v-on:click="this.addArme">Ajouter</button>&nbsp;
                 <button type="button"
-                    v-on:click="this.$router.push({ name: 'armesView' })">Annuler</button>
+                    v-on:click="this.$router.push({ name: 'IBAF' })">Annuler</button>
             </div>
                 <p style="margin-bottom: 50px;">&nbsp;</p>
                 </div>

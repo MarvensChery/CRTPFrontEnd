@@ -1,13 +1,16 @@
 <template>
   <nav class="navbar">
     <div class="navbar-brand">
-      <a class="navbar-item">
+      <router-link v-bind:to="{ name: 'accueil' } ">
+      <a class="navbar-item ">
         <img
           src="https://media.discordapp.net/attachments/927002688888131606/956803614402297866/logom9.png?width=512&height=128"
           id="logo" class="zoom" alt="Logo m9" width="112" height="40">
       </a>
-
-      <div class="navbar-burger burger" id="nav" data-target="navmnenu1">
+    </router-link>
+      <!-- Responsive navbar burger -->
+      <div class="navbar-burger burger"  id="nav" data-target="navmnenu1"
+      @click="toggleBurger" @keydown.space="bar">
         <span></span>
         <span></span>
         <span></span>
@@ -23,9 +26,9 @@
             <div class="container is-fluid">
               <div class="columns">
                 <div class="column">
-                  <h1 class="title is-6 is-mega-menu-title">
+                  <h1 class="title is-6 is-mega-menu-title flex">
                     Les recherches mise a votre disposition</h1>
-                  <router-link v-bind:to="{ name: 'requeteIPPE' }">
+                  <router-link v-bind:to="{ name: 'requeteIPPE' }" >
                     <a class="navbar-item">
                       <div class="navbar-content" id="ippe">
                         <p>
@@ -36,45 +39,39 @@
                       </div>
                     </a>
                   </router-link>
+                </div>
+                <div class="column " id="menuP">
+                  <h1 class="title is-6 is-mega-menu-title">Menu prof</h1>
+                  <router-link v-bind:to="{ name: 'personnesView' }" >
+                    <a class="navbar-item " id="banqueP">
+                      <strong>Banque de personne</strong>
+                    </a>
+                  </router-link>
                   <router-link v-bind:to="{ name: 'objetsView' }">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
-                          <strong>IBOB</strong>
-                          <br>
-                          <small>Recherche d'objets</small>
+                          <strong>Banque d'objets</strong>
                         </p>
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'armesView' }">
+                  <router-link v-bind:to="{ name: 'IBAF' }" >
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
-                          <strong>IBAF</strong>
-                          <br>
-                          <small>Recherche d'armes a feu</small>
+                          <strong>Banque d'armes</strong>
                         </p>
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'valeursView' }">
+                  <router-link v-bind:to="{ name: 'IBVA' }">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
-                          <strong>IBVA</strong>
-                          <br>
-                          <small>Recherche de valeurs</small>
+                          <strong>Banque de Valeur</strong>
                         </p>
                       </div>
-                    </a>
-                  </router-link>
-                </div>
-                <div class="column " id="menuP">
-                  <h1 class="title is-6 is-mega-menu-title">Menu prof</h1>
-                  <router-link v-bind:to="{ name: 'personnesView' }">
-                    <a class="navbar-item " id="banqueP">
-                      <strong>Banque de personne</strong>
                     </a>
                   </router-link>
                 </div>
@@ -82,11 +79,6 @@
             </div>
           </div>
         </div>
-        <router-link v-bind:to="{ name: 'accueil' }">
-          <a class="navbar-item " id="accueil">
-            Accueil
-          </a>
-        </router-link>
       </div>
       <div class="navbar-end">
         <router-link v-if="!this.store.Professeur" v-bind:to="{ name: 'etudiant' }">
@@ -103,17 +95,16 @@
               deconnection
             </router-link>
 
-            <router-link v-else v-bind:to="{ name: 'connexion' }">
+            <router-link v-else v-bind:to="{ name: 'connexion' }" >
               <div class="button is-light is-primary">
-                connection
+                Connection
               </div>
 
             </router-link>
-          </div>
         </div>
       </div>
     </div>
-
+    </div>
   </nav>
 </template>
 
@@ -126,7 +117,13 @@ export default {
   methods: {
     deco() {
       this.store.token = '';
-    }
+    },
+    toggleBurger() {
+    var burger = document.querySelector('.burger');
+    var menu = document.querySelector('.navbar-menu');
+    burger.classList.toggle('is-active');
+    menu.classList.toggle('is-active');
+},
   },
   setup(){
  const store = connexion();
@@ -135,8 +132,8 @@ export default {
  },
 
 };
-
 </script>
 
 <style scoped>
+
 </style>
