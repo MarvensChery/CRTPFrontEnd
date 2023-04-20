@@ -2,11 +2,16 @@ import { createRouter, createWebHistory } from 'vue-router';
 import AccueilView from '@/views/AccueilView.vue';
 import ConnexionView from '@/views/ConnexionView.vue';
 import RequeteIPPEView from '@/views/RequeteIPPEView.vue';
+import RequeteIBAFView from '@/views/RequeteIBAFView.vue';
 import PersonnesView from '@/views/PersonnesView.vue';
 import ConditionView from '@/views/ConditionView.vue';
 import PersonneView from '@/views/PersonneView.vue';
 import ObjetView from '@/views/ObjetView.vue';
 import ArmeView from '@/views/ArmeView.vue';
+import IBAF from '@/views/IBAF.vue';
+import IBVA from '@/views/IBVA.vue';
+import RequeteIBOB from '@/views/RequeteIBOB.vue';
+import RequeteIBVA from '@/views/RequeteIBVA.vue';
 
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
 import FpsView from '@/views/FpsView.vue';
@@ -32,6 +37,16 @@ const routes = [
         path: '/requeteIPPE', // Route pour faire une interrogation personne
         name: 'requeteIPPE',
         component: RequeteIPPEView,
+    },
+    {
+        path: '/RequeteIBOB', // Route pour faire une interrogation personne
+        name: 'RequeteIBOB',
+        component: RequeteIBOB,
+    },
+    {
+        path: '/requeteIBAF', // Route pour faire une interrogation personne
+        name: 'RequeteIBAFView',
+        component: RequeteIBAFView,
     },
     {
         path: '/personnes', // Route pour la liste des personne de la table IPPE
@@ -103,7 +118,7 @@ const routes = [
     },
     {
         path: '/arme',
-        name: 'armeView',
+        name: 'ArmeView',
         component: ArmeView,
         children: [
             {
@@ -144,13 +159,20 @@ const routes = [
     },
     {
         path: '/armes',
-        name: 'armesView',
-        component: ObjetsView,
+        name: 'IBAF',
+        component: IBAF,
+        // children: [
+        //    {
+        //         path: '/armes/:idArme',
+        //        name: 'ArmeView',
+        //        component: ArmeView,
+        //   },
+        // ],
     },
     {
         path: '/valeurs',
-        name: 'valeursView',
-        component: ObjetsView,
+        name: 'IBVA',
+        component: IBVA,
     },
     {
         path: '/objets',
@@ -178,6 +200,11 @@ const routes = [
                 component: IPPEView,
             },
         ],
+    },
+    {
+        path: '/requeteIBVA', // Route pour faire une interrogation personne
+        name: 'RequeteIBVA',
+        component: RequeteIBVA,
     },
 
 ];

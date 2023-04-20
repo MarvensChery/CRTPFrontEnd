@@ -40,7 +40,7 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'objetsView' }" @click="closeMenu">
+                  <router-link v-bind:to="{ name: 'RequeteIBOB' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
@@ -51,7 +51,7 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'armesView' }" @click="closeMenu">
+                  <router-link v-bind:to="{ name: 'RequeteIBAFView' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
@@ -62,7 +62,7 @@
                       </div>
                     </a>
                   </router-link>
-                  <router-link v-bind:to="{ name: 'valeursView' }" @click="closeMenu">
+                  <router-link v-bind:to="{ name: 'RequeteIBVA' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
@@ -74,11 +74,38 @@
                     </a>
                   </router-link>
                 </div>
-                <div class="column" id="menuP" v-if="this.store.Professeur">
+                <div class="column " id="menuP">
                   <h1 class="title is-6 is-mega-menu-title">Menu prof</h1>
-                  <router-link v-bind:to="{ name: 'personnesView' }" @click="closeMenu">
+                  <router-link v-bind:to="{ name: 'personnesView' }" >
                     <a class="navbar-item " id="banqueP">
                       <strong>Banque de personne</strong>
+                    </a>
+                  </router-link>
+                  <router-link v-bind:to="{ name: 'objetsView' }">
+                    <a class="navbar-item">
+                      <div class="navbar-content">
+                        <p>
+                          <strong>Banque d'objets</strong>
+                        </p>
+                      </div>
+                    </a>
+                  </router-link>
+                  <router-link v-bind:to="{ name: 'IBAF' }" >
+                    <a class="navbar-item">
+                      <div class="navbar-content">
+                        <p>
+                          <strong>Banque d'armes</strong>
+                        </p>
+                      </div>
+                    </a>
+                  </router-link>
+                  <router-link v-bind:to="{ name: 'IBVA' }">
+                    <a class="navbar-item">
+                      <div class="navbar-content">
+                        <p>
+                          <strong>Banque de Valeur</strong>
+                        </p>
+                      </div>
                     </a>
                   </router-link>
                 </div>

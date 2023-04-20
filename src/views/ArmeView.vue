@@ -3,8 +3,7 @@
 <template>
     <div class="container mb-4 is-desktop">
       <form @submit.prevent="onSubmit">
-        <h1 class="has-text-black " style="height:135px; text-align:center;
-        font-size: 24px; padding-top: 5%;" >
+        <h1 class="has-text-black " style="height:135px; text-align:center;font-size: 24px; padding-top: 5%;" >
             <b>
                 <u v-if="isNaN(this.$route.params.idArme)">AJOUT D'UNE RÉPONSE ARME À FEU</u>
                 <u v-else>MODIFICATION D'UNE RÉPONSE ARME À FEU</u>
@@ -85,7 +84,7 @@
                         <p v-if="CalibreValid" class="help is-danger">
                             {{CalibreValid}}</p>
                     </div>
-                    <div class="field" style="margin-left: 35%;">
+                    <div class="field">
                         <label for="typeArme" class="label">Type d'arme</label>
                         <div class = "control">
                             <select id="typeArme" class="select" name="typeArme"
@@ -99,12 +98,13 @@
                         </div>
                     </div>
                     <div class="field" style="padding-bottom: 20px">
+                    <label for="NoEvenement" class="label">Numéro d'évenement</label>
                     <div id="NoEvenement" class="columns is-mobile is-multiline is-centered">
                         <div class="column is-3-desktop is-2-mobile">
                             <label class="has-text-black" for="NoEvent"><b>Numéro évenement</b>
                                 <span style="color: red">*</span></label><br><br>
                             <select id="NoEvent" class="select" name="NoEvent"
-                            v-model="NoEvent" style="width: 80%;"  required>
+                            v-model="NoEvent"  required>
                                 <option></option>
                                 <option>123</option>
                                 <option>302</option>
@@ -158,7 +158,7 @@
                 v-if="isNaN(this.$route.params.idArme)"
                 v-on:click="this.addArme">Ajouter</button>&nbsp;
                 <button type="button"
-                    v-on:click="this.$router.push({ name: 'armesView' })">Annuler</button>
+                    v-on:click="this.$router.push({ name: 'IBAF' })">Annuler</button>
             </div>
                 <p style="margin-bottom: 50px;">&nbsp;</p>
                 </div>

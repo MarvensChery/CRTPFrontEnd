@@ -6,17 +6,23 @@
         <form class="has-text-centered">
           <div class="is-centered">
             <h1 class="title is-1-touch is-full my-6">Table IPPE Alimentation</h1>
-
+            <div class="columns is-multiline">
               <label
+              style=" margin-left: 30%;"
+              class="column is-3-desktop is-offset-1-desktop is-6-touch"
                 for="votre-nom"
-                ><b>Filtrer par nom de famille:</b></label
+                >Filtrer par nom de famille:</label
               >
-              <input class="input is-link is-size-8"
+              <input
+              style=" margin-left: 30%;"
+              class="column input is-hovered is-size-6 is-size-4-touch
+                 is-4-desktop is-5-touch mr-6"
                 v-model="nom"
                 id="votre-nom"
                 name="votre-nom"
                 type="text"
               />
+            </div>
             <div>
               <hr />
             </div>
@@ -56,7 +62,14 @@
             </div>
           </div>
         </form>
-
+        <!--BUTTON HOME-->
+        <div class="column is-12">
+          <button id="annuler" class="button is-danger " style="width: 30%; margin-left: 30%;"
+                  type="button" value="Annuler" v-on:click="$router.go(-1) "
+                  v-on:keydown="$router.go(-1)">
+            Annuler
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -124,5 +137,33 @@ export default {
 </script>
 
 <style scoped>
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
+#wrapper {
+  flex: 1;
+}
+
+.zoom:hover {
+  transform: scale(1.1);
+}
+
+.shadow:hover {
+  -webkit-filter: drop-shadow(-5px 2px 5px #999999);
+}
+
+#imgHome {
+  height: 64px;
+  width: 64px;
+  float: left;
+  margin-top: -50px;
+  margin-bottom: -100px;
+}
+
+#borderNone {
+  border: none;
+}
 </style>

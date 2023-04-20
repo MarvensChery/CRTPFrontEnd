@@ -1,13 +1,12 @@
-<!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
     <div>
-        <div>
+        <div v-if="this.$route.name === 'objetsView'">
             <h1 class="has-text-black " style="height:135px; text-align:center; font-size: 24px;">
             <b><u>LISTE D'OBJETS</u></b></h1>
             <div class="columns has-text-right has-text-black is-centered"
             style="padding-right: 5%; padding-bottom: 5%;">
-            <label for="valeursFiltres">Filtrer par:</label>
                 <div class="select">
+                    <label for="valeursFiltres">Filtrer par:</label>
                    <select v-model="valeursFiltres">
                         <option></option>
                         <option v-for="i in optionsValeurs" :value="i" :key="i">{{i}}</option>
@@ -21,7 +20,8 @@
                         <a id="objets">
                         <div class="table-container">
                             <table class="table has-text-black is-fullwidth"
-                                        style="text-align:center;padding-bottom: 5%;">
+                                        style="text-align:center;
+                            padding-bottom: 5%;">
                                 <tr>
                                     <th>Numéro de Série</th>
                                     <th>Marque</th>
@@ -46,34 +46,22 @@
                     </div>
                         </a>
                     </div>
+
             </div>
         </div>
-        <div class="buttons is-centered" style="padding-top: 5%;padding-bottom: 5%;">
-            <div>
-                <button v-if="(this.$root.$data.Professeur)"
-                v-on:click="this.$router.push({ path: '/' })"
-                class="button is-info" type="button"
-                >Retour a l'accueil</button>
-                <button v-if="(!this.$root.$data.Professeur)"
-                v-on:click="this.$router.push({ path: '/etudiant' })"
-                class="button is-info" type="button"
-                >Retour a l'accueil</button>
-            </div>
-            <div>
-                <button v-if="this.$route.name === 'objetsView'"
+    </div><div>
+        <button v-if="this.$route.name === 'objetsView'"
                 v-on:click="this.$router.push({ name: 'objetView' })"
                 class="button is-info" type="sumbit">Ajouter</button>
-            </div>
-        </div>
     </div>
-</template>
 
+</template>
 <script>
 import { connexion } from '@/stores/connexionStore';
 import { svrURL } from '../constantes';
 // noinspection JSUnusedGlobalSymbols
 export default {
-    name: 'ObjetsView',
+    name: 'IBOB',
     data() {
         return {
             valeurs: [],

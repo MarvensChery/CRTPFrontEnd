@@ -1,8 +1,8 @@
 <template>
     <div class="columns is-vcentered">
 
-        <div class="login column is-12">
-            <section class="section">
+        <div class="login column is-12 ">
+            <section class="section" style="margin-left: 10%; margin-right: 10%;">
                 <div class="has-text-centered">
                     <img class="login-logo" id="img" src="/images/etudiant.png" alt="logo etudiant">
                     <h1 class="subtitle mb-3" ><strong>Lequel des deux êtes vous ?</strong> </h1>
@@ -14,7 +14,7 @@
                         <span class="switch-button-label-span" id="btn">Étudiant</span>
                     </label>
                   </div>
-                <div class="field " v-if="!this.store.Professeur">
+                <div class="field " v-if="!this.store.Professeur" >
                     <label for="ID" class="label mt-3" id="nomLabel" >
                         Identifiant de l'étudiant</label>
                     <div class="control has-icons-right">
