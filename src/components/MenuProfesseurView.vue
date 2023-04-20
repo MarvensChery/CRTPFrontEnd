@@ -50,6 +50,17 @@
                       </div>
                     </a>
                   </router-link>
+                  <router-link v-bind:to="{ name: 'RequeteIBAFView' }" >
+                    <a class="navbar-item">
+                      <div class="navbar-content" id="ibob">
+                        <p>
+                          <strong>IBOB</strong>
+                          <br>
+                          <small>Recherche d'objet</small>
+                        </p>
+                      </div>
+                    </a>
+                  </router-link>
                 </div>
                 <div class="column " id="menuP">
                   <h1 class="title is-6 is-mega-menu-title">Menu prof</h1>

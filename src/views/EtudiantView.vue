@@ -9,7 +9,7 @@
         </div>
         <div class=" column is-large is-info
         has-text-centered mb-4 ml-2 mr-2 is-3-desktop is-3-tablet is-3-mobile">
-            <router-link v-bind:to="{ name: 'IBAF'}">
+            <router-link v-bind:to="{ name: 'RequeteIBAFView'}">
                 <img src ="/images/ibaf.png" alt="armesView">
             </router-link>
         </div>

@@ -43,7 +43,7 @@ const routes = [
     },
     {
         path: '/requeteIBAF', // Route pour faire une interrogation personne
-        name: 'requeteIBAF',
+        name: 'RequeteIBAFView',
         component: RequeteIBAFView,
     },
     {
