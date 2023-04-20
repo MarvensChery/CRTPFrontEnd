@@ -74,7 +74,7 @@
                     </a>
                   </router-link>
                 </div>
-                <div class="column " id="menuP">
+                <div class="column " id="menuP" v-if="this.store.Professeur">
                   <h1 class="title is-6 is-mega-menu-title">Menu prof</h1>
                   <router-link v-bind:to="{ name: 'personnesView' }" >
                     <a class="navbar-item " id="banqueP">
