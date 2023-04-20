@@ -1,54 +1,50 @@
-<!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
     <div>
-        <div>
             <h1 class="has-text-black " style="height:135px; text-align:center; font-size: 24px;">
-            <b><u>LISTE D'OBJETS</u></b></h1>
+            <b><u>LISTE D'ARMES</u></b></h1>
             <div class="columns has-text-right has-text-black is-centered"
-            style="padding-right: 5%; padding-bottom: 5%;">
+            style="padding-right: 5%;padding-bottom: 5%;">
             <label for="valeursFiltres">Filtrer par:</label>
                 <div class="select">
-                   <select v-model="valeursFiltres">
+                    <select v-model="valeursFiltres">
                         <option></option>
                         <option v-for="i in optionsValeurs" :value="i" :key="i">{{i}}</option>
                     </select>
                 </div>
                 <input id="type" style="height: 40px;" placeholder="Valeur du filtre"
-                    v-model="valValeurs">
+                v-model="valValeurs">
             </div>
             <div class="columns">
-                    <div id="detail" class="column is-centered">
-                        <a id="objets">
-                        <div class="table-container">
-                            <table class="table has-text-black is-fullwidth"
-                                        style="text-align:center;padding-bottom: 5%;">
-                                <tr>
-                                    <th>Numéro de Série</th>
-                                    <th>Marque</th>
-                                    <th>Modèle</th>
-                                    <th>Type d'objet</th>
-                                    <th>Numéro d'évènement</th>
-                                </tr>
-                            <tr v-for="o in filtresValeurs" v-bind:key="o.idBOB">
-                                <td>{{ o.NoSerie }}</td>
-                                <td>{{ o.Marque }}</td>
-                                <td>{{ o.Modele }}</td>
-                                <td>{{ o.TypeObjet }}</td>
-                                <td>{{ o.NoEvenement }}</td>
+                <div id="detail" class="column is-centered">
+                    <a id="armes">
+                    <div class="table-container">
+                        <table class="table has-text-black is-fullwidth" style="text-align:center;">
+                            <tr>
+                                <th>Numéro de Série</th>
+                                <th>Marque</th>
+                                <th>Calibre</th>
+                                <th>Type d'armes</th>
+                                <th>Numéro d'évènement</th>
+                            </tr>
+                            <tr v-for="a in filtresValeurs" v-bind:key="a.IdIBAF">
+                                <td>{{ a.NoSerie }}</td>
+                                <td>{{ a.Marque }}</td>
+                                <td>{{ a.Calibre }}</td>
+                                <td>{{ a.TypeArme }}</td>
+                                <td>{{ a.NoEvenement }}</td>
                                 <td>
-                                    <router-link :to="{ name: 'modifObjetView',
-                                                params: { idObjet: o.IdIBOB } }">
-                                    <i class='fas fa-edit'></i>
-                                </router-link>
+                                    <router-link :to="{ name: 'modifArmeView',
+                                                params: { idArme: a.IdIBAF } }">
+                                        <i class='fas fa-edit'></i>
+                                    </router-link>
                                 </td>
                             </tr>
                         </table>
                     </div>
-                        </a>
-                    </div>
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="buttons is-centered" style="padding-top: 5%;padding-bottom: 5%;">
+            <div class="buttons is-centered" style="padding-top: 5%;padding-bottom: 5%;">
             <div>
                 <button v-if="(this.$root.$data.Professeur)"
                 v-on:click="this.$router.push({ path: '/' })"
@@ -60,20 +56,20 @@
                 >Retour a l'accueil</button>
             </div>
             <div>
-                <button v-if="this.$route.name === 'objetsView'"
-                v-on:click="this.$router.push({ name: 'objetView' })"
+                <button
+                v-on:click="this.$router.push({ name: 'ArmeView'})"
                 class="button is-info" type="sumbit">Ajouter</button>
             </div>
         </div>
-    </div>
+        </div>
 </template>
-
 <script>
 import { connexion } from '@/stores/connexionStore';
 import { svrURL } from '../constantes';
+
 // noinspection JSUnusedGlobalSymbols
 export default {
-    name: 'ObjetsView',
+    name: 'IBAF',
     data() {
         return {
             valeurs: [],

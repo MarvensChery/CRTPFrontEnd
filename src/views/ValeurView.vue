@@ -160,6 +160,7 @@
 </template>
 
 <script>
+import { connexion } from '@/stores/connexionStore';
 import { svrURL } from '../constantes';
 import {
     capitalizeFirstLetter, isJourValide, isMoisValide, isAnneeValide, isDateValide,
@@ -190,12 +191,23 @@ export default {
             confimation: '',
         };
     },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
+    },
     mounted() {
+        this.checkToken();
         if (this.$route.path !== '/valeur') {
             this.getValeur(); // get les info d'une valeur au chargement de la page
         }
     },
     methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
         confirmation() {
             this.confimation = 'validation';
         },

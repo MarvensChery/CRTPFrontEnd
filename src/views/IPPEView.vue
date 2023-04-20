@@ -1599,6 +1599,7 @@ export default {
         };
     },
     mounted() {
+        this.checkToken();
         if (this.store.token === '') { this.$route.push('/connexion'); }
         this.getCrime();
         this.affichageInfoPersonne();
@@ -1620,6 +1621,11 @@ export default {
         },
     },
     methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
         onChangeCour(e) {
             if (e.target.value === 'Cour du Québec') {
                 this.$refs.auto.value = '500-01-310-';

@@ -231,6 +231,7 @@ import {
     verifieMarques,
     verifieGiletPantalonAutreVetement,
 } from '@/validations';
+import { connexion } from '@/stores/connexionStore';
 
 export default {
     name: 'DescriptionPersonneView',
@@ -278,11 +279,21 @@ export default {
             ErrorAutreVetement: '',
         };
     },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
+    },
     methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
         async GetDescription() {
             const rep = await fetch(`${svrURL}/personnes/${this.$route.params.idPersonne}`, {
                 headers: {
-                    Authorization: this.$store.state.token,
+                    Authorization: this.store.token,
                 },
             });
             if (rep.ok) {
@@ -474,7 +485,7 @@ export default {
                 // PUT
                 const response = await fetch(`${svrURL}/descriptionPersonnes/${this.$route.params.idPersonne}`, {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json', Authorization: this.$store.state.token },
+                    headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
                     body: JSON.stringify(body),
                 });
                 if (response.ok) {
@@ -491,6 +502,7 @@ export default {
         },
     },
     mounted() {
+        this.checkToken();
         this.GetDescription();
     },
 };
