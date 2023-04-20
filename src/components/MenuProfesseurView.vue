@@ -26,7 +26,7 @@
             <div class="container is-fluid">
               <div class="columns">
                 <div class="column">
-                  <h1 class="title is-6 is-mega-menu-title">
+                  <h1 class="title is-6 is-mega-menu-title flex">
                     Les recherches mise a votre disposition</h1>
                   <router-link v-bind:to="{ name: 'requeteIPPE' }" >
                     <a class="navbar-item">
@@ -39,13 +39,19 @@
                       </div>
                     </a>
                   </router-link>
+                </div>
+                <div class="column " id="menuP">
+                  <h1 class="title is-6 is-mega-menu-title">Menu prof</h1>
+                  <router-link v-bind:to="{ name: 'personnesView' }" >
+                    <a class="navbar-item " id="banqueP">
+                      <strong>Banque de personne</strong>
+                    </a>
+                  </router-link>
                   <router-link v-bind:to="{ name: 'objetsView' }">
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
-                          <strong>IBOB</strong>
-                          <br>
-                          <small>Recherche d'objets</small>
+                          <strong>Banque d'objets</strong>
                         </p>
                       </div>
                     </a>
@@ -54,9 +60,7 @@
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
-                          <strong>IBAF</strong>
-                          <br>
-                          <small>Recherche d'armes a feu</small>
+                          <strong>Banque d'armes</strong>
                         </p>
                       </div>
                     </a>
@@ -65,19 +69,9 @@
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
-                          <strong>IBVA</strong>
-                          <br>
-                          <small>Recherche de valeurs</small>
+                          <strong>Banque de Valeur</strong>
                         </p>
                       </div>
-                    </a>
-                  </router-link>
-                </div>
-                <div class="column " id="menuP">
-                  <h1 class="title is-6 is-mega-menu-title">Menu prof</h1>
-                  <router-link v-bind:to="{ name: 'personnesView' }" >
-                    <a class="navbar-item " id="banqueP">
-                      <strong>Banque de personne</strong>
                     </a>
                   </router-link>
                 </div>
