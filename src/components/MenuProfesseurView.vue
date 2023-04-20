@@ -50,6 +50,29 @@
                       </div>
                     </a>
                   </router-link>
+                  <router-link v-bind:to="{ name: 'RequeteIBAFView' }" >
+                    <a class="navbar-item">
+                      <div class="navbar-content" id="ibob">
+                        <p>
+                          <strong>IBAF</strong>
+                          <br>
+                          <small>Recherche d'armes</small>
+                        </p>
+                      </div>
+                    </a>
+                  </router-link>
+                  <router-link v-bind:to="{ name: 'RequeteIBVA' }" >
+                    <a class="navbar-item">
+                      <div class="navbar-content" id="ibva">
+                        <p>
+                          <strong>IBVA</strong>
+                          <br>
+                          <small>Recherche de Valeur</small>
+                        </p>
+                      </div>
+                    </a>
+                  </router-link>
+
                 </div>
                 <div class="column " id="menuP">
                   <h1 class="title is-6 is-mega-menu-title">Menu prof</h1>
@@ -135,6 +158,9 @@ export default {
     burger.classList.toggle('is-active');
     menu.classList.toggle('is-active');
 },
+closeMenu() {
+            this.isActive = false;
+        },
   },
   setup(){
  const store = connexion();
