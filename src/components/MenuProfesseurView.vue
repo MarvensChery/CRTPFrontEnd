@@ -120,7 +120,7 @@
         @click="closeMenu"
           v-bind:to="{ name: 'etudiant' }">
             <div class="button is-light" style="margin-right: 20px;">
-                Acceuil
+                Accueil
               </div>
         </router-link>
 
