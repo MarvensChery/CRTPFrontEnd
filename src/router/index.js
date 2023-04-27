@@ -10,6 +10,8 @@ import ObjetView from '@/views/ObjetView.vue';
 import ArmeView from '@/views/ArmeView.vue';
 import IBAF from '@/views/IBAF.vue';
 import IBVA from '@/views/IBVA.vue';
+import RequeteIBOB from '@/views/RequeteIBOB.vue';
+import RequeteIBVA from '@/views/RequeteIBVA.vue';
 
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
 import FpsView from '@/views/FpsView.vue';
@@ -37,8 +39,13 @@ const routes = [
         component: RequeteIPPEView,
     },
     {
+        path: '/RequeteIBOB', // Route pour faire une interrogation personne
+        name: 'RequeteIBOB',
+        component: RequeteIBOB,
+    },
+    {
         path: '/requeteIBAF', // Route pour faire une interrogation personne
-        name: 'requeteIBAF',
+        name: 'RequeteIBAFView',
         component: RequeteIBAFView,
     },
     {
@@ -193,6 +200,11 @@ const routes = [
                 component: IPPEView,
             },
         ],
+    },
+    {
+        path: '/requeteIBVA', // Route pour faire une interrogation personne
+        name: 'RequeteIBVA',
+        component: RequeteIBVA,
     },
 
 ];

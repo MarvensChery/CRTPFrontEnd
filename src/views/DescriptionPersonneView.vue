@@ -293,7 +293,7 @@ export default {
         async GetDescription() {
             const rep = await fetch(`${svrURL}/personnes/${this.$route.params.idPersonne}`, {
                 headers: {
-                    Authorization: this.$store.state.token,
+                    Authorization: this.store.token,
                 },
             });
             if (rep.ok) {
@@ -485,7 +485,7 @@ export default {
                 // PUT
                 const response = await fetch(`${svrURL}/descriptionPersonnes/${this.$route.params.idPersonne}`, {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json', Authorization: this.$store.state.token },
+                    headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
                     body: JSON.stringify(body),
                 });
                 if (response.ok) {

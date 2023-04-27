@@ -1,7 +1,7 @@
 <template>
   <div class="hero-body ">
     <!--box gives it the shadow-->
-    <article v-if="this.$root.$data.erreurIPPE === true" class="column is-full message is-danger">
+    <article v-if="this.store.erreurIPPE === true" class="column is-full message is-danger">
           <div class="message-body">
             Erreur, la personne recherché(e) n'existe pas
           </div>
@@ -120,21 +120,16 @@
             Recherche
           </button>
         </div>
+        <div class="column is-12">
+          <button id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler" v-on:click="$router.go(-1) "
+                  v-on:keydown="$router.go(-1)">
+            Annuler
+          </button>
+        </div>
       </form>
 
     </div>
-    <div class="columns is-multiline is-mobile">
-      <div class="column">
-                <button v-if="(this.$root.$data.Professeur)"
-                v-on:click="this.$router.push({ path: '/' })"
-                class="button is-info is-fullwidth " type="button"
-                >Retour a l'accueil</button>
-                <button v-if="(!this.$root.$data.Professeur)"
-                v-on:click="this.$router.push({ path: '/etudiant' })"
-                class="button is-info is-fullwidth " type="button"
-                >Retour a l'accueil</button>
-            </div>
-            </div>
   </div>
 </template>
 
