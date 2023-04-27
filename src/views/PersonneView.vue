@@ -437,7 +437,9 @@ export default {
                     headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
                     body: JSON.stringify(body),
                 });
+                console.log(response);
                 if (response.ok) {
+                    console.log(response);
                     this.PUTenvoyé = true;
                     setTimeout(() => {
                         this.$router.push('/personnes');

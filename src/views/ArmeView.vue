@@ -219,6 +219,7 @@ export default {
             MarqueValid: '',
             CalibreValid: '',
             confimation: '',
+            PUTenvoyé: false,
         };
     },
     setup() {
@@ -291,7 +292,6 @@ export default {
             const api = await fetch(`${svrURL}/armes`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    Accept: 'application/json',
                     Authorization: this.store.token,
                 },
                 method: 'POST',
@@ -332,22 +332,18 @@ export default {
             }
             this.jour = this.jour.toString().length === 1 ? `0${this.jour}` : this.jour;
             this.mois = this.mois.toString().length === 1 ? `0${this.mois}` : this.mois;
-            const formData = {
+            const body = {
                 NoSerie: capitalizeFirstLetter(this.NoSerie),
-                marque: capitalizeFirstLetter(this.Marque),
-                calibre: this.Calibre,
-                typeAr: capitalizeFirstLetter(this.typeArme),
+                Marque: capitalizeFirstLetter(this.Marque),
+                Calibre: this.Calibre,
+                TypeArme: capitalizeFirstLetter(this.typeArme),
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
             const api = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                    Authorization: this.store.token,
-                },
                 method: 'PUT',
-                body: JSON.stringify(formData),
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json', Authorization: this.store.token },
+                body: JSON.stringify(body),
             });
             const res = await api.json();
             if (res.success) this.sucess = res.message;
@@ -363,12 +359,12 @@ export default {
             const data = await rep.json();
 
             if (rep.ok) this.arme = data;
-
-            this.NoSerie = data[0].NoSerie;
-            this.Marque = data[0].Marque;
-            this.Calibre = data[0].Calibre;
-            this.typeArme = data[0].TypeArme;
-            const no = data[0].NoEvenement.split('-');
+            console.log(this.arme.NoSerie);
+            this.NoSerie = data.NoSerie;
+            this.Marque = data.Marque;
+            this.Calibre = data.Calibre;
+            this.typeArme = data.TypeArme;
+            const no = data.NoEvenement.split('-');
             [this.NoEvent, this.NoSeq] = [no[0], no[2]];
             [this.mois, this.jour] = [
                 no[1].substring(2, 4),
