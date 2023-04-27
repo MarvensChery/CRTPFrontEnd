@@ -334,30 +334,20 @@ export default {
             this.mois = this.mois.toString().length === 1 ? `0${this.mois}` : this.mois;
             const body = {
                 NoSerie: capitalizeFirstLetter(this.NoSerie),
-                marque: capitalizeFirstLetter(this.Marque),
-                calibre: this.Calibre,
-                typeAr: capitalizeFirstLetter(this.typeArme),
+                Marque: capitalizeFirstLetter(this.Marque),
+                Calibre: this.Calibre,
+                TypeArme: capitalizeFirstLetter(this.typeArme),
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
             const api = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json', Authorization: this.store.token },
                 body: JSON.stringify(body),
             });
-            if (api.ok) {
-                this.PUTenvoyé = true;
-                setTimeout(() => {
-                    this.$router.push('/armes');
-                }, 2000);
-            } else {
-                console.log(api);
-                const msg = await api.json();
-                alert(msg);
-            }
-            // const res = await api.json();
-            // if (res.success) this.sucess = res.message;
-            // else this.error = res.message;
+            const res = await api.json();
+            if (res.success) this.sucess = res.message;
+            else this.error = res.message;
         },
         async getArme() { // Get les info d'une arme
             const rep = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, {
