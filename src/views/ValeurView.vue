@@ -314,7 +314,12 @@ export default {
             else this.error = res.message;
         },
         async getValeur() { // recuperer les données d'une valeur
-            const rep = await fetch(`${svrURL}/valeurs/${this.$route.params.idValeur}`, { method: 'GET' });
+            const rep = await fetch(`${svrURL}/valeurs/${this.$route.params.idValeur}`, {
+                headers: {
+                    Authorization: this.store.token,
+                },
+                method: 'GET',
+            });
             const data = await rep.json();
 
             if (rep.ok) this.valeur = data;
