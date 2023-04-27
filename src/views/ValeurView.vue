@@ -305,6 +305,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
+                    Authorization: this.store.token,
                 },
                 method: 'PUT',
                 body: JSON.stringify(formData),
@@ -314,7 +315,13 @@ export default {
             else this.error = res.message;
         },
         async getValeur() { // recuperer les données d'une valeur
-            const rep = await fetch(`${svrURL}/valeurs/${this.$route.params.idValeur}`, { method: 'GET' });
+            const rep = await fetch(`${svrURL}/valeurs/${this.$route.params.idValeur}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: this.store.token,
+                },
+            });
             const data = await rep.json();
 
             if (rep.ok) this.valeur = data;
