@@ -25,16 +25,6 @@
             Ce champ ne peut pas etre vide!
           </div>
         </article>
-        <!--P1-->
-        <div class="column is-12">
-          <div class="field">
-            <label for="prenom1" class="label">Prenom 1</label>
-            <div class="control">
-              <input id="prenom1" class="input" type="text"
-                     placeholder="Prenom 1" v-model="prenom1" required>
-            </div>
-          </div>
-        </div>
         <!--BOUTON-->
         <div class="column is-12">
           <button id="form" class="button is-info is-fullwidth"
@@ -57,6 +47,8 @@
 </template>
 
 <script>
+import { connexion } from '@/stores/connexionStore';
+
 export default {
     name: 'RequeteIBAFView',
     data() {
@@ -64,6 +56,11 @@ export default {
             NSerie: '',
             NSerieError: false,
         };
+    },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
     },
 
     methods: {
@@ -74,6 +71,14 @@ export default {
                 this.$router.push(`/arme/${this.NSerie}`);
             }
         },
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
+    },
+    mounted() {
+        this.checkToken();
     },
 };
 </script>

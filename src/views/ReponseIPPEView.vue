@@ -436,6 +436,7 @@ export default {
         };
     },
     mounted() {
+        this.checkToken();
         this.getIppeReponse();
     },
     setup() {
@@ -444,6 +445,11 @@ export default {
         return { store };
     },
     methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
         async getIppeReponse() {
             const prenom2 = this.$route.params.prenom2 === 'null' ? '' : this.$route.params.prenom2;
             const personneInfo = await fetch(

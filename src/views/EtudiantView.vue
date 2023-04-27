@@ -37,6 +37,11 @@ export default {
     name: 'EtudiantView',
     /* eslint-disable */
   methods: {
+    checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
     deco() {
       this.store.token = '';
     }
@@ -46,6 +51,9 @@ export default {
  //exposer l'objet store à la vue
  return { store };
  },
+ mounted(){
+    this.checkToken();
+ }
 };
 </script>
 

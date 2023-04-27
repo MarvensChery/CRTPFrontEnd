@@ -227,11 +227,17 @@ export default {
         return { store };
     },
     mounted() {
+        this.checkToken();
         if (this.$route.path !== '/arme') {
             this.getArme(); // Get les info d'une arme précise
         }
     },
     methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
         confirmation() {
             this.confimation = 'validation';
         },
