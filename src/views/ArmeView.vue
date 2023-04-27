@@ -363,8 +363,8 @@ export default {
             this.NoSerie = data.NoSerie;
             this.Marque = data.Marque;
             this.Calibre = data.Calibre;
-            this.TypeArme = data.TypeArme;
-            const no = data[0].NoEvenement.split('-');
+            this.typeArme = data.TypeArme;
+            const no = data.NoEvenement.split('-');
             [this.NoEvent, this.NoSeq] = [no[0], no[2]];
             [this.mois, this.jour] = [
                 no[1].substring(2, 4),
