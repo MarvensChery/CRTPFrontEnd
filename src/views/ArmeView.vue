@@ -342,10 +342,9 @@ export default {
 
             const api = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json', Authorization: this.store.token },
                 body: JSON.stringify(body),
             });
-
             const res = await api.json();
             if (res.success) this.sucess = res.message;
             else this.error = res.message;
