@@ -334,9 +334,9 @@ export default {
             this.mois = this.mois.toString().length === 1 ? `0${this.mois}` : this.mois;
             const body = {
                 NoSerie: capitalizeFirstLetter(this.NoSerie),
-                marque: capitalizeFirstLetter(this.Marque),
-                calibre: this.Calibre,
-                typeAr: capitalizeFirstLetter(this.typeArme),
+                Marque: capitalizeFirstLetter(this.Marque),
+                Calibre: this.Calibre,
+                TypeArme: capitalizeFirstLetter(this.typeArme),
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
@@ -345,19 +345,10 @@ export default {
                 headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
                 body: JSON.stringify(body),
             });
-            if (api.ok) {
-                this.PUTenvoyé = true;
-                setTimeout(() => {
-                    this.$router.push('/armes');
-                }, 2000);
-            } else {
-                console.log(api);
-                const msg = await api.json();
-                alert(msg);
-            }
-            // const res = await api.json();
-            // if (res.success) this.sucess = res.message;
-            // else this.error = res.message;
+
+            const res = await api.json();
+            if (res.success) this.sucess = res.message;
+            else this.error = res.message;
         },
         async getArme() { // Get les info d'une arme
             const rep = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, {
@@ -373,8 +364,8 @@ export default {
             this.NoSerie = data.NoSerie;
             this.Marque = data.Marque;
             this.Calibre = data.Calibre;
-            this.typeArme = data.TypeArme;
-            const no = data.NoEvenement.split('-');
+            this.TypeArme = data.TypeArme;
+            const no = data[0].NoEvenement.split('-');
             [this.NoEvent, this.NoSeq] = [no[0], no[2]];
             [this.mois, this.jour] = [
                 no[1].substring(2, 4),
