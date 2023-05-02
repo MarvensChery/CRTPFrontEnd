@@ -12,23 +12,23 @@
             <tbody id="infoippe">
               <tr>
                 <td>Nom:</td>
-                <td>{{ reponseIPPE[0].NomFamille }}</td>
+                <td>{{ $route.params.nomFamille }}</td>
               </tr>
               <tr>
                 <td>Prenom 1 :</td>
-                <td>{{ reponseIPPE[0].Prenom1 }}</td>
+                <td>{{ $route.params.prenom1 }}</td>
               </tr>
               <tr>
                 <td>Prenom 2 :</td>
-                <td>{{ reponseIPPE[0].Prenom2 }}</td>
+                <td>{{ $route.params.prenom2 }}</td>
               </tr>
               <tr>
                 <td>Sexe :</td>
-                <td>{{ reponseIPPE[0].Masculin === false ? "Féminin" : "Masculin" }}</td>
+                <td>{{ $route.params.masculin === 'false' ? "Féminin" : "Masculin" }}</td>
               </tr>
               <tr>
                 <td>Date de naissance :</td>
-                <td>{{ reponseIPPE[0].DateNaissance.split("T")[0] }}</td>
+                <td>{{ $route.params.dateNaissance }}</td>
               </tr>
             </tbody>
           </table>
