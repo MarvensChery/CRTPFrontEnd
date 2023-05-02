@@ -1,5 +1,6 @@
+<!-- eslint-disable no-unused-vars -->
 <template>
-  <div v-if="reponseIPPE !== null">
+  <div v-if="reponseIPPE">
     <section class="hero-body">
       <div class="container is-size-5-mobile box has-text-weight-semibold">
         <div>
@@ -32,25 +33,25 @@
             </tbody>
           </table>
         </div>
-      <div>
-        <div v-if="reponseIPPE1type !== 'Négatif'">
-           <div v-if="pageactuelle < reponseIPPE[0].IPPE.length"
-            v-on:click="pageactuelle += 1"
-            v-on:keydown="pageactuelle = 2" style="margin-right: -5px; float: right">
-            <img class="shadow zoom"
-              src="https://cdn.discordapp.com/attachments/755238466618523729/966048980058378240/right-arrow4.png"
-              alt="right arrow" id="rightarrow" />
-           </div>
-        </div>
-        <div v-if="reponseIPPE1type === 'Négatif'">
-          <div v-if="pageactuelle < 1"
-            v-on:click="pageactuelle += 1"
-            v-on:keydown="pageactuelle = 2" style="margin-right: -5px; float: right">
-            <img class="shadow zoom"
-              src="https://cdn.discordapp.com/attachments/755238466618523729/966048980058378240/right-arrow4.png"
-              alt="right arrow" id="rightarrow" />
+        <div>
+          <div v-if="reponseIPPE1type !== 'Négatif'">
+            <div v-if="pageactuelle < reponseIPPE[0].IPPE.length
+            || pageactuelle < pagefps" v-on:click="pageactuelle += 1"
+              v-on:keydown="pageactuelle = 2" style="margin-right: -5px; float: right">
+              <img class="shadow zoom"
+                src="https://cdn.discordapp.com/attachments/755238466618523729/966048980058378240/right-arrow4.png"
+                alt="right arrow" id="rightarrow" />
+            </div>
           </div>
-        </div>
+          <div v-if="reponseIPPE1type === 'Négatif'">
+            <div v-if="pageactuelle < 1"
+            v-on:click="pageactuelle += 1" v-on:keydown="pageactuelle = 2"
+              style="margin-right: -5px; float: right">
+              <img class="shadow zoom"
+                src="https://cdn.discordapp.com/attachments/755238466618523729/966048980058378240/right-arrow4.png"
+                alt="right arrow" id="rightarrow" />
+            </div>
+          </div>
           <div v-if="pageactuelle > 1"
             v-on:click="pageactuelle -= 1" v-on:keydown="pageactuelle = 3"
             style="float: left; margin-left: -65px">
@@ -58,13 +59,12 @@
               src="https://cdn.discordapp.com/attachments/755238466618523729/966048962480058458/left-arrow4.png"
               alt="left arrow" id="leftarrow" />
           </div>
-      </div>
+        </div>
         <section>
           <div class="columns is-desktop">
             <div v-if="pageactuelle === pageactuelle">
               <div v-if="reponseIPPE1type === 'Négatif'" class="column">
-                <h2 id="reponse" class="title has-text-info-dark">
-                  ***{{ reponseIPPE1type }}***</h2>
+                <h2 id="reponse" class="title has-text-info-dark">***{{ reponseIPPE1type }}***</h2>
               </div>
               <a v-if="reponseIPPE1type !== 'Négatif'">
                 <div id="divPremiereRep" class="column is-12"
@@ -278,8 +278,7 @@
                           </tr>
                           <tr>
                             <td>Telephone:</td>
-                            <td>{{ ippe.Telephone }}
-                              Poste: {{ ippe.Poste }}</td>
+                            <td>{{ ippe.Telephone }} Poste: {{ ippe.Poste }}</td>
                           </tr>
                         </div>
                         <div v-if="ippe.TypeEvenement === 'Libération Conditionnelle'">
@@ -328,45 +327,77 @@
                     </table>
                   </div>
                 </div>
-              </a>
-              <!--Rep 2
-              <div id="divDeuxiemeRep" class="column is-full" v-if="pageactuelle === 2">
-              <h2 id="reponse2" class="title has-text-info-dark">
-                ***{{ this.reponseIPPE2type }}***</h2>
-              <table class="table is-hoverable is-fullwidth">
-                <tbody id="ippe2">
-                  <div v-if="reponseIPPE2type === 'Interdit'">
-                    <tr>
-                      <td>Nature:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[1].Nature }}</td>
-                    </tr>
-                    <tr>
-                      <td>Cour:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[1].Cour }}</td>
-                    </tr>
-                    <tr>
-                      <td>Numero de cause:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[1].NoCause }}</td>
-                    </tr>
-                    <tr>
-                      <td>Nature du crime:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[1].Nature }}</td>
-                    </tr>
-                    <tr>
-                      <td>Numéro d'événement:</td>
-                      <td>{{ this.reponseIPPE[0].IPPE[1].NoEvenement }}</td>
-                    </tr>
-                    <tr>
-                      <td>Expiration:</td>
-                      <td>
-                        {{ this.reponseIPPE[0].IPPE[1].FinSentence.split("T")[0] }}
-                      </td>
-                    </tr>
+                <div class="columns is-desktop" v-if="reponsefpstype === 'Bertionné'">
+                  <div id="divFPS1" class="column is-full" v-if="pageactuelle === pagefps">
+                    <div v-if="reponsefpstype === 'Bertionné'" class="column">
+                      <h2 id="reponse1" class="title has-text-info-dark">
+                        ***{{ reponsefpstype }}***</h2>
+                    </div>
+                    <table class="table is-hoverable is-fullwidth">
+                      <tbody id="fps">
+                        <tr>
+                          <td>NoFPS:</td>
+                          <td>{{ reponseIPPE[0].FPS[0].NoFPS }}</td>
+                        </tr>
+                        <tr>
+                          <td>CD:</td>
+                          <td>{{ reponseIPPE[0].FPS[0].CD }}</td>
+                        </tr>
+                        <tr>
+                          <td><strong>Description de la personne</strong></td>
+                        </tr>
+                        <tr>
+                          <td>Race :</td>
+                          <td>{{ reponseIPPE[0].Race }}</td>
+                        </tr>
+                        <tr>
+                          <td>Sexe :</td>
+                          <td v-if="reponseIPPE[0].Masculin = true ">
+                            {{ 'Homme' }}</td>
+                            <td v-if="reponseIPPE[0].Masculin = false ">
+                            {{ 'Autre' }}</td>
+                        </tr>
+                        <tr>
+                          <td>Taille :</td>
+                          <td>{{ reponseIPPE[0].Taille }}</td>
+                        </tr>
+                        <tr>
+                          <td>Poids :</td>
+                          <td>{{ reponseIPPE[0].Poids }}</td>
+                        </tr>
+                        <tr>
+                          <td>Yeux :</td>
+                          <td>{{ reponseIPPE[0].Yeux }}</td>
+                        </tr>
+                        <tr>
+                          <td>Cheveux :</td>
+                          <td>{{ reponseIPPE[0].Cheveux }}</td>
+                        </tr>
+                        <tr>
+                          <td>date naissance :</td>
+                          <td>{{ reponseIPPE[0].DateNaissance.split("T")[0] }}</td>
+                        </tr>
+                        <tr>
+                          <td>DateMesure :</td>
+                          <td>{{ reponseIPPE[0].FPS[0].DateMesure.split("T")[0] }}</td>
+                        </tr>
+                        <tr>
+                          <td>Antecedents:</td>
+                          <td>{{ reponseIPPE[0].FPS[0].Antecedents }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                </tbody>
-              </table>
-              </div>
-              -->
+                </div>
+                <div class="columns is-desktop" v-if="reponsefpstype === 'Négatif'">
+                  <div id="divFPS1" class="column is-full" v-if="pageactuelle === pagefps">
+                    <div v-if="reponsefpstype === 'Négatif'" class="column">
+                      <h2 id="reponse1" class="title has-text-info-dark">
+                        ***{{ reponsefpstype }}***</h2>
+                    </div>
+                    </div>
+                    </div>
+              </a>
             </div>
           </div>
           <!--Rep 2
@@ -379,24 +410,73 @@
   <tbody id="fps">
   <div v-if="reponseFPStype === 'Bertionné'">
     <tr>
-      <td>Nature:</td>
-      <td>{{ this.reponsefps[0].FPS[0].Nature }}</td>
+      <td>NoFPS:</td>
+      <td>{{ this.reponsefps[0].FPS[0].NoFPS }}</td>
     </tr>
     <tr>
-      <td>Cour:</td>
-      <td>{{ this.reponsefps[0].FPS[0].Cour }}</td>
+      <td>Comportement:</td>
+      <td>
+        {{
+           reponseIPPE[0].Depressif === true
+             ? "Dépressif"
+                                : reponseIPPE[0].Suicidaire === true
+                                  ? "Suicidaire"
+                                  : reponseIPPE[0].Toxicomanie === true
+                                    ? "Toxicomanie"
+                                    : reponseIPPE[0].Desorganise === true
+                                      ? "Desorganise"
+                                      : reponseIPPE[0].Violent === true
+                                        ? "Violent"
+                                        : "Aucun"
+                              }}
+                            </td>
     </tr>
     <tr>
-      <td>Numero de cause:</td>
-      <td>{{ this.reponsefps[0].FPS[0].NoCause }}</td>
+      <td>CD:</td>
+      <td>{{ this.reponsefps[0].FPS[0].CD }}</td>
     </tr>
     <tr>
-      <td>Nature du crime:</td>
-      <td>{{ this.reponsefps[0].FPS[0].Nature }}</td>
-    </tr>
+                            <td><strong>Description de la personne</strong></td>
+                          </tr>
+                          <tr>
+                            <td>Race :</td>
+                            <td>{{ reponseIPPE[0].Race }}</td>
+                          </tr>
+                          <tr>
+                            <td>Sexe :</td>
+                            <td>{{ reponseIPPE[0].sexe }}</td>
+                          </tr>
+                          <tr>
+                            <td>Taille :</td>
+                            <td>{{ reponseIPPE[0].Taille }}</td>
+                          </tr>
+                          <tr>
+                            <td>Poids :</td>
+                            <td>{{ reponseIPPE[0].Poids }}</td>
+                          </tr>
+                          <tr>
+                            <td>Yeux :</td>
+                            <td>{{ reponseIPPE[0].Yeux }}</td>
+                          </tr>
+                          <tr>
+                            <td>Cheveux :</td>
+                            <td>{{ reponseIPPE[0].Cheveux }}</td>
+                          </tr>
+                          <tr>
+                            <td>date naissance :</td>
+                            <td>{{ reponseIPPE[0].DateMesure }}</td>
+                          </tr>
+                          <tr>
+                            <td>age :</td>
+                            <td>{{ reponseIPPE[0].DateMesure }}</td>
+                          </tr>
+                          <tr>
+                            <td>DateMesure :</td>
+                            <td>{{ reponseIPPE[0].DateMesure }}</td>
+                          </tr>
     <tr>
-      <td>Numéro d'événement:</td>
-      <td>{{ this.reponsefps[0].FPS[0].NoEvenement }}</td>
+      <td>Antecedents:</td>
+      <td>{{ this.reponsefps[0].FPS[0].Antecedents }}</td>
     </tr>
     <tr>
       <td>Expiration:</td>
@@ -459,7 +539,9 @@ export default {
             reponseIPPE2type: null,
             reponseIPPE1conditions: null,
             pageactuelle: 1,
+            pagefps: 0,
             key: 0,
+            reponsefpstype: null,
         };
     },
     mounted() {
@@ -493,14 +575,18 @@ export default {
             );
             if (personneInfo.ok) {
                 this.reponseIPPE = await personneInfo.json();
-                const pIPPE = await fetch(
-                    `${svrURL}/personnes/${this.reponseIPPE[0].IdPersonne}/ippes`,
-                    {
-                        headers: {
-                            Authorization: this.store.token,
-                        },
+                const pIPPE = await fetch(`${svrURL}/personnes/${this.reponseIPPE[0].IdPersonne}/ippes`, {
+                    headers: {
+                        Authorization: this.store.token,
                     },
-                );
+                });
+                // eslint-disable-next-line no-unused-vars
+                const FPSInfo = await fetch(`${svrURL}/personnes/${this.reponseIPPE[0].IdPersonne}/fps`, {
+                    headers: {
+                        Authorization: this.store.token,
+                    },
+                });
+                // console.log(FPSInfo);
 
                 // console.log(repi[0].TypeEvenement);
 
@@ -517,6 +603,19 @@ export default {
                         this.reponseIPPE2type = this.reponseIPPE[0].IPPE[1].TypeEvenement;
                     }
                     console.log('nooooooooo');
+                    if (!FPSInfo.ok) {
+                        this.reponsefpstype = 'Négatif';
+                        this.pagefps = this.reponseIPPElength + 1;
+                        console.log(this.reponseIPPElength);
+                    } else {
+                        this.reponseIPPE[0].FPS = await FPSInfo.json();
+                        console.log(this.reponseIPPElength);
+                        this.pagefps = this.reponseIPPElength + 1;
+
+                        this.reponsefpstype = 'Bertionné';
+
+                        console.log('nahhhhhhhhhhhhhhhh');
+                    }
                 }
             } else {
                 this.$root.$data.erreurIPPE = true;
@@ -528,7 +627,7 @@ export default {
         <td><strong>Condition(s) :</strong></td>
     </tr>`;
             if (this.reponseIPPE1conditions === null || this.reponseIPPE1conditions.length === 0
-        || this.reponseIPPE1conditions.idCondition === null) {
+            || this.reponseIPPE1conditions.idCondition === null) {
                 return '';
             }
             if (this.reponseIPPE1conditions.length > 0) {

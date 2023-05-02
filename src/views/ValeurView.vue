@@ -151,7 +151,7 @@
                 v-if="!isNaN(this.$route.params.idValeur)"
                 v-on:click="confirmation">Supprimer</button>&nbsp;
                 <button type="button"
-                    v-on:click="this.$router.push({ name: 'valeursView' })">Annuler</button>
+                    v-on:click="this.$router.push({ name: 'IBVA' })">Annuler</button>
             </div>
             <p style="margin-bottom: 50px;">&nbsp;</p>
         </div>
