@@ -330,13 +330,14 @@ export default {
             else this.error = res.message;
         },
         async getObjet() { // get les info d'un objet
-            const rep = await fetch(`${svrURL}/objets/${this.$route.params.idObjet}`, { method: 'GET' }, {
-                headers: new Headers({
+            const rep = await fetch(`${svrURL}/objets/${this.$route.params.idObjet}`, {
+                headers: {
                     Authorization: this.store.token,
-                }),
+                },
+                method: 'GET',
             }); // get les info d'un objet
             const data = await rep.json();
-
+            console.log(data);
             if (rep.ok) this.objet = data;
 
             this.NoSerie = data[0].NoSerie;

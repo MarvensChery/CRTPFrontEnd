@@ -151,7 +151,7 @@
                 v-if="!isNaN(this.$route.params.idValeur)"
                 v-on:click="confirmation">Supprimer</button>&nbsp;
                 <button type="button"
-                    v-on:click="this.$router.push({ name: 'valeursView' })">Annuler</button>
+                    v-on:click="this.$router.push({ name: 'IBVA' })">Annuler</button>
             </div>
             <p style="margin-bottom: 50px;">&nbsp;</p>
         </div>
@@ -323,11 +323,10 @@ export default {
         },
         async getValeur() { // recuperer les données d'une valeur
             const rep = await fetch(`${svrURL}/valeurs/${this.$route.params.idValeur}`, {
-                method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json',
                     Authorization: this.store.token,
                 },
+                method: 'GET',
             });
             const data = await rep.json();
 
