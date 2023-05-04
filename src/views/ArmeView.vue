@@ -191,7 +191,7 @@
 import { connexion } from '@/stores/connexionStore';
 import { svrURL } from '@/constantes';
 import {
-    capitalizeFirstLetter, isJourValide, isMoisValide, isAnneeValide, isDateValide,
+    isJourValide, isMoisValide, isAnneeValide, isDateValide,
 } from '../validations';
 
 // noinspection JSUnusedGlobalSymbols
@@ -243,7 +243,13 @@ export default {
             this.confimation = 'validation';
         },
         async deleteArme() {
-            const api = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, { Authorization: this.store.token, method: 'DELETE' }); // Permet de delete une arme
+            const api = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: this.store.token,
+                },
+                method: 'DELETE',
+            }); // Permet de delete une arme
             const res = await api.json();
             if (res.success) {
                 this.sucess = res.message;
@@ -282,10 +288,10 @@ export default {
             this.jour = this.jour.toString().length === 1 ? `0${this.jour}` : this.jour;
             this.mois = this.mois.toString().length === 1 ? `0${this.mois}` : this.mois;
             const formData = {
-                NoSerie: capitalizeFirstLetter(this.NoSerie),
-                marque: capitalizeFirstLetter(this.Marque),
-                calibre: this.Calibre,
-                typeAr: capitalizeFirstLetter(this.typeArme),
+                NoSerie: (this.NoSerie),
+                Marque: (this.Marque),
+                Calibre: this.Calibre,
+                TypeArme: (this.typeArme),
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
@@ -333,10 +339,10 @@ export default {
             this.jour = this.jour.toString().length === 1 ? `0${this.jour}` : this.jour;
             this.mois = this.mois.toString().length === 1 ? `0${this.mois}` : this.mois;
             const body = {
-                NoSerie: capitalizeFirstLetter(this.NoSerie),
-                Marque: capitalizeFirstLetter(this.Marque),
+                NoSerie: (this.NoSerie),
+                Marque: (this.Marque),
                 Calibre: this.Calibre,
-                TypeArme: capitalizeFirstLetter(this.typeArme),
+                TypeArme: (this.typeArme),
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
