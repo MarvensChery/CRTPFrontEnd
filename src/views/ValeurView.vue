@@ -212,7 +212,14 @@ export default {
             this.confimation = 'validation';
         },
         async deleteValeur() { // delete une valeur de la liste
-            const api = await fetch(`${svrURL}/valeurs/${this.$route.params.idValeur}`, { method: 'DELETE' });
+            const api = await fetch(`${svrURL}/valeurs/${this.$route.params.idValeur}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    Authorization: this.store.token,
+                },
+                method: 'DELETE',
+            });
             const res = await api.json();
             if (res.success) {
                 this.sucess = res.message;
@@ -305,6 +312,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
+                    Authorization: this.store.token,
                 },
                 method: 'PUT',
                 body: JSON.stringify(formData),

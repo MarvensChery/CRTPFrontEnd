@@ -1651,16 +1651,26 @@ export default {
             }
         },
         async getCrime() {
-            const response = await fetch('http://localhost:3000/crimes');
+            const response = await fetch('http://localhost:3000/crimes', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: this.store.token,
+                },
+            });
             const data = await response.json();
             this.crimes = data;
             console.log(data);
         },
         async affichageInfoPersonne() {
             if (this.$route.params.idIppe) {
-                const response = await fetch(
-                    `http://localhost:3000/ippes/infoPersonne/${this.$route.params.idPersonne}/${this.$route.params.idIppe}`,
-                );
+                const response = await fetch(`http://localhost:3000/ippes/infoPersonne/${this.$route.params.idPersonne}/${this.$route.params.idIppe}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: this.store.token,
+                    },
+                });
                 if (response.ok) {
                     this.infoPersonne = await response.json();
                     console.log(this.infoPersonne);
