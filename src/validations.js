@@ -39,6 +39,11 @@ function isDateValide(annee, mois, jour) {
 function capitalizeFirstLetter(str) {
     return str[0].toUpperCase() + str.slice(1).toLowerCase();
 }
+// Pour Convertir toute les lettres en majuscule
+function capitalizeAllLetter(str) {
+    return str.toUpperCase();
+}
+
 // Pour valider l'heure
 function chekHour(str) {
     return /^\d{1,2}:\d{2}([ap]m)?$/.test(str);
@@ -123,6 +128,7 @@ function checkNomPrenomInput(str) {
 }
 
 export {
+    capitalizeAllLetter,
     isJourValide,
     isMoisValide,
     isAnneeValide,

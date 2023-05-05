@@ -15,7 +15,7 @@
               <label for="noserie" class="label">Numéro de Série</label>
               <div class="control">
                 <input id="noserie" class="input" type="text"
-                       placeholder="Numero de serie" v-model="nom" required>
+                       placeholder="Numero de serie" v-model="noserie" required>
               </div>
             </div>
           </div>
@@ -48,6 +48,8 @@
   </template>
 
 <script>
+import { connexion } from '@/stores/connexionStore';
+// import { capitalizeAllLetter } from '@/validations';
 
 export default {
     name: 'RequeteIBOB',
@@ -56,12 +58,30 @@ export default {
             noserie: '',
         };
     },
-
-    methods: {
-        // Fonction qui permet de vérifier si les champs sont valides
-
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
     },
+    methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
+        // Fonction qui permet de vérifier si les champs sont valides
+        isValid() {
+                this.$root.$data.erreurIBOB = false;
+                console.log(this.noserie);
+                this.$router.push(`/reponseIBOB/${this.noserie}`);
+        },
+    },
+    async mounted() {
+        await this.checkToken();
+    },
+
 };
+
 </script>
 
   <style scoped>

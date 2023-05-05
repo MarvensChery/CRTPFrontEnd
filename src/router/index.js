@@ -12,7 +12,7 @@ import IBAF from '@/views/IBAF.vue';
 import IBVA from '@/views/IBVA.vue';
 import RequeteIBOB from '@/views/RequeteIBOB.vue';
 import RequeteIBVA from '@/views/RequeteIBVA.vue';
-
+import ReponseIBOBView from '@/views/ReponseIBOB.vue';
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
 import FpsView from '@/views/FpsView.vue';
 import ValeurView from '@/views/ValeurView.vue';
@@ -110,6 +110,11 @@ const routes = [
         path: '/reponseIPPE',
         name: 'reponseIPPEView',
         component: ReponseIPPEView,
+    },
+    {
+        path: '/reponseIBOB/:noserie',
+        name: 'reponseIBOBView',
+        component: ReponseIBOBView,
     },
     {
         path: '/etudiant',
