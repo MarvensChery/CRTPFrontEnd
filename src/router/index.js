@@ -21,6 +21,7 @@ import SAAQView from '@/views/SAAQView.vue';
 import ObjetsView from '@/views/ObjetsView.vue';
 import DescriptionPersonneView from '@/views/DescriptionPersonneView.vue';
 import IPPEView from '@/views/IPPEView.vue';
+import ReponseIBAFView from '@/views/ResponseIBAFView.vue';
 
 const routes = [
     {
@@ -115,6 +116,11 @@ const routes = [
         path: '/reponseIBOB/:noserie',
         name: 'reponseIBOBView',
         component: ReponseIBOBView,
+    },
+    {
+        path: '/reponseIBAF/:noserie',
+        name: 'reponseIBAFView',
+        component: ReponseIBAFView,
     },
     {
         path: '/etudiant',
