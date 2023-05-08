@@ -21,6 +21,8 @@ import SAAQView from '@/views/SAAQView.vue';
 import ObjetsView from '@/views/ObjetsView.vue';
 import DescriptionPersonneView from '@/views/DescriptionPersonneView.vue';
 import IPPEView from '@/views/IPPEView.vue';
+import UtilisateursView from '@/views/UtilisateursView.vue';
+
 
 const routes = [
     {
@@ -205,6 +207,11 @@ const routes = [
         path: '/requeteIBVA', // Route pour faire une interrogation personne
         name: 'RequeteIBVA',
         component: RequeteIBVA,
+    },
+    {
+        path: '/utilisateurs', // Route pour faire une interrogation personne
+        name: 'UtilisateursView',
+        component: UtilisateursView,
     },
 
 ];
