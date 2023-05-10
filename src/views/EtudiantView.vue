@@ -1,6 +1,6 @@
 <template>
     <h1 class="title is-1 has-text-centered">Bienvenue</h1>
-    <div class="columns is-multiline is-mobile is-centered">
+    <div class="columns is-multiline is-mobile is-centered" >
         <div class="column is-large is-info
         has-text-centered mb-4 ml-2 mr-2 is-3-desktop is-3-tablet is-3-mobile">
             <router-link v-bind:to="{ name: 'requeteIPPE'}">

@@ -5,6 +5,7 @@ export const connexion = defineStore('connexion', {
     state: () => ({
         token: '',
         Professeur: false,
+        matricule: '',
     }),
 
     getters: {},

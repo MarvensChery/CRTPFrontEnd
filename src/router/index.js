@@ -12,7 +12,7 @@ import IBAF from '@/views/IBAF.vue';
 import IBVA from '@/views/IBVA.vue';
 import RequeteIBOB from '@/views/RequeteIBOB.vue';
 import RequeteIBVA from '@/views/RequeteIBVA.vue';
-
+import ReponseIBOBView from '@/views/ReponseIBOB.vue';
 import ReponseIPPEView from '@/views/ReponseIPPEView.vue';
 import FpsView from '@/views/FpsView.vue';
 import ValeurView from '@/views/ValeurView.vue';
@@ -22,6 +22,8 @@ import ObjetsView from '@/views/ObjetsView.vue';
 import DescriptionPersonneView from '@/views/DescriptionPersonneView.vue';
 import IPPEView from '@/views/IPPEView.vue';
 import UtilisateursView from '@/views/UtilisateursView.vue';
+import ReponseIBAFView from '@/views/ResponseIBAFView.vue';
+import ReponseIBAVView from '@/views/ReponseIBVAView.vue';
 
 
 const routes = [
@@ -112,6 +114,21 @@ const routes = [
         path: '/reponseIPPE',
         name: 'reponseIPPEView',
         component: ReponseIPPEView,
+    },
+    {
+        path: '/reponseIBOB/:noserie',
+        name: 'reponseIBOBView',
+        component: ReponseIBOBView,
+    },
+    {
+        path: '/reponseIBAF/:noserie',
+        name: 'reponseIBAFView',
+        component: ReponseIBAFView,
+    },
+    {
+        path: '/reponseIBAV/:noserieorauteur',
+        name: 'reponseIBAVView',
+        component: ReponseIBAVView,
     },
     {
         path: '/etudiant',

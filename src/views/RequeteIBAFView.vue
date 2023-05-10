@@ -68,7 +68,7 @@ export default {
         isValid() {
             if (this.NSerieNSerie !== '') {
                 this.$root.$data.erreurIPPE = false;
-                this.$router.push(`/arme/${this.NSerie}`);
+                this.$router.push(`/reponseIBAF/${this.NSerie}`);
             }
         },
         checkToken() {
@@ -78,7 +78,8 @@ export default {
         },
     },
     mounted() {
-        this.checkToken();
+      console.log(this.store.token);
+      this.checkToken();
     },
 };
 </script>
