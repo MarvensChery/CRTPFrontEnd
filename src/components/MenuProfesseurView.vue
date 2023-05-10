@@ -108,6 +108,15 @@
                       </div>
                     </a>
                   </router-link>
+                  <router-link v-bind:to="{ name: 'UtilisateursView' }">
+                  <a class="navbar-item">
+                      <div class="navbar-content">
+                        <p>
+                          <strong>Banque d'utilisateurs</strong>
+                        </p>
+                      </div>
+                    </a>
+                  </router-link>
                 </div>
               </div>
             </div>
