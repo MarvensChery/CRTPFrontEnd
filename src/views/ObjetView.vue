@@ -24,7 +24,7 @@
                         <button class='button button-danger doAction'
                                 v-on:click="deleteObjet"> Oui  </button>
                         <button class='button button-default cancelAction'
-                                v-on:click="confimation=''"> Non  </button>
+                            v-on:click="confimation=''"> Non  </button>
                     </div>
                 </footer>
             </div>
@@ -218,7 +218,15 @@ export default {
             this.confimation = 'validation';
         },
         async deleteObjet() {
-            const api = await fetch(`${svrURL}/objets/${this.$route.params.idObjet}`, { Authorization: this.store.token, method: 'DELETE' }); // delete un objet
+            const api = await fetch(`${svrURL}/objets/${this.$route.params.idObjet}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    Authorization: this.store.token,
+                },
+                method: 'DELETE',
+
+            }); // delete un objet
             const res = await api.json();
             if (res.success) {
                 this.sucess = res.message;

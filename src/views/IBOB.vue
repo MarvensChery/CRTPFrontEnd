@@ -29,7 +29,7 @@
                                     <th>Type d'objet</th>
                                     <th>Numéro d'évènement</th>
                                 </tr>
-                            <tr v-for="o in filtresValeurs" v-bind:key="o.idBOB">
+                            <tr v-for="o in filtresValeurs" v-bind:key="o.idIBOB">
                                 <td>{{ o.NoSerie }}</td>
                                 <td>{{ o.Marque }}</td>
                                 <td>{{ o.Modele }}</td>
