@@ -345,7 +345,6 @@ export default {
                 method: 'GET',
             }); // get les info d'un objet
             const data = await rep.json();
-            console.log(data);
             if (rep.ok) this.objet = data;
 
             this.NoSerie = data[0].NoSerie;

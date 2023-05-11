@@ -138,7 +138,6 @@ export default {
               this.connectionFailed=false;
                 const data = await response.json();
                 this.store.matricule = data.Matricule
-                console.log(this.store.matricule)
                 this.store.Professeur = this.check;
                 if (this.store.Professeur == !data.Etudiant) {
                   if (this.store.Professeur) { this.store.token = await data.token,

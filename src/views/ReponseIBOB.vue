@@ -73,10 +73,8 @@ export default {
             );
             if (personneInfo.ok) {
                 this.infoObjet = await personneInfo.json();
-                console.log(this.infoObjet);
             } else {
                 this.negatif = this.$route.params.noserie;
-                console.log(this.negatif);
             }
         },
         async getnomatricule() {
@@ -90,12 +88,11 @@ export default {
             );
             if (matriculeinfo.ok) {
                 this.matricule = await matriculeinfo.json();
-                console.log(this.matricule);
             } else {
-              this.$router.push('/requeteIBOB');
+                this.$router.push('/requeteIBOB');
                 console.error('erreur c produite');
             }
         },
     },
-    };
+};
 </script>

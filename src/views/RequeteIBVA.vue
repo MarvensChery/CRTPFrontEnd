@@ -54,45 +54,41 @@ import { connexion } from '@/stores/connexionStore';
 // import { capitalizeAllLetter } from '@/validations';
 
 export default {
-  name: 'RequeteIBVA',
-  data() {
-      return {
-          noserie: '',
-          auteur: '',
-      };
-  },
-  setup() {
-      const store = connexion();
-      // exposer l'objet store à la vue
-      return { store };
-  },
-  methods: {
-      checkToken() {
-          if (this.store.token === '') {
-              this.$router.push('/connexion');
-          }
-      },
-      // Fonction qui permet de vérifier si les champs sont valides
-      isValid() {
-              this.$root.$data.erreurIBOB = false;
-             console.log(this.auteur);
-             console.log(this.noserie);
-             let recherche = '';
-             if (this.noserie !== '') {
-              recherche = this.noserie;
-              console.log(recherche);
-          } else if (this.auteur !== '') {
-            recherche = this.auteur;
-            console.log(recherche);
-          } else {
-            console.log('vous devez selectioner au moin un des 2');
-          }
-              this.$router.push(`/reponseIBAV/${recherche}`);
-      },
-  },
-  async mounted() {
-      await this.checkToken();
-  },
+    name: 'RequeteIBVA',
+    data() {
+        return {
+            noserie: '',
+            auteur: '',
+        };
+    },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
+    },
+    methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
+        // Fonction qui permet de vérifier si les champs sont valides
+        isValid() {
+            this.$root.$data.erreurIBOB = false;
+            let recherche = '';
+            if (this.noserie !== '') {
+                recherche = this.noserie;
+            } else if (this.auteur !== '') {
+                recherche = this.auteur;
+            } else {
+                console.log('vous devez selectioner au moin un des 2');
+            }
+            this.$router.push(`/reponseIBAV/${recherche}`);
+        },
+    },
+    async mounted() {
+        await this.checkToken();
+    },
 
 };
 

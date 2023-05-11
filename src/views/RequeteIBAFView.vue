@@ -78,8 +78,7 @@ export default {
         },
     },
     mounted() {
-      console.log(this.store.token);
-      this.checkToken();
+        this.checkToken();
     },
 };
 </script>

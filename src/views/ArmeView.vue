@@ -365,7 +365,6 @@ export default {
             const data = await rep.json();
 
             if (rep.ok) this.arme = data;
-            console.log(this.arme.NoSerie);
             this.NoSerie = data.NoSerie;
             this.Marque = data.Marque;
             this.Calibre = data.Calibre;

@@ -141,7 +141,6 @@ export default {
             });
             if (users.ok) {
                 const json = await users.json();
-                console.log(json);
                 const promises = json.map((item) => this.avoirPIPPE(item.IdPersonne));
                 const results = await Promise.all(promises);
                 for (let i = 0; i < json.length; i++) {

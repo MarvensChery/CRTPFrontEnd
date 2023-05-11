@@ -70,7 +70,7 @@ export default {
             }
         },
         async getIbvaReponse() {
-           let noserie = '';
+            let noserie = '';
             const auteur = await fetch(
                 `${svrURL}/valeurs/numSerie/${this.$route.params.noserieorauteur}`, // ${this.$route.params.noserie}
                 {
@@ -81,21 +81,18 @@ export default {
             );
             if (auteur.ok) {
                 this.infoObjet = await auteur.json();
-                console.log(this.infoObjet);
             } else if (!auteur.ok) {
                 noserie = await fetch(
-                `${svrURL}/valeurs/auteur/${this.$route.params.noserieorauteur}`, // ${this.$route.params.noserie}
-                {
-                    headers: {
-                        Authorization: this.store.token,
+                    `${svrURL}/valeurs/auteur/${this.$route.params.noserieorauteur}`, // ${this.$route.params.noserie}
+                    {
+                        headers: {
+                            Authorization: this.store.token,
+                        },
                     },
-                },
-            );
-            this.infoObjet = await noserie.json();
-                console.log(this.infoObjet);
+                );
+                this.infoObjet = await noserie.json();
             } else if (!noserie.ok) {
                 this.negatif = this.$route.params.noserieorauteur;
-                console.log(this.negatif);
             }
         },
         async getnomatricule() {
@@ -109,12 +106,11 @@ export default {
             );
             if (matriculeinfo.ok) {
                 this.matricule = await matriculeinfo.json();
-                console.log(this.matricule);
             } else {
-              this.$router.push('/requeteIBOB');
+                this.$router.push('/requeteIBOB');
                 console.error('erreur c produite');
             }
         },
     },
-    };
+};
 </script>

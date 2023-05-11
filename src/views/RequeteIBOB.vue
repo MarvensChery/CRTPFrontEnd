@@ -45,7 +45,7 @@
           </button>
         </div>
     </div>
-  </template>
+</template>
 
 <script>
 import { connexion } from '@/stores/connexionStore';
@@ -71,9 +71,8 @@ export default {
         },
         // Fonction qui permet de vérifier si les champs sont valides
         isValid() {
-                this.$root.$data.erreurIBOB = false;
-                console.log(this.noserie);
-                this.$router.push(`/reponseIBOB/${this.noserie}`);
+            this.$root.$data.erreurIBOB = false;
+            this.$router.push(`/reponseIBOB/${this.noserie}`);
         },
     },
     async mounted() {
