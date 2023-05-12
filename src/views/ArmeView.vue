@@ -11,25 +11,6 @@
         </h1>
         <br>
         <br>
-        <div class='dialog-ovelay' v-if="confimation">
-            <div class='dialog'>
-                <header>
-                    <h3> Confirmation </h3>
-                    <i class='fa fa-close'></i>
-                </header>
-                <div class='dialog-msg'>
-                    <p> Voulez-vous supprimer? </p>
-                </div>
-                <footer>
-                    <div class='controls'>
-                        <button class='button button-danger doAction'
-                                v-on:click="deleteArme"> Oui  </button>
-                        <button class='button button-default cancelAction'
-                                v-on:click="confimation=''"> Non  </button>
-                    </div>
-                </footer>
-            </div>
-        </div>
         <div class="box" v-if="arme">
                 <div class="success" v-if="sucess">
                     <a class="closebtn" href="/armes">&times;</a>
@@ -153,12 +134,13 @@
                 v-on:click="this.updateArme">Modifier</button>&nbsp;
                 <button type="reset"
                 v-if="!isNaN(this.$route.params.idArme)"
-                v-on:click="confirmation">Supprimer</button>&nbsp;
+                v-on:click="showModal">Supprimer</button>&nbsp;
                 <button type="submit"
                 v-if="isNaN(this.$route.params.idArme)"
-                v-on:click="this.addArme">Ajouter</button>&nbsp;
+                v-on:click="addArme">Ajouter</button>&nbsp;
                 <button type="button"
-                    v-on:click="this.$router.push({ name: 'IBAF' })">Annuler</button>
+                    v-on:click="this.$router.push({ name: 'IBAF' })"
+                    @click="annuler">Annuler</button>
             </div>
                 <p style="margin-bottom: 50px;">&nbsp;</p>
                 </div>
@@ -166,30 +148,30 @@
         </div>
         </div>
       </form>
-        <div class="modal is-active" v-show="showModal" @close="showModal = false">
+      <div class="modal" :class="{'is-active': showModalFlag}">
             <div class="modal-background"></div>
             <div class="modal-card">
-                <header class="modal-card-head">
-                    <p class="modal-card-title">Confirmation de suppression</p>
-                    <button class="delete" aria-label="close"
-                            @click.prevent="showModal = false"></button>
-                </header>
-                <section class="modal-card-body">
-                    Voulez-vous vraiment supprimer cette entrée?
-                </section>
-                <footer class="modal-card-foot">
-                    <input class="button has-text-weight-bold is-danger" id="supprimer"
-                            @click.prevent="handlerSupprimer" value="Supprimer">
-                    <input class="button" @click.prevent="showModal = false" value="Retour">
-                </footer>
-            </div>
+            <header class="modal-card-head">
+          <p class="modal-card-title">Confirmation Modal</p>
+          <button class="delete" aria-label="close" @click="cancelModal"></button>
+            </header>
+            <section class="modal-card-body">
+          <p>{{ message }}</p>
+            </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" v-on:click="deleteArme" >Ok</button>
+          <button class="button" @click="cancelModal">Cancel</button>
+        </footer>
         </div>
+      </div>
     </div>
 </template>
 
 <script>
 import { connexion } from '@/stores/connexionStore';
-import { svrURL } from '@/constantes';
+import { createToast } from 'mosha-vue-toastify';
+import { svrURL } from '../constantes';
+import 'mosha-vue-toastify/dist/style.css';
 import {
     isJourValide, isMoisValide, isAnneeValide, isDateValide,
 } from '../validations';
@@ -220,12 +202,61 @@ export default {
             CalibreValid: '',
             confimation: '',
             PUTenvoyé: false,
+            showModalFlag: false,
+            okPressed: false,
+            message: "Press 'Ok' or 'Cancel'.",
         };
     },
     setup() {
+        const enregistrer = () => {
+            createToast(
+                'enregistrer',
+                {
+                    timeout: 2000,
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                },
+            );
+        };
+        const Suppression = () => {
+            createToast(
+                'Suppression',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
+        const annuler = () => {
+            createToast(
+                'annuler',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
+        const creation = () => {
+            createToast(
+                'creation',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
         const store = connexion();
         // exposer l'objet store à la vue
-        return { store };
+        return {
+            store, Suppression, enregistrer, creation, annuler,
+        };
     },
     mounted() {
         this.checkToken();
@@ -234,6 +265,19 @@ export default {
         }
     },
     methods: {
+        showModal() {
+            this.okPressed = false;
+            this.showModalFlag = true;
+        },
+        okModal() {
+            this.okPressed = true;
+            this.showModalFlag = false;
+            this.Suppression();
+        },
+        cancelModal() {
+            this.okPressed = false;
+            this.showModalFlag = false;
+        },
         checkToken() {
             if (this.store.token === '') {
                 this.$router.push('/connexion');
@@ -251,38 +295,132 @@ export default {
                 method: 'DELETE',
             }); // Permet de delete une arme
             const res = await api.json();
-            if (res.success) {
+            if (api.ok) {
                 this.sucess = res.message;
-                this.confimation = '';
-            } else this.error = res.message;
+                setTimeout(() => {
+                    this.$router.push('/armes');
+                }, 2000);
+                this.okModal();
+                // this.Suppression();
+            } else {
+                this.error = res.message;
+                createToast(
+                    {
+                        title: this.error,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
+            }
         },
         async addArme() { // Permet de add une arme
             if (this.NoSerie === '') {
                 this.NoSerieValid = '*Champ obligatoire : seulement des lettres et - sont valides';
+                createToast(
+                    {
+                        title: this.NoSerieValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (this.Marque === '') {
                 this.MarqueValid = '*Champ obligatoire : seulement des lettres et - sont valides';
+                createToast(
+                    {
+                        title: this.MarqueValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (this.Calibre === '') {
                 this.CalibreValid = '*Champ obligatoire : seulement des lettres et - sont valides';
+                createToast(
+                    {
+                        title: this.CalibreValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (!isJourValide(this.jour)) {
                 this.jourValid = 'le jour entré est invalide';
+                createToast(
+                    {
+                        title: this.jourValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (!isMoisValide(this.mois)) {
                 this.moisValid = 'le mois entré est invalide';
+                createToast(
+                    {
+                        title: this.moisValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (!isAnneeValide(this.annee)) {
                 this.anneValid = "l'année entrée est invalide";
+                createToast(
+                    {
+                        title: this.anneValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (!isDateValide(this.annee, this.mois, this.jour)) {
                 this.error = 'la date entrée est invalide';
+                createToast(
+                    {
+                        title: this.error,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             this.jour = this.jour.toString().length === 1 ? `0${this.jour}` : this.jour;
@@ -304,36 +442,131 @@ export default {
                 body: JSON.stringify(formData),
             });
             const res = await api.json();
-            if (res.success) this.sucess = res.message;
-            else this.error = res.message;
+            if (api.ok) {
+                this.sucess = res.message;
+                setTimeout(() => {
+                    this.$router.push('/armes');
+                }, 2000);
+                this.enregistrer();
+            } else {
+                this.error = res.message;
+                createToast(
+                    {
+                        title: this.error,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
+            }
         },
         async updateArme() { // Permet de Update une arme
             if (this.NoSerie === '') {
                 this.NoSerieValid = '*Champ obligatoire : seulement des lettres et - sont valides';
+                createToast(
+                    {
+                        title: this.NoSerieValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (this.Marque === '') {
                 this.MarqueValid = '*Champ obligatoire : seulement des lettres et - sont valides';
+                createToast(
+                    {
+                        title: this.MarqueValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (this.Calibre === '') {
                 this.CalibreValid = '*Champ obligatoire : seulement des lettres et - sont valides';
+                createToast(
+                    {
+                        title: this.CalibreValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (!isJourValide(this.jour)) {
                 this.jourValid = 'le jour entré est invalide';
+                createToast(
+                    {
+                        title: this.jourValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (!isMoisValide(this.mois)) {
                 this.moisValid = 'le mois entré est invalide';
+                createToast(
+                    {
+                        title: this.moisValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (!isAnneeValide(this.annee)) {
                 this.anneValid = "l'année entrée est invalide";
+                createToast(
+                    {
+                        title: this.anneValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (!isDateValide(this.annee, this.mois, this.jour)) {
                 this.error = 'la date entrée est invalide';
+                createToast(
+                    {
+                        title: this.error,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             this.jour = this.jour.toString().length === 1 ? `0${this.jour}` : this.jour;
@@ -352,8 +585,26 @@ export default {
                 body: JSON.stringify(body),
             });
             const res = await api.json();
-            if (res.success) this.sucess = res.message;
-            else this.error = res.message;
+            if (api.ok) {
+                this.sucess = res.message;
+                setTimeout(() => {
+                    this.$router.push('/armes');
+                }, 2000);
+                this.enregistrer();
+            } else {
+                this.error = res.message;
+                createToast(
+                    {
+                        title: this.error,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
+            }
         },
         async getArme() { // Get les info d'une arme
             const rep = await fetch(`${svrURL}/armes/${this.$route.params.idArme}`, {
@@ -365,7 +616,6 @@ export default {
             const data = await rep.json();
 
             if (rep.ok) this.arme = data;
-            console.log(this.arme.NoSerie);
             this.NoSerie = data.NoSerie;
             this.Marque = data.Marque;
             this.Calibre = data.Calibre;

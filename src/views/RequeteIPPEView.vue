@@ -116,16 +116,21 @@
         <div class="column is-12">
           <button id="form" class="button is-info is-fullwidth"
                   type="button" value="Recherche" v-on:click="this.isValid()"
-                  v-on:keydown="this.isValid()">
+                  v-on:keydown="this.isValid()" @click="recherche">
             Recherche
           </button>
         </div>
         <div class="column is-12">
-          <button id="annuler" class="button is-danger is-fullwidth"
-                  type="button" value="Annuler" v-on:click="$router.go(-1) "
-                  v-on:keydown="$router.go(-1)">
-            Annuler
-          </button>
+          <button v-if="(this.store.Professeur)"
+                v-on:click="this.$router.push({ path: '/' })"
+                id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler" @click="annuler"
+                >Annuler</button>
+                <button v-if="(!this.store.Professeur)"
+                v-on:click="this.$router.push({ path: '/etudiant' })"
+                id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler" @click="annuler"
+                >Annuler</button>
         </div>
       </form>
 
@@ -138,6 +143,8 @@ import { connexion } from '@/stores/connexionStore';
 import {
     isAnneeValide, isMoisValide, isJourValide, capitalizeFirstLetter,
 } from '@/validations';
+import { createToast } from 'mosha-vue-toastify';
+import 'mosha-vue-toastify/dist/style.css';
 
 export default {
     name: 'RequeteIPPEView',
@@ -160,11 +167,38 @@ export default {
         };
     },
     setup() {
+        const recherche = () => {
+            createToast(
+                'recherche en cours',
+                {
+                    timeout: 2000,
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                },
+            );
+        };
+        const annuler = () => {
+            createToast(
+                'Retour effectué avec succes',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
         const store = connexion();
         // exposer l'objet store à la vue
-        return { store };
+        return {
+            store, recherche, annuler,
+        };
     },
     methods: {
+        retouraccueil() {
+            this.$router.push('/');
+        },
         checkToken() {
             if (this.store.token === '') {
                 this.$router.push('/connexion');

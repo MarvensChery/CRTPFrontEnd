@@ -31,21 +31,25 @@
         <div class="column is-12">
           <button id="form" class="button is-info is-fullwidth"
                   type="button" value="Recherche" v-on:click="this.isValid()"
-                  style="width: 25%;margin-left: 35%;"
                   v-on:keydown="this.isValid()">
             Recherche
           </button>
         </div>
+        <div class="column is-12">
+      <button v-if="(this.store.Professeur)"
+                v-on:click="this.$router.push({ path: '/' })"
+                id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler"
+                >Annuler</button>
+                <button v-if="(!this.store.Professeur)"
+                v-on:click="this.$router.push({ path: '/etudiant' })"
+                id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler"
+                >Annuler</button>
+      </div>
       </form>
 
     </div>
-    <div class="column is-12">
-        <button id="annuler" class="button is-danger" style="margin-left: 37%;width: 20%;"
-                type="button" value="Annuler" v-on:click="$router.go(-1) "
-                v-on:keydown="$router.go(-1)">
-          Annuler
-        </button>
-      </div>
   </div>
 </template>
 
@@ -54,45 +58,41 @@ import { connexion } from '@/stores/connexionStore';
 // import { capitalizeAllLetter } from '@/validations';
 
 export default {
-  name: 'RequeteIBVA',
-  data() {
-      return {
-          noserie: '',
-          auteur: '',
-      };
-  },
-  setup() {
-      const store = connexion();
-      // exposer l'objet store à la vue
-      return { store };
-  },
-  methods: {
-      checkToken() {
-          if (this.store.token === '') {
-              this.$router.push('/connexion');
-          }
-      },
-      // Fonction qui permet de vérifier si les champs sont valides
-      isValid() {
-              this.$root.$data.erreurIBOB = false;
-             console.log(this.auteur);
-             console.log(this.noserie);
-             let recherche = '';
-             if (this.noserie !== '') {
-              recherche = this.noserie;
-              console.log(recherche);
-          } else if (this.auteur !== '') {
-            recherche = this.auteur;
-            console.log(recherche);
-          } else {
-            console.log('vous devez selectioner au moin un des 2');
-          }
-              this.$router.push(`/reponseIBAV/${recherche}`);
-      },
-  },
-  async mounted() {
-      await this.checkToken();
-  },
+    name: 'RequeteIBVA',
+    data() {
+        return {
+            noserie: '',
+            auteur: '',
+        };
+    },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
+    },
+    methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
+        // Fonction qui permet de vérifier si les champs sont valides
+        isValid() {
+            this.$root.$data.erreurIBOB = false;
+            let recherche = '';
+            if (this.noserie !== '') {
+                recherche = this.noserie;
+            } else if (this.auteur !== '') {
+                recherche = this.auteur;
+            } else {
+                console.log('vous devez selectioner au moin un des 2');
+            }
+            this.$router.push(`/reponseIBAV/${recherche}`);
+        },
+    },
+    async mounted() {
+        await this.checkToken();
+    },
 
 };
 

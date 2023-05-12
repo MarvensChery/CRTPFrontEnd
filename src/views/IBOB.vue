@@ -80,8 +80,6 @@ export default {
                         .includes(this.valValeurs.toLowerCase()),
                 );
             }
-
-            console.log(filtresValeurs);
             return filtresValeurs;
         },
     },
@@ -112,7 +110,6 @@ export default {
             if (rep.ok) {
                 this.valeurs = data;
             }
-            console.log(this.valeurs);
         },
         async getAllOptions() { // get les options (colonne) des donnée
             const rep = await fetch(`${svrURL}${this.$route.path}`, {

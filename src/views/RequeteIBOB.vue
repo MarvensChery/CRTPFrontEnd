@@ -29,23 +29,27 @@
           <div class="column is-12">
             <button id="form" class="button is-info is-fullwidth"
                     type="button" value="Recherche" v-on:click="this.isValid()"
-                    style="width: 25%;margin-left: 35%;"
-                    v-on:keydown="this.isValid()">
+                   v-on:keydown="this.isValid()">
               Recherche
             </button>
           </div>
+          <div class="column is-12">
+        <button v-if="(this.store.Professeur)"
+                v-on:click="this.$router.push({ path: '/' })"
+                id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler"
+                >Annuler</button>
+                <button v-if="(!this.store.Professeur)"
+                v-on:click="this.$router.push({ path: '/etudiant' })"
+                id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler"
+                >Annuler</button>
+        </div>
         </form>
 
       </div>
-      <div class="column is-12">
-          <button id="annuler" class="button is-danger" style="margin-left: 37%;width: 20%;"
-                  type="button" value="Annuler" v-on:click="$router.go(-1) "
-                  v-on:keydown="$router.go(-1)">
-            Annuler
-          </button>
-        </div>
     </div>
-  </template>
+</template>
 
 <script>
 import { connexion } from '@/stores/connexionStore';
@@ -71,9 +75,8 @@ export default {
         },
         // Fonction qui permet de vérifier si les champs sont valides
         isValid() {
-                this.$root.$data.erreurIBOB = false;
-                console.log(this.noserie);
-                this.$router.push(`/reponseIBOB/${this.noserie}`);
+            this.$root.$data.erreurIBOB = false;
+            this.$router.push(`/reponseIBOB/${this.noserie}`);
         },
     },
     async mounted() {

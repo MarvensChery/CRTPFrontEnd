@@ -114,6 +114,83 @@
                             </p>
                         </div>
                     </div>
+                    <div class="column has-text-centered">
+                    <div id="NumtelPer" class="columns is-multiline mt-2">
+
+                        <div class="column is-half">
+                    <label for="numTel" class="label">Numéro de téléphone</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input id = "numTel" class="input" type="text"
+                            placeholder="Numéro de télèphone" v-model="numTel">
+                        </div>
+                            <p class="help is-danger">{{ ErrorNumTel }}</p>
+                        </div>
+                        <div class="column is-half">
+                    <label for="numPer" class="label">Numéro de permis</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input id = "numPer" class="input" type="text"
+                            placeholder="Numéro de permis" v-model="numPermis">
+                        </div>
+                        <p class="help is-danger" > {{ ErrorNumPermis }} </p>
+                    </div>
+                    </div></div>
+                    <div class="column has-text-centered">
+                    <div id="NumtelPer" class="columns is-multiline mt-2">
+
+                        <div class="column is-half">
+                    <label for="adresse1" class="label">Adresse 1</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input id = "adresse1" class="input" type="text"
+                            placeholder="Adresse 1" v-model="adresse1">
+                        </div>
+                        <p class="help is-danger"> {{ ErrorAdresse1 }} </p>
+                    </div>
+                    <div class="column is-half">
+                    <label for="adresse2" class="label">Adresse 2</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input id = "adresse2" class="input" type="text"
+                            placeholder="Adresse 2" v-model="adresse2">
+                        </div>
+                        <p class="help is-danger"> {{ ErrorAdresse2 }} </p>
+                    </div></div></div>
+                    <label for="ville" class="label has-text-centered" >Ville</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input id = "ville" class="input has-text-centered" type="text"
+                            placeholder="ville" v-model="ville">
+                        </div>
+                        <p class="help is-danger"> {{ ErrorVille }}</p>
+
+                    <div class="columns">
+                        <div class="column is-6">
+                            <label for="province" class="label">Province</label>
+                                <div class="select">
+                                    <select v-model="province">
+                                        <option ></option>
+                                        <option >Québec</option>
+                                        <option >Terre-Neuve-et-Labrador</option>
+                                        <option >Colombie-Britannique</option>
+                                        <option >Alberta</option>
+                                        <option >Saskatchewan</option>
+                                        <option >Manitoba</option>
+                                        <option >Ontario</option>
+                                        <option >Nouveau-Brunswick</option>
+                                        <option >Île-du-prince-Édouard</option>
+                                        <option >Nouvelle-Écosse</option>
+                                        <option >Yukon</option>
+                                        <option >Territoires du Nord-Ouest</option>
+                                        <option >Nunavut</option>
+                                    </select>
+                                </div>
+                        </div>
+                        <div class="column is-6">
+                            <label for="codePostal" class="label">Code Postal</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    <input id = "codePostal" class="input" type="text"
+                                    placeholder="codePostal" v-model="codePostal">
+                                </div>
+                                <p class="help is-danger"> {{ ErrorCodePostal }}</p>
+                        </div>
+                    </div>
                     <div class="has-text-centered">
                         <button class="button is-info is-rounded"
                         v-if="this.personne !== null"
@@ -137,7 +214,7 @@
                                         <th class="is-info">Événement</th>
                                         <th class="is-info">Numéro</th>
                                         <th style="border:none;"
-                                        v-if="this.personne !== null">
+                                        v-if="this.ippe != null">
                                             <router-link v-bind:to="{name: 'IPPEView',
                                             params: {idPersonne: this.personne[0].IdPersonne}}">
                                             <i class="fas fa-user-plus"></i>
@@ -183,23 +260,41 @@
                 <div class="buttons is-centered">
                     <button class="button is-info"
                     v-if="this.personne === null"
-                    v-on:click="CreatePersonnes" >Enregistrer</button>
+                    v-on:click="CreatePersonnes" @click="creation">Enregistrer</button>
                     <button class="button is-info"
                     v-if="this.personne !== null"
-                    v-on:click="UpdatePersonne" >Enregistrer</button>
+                    v-on:click="UpdatePersonne" @click="enregistrer">Enregistrer</button>
                     <button class="button is-info"
                     v-if="this.personne !== null"
-                    v-on:click="DeletePersonne">Supprimer</button>
+                    @click="showModal">
+                     Supprimer</button>
                     <button class="button is-info"
-                    v-on:click="retourListePersonnes">Annuler</button>
+                    v-on:click="retourListePersonnes" @click="annuler">Annuler</button>
                 </div>
         </div>
+        <div class="modal" :class="{'is-active': showModalFlag}">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+            <header class="modal-card-head">
+          <p class="modal-card-title">Confirmation Modal</p>
+          <button class="delete" aria-label="close" @click="cancelModal"></button>
+            </header>
+            <section class="modal-card-body">
+          <p>{{ message }}</p>
+            </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" v-on:click="DeletePersonne" @click="okModal">Ok</button>
+          <button class="button" @click="cancelModal">Cancel</button>
+        </footer>
+        </div>
+      </div>
     </div>
 
 </template>
 
 <script>
 import { connexion } from '@/stores/connexionStore';
+import { createToast } from 'mosha-vue-toastify';
 import { svrURL } from '../constantes';
 import {
     isJourValide,
@@ -208,7 +303,15 @@ import {
     isDateValide,
     checkNomInput,
     checkPrenomInput, capitalizeFirstLetter,
+    verifieNumTel,
+    verifieNumPermis,
+    verifieAdresse,
+    verifieVille,
+    verifieCodePostal,
 } from '../validations.js';
+// import the library
+// import the styling for the toast
+import 'mosha-vue-toastify/dist/style.css';
 // noinspection JSUnusedGlobalSymbols
 export default {
     name: 'PersonneView',
@@ -225,6 +328,13 @@ export default {
             jour: '',
             sexe: '',
             categorie: '',
+            numTel: '',
+            numPermis: null,
+            adresse1: null,
+            adresse2: null,
+            ville: null,
+            province: null,
+            codePostal: null,
             // Les erreurs
             uneErreurEstPresente: false,
             prenom1Error: false,
@@ -236,10 +346,19 @@ export default {
             dateError: false,
             genreError: false,
             categorieError: false,
+            ErrorNumTel: '',
+            ErrorNumPermis: '',
+            ErrorAdresse1: '',
+            ErrorAdresse2: '',
+            ErrorVille: '',
+            ErrorCodePostal: '',
             // Requête réussi
             PUTenvoyé: false,
             POSTenvoyé: false,
             DELETEenvoyé: false,
+            showModalFlag: false,
+            okPressed: false,
+            message: "Press 'Ok' or 'Cancel'.",
         };
     },
     mounted() {
@@ -250,9 +369,55 @@ export default {
         }
     },
     setup() {
+        const enregistrer = () => {
+            createToast(
+                'enregistrer',
+                {
+                    timeout: 2000,
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                },
+            );
+        };
+        const Suppression = () => {
+            createToast(
+                'Suppression',
+                {
+                    position: 'bottom-right',
+                    type: 'danger',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
+        const annuler = () => {
+            createToast(
+                'annuler',
+                {
+                    position: 'bottom-right',
+                    type: 'danger',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
+        const creation = () => {
+            createToast(
+                'creation',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
         const store = connexion();
         // exposer l'objet store à la vue
-        return { store };
+        return {
+            store, Suppression, enregistrer, creation, annuler,
+        };
     },
     computed: {
         // Rajoute une majuscule au nom de famille
@@ -297,6 +462,19 @@ export default {
         },
     },
     methods: {
+        showModal() {
+            this.okPressed = false;
+            this.showModalFlag = true;
+        },
+        okModal() {
+            this.okPressed = true;
+            this.showModalFlag = false;
+            this.Suppression();
+        },
+        cancelModal() {
+            this.okPressed = false;
+            this.showModalFlag = false;
+        },
         checkToken() {
             if (this.store.token === '') {
                 this.$router.push('/connexion');
@@ -320,17 +498,40 @@ export default {
                 this.jour = anneeVal.substring(0, 2);
                 this.sexe = this.personne[0].Masculin;
                 this.categorie = this.personne[0].TypePersonne;
+                this.numTel = this.personne[0].Telephone;
+                this.numPermis = this.personne[0].NoPermis;
+                this.adresse1 = this.personne[0].Adresse1;
+                this.adresse2 = this.personne[0].Adresse2;
+                this.ville = this.personne[0].Ville;
+                this.province = this.personne[0].Province;
+                this.codePostal = this.personne[0].CodePostal;
             }
         },
         // Recherche si la personne possède des évênements IPPE
         async getIPPE() {
-            const response = await fetch(`${svrURL}/personnes/${this.paramId}/ippes`, {
+            if (!this.paramId) {
+                // Gérer le cas où this.paramId est vide ou non défini
+                return;
+            }
+            const url = `${svrURL}/personnes/${this.paramId}/ippes`;
+            const response = await fetch(url, {
                 headers: new Headers({
                     Authorization: this.store.token,
                 }),
             });
             if (response.ok) {
-                this.ippe = await response.json();
+                const data = await response.json();
+                if (data) {
+                    this.ippe = data;
+                } else {
+                    this.ippe = [];
+                }
+            } else if (response.status === 404) {
+                // Gérer le cas où la ressource n'a pas été trouvée
+                this.ippe = [];
+            } else {
+                this.ippe = [];
+                // Gérer le cas où une autre erreur s'est produite
             }
         },
         // Suppression de la personne et ses IPPE
@@ -423,30 +624,90 @@ export default {
                 this.jour = this.jour.length === 1 ? `0${this.jour}` : this.jour;
                 this.mois = this.mois.length === 1 ? `0${this.mois}` : this.mois;
                 const date = `${this.annee}-${this.mois}-${this.jour}`;
-                const body = {
-                    TypePersonne: this.categorie,
-                    NomFamille: this.capitalizeName,
-                    Prenom1: this.capitalizeFirstNameOne,
-                    Prenom2: this.capitalizeFirstNameDeux,
-                    Masculin: this.sexe,
-                    DateNaissance: date,
-                };
-
-                const response = await fetch(`${svrURL}/personnes/${this.paramId}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
-                    body: JSON.stringify(body),
-                });
-                console.log(response);
-                if (response.ok) {
-                    console.log(response);
-                    this.PUTenvoyé = true;
-                    setTimeout(() => {
-                        this.$router.push('/personnes');
-                    }, 2000);
+                if (this.uneErreurEstPresente) {
+                    this.uneErreurEstPresente = false;
+                }
+                // Vérification de tous les champs
+                if (!verifieNumTel(this.numTel) && (this.numTel !== null && this.numTel !== '')) {
+                    // Si il y a une erreur dans la vérification
+                    // et que le champ n'est ni null ni vide
+                // : Faire apparaître l'erreur
+                    this.ErrorNumTel = '* seul 10 chiffres sont acceptés';
+                    this.uneErreurEstPresente = true;
                 } else {
-                    const msg = await response.json();
-                    alert(msg);
+                    this.ErrorNumTel = '';
+                }
+                if (!verifieNumPermis(this.numPermis) && (this.numPermis !== null && this.numPermis !== '')) {
+                    this.ErrorNumPermis = '*Le numéro de permis est invalide. Ex:A123412341234';
+                    this.uneErreurEstPresente = true;
+                } else {
+                    this.ErrorNumPermis = '';
+                }
+                if (!verifieAdresse(this.adresse1) && (this.adresse1 !== null && this.adresse1 !== '')) {
+                    this.ErrorAdresse1 = '*Maximum de 50 caracthère';
+                    this.uneErreurEstPresente = true;
+                } else {
+                    this.ErrorAdresse1 = '';
+                }
+                if (!verifieAdresse(this.adresse2) && (this.adresse2 !== null && this.adresse2 !== '')) {
+                    this.ErrorAdresse2 += '*Maximum de 50 caracthère';
+                    this.uneErreurEstPresente = true;
+                } else {
+                    this.ErrorAdresse2 = '';
+                }
+                if (!verifieVille(this.ville) && (this.ville !== null && this.ville !== '')) {
+                    this.ErrorVille = '*Maximum de 50 caracthère';
+                    this.uneErreurEstPresente = true;
+                } else {
+                    this.ErrorVille = '';
+                }
+                if (!verifieCodePostal(this.codePostal) && (this.codePostal !== null && this.codePostal !== '')) {
+                    this.ErrorCodePostal = '*Entrez un code Postal valide Ex: A1B 2C3';
+                    this.uneErreurEstPresente = true;
+                } else {
+                    this.ErrorCodePostal = '';
+                }
+                if (this.uneErreurEstPresente === true) {
+                    this.envoyé = false;
+                } else {
+                    // Envoyer null dans le cas d'une chaine vide
+                    const tel = this.numTel === undefined ? null : this.numTel;
+                    const permis = this.numPermis === '' ? null : this.numPermis;
+                    const adresse1 = this.adresse1 === '' ? null : this.adresse1;
+                    const adresse2 = this.adresse2 === '' ? null : this.adresse2;
+                    const ville = this.ville === '' ? null : this.ville;
+                    const province = this.province === '' ? null : this.province;
+                    const CD = this.codePostal === '' ? null : this.codePostal;
+                    const body = {
+                        TypePersonne: this.categorie,
+                        NomFamille: this.capitalizeName,
+                        Prenom1: this.capitalizeFirstNameOne,
+                        Prenom2: this.prenomDeux === '' ? null : this.capitalizeFirstNameDeux,
+                        Masculin: this.sexe,
+                        DateNaissance: date,
+                        Telephone: tel,
+                        NoPermis: permis,
+                        Adresse1: adresse1,
+                        Adresse2: adresse2,
+                        Province: province,
+                        CodePostal: CD,
+                        Ville: ville,
+                    };
+
+                    const response = await fetch(`${svrURL}/personnes/${this.paramId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
+                        body: JSON.stringify(body),
+                    });
+                    if (response.ok) {
+                        this.PUTenvoyé = true;
+                        setTimeout(() => {
+                            this.$router.push('/personnes');
+                        }, 2000);
+                    } else {
+                        const msg = await response.json();
+                        alert(msg);
+                    }
                 }
             }
         },
@@ -454,31 +715,93 @@ export default {
         async CreatePersonnes() {
             this.ErrorHandler();
             if (!this.uneErreurEstPresente) {
-                this.jour = this.jour.length === 1 ? `0${this.jour}` : this.jour;
-                this.mois = this.mois.length === 1 ? `0${this.mois}` : this.mois;
-                const date = `${this.annee}-${this.mois}-${this.jour}`;
-                const body = {
-                    TypePersonne: this.categorie,
-                    NomFamille: this.capitalizeName,
-                    Prenom1: this.capitalizeFirstNameOne,
-                    Prenom2: this.capitalizeFirstNameDeux,
-                    Masculin: this.sexe,
-                    DateNaissance: date,
-                };
-
-                const response = await fetch(`${svrURL}/personnes`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
-                    body: JSON.stringify(body),
-                });
-                if (response.ok) {
-                    this.POSTenvoyé = true;
-                    setTimeout(() => {
-                        this.$router.push('/personnes');
-                    }, 2000);
+                if (this.uneErreurEstPresente) {
+                    this.uneErreurEstPresente = false;
+                }
+                // Vérification de tous les champs
+                if (!verifieNumTel(this.numTel) && (this.numTel !== null && this.numTel !== '')) {
+                    // Si il y a une erreur dans la vérification
+                    // et que le champ n'est ni null ni vide
+                // : Faire apparaître l'erreur
+                    this.ErrorNumTel = '* seul 10 chiffres sont acceptés';
+                    this.uneErreurEstPresente = true;
                 } else {
-                    const errormsg = await response.json();
-                    alert(errormsg);
+                    this.ErrorNumTel = '';
+                }
+                if (!verifieNumPermis(this.numPermis) && (this.numPermis !== null && this.numPermis !== '')) {
+                    this.ErrorNumPermis = '*Le numéro de permis est invalide. Ex:A123412341234';
+                    this.uneErreurEstPresente = true;
+                } else {
+                    this.ErrorNumPermis = '';
+                }
+                if (!verifieAdresse(this.adresse1) && (this.adresse1 !== null && this.adresse1 !== '')) {
+                    this.ErrorAdresse1 = '*Maximum de 50 caracthère';
+                    this.uneErreurEstPresente = true;
+                } else {
+                    this.ErrorAdresse1 = '';
+                }
+                if (!verifieAdresse(this.adresse2) && (this.adresse2 !== null && this.adresse2 !== '')) {
+                    this.ErrorAdresse2 += '*Maximum de 50 caracthère';
+                    this.uneErreurEstPresente = true;
+                } else {
+                    this.ErrorAdresse2 = '';
+                }
+                if (!verifieVille(this.ville) && (this.ville !== null && this.ville !== '')) {
+                    this.ErrorVille = '*Maximum de 50 caracthère';
+                    this.uneErreurEstPresente = true;
+                } else {
+                    this.ErrorVille = '';
+                }
+                if (!verifieCodePostal(this.codePostal) && (this.codePostal !== null && this.codePostal !== '')) {
+                    this.ErrorCodePostal = '*Entrez un code Postal valide Ex: A1B 2C3';
+                    this.uneErreurEstPresente = true;
+                } else {
+                    this.ErrorCodePostal = '';
+                }
+                if (this.uneErreurEstPresente === true) {
+                    this.envoyé = false;
+                } else {
+                    // Envoyer null dans le cas d'une chaine vide
+                    const tel = this.numTel === undefined ? null : this.numTel;
+                    const permis = this.numPermis === '' ? null : this.numPermis;
+                    const adresse1 = this.adresse1 === '' ? null : this.adresse1;
+                    const adresse2 = this.adresse2 === '' ? null : this.adresse2;
+                    const ville = this.ville === '' ? null : this.ville;
+                    const province = this.province === '' ? null : this.province;
+                    const CD = this.codePostal === '' ? null : this.codePostal;
+                    this.jour = this.jour.length === 1 ? `0${this.jour}` : this.jour;
+                    this.mois = this.mois.length === 1 ? `0${this.mois}` : this.mois;
+                    const date = `${this.annee}-${this.mois}-${this.jour}`;
+                    const body = {
+                        TypePersonne: this.categorie,
+                        NomFamille: this.capitalizeName,
+                        Prenom1: this.capitalizeFirstNameOne,
+                        Prenom2: this.prenomDeux === '' ? null : this.capitalizeFirstNameDeux,
+                        Masculin: this.sexe,
+                        DateNaissance: date,
+                        Telephone: tel,
+                        NoPermis: permis,
+                        Adresse1: adresse1,
+                        Adresse2: adresse2,
+                        Province: province,
+                        CodePostal: CD,
+                        Ville: ville,
+                    };
+
+                    const response = await fetch(`${svrURL}/personnes`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
+                        body: JSON.stringify(body),
+                    });
+                    if (response.ok) {
+                        this.POSTenvoyé = true;
+                        setTimeout(() => {
+                            this.$router.push('/personnes');
+                        }, 2000);
+                    } else {
+                        const errormsg = await response.json();
+                        alert(errormsg);
+                    }
                 }
             }
         },

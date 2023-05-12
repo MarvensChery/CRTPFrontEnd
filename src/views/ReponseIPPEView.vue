@@ -532,6 +532,14 @@
 </div>-->
         </section>
       </div>
+      <div class="column is-12">
+      <button
+                v-on:click="this.$router.push({ path: '/requeteIPPE' })"
+                id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler"
+                >Annuler</button>
+
+      </div>
     </section>
   </div>
 </template>
@@ -601,11 +609,6 @@ export default {
                         Authorization: this.store.token,
                     },
                 });
-                // console.log(FPSInfo);
-
-                // console.log(repi[0].TypeEvenement);
-
-                //  console.log(repi.length);
                 if (!pIPPE.ok) {
                     this.reponseIPPE1type = 'Négatif';
                 } else {
@@ -617,43 +620,37 @@ export default {
                     if (this.reponseIPPE[0].IPPE[1]) {
                         this.reponseIPPE2type = this.reponseIPPE[0].IPPE[1].TypeEvenement;
                     }
-                    console.log('nooooooooo');
                     if (!FPSInfo.ok) {
                         this.reponsefpstype = 'Négatif';
                         this.pagefps = this.reponseIPPElength + 1;
-                        console.log(this.reponseIPPElength);
                     } else {
                         this.reponseIPPE[0].FPS = await FPSInfo.json();
-                        console.log(this.reponseIPPElength);
                         this.pagefps = this.reponseIPPElength + 1;
 
                         this.reponsefpstype = 'Bertionné';
-
-                        console.log('nahhhhhhhhhhhhhhhh');
-                        console.log(this.reponseIPPE);
-            if (this.reponseIPPE[0].FPS[0].Violent === true) {
-                this.comportement += 'V';
-            }
-            if (this.reponseIPPE[0].FPS[0].Echappe === true) {
-                this.comportement += 'E';
-            }
-            if (this.reponseIPPE[0].FPS[0].Suicidaire === true) {
-                this.comportement += 'S';
-            }
-            if (this.reponseIPPE[0].FPS[0].Desequilibre === true) {
-                this.comportement += 'D';
-            }
-            if (this.reponseIPPE[0].FPS[0].Contagieux === true) {
-                this.comportement += 'C';
-            }
-            if (this.reponseIPPE[0].FPS[0].Contagieux === false
+                        if (this.reponseIPPE[0].FPS[0].Violent === true) {
+                            this.comportement += 'V';
+                        }
+                        if (this.reponseIPPE[0].FPS[0].Echappe === true) {
+                            this.comportement += 'E';
+                        }
+                        if (this.reponseIPPE[0].FPS[0].Suicidaire === true) {
+                            this.comportement += 'S';
+                        }
+                        if (this.reponseIPPE[0].FPS[0].Desequilibre === true) {
+                            this.comportement += 'D';
+                        }
+                        if (this.reponseIPPE[0].FPS[0].Contagieux === true) {
+                            this.comportement += 'C';
+                        }
+                        if (this.reponseIPPE[0].FPS[0].Contagieux === false
             && this.reponseIPPE[0].FPS[0].Desequilibre === false
             && this.reponseIPPE[0].FPS[0].Suicidaire === false
             && this.reponseIPPE[0].FPS[0].Echappe === false
             && this.reponseIPPE[0].FPS[0].Violent === false
-            ) {
-                this.comportement = 'AUCUN COMPORTEMENT';
-            }
+                        ) {
+                            this.comportement = 'AUCUN COMPORTEMENT';
+                        }
                     }
                 }
             } else {

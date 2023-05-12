@@ -31,70 +31,75 @@
              </table>
            </div>
          </div>
-   </template>
-   <script>
-   import { connexion } from '@/stores/connexionStore';
-   import { svrURL } from '@/constantes';
+         <div class="column is-12">
+      <button
+                v-on:click="this.$router.push({ path: '/reponseIBAF' })"
+                id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler"
+                >Annuler</button>
 
-   export default {
-       name: 'ReponseIBAFView',
-       data() {
-           return {
-               infoObjet: '',
-               negatif: '',
-               matricule: '',
-           };
-       },
-       mounted() {
-           this.checkToken();
-           this.getIbafReponse();
-           this.getnomatricule();
-       },
-       setup() {
-           const store = connexion();
-           // exposer l'objet store à la vue
-           return { store };
-       },
-       methods: {
-           checkToken() {
-               if (this.store.token === '') {
-                   this.$router.push('/connexion');
-               }
-           },
-           async getIbafReponse() {
-               const personneInfo = await fetch(
-                   `${svrURL}/armes/numSerie/${this.$route.params.noserie}`, // ${this.$route.params.noserie}
-                   {
-                       headers: {
-                           Authorization: this.store.token,
-                       },
-                   },
-               );
-               if (personneInfo.ok) {
-                   this.infoObjet = await personneInfo.json();
-                   console.log(this.infoObjet);
-               } else {
-                   this.negatif = this.$route.params.noserie;
-                   console.log(this.negatif);
-               }
-           },
-           async getnomatricule() {
-               const matriculeinfo = await fetch(
-                   `${svrURL}/utilisateurs/matricule/${this.store.matricule}`,
-                   {
-                       headers: {
-                           Authorization: this.store.token,
-                       },
-                   },
-               );
-               if (matriculeinfo.ok) {
-                   this.matricule = await matriculeinfo.json();
-                   console.log(this.matricule);
-               } else {
-                 this.$router.push('/requeteIBOB');
-                   console.error('erreur c produite');
-               }
-           },
-       },
-       };
-   </script>
+      </div>
+</template>
+<script>
+import { connexion } from '@/stores/connexionStore';
+import { svrURL } from '@/constantes';
+
+export default {
+    name: 'ReponseIBAFView',
+    data() {
+        return {
+            infoObjet: '',
+            negatif: '',
+            matricule: '',
+        };
+    },
+    mounted() {
+        this.checkToken();
+        this.getIbafReponse();
+        this.getnomatricule();
+    },
+    setup() {
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return { store };
+    },
+    methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
+        async getIbafReponse() {
+            const personneInfo = await fetch(
+                `${svrURL}/armes/numSerie/${this.$route.params.noserie}`, // ${this.$route.params.noserie}
+                {
+                    headers: {
+                        Authorization: this.store.token,
+                    },
+                },
+            );
+            if (personneInfo.ok) {
+                this.infoObjet = await personneInfo.json();
+            } else {
+                this.negatif = this.$route.params.noserie;
+            }
+        },
+        async getnomatricule() {
+            const matriculeinfo = await fetch(
+                `${svrURL}/utilisateurs/matricule/${this.store.matricule}`,
+                {
+                    headers: {
+                        Authorization: this.store.token,
+                    },
+                },
+            );
+            if (matriculeinfo.ok) {
+                this.matricule = await matriculeinfo.json();
+            } else {
+                this.$router.push('/requeteIBOB');
+                console.error('erreur c produite');
+            }
+        },
+    },
+};
+</script>

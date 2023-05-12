@@ -5,17 +5,17 @@
     "private": true,
     "dependencies": {
         "express": "^4.18.2",
+        "mosha-vue-toastify": "^1.0.23",
         "nodemon": "^2.0.22",
         "pinia": "^2.0.34",
+        "vite": "^4.3.4",
         "vue": "^3.2.19",
-        "vue-router": "^4.1.6",
-        "vite": "^4.3.4"
-
+        "vue-router": "^4.1.6"
     },
     "devDependencies": {
-        "@vitejs/plugin-vue": "^4.1.0",
         "@babel/core": "^7.21.4",
         "@babel/eslint-parser": "^7.21.3",
+        "@vitejs/plugin-vue": "^4.1.0",
         "@vue/eslint-config-airbnb": "^6.0.0",
         "eslint": "^8.39.0",
         "eslint-plugin-import": "^2.27.5",

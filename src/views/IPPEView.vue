@@ -1876,7 +1876,6 @@ export default {
             });
             const data = await response.json();
             this.crimes = data;
-            console.log(data);
         },
         async affichageInfoPersonne() {
             if (this.$route.params.idIppe) {
@@ -1889,7 +1888,6 @@ export default {
                 });
                 if (response.ok) {
                     this.infoPersonne = await response.json();
-                    console.log(this.infoPersonne);
                     this.IPPE.noEvenement = this.infoPersonne.data.NoEvenement;
                     this.IPPE.typeEvenement = this.infoPersonne.data.TypeEvenement;
                     this.IPPE.mandat = this.infoPersonne.data.Mandat;
@@ -1920,7 +1918,6 @@ export default {
                         this.infoPersonne.data.NoCause.substr(-9),
                         '',
                     );
-                    console.log(this.IPPE.noCause1, this.IPPE.noCause);
                     this.IPPE.lieuDetention = this.infoPersonne.data.LieuDetention;
                     this.IPPE.finSentence = this.infoPersonne.data.DateNaissance.substr(
                         0,
@@ -1938,7 +1935,6 @@ export default {
                 );
                 if (response.ok) {
                     this.infoPersonne = await response.json();
-                    console.log(this.infoPersonne);
                 }
             }
         },
@@ -1953,7 +1949,6 @@ export default {
             );
             const data = await response.json();
             if (data.success === true) {
-                console.log(data);
                 alert(data.message);
                 this.$router.push(`/personne/${this.$route.params.idPersonne}`);
             } else {
@@ -2045,7 +2040,6 @@ export default {
             const accuse = {
                 tableIPPE,
             };
-            console.log(accuse);
             if (this.$route.params.idIppe) await this.modifierIPPE(accuse);
             else await this.ajoutIPPE(accuse);
         },
@@ -2058,7 +2052,6 @@ export default {
             };
 
             const disparu = { tableIPPE };
-            console.log(disparu);
             if (this.$route.params.idIppe) await this.modifierIPPE(disparu);
             else await this.ajoutIPPE(disparu);
         },
@@ -2075,7 +2068,6 @@ export default {
                 NoEvenement: this.$refs.numEvenement.value,
             };
             const recherche = { tableIPPE };
-            console.log(recherche);
             if (this.$route.params.idIppe) await this.modifierIPPE(recherche);
             else await this.ajoutIPPE(recherche);
         },
@@ -2093,7 +2085,6 @@ export default {
                 IdNatureCrime: NatureCrime[0],
             };
             const probation = { tableIPPE };
-            console.log(probation);
             if (this.$route.params.idIppe) await this.modifierIPPE(probation);
             else await this.ajoutIPPE(probation);
         },
@@ -2109,7 +2100,6 @@ export default {
                 IdNatureCrime: NatureCrime[0],
             };
             const Interdit = { tableIPPE };
-            console.log(Interdit);
             if (this.$route.params.idIppe) await this.modifierIPPE(Interdit);
             else await this.ajoutIPPE(Interdit);
         },
@@ -2126,7 +2116,6 @@ export default {
                 IdNatureCrime: NatureCrime[0],
             };
             const SousObservation = { tableIPPE };
-            console.log(SousObservation);
             if (this.$route.params.idIppe) await this.modifierIPPE(SousObservation);
             else await this.ajoutIPPE(SousObservation);
         },
@@ -2143,7 +2132,6 @@ export default {
                 FinSentence: this.$refs.finSentence.value,
             };
             const LibConditionnelle = { tableIPPE };
-            console.log(LibConditionnelle);
             if (this.$route.params.idIppe) await this.modifierIPPE(LibConditionnelle);
             else await this.ajoutIPPE(LibConditionnelle);
         },
