@@ -4,18 +4,235 @@
     <div class="notification is-info is-light">
       <div class="container is-2by1">
         <div class="notification is-info is-light">
-          <div class="column"></div>
-          <header>
-            <p
-              class="
-                is-size-5
-                card-content
-                has-text-centered has-text-weight-bold
-              "
-              v-if="!this.$route.params.idIppe"
-            >
-              AJOUT D'UNE RÉPONSE IPPE
-            </p>
+          <div class="column" v-if="!this.$route.params.idIppe">
+            <div class="columns is-centered">
+                <div class="column is-half">
+                  <div class="column  has-text-centered">
+                            <label for="categorie" class="label">Type Evenement</label>
+                            <div class="select">
+                                <select id= "evenement" v-model="typeEvenement">
+                                    <option id="Négatif">Négatif</option>
+                                    <option id="Recherché">Recherché</option>
+                                    <option id="Sous observation">Sous observation</option>
+                                    <option id="Probation">Probation</option>
+                                    <option id="Libération conditionnelle">
+                                      Libération conditionnelle</option>
+                                    <option id="Disparu">Disparu</option>
+                                    <option id="Interdit">Interdit</option>
+                                </select>
+                            </div>
+                            <p v-if="categorieError === true"
+                            class="help is-danger has-text-centered">
+                            *Champ obligatoire.
+                            </p>
+                        </div>
+                    <div class="field">
+                        <label for="prenom1" class="label">Mandat</label>
+                        <div class="control ">
+                            <input id = "prenom1" class="input" type="text"
+                            placeholder="Mandat"
+                            v-model="Mandat">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom1Error === true" class="help is-danger">
+                            *Champ obligatoire : seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom1" class="label">NoEvenement</label>
+                        <div class="control ">
+                            <input id = "prenom1" class="input" type="text"
+                            placeholder="NoEvenement"
+                            v-model=" NoEvenement">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom1Error === true" class="help is-danger">
+                            *Champ obligatoire : seulement des lettres sont valides</p>
+                    </div>
+
+                    <div class="field">
+                        <label for="prenom2" class="label">Motif</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="Motif"
+                            v-model="Motif">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Nature</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="Nature"
+                            v-model="Nature">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+
+                    <div class="field">
+                        <label for="prenom2" class="label">DossierEnquete</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="DossierEnquete"
+                            v-model="DossierEnquete">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Cour</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="Cour"
+                            v-model="Cour">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">NoMandat</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="NoMandat"
+                            v-model="NoMandat">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">NoCause</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="NoCause"
+                            v-model="NoCause">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Lieu Detention</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="Lieu Detention"
+                            v-model="LieuDetention">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Fin de la sentence</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="date"
+                            placeholder="Fin de sentence"
+                            v-model="FinSentence">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Vu la Derniere Fois</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="Vu la Derniere Fois"
+                            v-model="dernierefois">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Agent Probation</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="Agent Probation"
+                            v-model="AgentProbation">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Agent Liberation</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="Agent Liberation"
+                            v-model="AgentLiberation">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Telephone</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="tel"
+                            placeholder="Telephone"
+                            v-model="Telephone">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Poste</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="Poste"
+                            v-model="Poste">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="has-text-centered">
+                        <button class="button is-info is-rounded"
+                        v-if="this.personne !== null"
+                        v-on:click="ajoutIPPE()">
+                            Ajout IPPE
+                        </button>
+                    </div>
+                </div>
+            </div>
+            </div>
             <p
               class="
                 is-size-5
@@ -26,7 +243,6 @@
             >
               MODIFICATION D'UNE RÉPONSE IPPE
             </p>
-          </header>
           <div v-if="this.infoPersonne">
             <div class="has-text-centered card-content">
               <div class="box has-background-info-light">
@@ -1568,27 +1784,27 @@ export default {
             date: '',
             dataIPPE: [],
             IPPE: {
-                noEvenement: '',
-                typeEvenement: '',
-                mandat: '',
-                motif: '',
-                nature: '',
-                dossierEnquete: '',
-                dossierEnquete1: '',
+                NoEvenement: '',
+                TypeEvenement: '',
+                Mandat: '',
+                Motif: '',
+                Nature: '',
+                DossierEnquete: '',
+                DossierEnquete1: '',
                 cour: '',
-                natureCrime: null,
-                noMandat: '',
-                noMandat1: '',
-                noMandat2: '',
-                noCause: '',
-                noCause1: '',
+                NatureCrime: null,
+                NoMandat: '',
+                NoMandat1: '',
+                NoMandat2: '',
+                NoCause: '',
+                NoCause1: '',
                 lieuDetention: '',
-                finSentence: '',
-                vuDerniereFois: '',
-                agentProbation: '',
-                agentLiberation: '',
-                telephone: '',
-                poste: '',
+                FinSentence: '',
+                dernierefois: '',
+                AgentProbation: '',
+                AgentLiberation: '',
+                Telephone: '',
+                Poste: '',
                 idCondition: '',
             },
             regexNumTrait: /^(?=.*\d)(?=.*[-])[\d-]{2,15}$/,
@@ -1767,13 +1983,32 @@ export default {
                 }
             }
         },
-        async ajoutIPPE(element) {
+        async ajoutIPPE() {
+            const boy = {
+                TypeEvenement: this.typeEvenement,
+                NoEvenement: this.NoEvenement,
+                Mandat: this.Mandat,
+                Motif: this.Motif,
+                Nature: this.Nature,
+                DossierEnquete: this.DossierEnquete,
+                Cour: this.Cour,
+                NoMandat: this.NoMandat,
+                NoCause: this.NoCause,
+                LieuDetention: this.LieuDetention,
+                FinSentence: this.FinSentence,
+                VuDerniereFois: this.dernierefois,
+                AgentProbation: this.AgentProbation,
+                AgentLiberation: this.AgentLiberation,
+                Telephone: this.Telephone,
+                Poste: this.Poste,
+            };
+            console.log(boy);
             const response = await fetch(
-                `http://localhost:3000/ippes/${this.$route.params.idPersonne}`,
+                `http://localhost:3000/ippes/insertIppePersonne/${this.$route.params.idPersonne}`,
                 {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ element }),
+                    headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
+                    body: JSON.stringify(boy),
                 },
             );
             const data = await response.json();
