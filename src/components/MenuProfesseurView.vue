@@ -165,6 +165,7 @@ export default {
     methods: {
         deco() {
             this.store.token = '';
+            sessionStorage.clear();
         },
         closeMenu() {
             this.isActive = false;

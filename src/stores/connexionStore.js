@@ -1,14 +1,15 @@
+/* eslint-disable import/prefer-default-export */
 import { defineStore } from 'pinia';
 
-// eslint-disable-next-line import/prefer-default-export
 export const connexion = defineStore('connexion', {
     state: () => ({
-        token: '',
-        Professeur: false,
-        matricule: '',
+        token: sessionStorage.getItem('token') || '',
+        Professeur: sessionStorage.getItem('Professeur') === 'true',
+        matricule: sessionStorage.getItem('matricule') || '',
     }),
 
     getters: {},
 
-    actions: {},
+    actions: {
+    },
 });
