@@ -260,23 +260,41 @@
                 <div class="buttons is-centered">
                     <button class="button is-info"
                     v-if="this.personne === null"
-                    v-on:click="CreatePersonnes" >Enregistrer</button>
+                    v-on:click="CreatePersonnes" @click="creation">Enregistrer</button>
                     <button class="button is-info"
                     v-if="this.personne !== null"
-                    v-on:click="UpdatePersonne" >Enregistrer</button>
+                    v-on:click="UpdatePersonne" @click="enregistrer">Enregistrer</button>
                     <button class="button is-info"
                     v-if="this.personne !== null"
-                    v-on:click="DeletePersonne">Supprimer</button>
+                    @click="showModal">
+                     Supprimer</button>
                     <button class="button is-info"
-                    v-on:click="retourListePersonnes">Annuler</button>
+                    v-on:click="retourListePersonnes" @click="annuler">Annuler</button>
                 </div>
         </div>
+        <div class="modal" :class="{'is-active': showModalFlag}">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+            <header class="modal-card-head">
+          <p class="modal-card-title">Confirmation Modal</p>
+          <button class="delete" aria-label="close" @click="cancelModal"></button>
+            </header>
+            <section class="modal-card-body">
+          <p>{{ message }}</p>
+            </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" v-on:click="DeletePersonne" @click="okModal">Ok</button>
+          <button class="button" @click="cancelModal">Cancel</button>
+        </footer>
+        </div>
+      </div>
     </div>
 
 </template>
 
 <script>
 import { connexion } from '@/stores/connexionStore';
+import { createToast } from 'mosha-vue-toastify';
 import { svrURL } from '../constantes';
 import {
     isJourValide,
@@ -291,6 +309,9 @@ import {
     verifieVille,
     verifieCodePostal,
 } from '../validations.js';
+// import the library
+// import the styling for the toast
+import 'mosha-vue-toastify/dist/style.css';
 // noinspection JSUnusedGlobalSymbols
 export default {
     name: 'PersonneView',
@@ -335,6 +356,9 @@ export default {
             PUTenvoyé: false,
             POSTenvoyé: false,
             DELETEenvoyé: false,
+            showModalFlag: false,
+            okPressed: false,
+            message: "Press 'Ok' or 'Cancel'.",
         };
     },
     mounted() {
@@ -345,9 +369,55 @@ export default {
         }
     },
     setup() {
+        const enregistrer = () => {
+            createToast(
+                'enregistrer',
+                {
+                    timeout: 2000,
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                },
+            );
+        };
+        const Suppression = () => {
+            createToast(
+                'Suppression',
+                {
+                    position: 'bottom-right',
+                    type: 'danger',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
+        const annuler = () => {
+            createToast(
+                'annuler',
+                {
+                    position: 'bottom-right',
+                    type: 'danger',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
+        const creation = () => {
+            createToast(
+                'creation',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
         const store = connexion();
         // exposer l'objet store à la vue
-        return { store };
+        return {
+            store, Suppression, enregistrer, creation, annuler,
+        };
     },
     computed: {
         // Rajoute une majuscule au nom de famille
@@ -392,6 +462,19 @@ export default {
         },
     },
     methods: {
+        showModal() {
+            this.okPressed = false;
+            this.showModalFlag = true;
+        },
+        okModal() {
+            this.okPressed = true;
+            this.showModalFlag = false;
+            this.Suppression();
+        },
+        cancelModal() {
+            this.okPressed = false;
+            this.showModalFlag = false;
+        },
         checkToken() {
             if (this.store.token === '') {
                 this.$router.push('/connexion');
@@ -620,7 +703,7 @@ export default {
                         this.PUTenvoyé = true;
                         setTimeout(() => {
                             this.$router.push('/personnes');
-                        }, 20);
+                        }, 2000);
                     } else {
                         const msg = await response.json();
                         alert(msg);

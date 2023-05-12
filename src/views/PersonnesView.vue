@@ -65,8 +65,9 @@
         <!--BUTTON HOME-->
         <div class="column is-12">
           <button id="annuler" class="button is-danger " style="width: 30%; margin-left: 30%;"
-                  type="button" value="Annuler" v-on:click="$router.go(-1) "
-                  v-on:keydown="$router.go(-1)">
+                  type="button" value="Annuler" v-on:click="retouraccueil"
+                  @click="annuler"
+                  v-on:keydown="retouraccueil">
             Annuler
           </button>
         </div>
@@ -79,6 +80,8 @@
 // noinspection JSUnusedGlobalSymbols
 import { connexion } from '@/stores/connexionStore';
 import { svrURL } from '@/constantes';
+import { createToast } from 'mosha-vue-toastify';
+import 'mosha-vue-toastify/dist/style.css';
 
 export default {
     name: 'PersonnesView',
@@ -100,15 +103,64 @@ export default {
         },
     },
     setup() {
+        const enregistrer = () => {
+            createToast(
+                'enregistrer',
+                {
+                    timeout: 2000,
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                },
+            );
+        };
+        const Suppression = () => {
+            createToast(
+                'Suppression',
+                {
+                    position: 'bottom-right',
+                    type: 'danger',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
+        const annuler = () => {
+            createToast(
+                'Retour effectué avec succes',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
+        const creation = () => {
+            createToast(
+                'creation',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
         const store = connexion();
         // exposer l'objet store à la vue
-        return { store };
+        return {
+            store, Suppression, enregistrer, creation, annuler,
+        };
     },
     mounted() {
         this.checkToken();
         this.getPersonnes();
     },
     methods: {
+        retouraccueil() {
+            this.$router.push('/');
+        },
         checkToken() {
             if (this.store.token === '') {
                 this.$router.push('/connexion');

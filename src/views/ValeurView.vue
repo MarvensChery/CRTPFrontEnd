@@ -151,17 +151,36 @@
                 v-if="!isNaN(this.$route.params.idValeur)"
                 v-on:click="confirmation">Supprimer</button>&nbsp;
                 <button type="button"
-                    v-on:click="this.$router.push({ name: 'IBVA' })">Annuler</button>
+                    v-on:click="this.$router.push({ name: 'IBVA' })"
+                    @click="annuler">Annuler</button>
             </div>
             <p style="margin-bottom: 50px;">&nbsp;</p>
         </div>
       </form>
+      <div class="modal" :class="{'is-active': showModalFlag}">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+            <header class="modal-card-head">
+          <p class="modal-card-title">Confirmation Modal</p>
+          <button class="delete" aria-label="close" @click="cancelModal"></button>
+            </header>
+            <section class="modal-card-body">
+          <p>{{ message }}</p>
+            </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" v-on:click="deleteValeur" >Ok</button>
+          <button class="button" @click="cancelModal">Cancel</button>
+        </footer>
+        </div>
+      </div>
     </div>
 </template>
 
 <script>
 import { connexion } from '@/stores/connexionStore';
+import { createToast } from 'mosha-vue-toastify';
 import { svrURL } from '../constantes';
+import 'mosha-vue-toastify/dist/style.css';
 import {
     capitalizeFirstLetter, isJourValide, isMoisValide, isAnneeValide, isDateValide,
 } from '../validations';
@@ -189,12 +208,61 @@ export default {
             NoSerieValid: '',
             auteurValid: '',
             confimation: '',
+            showModalFlag: false,
+            okPressed: false,
+            message: "Press 'Ok' or 'Cancel'.",
         };
     },
     setup() {
+        const enregistrer = () => {
+            createToast(
+                'enregistrer',
+                {
+                    timeout: 2000,
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                },
+            );
+        };
+        const Suppression = () => {
+            createToast(
+                'Suppression',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
+        const annuler = () => {
+            createToast(
+                'annuler',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
+        const creation = () => {
+            createToast(
+                'creation',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
         const store = connexion();
         // exposer l'objet store à la vue
-        return { store };
+        return {
+            store, Suppression, enregistrer, creation, annuler,
+        };
     },
     mounted() {
         this.checkToken();
@@ -203,6 +271,19 @@ export default {
         }
     },
     methods: {
+        showModal() {
+            this.okPressed = false;
+            this.showModalFlag = true;
+        },
+        okModal() {
+            this.okPressed = true;
+            this.showModalFlag = false;
+            this.Suppression();
+        },
+        cancelModal() {
+            this.okPressed = false;
+            this.showModalFlag = false;
+        },
         checkToken() {
             if (this.store.token === '') {
                 this.$router.push('/connexion');
@@ -221,43 +302,126 @@ export default {
                 method: 'DELETE',
             });
             const res = await api.json();
-            if (res.success) {
+            if (api.ok) {
                 this.sucess = res.message;
-                this.confimation = '';
-            } else this.error = res.message;
+                setTimeout(() => {
+                    this.$router.push('/valeurs');
+                }, 2000);
+                this.okModal();
+                // this.Suppression();
+            } else {
+                this.error = res.message;
+                createToast(
+                    {
+                        title: this.error,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
+            }
         },
         async addValeur() { // ajouter une valeur à la liste
             if (this.Identifiant === '') {
                 this.NoSerieValid = '*Champ obligatoire : seulement des lettres et - sont valides';
+                createToast(
+                    {
+                        title: this.NoSerieValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (this.auteur === '') {
                 this.auteurValid = '*Champ obligatoire : seulement des lettres et - sont valides';
+                createToast(
+                    {
+                        title: this.auteurValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (!isJourValide(this.jour)) {
                 this.jourValid = 'le jour entré est invalide';
+                createToast(
+                    {
+                        title: this.jourValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (!isMoisValide(this.mois)) {
                 this.moisValid = 'le mois entré est invalide';
+                createToast(
+                    {
+                        title: this.moisValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (!isAnneeValide(this.annee)) {
                 this.anneValid = "l'année entrée est invalide";
+                createToast(
+                    {
+                        title: this.anneValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (!isDateValide(this.annee, this.mois, this.jour)) {
                 this.error = 'la date entrée est invalide';
+                createToast(
+                    {
+                        title: this.error,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             this.jour = this.jour.toString().length === 1 ? `0${this.jour}` : this.jour;
             this.mois = this.mois.toString().length === 1 ? `0${this.mois}` : this.mois;
             const formData = {
-                auteur: capitalizeFirstLetter(this.auteur),
-                NoSerie: capitalizeFirstLetter(this.Identifiant),
-                typeVa: capitalizeFirstLetter(this.TypeValeur),
-                resIBVA: capitalizeFirstLetter(this.TypeEvenement),
+                Auteur: capitalizeFirstLetter(this.auteur),
+                Identifiant: capitalizeFirstLetter(this.Identifiant),
+                TypeValeur: capitalizeFirstLetter(this.TypeValeur),
+                TypeEvenement: capitalizeFirstLetter(this.TypeEvenement),
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
@@ -265,46 +429,132 @@ export default {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
+                    Authorization: this.store.token,
                 },
                 method: 'POST',
                 body: JSON.stringify(formData),
             });
             const res = await api.json();
-            if (res.success) this.sucess = res.message;
-            else this.error = res.message;
+            if (api.ok) {
+                this.sucess = res.message;
+                setTimeout(() => {
+                    this.$router.push('/valeurs');
+                }, 2000);
+                this.enregistrer();
+                // this.Suppression();
+            } else {
+                this.error = res.message;
+                createToast(
+                    {
+                        title: this.error,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
+            }
         },
         async updateValeur() { // modifier une valeur de la liste
             if (this.Identifiant === '') {
                 this.NoSerieValid = '*Champ obligatoire : seulement des lettres et - sont valides';
+                createToast(
+                    {
+                        title: this.NoSerieValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (this.auteur === '') {
                 this.auteurValid = '*Champ obligatoire : seulement des lettres et - sont valides';
+                createToast(
+                    {
+                        title: this.auteurValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (!isJourValide(this.jour)) {
                 this.jourValid = 'le jour entré est invalide';
+                createToast(
+                    {
+                        title: this.jourValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (!isMoisValide(this.mois)) {
                 this.moisValid = 'le mois entré est invalide';
+                createToast(
+                    {
+                        title: this.moisValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (!isAnneeValide(this.annee)) {
                 this.anneValid = "l'année entrée est invalide";
+                createToast(
+                    {
+                        title: this.anneValid,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             if (!isDateValide(this.annee, this.mois, this.jour)) {
                 this.error = 'la date entrée est invalide';
+                createToast(
+                    {
+                        title: this.error,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
                 return;
             }
             this.jour = this.jour.toString().length === 1 ? `0${this.jour}` : this.jour;
             this.mois = this.mois.toString().length === 1 ? `0${this.mois}` : this.mois;
             const formData = {
-                auteur: capitalizeFirstLetter(this.auteur),
-                NoSerie: capitalizeFirstLetter(this.Identifiant),
-                typeVa: capitalizeFirstLetter(this.TypeValeur),
-                resIBVA: capitalizeFirstLetter(this.TypeEvenement),
+                Auteur: capitalizeFirstLetter(this.auteur),
+                Identifiant: capitalizeFirstLetter(this.Identifiant),
+                TypeValeur: capitalizeFirstLetter(this.TypeValeur),
+                TypeEvenement: capitalizeFirstLetter(this.TypeEvenement),
                 NoEvenement: `${this.NoEvent}-${this.annee.substring(2)}${this.mois}${this.jour}-${this.NoSeq}`,
             };
 
@@ -318,8 +568,27 @@ export default {
                 body: JSON.stringify(formData),
             });
             const res = await api.json();
-            if (res.success) this.sucess = res.message;
-            else this.error = res.message;
+            if (api.ok) {
+                this.sucess = res.message;
+                setTimeout(() => {
+                    this.$router.push('/valeurs');
+                }, 2000);
+                this.enregistrer();
+                // this.Suppression();
+            } else {
+                this.error = res.message;
+                createToast(
+                    {
+                        title: this.error,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
+            }
         },
         async getValeur() { // recuperer les données d'une valeur
             const rep = await fetch(`${svrURL}/valeurs/${this.$route.params.idValeur}`, {

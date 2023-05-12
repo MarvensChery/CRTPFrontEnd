@@ -532,6 +532,14 @@
 </div>-->
         </section>
       </div>
+      <div class="column is-12">
+      <button
+                v-on:click="this.$router.push({ path: '/requeteIPPE' })"
+                id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler"
+                >Annuler</button>
+
+      </div>
     </section>
   </div>
 </template>

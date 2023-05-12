@@ -50,13 +50,13 @@
         </div>
         <div class="buttons is-centered" style="padding-top: 5%;padding-bottom: 5%;">
             <div>
-                <button v-if="(this.$root.$data.Professeur)"
+                <button v-if="(this.store.Professeur)"
                 v-on:click="this.$router.push({ path: '/' })"
-                class="button is-info" type="button"
+                class="button is-info" type="button"  @click="success"
                 >Retour a l'accueil</button>
-                <button v-if="(!this.$root.$data.Professeur)"
+                <button v-if="(!this.store.Professeur)"
                 v-on:click="this.$router.push({ path: '/etudiant' })"
-                class="button is-info" type="button"
+                class="button is-info" type="button" @click="success"
                 >Retour a l'accueil</button>
             </div>
             <div>
@@ -70,7 +70,9 @@
 
 <script>
 import { connexion } from '@/stores/connexionStore';
+import { createToast } from 'mosha-vue-toastify';
 import { svrURL } from '../constantes';
+import 'mosha-vue-toastify/dist/style.css';
 // noinspection JSUnusedGlobalSymbols
 export default {
     name: 'ObjetsView',
@@ -96,9 +98,22 @@ export default {
         },
     },
     setup() {
+        const success = () => {
+            createToast(
+                'success',
+                {
+                    timeout: 2000,
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                },
+            );
+        };
         const store = connexion();
         // exposer l'objet store à la vue
-        return { store };
+        return {
+            store, success,
+        };
     },
     mounted() {
         this.checkToken();

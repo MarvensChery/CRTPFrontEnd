@@ -68,12 +68,17 @@
         </form>
         <!--BUTTON HOME-->
         <div class="column is-12">
-          <button id="annuler" class="button is-danger " style="width: 30%; margin-left: 30%;"
-                  type="button" value="Annuler" v-on:click="$router.go(-1) "
-                  v-on:keydown="$router.go(-1)">
-            Annuler
-          </button>
-        </div>
+      <button v-if="(this.store.Professeur)"
+                v-on:click="this.$router.push({ path: '/' })"
+                id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler"
+                >Annuler</button>
+                <button v-if="(!this.store.Professeur)"
+                v-on:click="this.$router.push({ path: '/etudiant' })"
+                id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler"
+                >Annuler</button>
+      </div>
       </div>
     </div>
   </div>

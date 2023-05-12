@@ -25,7 +25,6 @@ import UtilisateursView from '@/views/UtilisateursView.vue';
 import ReponseIBAFView from '@/views/ResponseIBAFView.vue';
 import ReponseIBAVView from '@/views/ReponseIBVAView.vue';
 
-
 const routes = [
     {
         path: '/', // Route pour le menu

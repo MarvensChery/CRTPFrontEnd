@@ -39,6 +39,14 @@
           </table>
         </div>
     </div>
+    <div class="column is-12">
+      <button
+                v-on:click="this.$router.push({ path: '/requeteIBVA' })"
+                id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler"
+                >Annuler</button>
+
+      </div>
 </template>
 <script>
 import { connexion } from '@/stores/connexionStore';
