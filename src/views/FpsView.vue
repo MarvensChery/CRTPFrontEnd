@@ -21,6 +21,29 @@
                         v-if="errorMsg !== ''">
                             <i class="fa-solid fa-circle-xmark"></i>&nbsp;{{errorMsg}}
                         </span>
+                        <div class="columns">
+                            <div class="column">
+                                <label for="nom"
+                                 class="label has-text-right">Nom de famille:</label>
+                                <label for="nom" class="label has-text-right">Prénom:</label>
+                                <label for="nom" class="label has-text-right"
+                                v-if="prenom2 !== null">Deuxième prénom:</label>
+                                <label for="nom" class="label has-text-right">Sexe:</label>
+                                <label for="nom"
+                                 class="label has-text-right">Date de naissance:</label>
+                            </div>
+                            <div class="column">
+                                <label for="nom" class="label">{{ nom }}</label>
+                                <label for="nom" class="label">{{ prenom }}</label>
+                                <label for="nom" class="label"
+                                v-if="prenom2 !== null">{{ prenom2 }}</label>
+                                <label for="nom" class="label" v-if="
+                                sexe === true">Masculin</label>
+                                <label for="nom" class="label" v-else>Féminin</label>
+                                <label for="nom" class="label">{{ naissance }}</label>
+                            </div>
+                        </div>
+
                         <div class="field">
                             <label for="inputFPS" class="label">Numéro FPS: </label>
                             <br />
@@ -55,10 +78,16 @@
 
                             <div class="columns is-multiline">
                                 <div class="column is-one-third">
-                                    <label for="comportement1" class="checkbox">
+                                    <label for="comportement1" class="checkbox"  v-if="
+                                sexe === true">
                                         <input type="checkbox" value="true"
                                         v-model="Violent" id="comportement1"/>
                                         Violent
+                                    </label>
+                                    <label for="comportement1" class="checkbox"  v-else>
+                                        <input type="checkbox" value="true"
+                                        v-model="Violent" id="comportement1"/>
+                                        Violente
                                     </label>
                                 </div>
                                 <div class="column is-two-thirds">
@@ -76,18 +105,32 @@
                                     </label>
                                 </div>
                                 <div class="column is-one-third">
-                                    <label for="comportement4" id="comportement4" class="checkbox">
+                                    <label for="comportement4" id="comportement4" class="checkbox"
+                                    v-if="sexe === true">
                                         <input type="checkbox" value="true"
                                         v-model="Desequilibre" />
                                         Déséquilibré
                                     </label>
+                                    <label for="comportement4" id="comportement4" class="checkbox"
+                                    v-else>
+                                        <input type="checkbox" value="true"
+                                        v-model="Desequilibre" />
+                                        Déséquilibrée
+                                    </label>
                                 </div>
                                 <div class="column is-one-third"></div>
                                 <div class="column is-one-third">
-                                    <label for="comportement5" id="comportement5" class="checkbox">
+                                    <label for="comportement5" id="comportement5" class="checkbox"
+                                    v-if="sexe === true">
                                         <input type="checkbox" value="true"
                                         v-model="Contagieux" />
                                         Contagieux
+                                    </label>
+                                    <label for="comportement5" id="comportement5" class="checkbox"
+                                    v-else>
+                                        <input type="checkbox" value="true"
+                                        v-model="Contagieux" />
+                                        Contagieuse
                                     </label>
                                 </div>
                             </div>
@@ -253,13 +296,15 @@
                         <br />
 
                         <div class="columns">
-                            <router-link v-bind:to="{path: '/'}">
+
                                 <div class="column is-one-third">
                                     <div class="buttons is-right">
+                                        <router-link v-bind:to="{path: '/personne/'
+                                        +this.$route.params.idPersonne}">
                                         <button class="button is-info is-default">Retour</button>
-                                    </div>
+                                    </router-link>
                                 </div>
-                            </router-link>
+                                </div>
 
                             <div v-if="this.$route.params.idFPS" class="column is-one-third">
                                 <div class="buttons is-centered">
@@ -277,15 +322,15 @@
 
                             <div v-if="this.$route.params.idFPS" class="column is-one-third">
                                 <div class="buttons">
-                                    <button class="button is-info is-default"
+                                    <button class="button is-info is-danger"
                                     v-on:click="delFps">Supprimer</button>
                                 </div>
                             </div>
 
                             <div v-else class="column is-one-third">
                                 <div class="buttons">
-                                    <button class="button is-info is-default"
-                                    v-on:click="clear">Supprimer</button>
+                                    <button class="button is-info is-danger"
+                                    v-on:click="clear">Réinitialiser</button>
                                 </div>
                             </div>
                         </div>
@@ -308,6 +353,11 @@ export default {
         return {
             // Lien de chaque input avec un v-model
             numeroFPS: '',
+            nom: '',
+            sexe: '',
+            prenom: '',
+            prenom2: '',
+            naissance: '',
             Violent: false,
             EchappeG: false,
             Suicidaire: false,
@@ -337,6 +387,7 @@ export default {
             numeroMSG: '',
             tailleMSG: '',
             poidMSG: '',
+
         };
     },
     setup() {
@@ -388,6 +439,11 @@ export default {
                     console.log(data2);
                     // Remplissage des input avec les données récupérer
                     this.numeroFPS = (data[0].NoFPS).substring(0, 6);
+                    this.nom = data2[0].NomFamille;
+                    this.prenom = data2[0].Prenom1;
+                    this.prenom2 = data2[0].Prenom2;
+                    this.sexe = data2[0].Masculin;
+                    this.naissance = data2[0].DateNaissance.substring(0, 10);
                     this.Violent = data[0].Violent;
                     this.EchappeG = data[0].Echappe;
                     this.Suicidaire = data[0].Suicidaire;
@@ -425,6 +481,7 @@ export default {
             this.numeroMSG = '';
             this.tailleMSG = '';
             this.poidMSG = '';
+
             // Permet de verifier si le num. est valide
             if (isNumeroValid(this.numeroFPS)) {
                 checks += 1;
@@ -453,6 +510,9 @@ export default {
         async postFps() {
             this.hideMsg();
             if (this.validation()) {
+                const myHeaders = new Headers();
+                myHeaders.append('Content-Type', 'application/json');
+                myHeaders.append('Authorization', this.store.token);
                 // Création d'un JSON que va envoyer au backend
                 const data = JSON.stringify({
                     IdPersonne: this.$route.params.idPersonne,
@@ -478,10 +538,9 @@ export default {
                     Poids: this.sendDataNull(this.Poids),
                     Yeux: this.sendDataNull(this.Yeux),
                     Marques: this.sendDataNull(this.Marques),
+                    Antecedents: 'Desc',
                     CD: this.CD,
                 });
-                const myHeaders = new Headers();
-                myHeaders.append('Content-Type', 'application/json');
 
                 const requestOptions = {
                     method: 'POST',
@@ -489,6 +548,7 @@ export default {
                     body: data,
                 };
                 try {
+                    console.log(requestOptions.body);
                     const rep = await fetch(`${svrURL}/fps`, requestOptions);
                     if (rep.status === 200) {
                         this.message = `L'ajout du numéro FPS ${this.numeroFPS}H est réussi !`;
@@ -535,17 +595,19 @@ export default {
             this.hideMsg();
             const myHeaders = new Headers();
             myHeaders.append('Content-Type', 'application/json');
+            myHeaders.append('Authorization', this.store.token);
 
             const requestOptions = {
                 method: 'DELETE',
                 headers: myHeaders,
             };
             try {
+                const a = this.$route.params.idPersonne;
                 const rep = await fetch(`${svrURL}/fps/${this.IdFPS}`, requestOptions);
                 if (rep.status === 200) {
                     this.message = `La suppression du FPS ${this.numeroFPS}H est réussi !`;
                     window.scrollTo(0, 0);
-                    setTimeout(() => this.$router.push('/personnes'), 2000);
+                    setTimeout(() => this.$router.push(`/personne/${{ a }}`), 2000);
                 }
             } catch (error) {
                 this.errorMsg = 'Une erreur est survenu avec la base de donnée !';
@@ -559,6 +621,7 @@ export default {
             if (this.validation()) {
                 const myHeaders = new Headers();
                 myHeaders.append('Content-Type', 'application/json');
+                myHeaders.append('Authorization', this.store.token);
 
                 const data = JSON.stringify({
                     IdPersonne: this.$route.params.idPersonne,
@@ -611,7 +674,20 @@ export default {
             }
         },
     },
-    mounted() {
+    async mounted() {
+        const rep2 = await fetch(`${svrURL}/personnes/${this.$route.params.idPersonne}`, {
+            headers: new Headers({
+                Authorization: this.store.token,
+            }),
+        });
+        if (rep2.ok) {
+            const data2 = await rep2.json();
+            this.nom = data2[0].NomFamille;
+            this.prenom = data2[0].Prenom1;
+            this.prenom2 = data2[0].Prenom2;
+            this.sexe = data2[0].Masculin;
+            this.naissance = data2[0].DateNaissance.substring(0, 10);
+        }
         this.checkToken();
         this.getFps();
         const recaptchaScript = document.createElement('script');

@@ -75,7 +75,7 @@
                                 <label for="jour" class="label">Jour</label>
                                 <div class="control">
                                     <input id="jour" class="input" type="number" placeholder="02"
-                                    min="1" max="12" v-model="jour">
+                                    min="1" max="31" v-model="jour">
                                 </div>
                                 <p v-if="jourError === true" class="help is-danger">
                                     *Champ obligatoire : seulement les chiffres
