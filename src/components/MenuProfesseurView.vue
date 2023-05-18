@@ -78,7 +78,7 @@
                   <h1 class="title is-6 is-mega-menu-title">Menu prof</h1>
                   <router-link v-bind:to="{ name: 'personnesView' }" >
                     <a class="navbar-item " id="banqueP">
-                      <strong>Banque de personne</strong>
+                      <strong>Banque de personnes</strong>
                     </a>
                   </router-link>
                   <router-link v-bind:to="{ name: 'objetsView' }">
@@ -103,7 +103,7 @@
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
-                          <strong>Banque de Valeur</strong>
+                          <strong>Banque de valeurs</strong>
                         </p>
                       </div>
                     </a>
@@ -140,12 +140,12 @@
             @click="closeMenu"
             v-on:click="deco"
               class="button is-light is-danger"  >
-              Déconnection
+              Déconnexion
             </router-link>
 
             <router-link v-else v-bind:to="{ name: 'connexion' }" @click="closeMenu">
               <div class="button is-light is-primary">
-                Connection
+                Connexion
               </div>
 
             </router-link>
