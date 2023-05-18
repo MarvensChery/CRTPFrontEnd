@@ -1933,10 +1933,13 @@ export default {
                 },
             );
             const data = await response.json();
-            if (data.success === true) {
+
+            if (data.ok) {
+                console.log('lol');
                 alert(data.message);
                 this.$router.push(`/personne/${this.$route.params.idPersonne}`);
             } else {
+                console.log(data);
                 alert(
                     `Oups quelque chose n'a pas fonctionné, Le serveur indique: ${data.message}`,
                 );
