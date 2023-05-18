@@ -214,7 +214,7 @@
                                         <th class="is-info">Événement</th>
                                         <th class="is-info">Numéro</th>
                                         <th style="border:none;"
-                                        v-if="this.ippe != null">
+                                        v-if="this.ippe !== null">
                                             <router-link v-bind:to="{name: 'IPPEView',
                                             params: {idPersonne: this.personne[0].IdPersonne}}">
                                             <i class="fas fa-user-plus"></i>
