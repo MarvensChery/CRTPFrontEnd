@@ -27,7 +27,7 @@
                                  class="label has-text-right">Nom de famille:</label>
                                 <label for="nom" class="label has-text-right">Prénom:</label>
                                 <label for="nom" class="label has-text-right"
-                                v-if="prenom2 !== null">Deuxième prénom:</label>
+                                v-if="prenom2 !== '' && prenom2 !== null">Deuxième prénom:</label>
                                 <label for="nom" class="label has-text-right">Sexe:</label>
                                 <label for="nom"
                                  class="label has-text-right">Date de naissance:</label>
@@ -36,7 +36,7 @@
                                 <label for="nom" class="label">{{ nom }}</label>
                                 <label for="nom" class="label">{{ prenom }}</label>
                                 <label for="nom" class="label"
-                                v-if="prenom2 !== null">{{ prenom2 }}</label>
+                                v-if="prenom2 !== '' && prenom2 !== null"> {{ prenom2 }}</label>
                                 <label for="nom" class="label" v-if="
                                 sexe === true">Masculin</label>
                                 <label for="nom" class="label" v-else>Féminin</label>
