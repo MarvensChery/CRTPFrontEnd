@@ -1,5 +1,7 @@
 <template>
     <h1 class="title is-6">Identification de l’agent: {{ this.store.matricule }},Nom de famille</h1>
+    <section class="hero-body">
+      <div class="container is-size-5-mobile box has-text-weight-semibold">
            <div v-if="negatif" class="my-6">
              <h2 id="reponse" class="title has-text-info-dark">***Négatif***</h2>
              <p>Demande de verification pour No serie : {{  negatif }}</p>
@@ -31,11 +33,14 @@
              </table>
            </div>
          </div>
+         </div>
+    </section>
+
          <div class="column is-12">
       <button
-                v-on:click="this.$router.push({ path: '/reponseIBAF' })"
+                v-on:click="this.$router.push({ path: '/requeteIBAF' })"
                 id="annuler" class="button is-danger is-fullwidth"
-                  type="button" value="Annuler"
+                  type="button" value="Annuler" @click="annuler"
                 >Annuler</button>
 
       </div>
@@ -43,6 +48,7 @@
 <script>
 import { connexion } from '@/stores/connexionStore';
 import { svrURL } from '@/constantes';
+import { createToast } from 'mosha-vue-toastify';
 
 export default {
     name: 'ReponseIBAFView',
@@ -59,9 +65,22 @@ export default {
         this.getnomatricule();
     },
     setup() {
+        const annuler = () => {
+            createToast(
+                'annuler',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
         const store = connexion();
         // exposer l'objet store à la vue
-        return { store };
+        return {
+            store, annuler,
+        };
     },
     methods: {
         checkToken() {

@@ -20,7 +20,7 @@
           </div>
         </div>
         <!--VALIDATION ERREUR-->
-        <article v-if="nomError === true" class="column is-full message is-danger">
+        <article v-if="NSerieError === true" class="column is-full message is-danger">
           <div class="message-body">
             Ce champ ne peut pas etre vide!
           </div>
@@ -37,12 +37,12 @@
           <button v-if="(this.store.Professeur)"
                 v-on:click="this.$router.push({ path: '/' })"
                 id="annuler" class="button is-danger is-fullwidth"
-                  type="button" value="Annuler"
+                  type="button" value="Annuler" @click="annuler"
                 >Annuler</button>
                 <button v-if="(!this.store.Professeur)"
                 v-on:click="this.$router.push({ path: '/etudiant' })"
                 id="annuler" class="button is-danger is-fullwidth"
-                  type="button" value="Annuler"
+                  type="button" value="Annuler" @click="annuler"
                 >Annuler</button>
         </div>
       </form>
@@ -53,6 +53,7 @@
 
 <script>
 import { connexion } from '@/stores/connexionStore';
+import { createToast } from 'mosha-vue-toastify';
 
 export default {
     name: 'RequeteIBAFView',
@@ -63,17 +64,32 @@ export default {
         };
     },
     setup() {
+        const annuler = () => {
+            createToast(
+                'annuler',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
         const store = connexion();
         // exposer l'objet store à la vue
-        return { store };
+        return {
+            store, annuler,
+        };
     },
 
     methods: {
     // Fonction qui permet de vérifier si les champs sont valides
         isValid() {
-            if (this.NSerieNSerie !== '') {
+            if (this.NSerie !== '') {
                 this.$root.$data.erreurIPPE = false;
                 this.$router.push(`/reponseIBAF/${this.NSerie}`);
+            } else {
+                this.NSerieError = true;
             }
         },
         checkToken() {

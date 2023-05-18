@@ -22,7 +22,7 @@
           </div>
         </div>
         <!--VALIDATION ERREUR-->
-        <article v-if="nomError === true" class="column is-full message is-danger">
+        <article v-if="erreur === true" class="column is-full message is-danger">
           <div class="message-body">
             Ce champ ne peut pas etre vide!
           </div>
@@ -39,12 +39,12 @@
       <button v-if="(this.store.Professeur)"
                 v-on:click="this.$router.push({ path: '/' })"
                 id="annuler" class="button is-danger is-fullwidth"
-                  type="button" value="Annuler"
+                  type="button" value="Annuler" @click="annuler"
                 >Annuler</button>
                 <button v-if="(!this.store.Professeur)"
                 v-on:click="this.$router.push({ path: '/etudiant' })"
                 id="annuler" class="button is-danger is-fullwidth"
-                  type="button" value="Annuler"
+                  type="button" value="Annuler" @click="annuler"
                 >Annuler</button>
       </div>
       </form>
@@ -55,6 +55,7 @@
 
 <script>
 import { connexion } from '@/stores/connexionStore';
+import { createToast } from 'mosha-vue-toastify';
 // import { capitalizeAllLetter } from '@/validations';
 
 export default {
@@ -63,12 +64,26 @@ export default {
         return {
             noserie: '',
             auteur: '',
+            erreur: false,
         };
     },
     setup() {
+        const annuler = () => {
+            createToast(
+                'annuler',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
         const store = connexion();
         // exposer l'objet store à la vue
-        return { store };
+        return {
+            store, annuler,
+        };
     },
     methods: {
         checkToken() {
@@ -81,13 +96,18 @@ export default {
             this.$root.$data.erreurIBOB = false;
             let recherche = '';
             if (this.noserie !== '') {
+                this.erreur = false;
                 recherche = this.noserie;
+                this.$router.push(`/reponseIBAV/${recherche}`);
             } else if (this.auteur !== '') {
+                this.erreur = false;
                 recherche = this.auteur;
+                this.$router.push(`/reponseIBAV/${recherche}`);
             } else {
+                this.erreur = true;
                 console.log('vous devez selectioner au moin un des 2');
             }
-            this.$router.push(`/reponseIBAV/${recherche}`);
+            // this.$router.push(`/reponseIBAV/${recherche}`);
         },
     },
     async mounted() {

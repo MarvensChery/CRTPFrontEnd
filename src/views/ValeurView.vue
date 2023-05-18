@@ -415,6 +415,21 @@ export default {
                 );
                 return;
             }
+            if (!this.TypeValeur) {
+                this.error = 'Manque le type de valeur';
+                createToast(
+                    {
+                        title: this.error,
+                    },
+                    {
+                        position: 'bottom-right',
+                        type: 'danger',
+                        transition: 'slide',
+                        timeout: 2000,
+                    },
+                );
+                return;
+            }
             this.jour = this.jour.toString().length === 1 ? `0${this.jour}` : this.jour;
             this.mois = this.mois.toString().length === 1 ? `0${this.mois}` : this.mois;
             const formData = {

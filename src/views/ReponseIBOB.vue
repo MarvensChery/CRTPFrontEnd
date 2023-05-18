@@ -1,10 +1,16 @@
 <template>
  <h1 class="title is-6">Identification de l’agent: {{ this.store.matricule }}, Nom de famille</h1>
-
+ <section class="hero-body">
+      <div class="container is-size-5-mobile box has-text-weight-semibold">
+        <div>
+          <h2 class="title has-text-info-dark">IBOB Interrogation - Objet</h2>
+        </div>
         <div v-if="negatif" class="my-6">
           <h2 id="reponse" class="title has-text-info-dark">***Négatif***</h2>
+          <br>
           <p>Demande de verification pour No serie : {{  negatif }}</p>
-          <p> Nous avons aucunes Info pour cet Objet</p>
+          <br>
+          <p> !!! Nous avons aucune Info pour cet Objet !!!</p>
         </div>
         <div v-if="infoObjet">
         <div class="my-6">
@@ -32,18 +38,20 @@
           </table>
         </div>
       </div>
+      </div>
+      </section>
       <div class="column is-12">
-      <button
-                v-on:click="this.$router.push({ path: '/RequeteIBOB' })"
-                id="annuler" class="button is-danger is-fullwidth"
-                  type="button" value="Annuler"
-                >Annuler</button>
+                <button type="button" class="button is-danger is-fullwidth"
+                    v-on:click="this.$router.push({ path: '/RequeteIBOB' })"
+                    @click="annuler">Annuler</button>
 
       </div>
 </template>
 <script>
 import { connexion } from '@/stores/connexionStore';
-import { svrURL } from '@/constantes';
+import { createToast } from 'mosha-vue-toastify';
+import { svrURL } from '../constantes';
+import 'mosha-vue-toastify/dist/style.css';
 
 export default {
     name: 'ReponseIBOBView',
@@ -60,9 +68,22 @@ export default {
         this.getnomatricule();
     },
     setup() {
+        const annuler = () => {
+            createToast(
+                'annuler',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
         const store = connexion();
         // exposer l'objet store à la vue
-        return { store };
+        return {
+            store, annuler,
+        };
     },
     methods: {
         checkToken() {

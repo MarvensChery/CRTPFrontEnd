@@ -20,7 +20,7 @@
             </div>
           </div>
           <!--VALIDATION ERREUR-->
-          <article v-if="nomError === true" class="column is-full message is-danger">
+          <article v-if="noerreur === true" class="column is-full message is-danger">
             <div class="message-body">
               Ce champ ne peut pas etre vide!
             </div>
@@ -36,11 +36,13 @@
           <div class="column is-12">
         <button v-if="(this.store.Professeur)"
                 v-on:click="this.$router.push({ path: '/' })"
+                @click="annuler"
                 id="annuler" class="button is-danger is-fullwidth"
                   type="button" value="Annuler"
                 >Annuler</button>
                 <button v-if="(!this.store.Professeur)"
                 v-on:click="this.$router.push({ path: '/etudiant' })"
+                @click="annuler"
                 id="annuler" class="button is-danger is-fullwidth"
                   type="button" value="Annuler"
                 >Annuler</button>
@@ -53,19 +55,34 @@
 
 <script>
 import { connexion } from '@/stores/connexionStore';
-// import { capitalizeAllLetter } from '@/validations';
+import { createToast } from 'mosha-vue-toastify';
+import 'mosha-vue-toastify/dist/style.css';
 
 export default {
     name: 'RequeteIBOB',
     data() {
         return {
             noserie: '',
+            noerreur: false,
         };
     },
     setup() {
+        const annuler = () => {
+            createToast(
+                'annuler',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
         const store = connexion();
         // exposer l'objet store à la vue
-        return { store };
+        return {
+            store, annuler,
+        };
     },
     methods: {
         checkToken() {
@@ -75,8 +92,12 @@ export default {
         },
         // Fonction qui permet de vérifier si les champs sont valides
         isValid() {
-            this.$root.$data.erreurIBOB = false;
-            this.$router.push(`/reponseIBOB/${this.noserie}`);
+            if (this.noserie !== '') {
+                this.$root.$data.erreurIBOB = false;
+                this.$router.push(`/reponseIBOB/${this.noserie}`);
+            } else {
+                this.noerreur = true;
+            }
         },
     },
     async mounted() {

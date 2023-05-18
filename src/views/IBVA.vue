@@ -19,14 +19,19 @@
             <div id="detail" class="column is-centered">
                 <a id="valeurs">
                     <div class="table-container">
-                        <table class="table has-text-black is-fullwidth" style="text-align:center;">
+        <table
+          class="table is-striped is-fullwidth is-bordered is-centered my-5"
+        >
+          <thead>
                             <tr>
-                                <th>Identifiant</th>
-                                <th>Auteur</th>
-                                <th>Type de Valeur</th>
-                                <th>Type d'évènement</th>
-                                <th>Numéro d'évènement</th>
+                                <th class="is-info">Identifiant</th>
+                                <th class="is-info">Auteur</th>
+                                <th class="is-info">Type de Valeur</th>
+                                <th class="is-info">Type d'évènement</th>
+                                <th class="is-info">Numéro d'évènement</th>
                             </tr>
+                            </thead>
+                            <tbody>
                             <tr v-for="v in filtresValeurs" v-bind:key="v.IdIBVA">
                                 <td>{{ v.Identifiant }}</td>
                                 <td>{{ v.Auteur }}</td>
@@ -41,7 +46,7 @@
                                         <i class='fas fa-edit'></i>
                                     </router-link>
                                 </td>
-                            </tr>
+                            </tr></tbody>
                         </table>
                     </div>
                 </a>

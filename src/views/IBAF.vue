@@ -17,15 +17,20 @@
             <div class="columns">
                 <div id="detail" class="column is-centered">
                     <a id="armes">
-                    <div class="table-container">
-                        <table class="table has-text-black is-fullwidth" style="text-align:center;">
+                        <div class="table-container">
+        <table
+          class="table is-striped is-fullwidth is-bordered is-centered my-5"
+        >
+          <thead>
                             <tr>
-                                <th>Numéro de Série</th>
-                                <th>Marque</th>
-                                <th>Calibre</th>
-                                <th>Type d'armes</th>
-                                <th>Numéro d'évènement</th>
+                                <th class="is-info">Numéro de Série</th>
+                                <th class="is-info">Marque</th>
+                                <th class="is-info">Calibre</th>
+                                <th class="is-info">Type d'armes</th>
+                                <th class="is-info">Numéro d'évènement</th>
                             </tr>
+                            </thead>
+                            <tbody>
                             <tr v-for="a in filtresValeurs" v-bind:key="a.IdIBAF">
                                 <td>{{ a.NoSerie }}</td>
                                 <td>{{ a.Marque }}</td>
@@ -38,7 +43,7 @@
                                         <i class='fas fa-edit'></i>
                                     </router-link>
                                 </td>
-                            </tr>
+                            </tr></tbody>
                         </table>
                     </div>
                     </a>
