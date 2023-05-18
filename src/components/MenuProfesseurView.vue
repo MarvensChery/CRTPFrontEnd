@@ -28,7 +28,7 @@
               <div class="columns">
                 <div class="column">
                   <h1 class="title is-6 is-mega-menu-title">
-                    Les recherches mise a votre disposition</h1>
+                    Les recherches mise à votre disposition</h1>
                   <router-link v-bind:to="{ name: 'requeteIPPE' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content" id="ippe">
@@ -57,7 +57,7 @@
                         <p>
                           <strong>IBAF</strong>
                           <br>
-                          <small>Recherche d'armes a feu</small>
+                          <small>Recherche d'armes à feu</small>
                         </p>
                       </div>
                     </a>
