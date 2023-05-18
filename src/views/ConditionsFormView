@@ -1,0 +1,62 @@
+<template>
+<div class="container mb-4 is-desktop">
+  <form>
+    <h1 class="has-text-black" style="height: 135px; text-align: center; font-size: 24px; padding-top: 5%;">
+      <b>
+        <u>AJOUT D'UNE RÉPONSE CONDITIONS</u>
+      </b>
+    </h1>
+    <br>
+    <br>
+    <div class="field">
+      <label for="id" class="label">ID</label>
+      <div class="control">
+        <input id="id" class="input" type="text" name="id" placeholder="ID" required>
+      </div>
+    </div>
+    <div class="field">
+      <label for="label" class="label">Label</label>
+      <div class="control">
+        <select id="label" class="select" name="label" required>
+          <option></option>
+          <option>Avoir comme adresse le</option>
+          <option>Ne pas entrer en contact avec</option>
+          <option>Doit garder la paix et avoir bonne conduite</option>
+          <option>Aucune consommation d'alcool ou de drogue non prescrite</option>
+          <option>Ne pas fréquenter</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label for="heureDebut" class="label">Heure de début</label>
+      <div class="control">
+        <input id="heureDebut" class="input" type="time" name="heureDebut" required>
+      </div>
+    </div>
+    <div class="field">
+      <label for="heureFin" class="label">Heure de fin</label>
+      <div class="control">
+        <input id="heureFin" class="input" type="time" name="heureFin" required>
+      </div>
+    </div>
+    <div class="field">
+      <label for="victime" class="label">Victime</label>
+      <div class="control">
+        <input id="victime" class="input" type="text" name="victime" placeholder="Victime" required>
+      </div>
+    </div>
+    <div class="field">
+      <label for="frequentations" class="label">Fréquentations</label>
+      <div class="control">
+        <input id="frequentations" class="input" type="text" name="frequentations" placeholder="Fréquentations" required>
+      </div>
+    </div>
+    <div class="btn-block">
+      <button type="submit">Ajouter</button>
+    </div>
+    <p style="margin-bottom: 50px;">&nbsp;</p>
+  </form>
+</div>
+
+
+</template>
