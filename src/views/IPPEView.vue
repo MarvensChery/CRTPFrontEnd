@@ -1789,6 +1789,17 @@ export default {
                 },
             );
         };
+        const modif = () => {
+            createToast(
+                'IPPE modifie',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
         const creer = () => {
             createToast(
                 'IPPE creer',
@@ -1802,7 +1813,9 @@ export default {
         };
         const store = connexion();
         // exposer l'objet store à la vue
-        return { store, annuler, creer };
+        return {
+            store, annuler, creer, modif,
+        };
     },
     computed: {
         typeBouton() {
@@ -1934,15 +1947,11 @@ export default {
             );
             const data = await response.json();
 
-            if (data.ok) {
-                console.log('lol');
-                alert(data.message);
+            if (data) {
+                this.modif();
                 this.$router.push(`/personne/${this.$route.params.idPersonne}`);
             } else {
-                console.log(data);
-                alert(
-                    `Oups quelque chose n'a pas fonctionné, Le serveur indique: ${data.message}`,
-                );
+                this.$router.push(`/personne/${this.$route.params.idPersonne}`);
             }
         },
         async supprimerIPPE() {
