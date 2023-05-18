@@ -248,6 +248,55 @@
                     </div>
                 </div>
             </section>
+            <section class="section mt-3 has-text-centered ">
+                <!--Introduire le tableau ici-->
+                <div id='TableauIPPE' class="container has-text-centered is-centered">
+                    <h1 class="title is-4">Réponses - FPS</h1>
+                    <div class="columns is-centered">
+                        <div class="column is-narrow">
+                            <table id="table" class="table is-bordered
+                            is-striped is-narrow is-hoverable" style="align-content: center;">
+                                <thead>
+                                    <tr>
+                                        <th class="is-info">Comportement</th>
+                                        <th class="is-info">Numéro</th>
+                                        <th style="border:none;"
+                                        v-if="this.personne !== null">
+                                        <div v-if="fps.length === 0">
+                                            <router-link v-bind:to="{name: 'FpsView',
+                                            params: {idPersonne: this.personne[0].IdPersonne}}">
+                                            <i class="fas fa-user-plus"></i>
+                                            </router-link>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody v-if="this.personne === null">
+                                    <tr>
+                                        <td> <br> </td>
+                                        <td> <br> </td>
+                                    </tr>
+                                </tbody>
+                                <tbody v-if="this.ippe !== null && this.personne !== null">
+                                    <tr v-for="i in this.fps"
+                                    v-bind:key="i.IdFPS">
+                                        <td>{{i.Antecedents}}</td>
+                                        <td>{{i.NoFPS}}</td>
+                                        <td style="border:none;">
+                                            <router-link v-bind:to="{name: 'ajoutFpsView',
+                                            params: {
+                                                idPersonne: this.personne[0].IdPersonne,
+                                                idFPS: i.IdFPS}}">
+                                                <i class="fas fa-pen"></i>
+                                            </router-link>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
                 <p class="has-text-success has-text-centered" v-if="PUTenvoyé">
                         *Modifications enregistrées avec succès
                 </p>
@@ -320,6 +369,7 @@ export default {
             personne: null,
             paramId: this.$route.params.idPersonne,
             ippe: null,
+            fps: [],
             nomFamille: '',
             prenomUn: '',
             prenomDeux: '',
@@ -361,11 +411,12 @@ export default {
             message: "Press 'Ok' or 'Cancel'.",
         };
     },
-    mounted() {
+    async mounted() {
         this.checkToken();
         if (this.paramId) {
             this.getPersonne();
             this.getIPPE();
+            await this.getFPS();
         }
     },
     setup() {
@@ -532,6 +583,17 @@ export default {
             } else {
                 this.ippe = [];
                 // Gérer le cas où une autre erreur s'est produite
+            }
+        },
+        async getFPS() {
+            const response = await fetch(`${svrURL}/fps`, {
+                headers: new Headers({
+                    Authorization: this.store.token,
+                }),
+            });
+            if (response.ok) {
+                const fps = await response.json();
+                this.fps = await fps.filter((x) => x.IdPersonne === this.personne[0].IdPersonne);
             }
         },
         // Suppression de la personne et ses IPPE

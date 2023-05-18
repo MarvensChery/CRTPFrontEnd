@@ -35,7 +35,7 @@
         </div>
         <div>
           <div v-if="reponseIPPE1type !== 'Négatif'">
-            <div v-if="pageactuelle < reponseIPPE[0].IPPE.length
+            <div v-if="pageactuelle < this.reponseIPPElength
             || pageactuelle < pagefps" v-on:click="pageactuelle += 1"
               v-on:keydown="pageactuelle = 2" style="margin-right: -5px; float: right">
               <img class="shadow zoom"

@@ -371,9 +371,21 @@ export default {
         },
         async getFps() {
             if (this.$route.params.idFPS !== undefined) {
-                const rep = await fetch(`${svrURL}/fps/${this.$route.params.idFPS}`);
-                if (rep.ok) {
+                const rep = await fetch(`${svrURL}/fps/${this.$route.params.idFPS}`, {
+                    headers: new Headers({
+                        Authorization: this.store.token,
+                    }),
+                });
+                const rep2 = await fetch(`${svrURL}/personnes/${this.$route.params.idPersonne}`, {
+                    headers: new Headers({
+                        Authorization: this.store.token,
+                    }),
+                });
+                if (rep.ok && rep2.ok) {
                     const data = await rep.json();
+                    const data2 = await rep2.json();
+
+                    console.log(data2);
                     // Remplissage des input avec les données récupérer
                     this.numeroFPS = (data[0].NoFPS).substring(0, 6);
                     this.Violent = data[0].Violent;
@@ -382,10 +394,10 @@ export default {
                     this.Desequilibre = data[0].Desequilibre;
                     this.Contagieux = data[0].Contagieux;
                     this.idPersonne = data[0].IdPersonne;
-                    this.Race = data[0].Race;
-                    this.Taille = data[0].Taille;
-                    this.Poids = data[0].Poids;
-                    this.Yeux = data[0].Yeux;
+                    this.Race = data2[0].Race;
+                    this.Taille = data2[0].Taille;
+                    this.Poids = data2[0].Poids;
+                    this.Yeux = data2[0].Yeux;
                     this.Marques = data[0].Marques;
                     this.Violence = data[0].Violence;
                     this.Fraude = data[0].Fraude;

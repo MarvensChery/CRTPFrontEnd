@@ -30,8 +30,6 @@
               <table class="table is-striped is-fullwidth is-bordered is-centered my-5">
                 <thead>
                   <tr>
-                    <th class="is-info">Id utilisateur</th>
-                    <th class="is-info">Id personne</th>
                     <th class="is-info">Nom</th>
                     <th class="is-info">Prenom1</th>
                     <th class="is-info">Prenom2</th>
@@ -48,8 +46,6 @@
                   v-bind:key="personne.IdPersonne"
                 >
                   <tr>
-                    <td>{{ personne.IdUtilisateur }}</td>
-                    <td>{{ personne.IdPersonne }}</td>
                     <td>{{ personne.NomFamille }}</td>
                     <td>{{ personne.Prenom1 }}</td>
                     <td v-if="personne.Prenom2 !== null">{{ personne.Prenom2 }}</td>
