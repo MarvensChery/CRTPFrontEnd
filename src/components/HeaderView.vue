@@ -6,7 +6,7 @@
             <h1 class="is-info">Centre de renseignements - Techniques policières</h1>
         </div>
     </div>
-</template>
+</template> 
 
 <script>
 export default {
