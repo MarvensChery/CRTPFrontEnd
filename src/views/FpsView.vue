@@ -433,8 +433,10 @@ export default {
                     }),
                 });
                 if (rep.ok && rep2.ok) {
-                    const data = await rep.json();
+                    const data3 = await rep.json();
+
                     const data2 = await rep2.json();
+                    const data = data3.filter((x) => x.IdPersonne === data2[0].IdPersonne);
 
                     console.log(data2);
                     // Remplissage des input avec les données récupérer
