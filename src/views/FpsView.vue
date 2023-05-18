@@ -658,18 +658,19 @@ export default {
 
                 try {
                     const rep = await fetch(`${svrURL}/fps/${this.$route.params.idFPS}`, requestOptions);
+                    console.log(rep);
                     if (rep.status === 200) {
                         this.message = `La modifcation du FPS ${this.numeroFPS}H est réussi !`;
-                        window.scrollTo(0, 0);
+                        setTimeout(() => {
+                            this.$router.push('/personnes');
+                        }, 2000);
                     }
 
                     if (rep.status === 500) {
                         this.errorMsg = "La modification n'a pas pu être fait !";
-                        window.scrollTo(0, 0);
                     }
                 } catch (error) {
                     this.errorMsg = 'Une erreur est survenu avec la base de donnée !';
-                    window.scrollTo(0, 0);
                 }
             }
         },
