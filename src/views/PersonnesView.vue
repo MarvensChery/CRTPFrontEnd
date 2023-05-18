@@ -64,7 +64,7 @@
         </form>
         <!--BUTTON HOME-->
         <div class="column is-12">
-          <button id="annuler" class="button is-danger " style="width: 30%; margin-left: 30%;"
+          <button id="annuler" class="button is-danger is-fullwidth"
                   type="button" value="Annuler" v-on:click="retouraccueil"
                   @click="annuler"
                   v-on:keydown="retouraccueil">

@@ -21,7 +21,7 @@
                     {{error}}
                 </div>
             <div class="columns is-centered">
-                <div class="column is-half">
+                <div class="column">
                     <div class="field" v-if="arme.idArme!==-1">
                             <label for="idArme" class="label is-hidden">idArme</label>
                             <div class="control">
@@ -68,7 +68,8 @@
                     <div class="field">
                         <label for="typeArme" class="label">Type d'arme</label>
                         <div class = "control">
-                            <select id="typeArme" class="select" name="typeArme"
+                            <div class="select is-fullwidth">
+                            <select id="typeArme" name="typeArme"
                             v-model="typeArme" required>
                             <option></option>
                             <option>Révolver</option>
@@ -76,14 +77,14 @@
                             <option>Carabine</option>
                             <option>Fusil</option>
                             </select>
-                        </div>
+                        </div></div>
                     </div>
                     <div class="field" style="padding-bottom: 20px">
-                    <label for="NoEvenement" class="label">Numéro d'évenement</label>
-                    <div id="NoEvenement" class="columns is-mobile is-multiline is-centered">
-                        <div class="column is-3-desktop is-2-mobile">
+                    <div id="NoEvenement" class="columns is-3-mobile is-multiline is-centered">
+                        <div class="column is-3-desktop is-5-mobile">
                             <label class="has-text-black" for="NoEvent"><b>Numéro évenement</b>
                                 <span style="color: red">*</span></label><br><br>
+                                <div class="control"><div class="select is-fullwidth">
                             <select id="NoEvent" class="select" name="NoEvent"
                             v-model="NoEvent"  required>
                                 <option></option>
@@ -91,19 +92,19 @@
                                 <option>302</option>
                                 <option>108</option>
                             </select>
-                        </div>
+                        </div></div></div>
 
-                        <div class="column is-2-desktop is-2-mobile">
+                        <div class="column is-2-desktop is-4-mobile">
                             <label class="has-text-black" for="annee"><b>Année</b>
                                 <span style="color: red">*</span></label><br><br>
-                            <input id="annee" type="text" name="annee" placeholder="2022"
+                            <input id="annee" class="input" type="text" name="annee" placeholder="2022"
                             maxlength="4" v-model="annee" required/>
                             <label class="has-text-danger"  v-if="anneValid"
                             for="warning">
                             <b>{{anneValid}}</b></label>
                         </div>
 
-                        <div class="column is-1-desktop is-2-mobile">
+                        <div class="column is-2-desktop is-4-mobile">
                             <label class="has-text-black" for="ddm"><b>Mois</b><span
                                 style="color: red">*</span></label><br><br>
                             <input id="Mois" class="input" type="number" maxlength="2"
@@ -112,7 +113,7 @@
                             for="warning">
                             <b>{{moisValid}}</b></label>
                         </div>
-                        <div class="column is-1-desktop is-2-mobile">
+                        <div class="column is-2-desktop is-4-mobile">
                             <label class="has-text-black" for="ddm"><b>Jour</b><span
                                 style="color: red">*</span></label><br><br>
                             <input id="jour" class="input" type="number" maxlength="2"
@@ -121,30 +122,36 @@
                             for="warning">
                             <b>{{jourValid}}</b></label>
                         </div>
+                        </div>
+
                         <div class=" is-3-desktop is-2-mobile">
                             <label class="has-text-black" for="NoSeq"><b>Numéro Séquentiel</b>
                                 <span style="color: red">*</span></label><br><br>
-                            <input maxlength="4" id="NoSeq" type="text" name="NoSeq"
+                            <input maxlength="4" class="input" id="NoSeq" type="text" name="NoSeq"
                                 placeholder="Numéro Séquentiel" v-model="NoSeq" required/>
-                        </div>
-                   </div>
-                   <div class="btn-block" >
+
+                   </div></div>
+            <div class="btn-block" >
+                    <div class="columns is-mobile is-centered">
+    <div class="column is-one-quarter" v-if="!isNaN(this.$route.params.idArme)">
                 <button
                 v-if="!isNaN(this.$route.params.idArme)"
-                v-on:click="this.updateArme">Modifier</button>&nbsp;
+                v-on:click="this.updateArme" class="button is-primary is-fullwidth">Modifier</button></div>&nbsp;&nbsp;&nbsp;
+                <div class="column is-one-quarter" v-if="!isNaN(this.$route.params.idArme)">
                 <button type="reset"
                 v-if="!isNaN(this.$route.params.idArme)"
-                v-on:click="showModal">Supprimer</button>&nbsp;
+                v-on:click="showModal" class="button is-danger is-fullwidth">Supprimer</button></div>&nbsp;&nbsp;&nbsp;
+                <div class="column is-one-quarter" v-if="isNaN(this.$route.params.idArme)">
                 <button type="submit"
                 v-if="isNaN(this.$route.params.idArme)"
-                v-on:click="addArme">Ajouter</button>&nbsp;
-                <button type="button"
+                v-on:click="addArme" class="button is-primary is-fullwidth">Ajouter</button> </div>&nbsp;&nbsp;&nbsp;
+                <div class="column is-one-quarter ">
+                <button type="button" class="button is-danger is-fullwidth"
                     v-on:click="this.$router.push({ name: 'IBAF' })"
-                    @click="annuler">Annuler</button>
-            </div>
+                    @click="annuler">Annuler</button></div>
+            </div></div>
                 <p style="margin-bottom: 50px;">&nbsp;</p>
                 </div>
-            </div>
         </div>
         </div>
       </form>
@@ -152,7 +159,7 @@
             <div class="modal-background"></div>
             <div class="modal-card">
             <header class="modal-card-head">
-          <p class="modal-card-title">Confirmation Modal</p>
+                <p class="modal-card-title">ETES VOUS SUR QUE VOUS VOULEZ SUPPRIMER!!!</p>
           <button class="delete" aria-label="close" @click="cancelModal"></button>
             </header>
             <section class="modal-card-body">
@@ -160,7 +167,7 @@
             </section>
         <footer class="modal-card-foot">
           <button class="button is-success" v-on:click="deleteArme" >Ok</button>
-          <button class="button" @click="cancelModal">Cancel</button>
+          <button class="button" @click="cancelModal">Annuler</button>
         </footer>
         </div>
       </div>
@@ -277,6 +284,7 @@ export default {
         cancelModal() {
             this.okPressed = false;
             this.showModalFlag = false;
+            this.annuler();
         },
         checkToken() {
             if (this.store.token === '') {
@@ -638,293 +646,4 @@ export default {
 
 <style scoped>
 
-html, body {
-    min-height: 100%;
-    }
-    body, div, form, input, select, textarea, label {
-    padding: 0;
-    margin: 0;
-    outline: none;
-    font-family: Roboto, Arial, sans-serif;
-    font-size: 14px;
-    color: #666;
-    line-height: 22px;
-    }
-    .dialog-ovelay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.50);
-    z-index: 999999
-}
-.dialog-ovelay .dialog {
-    width: 400px;
-    margin: 100px auto 0;
-    background-color: #fff;
-    box-shadow: 0 0 20px rgba(0,0,0,.2);
-    border-radius: 3px;
-    overflow: hidden
-}
-.dialog-ovelay .dialog header {
-    padding: 10px 8px;
-    background-color: #f6f7f9;
-    border-bottom: 1px solid #e5e5e5
-}
-.dialog-ovelay .dialog header h3 {
-    font-size: 14px;
-    margin: 0;
-    color: #555;
-    display: inline-block
-}
-.dialog-ovelay .dialog header .fa-close {
-    float: right;
-    color: #c4c5c7;
-    cursor: pointer;
-    transition: all .5s ease;
-    padding: 0 2px;
-    border-radius: 1px
-}
-.dialog-ovelay .dialog header .fa-close:hover {
-    color: #b9b9b9
-}
-.dialog-ovelay .dialog header .fa-close:active {
-    box-shadow: 0 0 5px #673AB7;
-    color: #a2a2a2
-}
-.dialog-ovelay .dialog .dialog-msg {
-    padding: 12px 10px
-}
-.dialog-ovelay .dialog .dialog-msg p{
-    margin: 0;
-    font-size: 15px;
-    color: #333
-}
-.dialog-ovelay .dialog footer {
-    border-top: 1px solid #e5e5e5;
-    padding: 8px 10px
-}
-.dialog-ovelay .dialog footer .controls {
-    direction: rtl
-}
-.dialog-ovelay .dialog footer .controls .button {
-    padding: 5px 15px;
-    border-radius: 3px
-}
-.button {
-  cursor: pointer
-}
-.button-default {
-    background-color: rgb(248, 248, 248);
-    border: 1px solid rgba(204, 204, 204, 0.5);
-    color: #5D5D5D;
-}
-.button-danger {
-    background-color: #f44336;
-    border: 1px solid #d32f2f;
-    color: #f5f5f5
-}
-.link {
-  padding: 5px 10px;
-  cursor: pointer
-}
-    .closebtn {
-        margin-left: 15px;
-        color: white;
-        font-weight: bold;
-        float: right;
-        font-size: 22px;
-        line-height: 20px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .closebtn:hover {
-        color: black;
-    }
-    .error, .success {
-        border: 1px solid;
-        margin: 10px 0px;
-        padding: 15px 10px 15px 50px;
-        background-repeat: no-repeat;
-        background-position: 10px center;
-        }
-    .success {
-        color: #4F8A10;
-        background-color: #DFF2BF;
-        background-image: url('https://i.imgur.com/Q9BGTuy.png');
-    }
-    .error{
-        color: #D8000C;
-        background-color: #FFBABA;
-        background-image: url('https://i.imgur.com/GnyDvKN.png');
-    }
-
-    .center {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-
-      }
-
-    .testbox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: inherit;
-    padding: 20px;
-    }
-    form {
-    width: 100%;
-    padding: 20px;
-    border-radius: 6px;
-    background: #fff;
-    }
-    .banner {
-    position: relative;
-    height: 135px;
-    width: 135px;
-    background-image: url("/public/images/LogoMaisonneuve.jpg");
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    float:left;
-    }
-    .banner::after {
-    content: "";
-    background-color: rgba(0, 0, 0, 0.2);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    }
-    input, select, textarea {
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    }
-    input {
-    width: calc(100% - 10px);
-    padding: 5px;
-    }
-    textarea {
-    width: calc(100% - 12px);
-    padding: 5px;
-    }
-    .item:hover p,
-    .item:hover i,
-    .question:hover p,
-    .question label:hover,
-    input:hover::placeholder select:hover::placeholder {
-    color: #008bcc;
-    }
-    .item input:hover, .item select:hover, .item textarea:hover {
-    border: 1px solid transparent;
-    box-shadow: 0 0 3px 0 #008bcc;
-    color: #008bcc;
-    }
-    .item {
-    position: relative;
-    margin: 10px 0;
-    }
-    .item span {
-    color: red;
-    }
-    input[type="date"]::-webkit-inner-spin-button {
-    display: none;
-    }
-    .item i, input[type="date"]::-webkit-calendar-picker-indicator {
-    position: absolute;
-    font-size: 20px;
-    color: #008bcc;
-    }
-    .item i {
-    right: 1%;
-    top: 30px;
-    z-index: 1;
-    }
-    [type="date"]::-webkit-calendar-picker-indicator {
-    right: 1%;
-    z-index: 2;
-    opacity: 0;
-    cursor: pointer;
-    }
-    input[type=radio], input[type=checkbox]  {
-    display: none;
-    }
-    label.radio {
-    position: relative;
-    display: inline-block;
-    margin: 5px 20px 15px 0;
-    cursor: pointer;
-    }
-    .question span {
-    margin-left: 30px;
-    }
-    .question-answer label {
-    display: block;
-    }
-    label.radio:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    width: 17px;
-    height: 17px;
-    border-radius: 50%;
-    border: 2px solid #ccc;
-    }
-    input[type=radio]:checked + label:before, label.radio:hover:before {
-    border: 2px solid #008bcc;
-    }
-    label.radio:after {
-    content: "";
-    position: absolute;
-    top: 6px;
-    left: 5px;
-    width: 8px;
-    height: 4px;
-    border: 3px solid #008bcc;
-    border-top: none;
-    border-right: none;
-    transform: rotate(-45deg);
-    opacity: 0;
-    }
-    input[type=radio]:checked + label:after {
-    opacity: 1;
-    }
-    .btn-block {
-    margin-top: 10px;
-    text-align: center;
-    }
-    button {
-    width: 130px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background: #008bcc;
-    font-size: 16px;
-    color: #fff;
-    cursor: pointer;
-    }
-    button:hover {
-    background: #008bcc;
-    }
-    @media (min-width: 568px) {
-    .name-item, .city-item {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    }
-    .name-item input, .name-item div {
-    width: calc(50% - 20px);
-    }
-    .name-item div input {
-    width:97%;}
-    .name-item div label {
-    display:block;
-    padding-bottom:5px;
-    }
-    }
 </style>

@@ -138,10 +138,12 @@
                     *Modifications enregistrées avec succès</p>
             <div class="columns">
                 <div class="column is-6 has-text-right">
-                    <button class="button is-info" v-on:click="retourALaPersonne">Retour</button>
+                    <button class="button is-info" v-on:click="retourALaPersonne"
+                    @click="annuler">Retour</button>
                 </div>
                 <div class="column is-6">
-                    <button class="button is-info" v-on:click="updateDescription">
+                    <button class="button is-info" v-on:click="updateDescription"
+                    @click="enregistrer">
                         Enregistrer
                     </button>
                 </div>
@@ -161,6 +163,7 @@ import {
     verifieGiletPantalonAutreVetement,
 } from '@/validations';
 import { connexion } from '@/stores/connexionStore';
+import { createToast } from 'mosha-vue-toastify';
 
 export default {
     name: 'DescriptionPersonneView',
@@ -209,9 +212,33 @@ export default {
         };
     },
     setup() {
+        const enregistrer = () => {
+            createToast(
+                'enregistrer',
+                {
+                    timeout: 2000,
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                },
+            );
+        };
+        const annuler = () => {
+            createToast(
+                'annuler',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
         const store = connexion();
         // exposer l'objet store à la vue
-        return { store };
+        return {
+            store, annuler, enregistrer,
+        };
     },
     methods: {
         checkToken() {
