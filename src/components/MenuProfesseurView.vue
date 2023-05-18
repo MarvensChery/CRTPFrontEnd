@@ -28,7 +28,7 @@
               <div class="columns">
                 <div class="column">
                   <h1 class="title is-6 is-mega-menu-title">
-                    Les recherches mise a votre disposition</h1>
+                    Les recherches mise à votre disposition</h1>
                   <router-link v-bind:to="{ name: 'requeteIPPE' }" @click="closeMenu">
                     <a class="navbar-item">
                       <div class="navbar-content" id="ippe">
@@ -57,7 +57,7 @@
                         <p>
                           <strong>IBAF</strong>
                           <br>
-                          <small>Recherche d'armes a feu</small>
+                          <small>Recherche d'armes à feu</small>
                         </p>
                       </div>
                     </a>
@@ -78,7 +78,7 @@
                   <h1 class="title is-6 is-mega-menu-title">Menu prof</h1>
                   <router-link v-bind:to="{ name: 'personnesView' }" >
                     <a class="navbar-item " id="banqueP">
-                      <strong>Banque de personne</strong>
+                      <strong>Banque de personnes</strong>
                     </a>
                   </router-link>
                   <router-link v-bind:to="{ name: 'objetsView' }">
@@ -103,12 +103,24 @@
                     <a class="navbar-item">
                       <div class="navbar-content">
                         <p>
-                          <strong>Banque de Valeur</strong>
+                          <strong>Banque de valeurs</strong>
                         </p>
                       </div>
                     </a>
                   </router-link>
                 </div>
+                <div class="column " id="menuP" v-if="this.store.Professeur">
+                  <h1 class="title is-6 is-mega-menu-title">Utilisateurs</h1>
+                  <router-link v-bind:to="{ name: 'UtilisateursView' }">
+                  <a class="navbar-item">
+                      <div class="navbar-content">
+                        <p>
+                          <strong>Banque d'utilisateurs</strong>
+                        </p>
+                      </div>
+                    </a>
+                  </router-link>
+                  </div>
               </div>
             </div>
           </div>
@@ -128,12 +140,12 @@
             @click="closeMenu"
             v-on:click="deco"
               class="button is-light is-danger"  >
-              Déconnection
+              Déconnexion
             </router-link>
 
             <router-link v-else v-bind:to="{ name: 'connexion' }" @click="closeMenu">
               <div class="button is-light is-primary">
-                Connection
+                Connexion
               </div>
 
             </router-link>
@@ -156,6 +168,7 @@ export default {
     methods: {
         deco() {
             this.store.token = '';
+            sessionStorage.clear();
         },
         closeMenu() {
             this.isActive = false;

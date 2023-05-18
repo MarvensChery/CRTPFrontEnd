@@ -4,30 +4,28 @@
     "description": "Client web Vue.js de l'application CRTP",
     "private": true,
     "dependencies": {
-        "core-js": "^3.29.1",
         "express": "^4.18.2",
+        "mosha-vue-toastify": "^1.0.23",
         "nodemon": "^2.0.22",
         "pinia": "^2.0.34",
+        "vite": "^4.3.4",
         "vue": "^3.2.19",
         "vue-router": "^4.1.6"
     },
     "devDependencies": {
         "@babel/core": "^7.21.4",
         "@babel/eslint-parser": "^7.21.3",
-        "@vue/cli-plugin-babel": "~5.0.1",
-        "@vue/cli-plugin-eslint": "~5.0.1",
-        "@vue/cli-plugin-router": "~5.0.1",
-        "@vue/cli-service": "~5.0.1",
+        "@vitejs/plugin-vue": "^4.1.0",
         "@vue/eslint-config-airbnb": "^6.0.0",
-        "eslint": "^7.32.0",
+        "eslint": "^8.39.0",
         "eslint-plugin-import": "^2.27.5",
         "eslint-plugin-vue": "^8.7.1",
         "eslint-plugin-vuejs-accessibility": "^1.2.0"
     },
     "scripts": {
-        "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
-        "lint": "vue-cli-service lint",
-        "fix": "vue-cli-service lint --fix"
+        "dev": "vite",
+        "build": "vite build",
+        "serve": "vite preview",
+        "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src"
     }
 }

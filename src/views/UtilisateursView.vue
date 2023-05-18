@@ -5,7 +5,7 @@
       <div class="column is-10 is-12-touch is-offset-1-desktop box pb-5">
         <form class="has-text-centered">
           <div class="is-centered">
-            <h1 class="title is-1-touch is-full my-6">Table IPPE Alimentation</h1>
+            <h1 class="title is-1-touch is-full my-6">Table d'utilisateurs</h1>
             <div class="columns is-multiline">
               <label
               style=" margin-left: 30%;"
@@ -64,13 +64,17 @@
         </form>
         <!--BUTTON HOME-->
         <div class="column is-12">
-          <button id="annuler" class="button is-danger is-fullwidth"
-                  type="button" value="Annuler" v-on:click="retouraccueil"
-                  @click="annuler"
-                  v-on:keydown="retouraccueil">
-            Annuler
-          </button>
-        </div>
+      <button v-if="(this.store.Professeur)"
+                v-on:click="this.$router.push({ path: '/' })"
+                id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler"
+                >Annuler</button>
+                <button v-if="(!this.store.Professeur)"
+                v-on:click="this.$router.push({ path: '/etudiant' })"
+                id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler"
+                >Annuler</button>
+      </div>
       </div>
     </div>
   </div>
@@ -80,11 +84,9 @@
 // noinspection JSUnusedGlobalSymbols
 import { connexion } from '@/stores/connexionStore';
 import { svrURL } from '@/constantes';
-import { createToast } from 'mosha-vue-toastify';
-import 'mosha-vue-toastify/dist/style.css';
 
 export default {
-    name: 'PersonnesView',
+    name: 'UtilisateursView',
     data() {
         return {
             nom: '',
@@ -103,64 +105,15 @@ export default {
         },
     },
     setup() {
-        const enregistrer = () => {
-            createToast(
-                'enregistrer',
-                {
-                    timeout: 2000,
-                    position: 'bottom-right',
-                    type: 'success',
-                    transition: 'slide',
-                },
-            );
-        };
-        const Suppression = () => {
-            createToast(
-                'Suppression',
-                {
-                    position: 'bottom-right',
-                    type: 'danger',
-                    transition: 'slide',
-                    timeout: 2000,
-                },
-            );
-        };
-        const annuler = () => {
-            createToast(
-                'Retour effectué avec succes',
-                {
-                    position: 'bottom-right',
-                    type: 'success',
-                    transition: 'slide',
-                    timeout: 2000,
-                },
-            );
-        };
-        const creation = () => {
-            createToast(
-                'creation',
-                {
-                    position: 'bottom-right',
-                    type: 'success',
-                    transition: 'slide',
-                    timeout: 2000,
-                },
-            );
-        };
         const store = connexion();
         // exposer l'objet store à la vue
-        return {
-            store, Suppression, enregistrer, creation, annuler,
-        };
+        return { store };
     },
     mounted() {
         this.checkToken();
         this.getPersonnes();
     },
     methods: {
-        retouraccueil() {
-            this.$router.push('/');
-        },
         checkToken() {
             if (this.store.token === '') {
                 this.$router.push('/connexion');
@@ -169,15 +122,32 @@ export default {
         goPageModifierPersonnes(id) {
             this.$router.push(`/personne/${id}`);
         },
-        async getPersonnes() {
-            const rep = await fetch(`${svrURL}/personnes`, {
+        async avoirPIPPE(i) {
+            const a = await fetch(`${svrURL}/personnes/${i}`, {
                 headers: new Headers({
                     Authorization: this.store.token,
                 }),
             });
-            if (rep.ok) {
-                const json = await rep.json();
-                this.tableauPersonne = json;
+            if (a.ok) {
+                const b = await a.json();
+                return b[0];
+            }
+            return null;
+        },
+        async getPersonnes() {
+            const users = await fetch(`${svrURL}/utilisateurs`, {
+                headers: new Headers({
+                    Authorization: this.store.token,
+                }),
+            });
+            if (users.ok) {
+                const json = await users.json();
+                const promises = json.map((item) => this.avoirPIPPE(item.IdPersonne));
+                const results = await Promise.all(promises);
+                for (let i = 0; i < json.length; i++) {
+                    results[i].IdUtilisateur = json[i].IdUtilisateur;
+                }
+                this.tableauPersonne = results;
                 this.tableauPersonne.sort((a, b) => {
                     if (a.NomFamille < b.NomFamille) {
                         return -1;

@@ -11,72 +11,6 @@
                         {{personne[0].NomFamille}} {{personne[0].Prenom1}} {{personne[0].Prenom2}}
                     </h1>
                     <br>
-                    <label for="numTel" class="label">Numéro de téléphone</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input id = "numTel" class="input" type="text"
-                            placeholder="Numéro de télèphone" v-model="numTel">
-                        </div>
-                            <p class="help is-danger">{{ ErrorNumTel }}</p>
-
-                    <label for="numPer" class="label">Numéro de permis</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input id = "numPer" class="input" type="text"
-                            placeholder="Numéro de permis" v-model="numPermis">
-                        </div>
-                        <p class="help is-danger" > {{ ErrorNumPermis }} </p>
-
-                    <label for="adresse1" class="label">Adresse 1</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input id = "adresse1" class="input" type="text"
-                            placeholder="Adresse 1" v-model="adresse1">
-                        </div>
-                        <p class="help is-danger"> {{ ErrorAdresse1 }} </p>
-
-                    <label for="adresse2" class="label">Adresse 2</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input id = "adresse2" class="input" type="text"
-                            placeholder="Adresse 2" v-model="adresse2">
-                        </div>
-                        <p class="help is-danger"> {{ ErrorAdresse2 }} </p>
-
-                    <label for="ville" class="label">Ville</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input id = "ville" class="input" type="text"
-                            placeholder="ville" v-model="ville">
-                        </div>
-                        <p class="help is-danger"> {{ ErrorVille }}</p>
-
-                    <div class="columns">
-                        <div class="column is-6">
-                            <label for="province" class="label">Province</label>
-                                <div class="select">
-                                    <select v-model="province">
-                                        <option ></option>
-                                        <option >Québec</option>
-                                        <option >Terre-Neuve-et-Labrador</option>
-                                        <option >Colombie-Britannique</option>
-                                        <option >Alberta</option>
-                                        <option >Saskatchewan</option>
-                                        <option >Manitoba</option>
-                                        <option >Ontario</option>
-                                        <option >Nouveau-Brunswick</option>
-                                        <option >Île-du-prince-Édouard</option>
-                                        <option >Nouvelle-Écosse</option>
-                                        <option >Yukon</option>
-                                        <option >Territoires du Nord-Ouest</option>
-                                        <option >Nunavut</option>
-                                    </select>
-                                </div>
-                        </div>
-                        <div class="column is-6">
-                            <label for="codePostal" class="label">Code Postal</label>
-                                <div class="control has-icons-left has-icons-right">
-                                    <input id = "codePostal" class="input" type="text"
-                                    placeholder="codePostal" v-model="codePostal">
-                                </div>
-                                <p class="help is-danger"> {{ ErrorCodePostal }}</p>
-                        </div>
-                    </div>
 
                     <div class="columns">
                         <div class="column is-4">
@@ -204,10 +138,12 @@
                     *Modifications enregistrées avec succès</p>
             <div class="columns">
                 <div class="column is-6 has-text-right">
-                    <button class="button is-info" v-on:click="retourALaPersonne">Retour</button>
+                    <button class="button is-info" v-on:click="retourALaPersonne"
+                    @click="annuler">Retour</button>
                 </div>
                 <div class="column is-6">
-                    <button class="button is-info" v-on:click="updateDescription">
+                    <button class="button is-info" v-on:click="updateDescription"
+                    @click="enregistrer">
                         Enregistrer
                     </button>
                 </div>
@@ -221,17 +157,13 @@
 import { svrURL } from '@/constantes';
 // importation des vérifications
 import {
-    verifieNumTel,
-    verifieNumPermis,
-    verifieAdresse,
-    verifieVille,
-    verifieCodePostal,
     verifieTaillePoids,
     verifieYeuxCheveux,
     verifieMarques,
     verifieGiletPantalonAutreVetement,
 } from '@/validations';
 import { connexion } from '@/stores/connexionStore';
+import { createToast } from 'mosha-vue-toastify';
 
 export default {
     name: 'DescriptionPersonneView',
@@ -280,9 +212,33 @@ export default {
         };
     },
     setup() {
+        const enregistrer = () => {
+            createToast(
+                'enregistrer',
+                {
+                    timeout: 2000,
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                },
+            );
+        };
+        const annuler = () => {
+            createToast(
+                'annuler',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
         const store = connexion();
         // exposer l'objet store à la vue
-        return { store };
+        return {
+            store, annuler, enregistrer,
+        };
     },
     methods: {
         checkToken() {
@@ -344,50 +300,17 @@ export default {
                 }
             }
         },
+        async retourALaPersonne() {
+            setTimeout(() => {
+                this.$router.push(`/personne/${this.$route.params.idPersonne}`);
+            }, 20);
+        },
         async updateDescription() {
             let msg;
             if (this.uneErreurEstPresente) {
                 this.uneErreurEstPresente = false;
             }
             // Vérification de tous les champs
-            if (!verifieNumTel(this.numTel) && (this.numTel !== null && this.numTel !== '')) {
-            // Si il y a une erreur dans la vérification et que le champ n'est ni null ni vide
-                // : Faire apparaître l'erreur
-                this.ErrorNumTel = '* seul 10 chiffres sont acceptés';
-                this.uneErreurEstPresente = true;
-            } else {
-                this.ErrorNumTel = '';
-            }
-            if (!verifieNumPermis(this.numPermis) && (this.numPermis !== null && this.numPermis !== '')) {
-                this.ErrorNumPermis = '*Le numéro de permis est invalide. Ex:A123412341234';
-                this.uneErreurEstPresente = true;
-            } else {
-                this.ErrorNumPermis = '';
-            }
-            if (!verifieAdresse(this.adresse1) && (this.adresse1 !== null && this.adresse1 !== '')) {
-                this.ErrorAdresse1 = '*Maximum de 50 caracthère';
-                this.uneErreurEstPresente = true;
-            } else {
-                this.ErrorAdresse1 = '';
-            }
-            if (!verifieAdresse(this.adresse2) && (this.adresse2 !== null && this.adresse2 !== '')) {
-                this.ErrorAdresse2 += '*Maximum de 50 caracthère';
-                this.uneErreurEstPresente = true;
-            } else {
-                this.ErrorAdresse2 = '';
-            }
-            if (!verifieVille(this.ville) && (this.ville !== null && this.ville !== '')) {
-                this.ErrorVille = '*Maximum de 50 caracthère';
-                this.uneErreurEstPresente = true;
-            } else {
-                this.ErrorVille = '';
-            }
-            if (!verifieCodePostal(this.codePostal) && (this.codePostal !== null && this.codePostal !== '')) {
-                this.ErrorCodePostal = '*Entrez un code Postal valide Ex: A1B 2C3';
-                this.uneErreurEstPresente = true;
-            } else {
-                this.ErrorCodePostal = '';
-            }
             if (!verifieTaillePoids(this.taille) && (this.taille !== null && this.taille !== '')) {
                 this.ErrorTaille = '*Veuillez entrer 3 chiffres max. Taille en CM';
                 this.uneErreurEstPresente = true;
@@ -441,13 +364,6 @@ export default {
                 this.envoyé = false;
             } else {
             // Envoyer null dans le cas d'une chaine vide
-                const tel = this.Telephone === undefined ? null : this.Telephone;
-                const permis = this.numPermis === '' ? null : this.numPermis;
-                const adresse1 = this.adresse1 === '' ? null : this.adresse1;
-                const adresse2 = this.adresse2 === '' ? null : this.adresse2;
-                const ville = this.ville === '' ? null : this.ville;
-                const province = this.province === '' ? null : this.province;
-                const CD = this.codePostal === '' ? null : this.codePostal;
                 const race = this.race === '' ? null : this.race;
                 const taille = this.taille === '' ? null : this.taille;
                 const poids = this.poids === '' ? null : this.poids;
@@ -460,13 +376,6 @@ export default {
 
                 // la const body contient tout ce qui sera envoyé à la base de données.
                 const body = {
-                    Telephone: tel,
-                    NoPermis: permis,
-                    AdresseUn: adresse1,
-                    AdresseDeux: adresse2,
-                    Ville: ville,
-                    Province: province,
-                    CP: CD,
                     Race: race,
                     Taille: taille,
                     Poids: poids,
@@ -475,7 +384,7 @@ export default {
                     Marques: marques,
                     Gilet: gilet,
                     Pantalon: pantalon,
-                    Autre: autreVetement,
+                    AutreVetement: autreVetement,
                     Toxicomanie: this.toxicomanie,
                     Desorganise: this.desorganise,
                     Suicidaire: this.suicidaire,
@@ -493,7 +402,7 @@ export default {
                     // time out qui redirige vers la page personneView après 2000millisecond
                     setTimeout(() => {
                         this.$router.push(`/personne/${this.$route.params.idPersonne}`);
-                    }, 2000);
+                    }, 20);
                 } else {
                     msg = await response.json();
                     alert(msg);

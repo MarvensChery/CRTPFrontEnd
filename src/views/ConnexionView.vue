@@ -120,39 +120,48 @@ export default {
     },
     methods: {
 
-        async connect() {
-            const url = 'http://localhost:3000/connexion';
-            const Identifiant = this.Identifiant;
-            const MotDePasse = this.mdp;
-            const body = { Identifiant, MotDePasse };
+      async connect() {
+  const url = 'http://localhost:3000/connexion';
+  const Identifiant = this.Identifiant;
+  const MotDePasse = this.mdp;
+  const body = { Identifiant, MotDePasse };
 
-            // effectuer le fetch
-            const response = await fetch(url, {
-                headers: { 'Content-Type': 'application/json' },
-                method: 'POST',
-                body: JSON.stringify(body),
-            });
+  // Effectuer le fetch
+  const response = await fetch(url, {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
 
-            // traiter la réponse
-            if (response.ok) {
-              this.connectionFailed=false;
-                const data = await response.json();
-                this.store.Professeur = this.check;
-                if (this.store.Professeur == !data.Etudiant) {
-                  if (this.store.Professeur) { this.store.token = await data.token,
-                    this.$router.push('/')}
-                else {this.store.token = await data.token,this.$router.push('/etudiant')}}
-                else {
-              this.connectionFailed=true;
-                console.error('une erreur sest produite');
-            }
+  // Traiter la réponse
+  if (response.ok) {
+    this.connectionFailed = false;
+    const data = await response.json();
+    this.store.matricule = data.Matricule;
 
-            } else {
-              this.connectionFailed=true;
-                console.error('une erreur sest produite');
-            }
+    this.store.Professeur = this.check;
+    if (this.store.Professeur !== data.Etudiant) {
+      if (this.store.Professeur) {
+        this.store.token = data.token;
+        this.$router.push('/');
+      } else {
+        this.store.token = data.token;
+        this.$router.push('/etudiant');
+      }
+    } else {
+      this.connectionFailed = true;
+      console.error('Une erreur s\'est produite');
+    }
 
-        },
+    // Store the values in local storage
+    sessionStorage.setItem('matricule', this.store.matricule);
+    sessionStorage.setItem('Professeur', this.store.Professeur.toString());
+    sessionStorage.setItem('token', this.store.token);
+  } else {
+    this.connectionFailed = true;
+    console.error('Une erreur s\'est produite');
+  }
+},
         async toggleCheckbox() {
           this.check = !this.check
       this.$emit('setCheckboxVal', this.check)

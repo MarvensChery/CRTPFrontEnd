@@ -4,18 +4,235 @@
     <div class="notification is-info is-light">
       <div class="container is-2by1">
         <div class="notification is-info is-light">
-          <div class="column"></div>
-          <header>
-            <p
-              class="
-                is-size-5
-                card-content
-                has-text-centered has-text-weight-bold
-              "
-              v-if="!this.$route.params.idIppe"
-            >
-              AJOUT D'UNE RÉPONSE IPPE
-            </p>
+          <div class="column" v-if="!this.$route.params.idIppe">
+            <div class="columns is-centered">
+                <div class="column is-half">
+                  <div class="column  has-text-centered">
+                            <label for="categorie" class="label">Type Evenement</label>
+                            <div class="select">
+                                <select id= "evenement" v-model="typeEvenement">
+                                    <option id="Négatif">Négatif</option>
+                                    <option id="Recherché">Recherché</option>
+                                    <option id="Sous observation">Sous observation</option>
+                                    <option id="Probation">Probation</option>
+                                    <option id="Libération conditionnelle">
+                                      Libération conditionnelle</option>
+                                    <option id="Disparu">Disparu</option>
+                                    <option id="Interdit">Interdit</option>
+                                </select>
+                            </div>
+                            <p v-if="categorieError === true"
+                            class="help is-danger has-text-centered">
+                            *Champ obligatoire.
+                            </p>
+                        </div>
+                    <div class="field">
+                        <label for="prenom1" class="label">Mandat</label>
+                        <div class="control ">
+                            <input id = "prenom1" class="input" type="text"
+                            placeholder="Mandat"
+                            v-model="Mandat">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom1Error === true" class="help is-danger">
+                            *Champ obligatoire : seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom1" class="label">NoEvenement</label>
+                        <div class="control ">
+                            <input id = "prenom1" class="input" type="text"
+                            placeholder="NoEvenement"
+                            v-model=" NoEvenement">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom1Error === true" class="help is-danger">
+                            *Champ obligatoire : seulement des lettres sont valides</p>
+                    </div>
+
+                    <div class="field">
+                        <label for="prenom2" class="label">Motif</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="Motif"
+                            v-model="Motif">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Nature</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="Nature"
+                            v-model="Nature">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+
+                    <div class="field">
+                        <label for="prenom2" class="label">DossierEnquete</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="DossierEnquete"
+                            v-model="DossierEnquete">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Cour</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="Cour"
+                            v-model="Cour">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">NoMandat</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="NoMandat"
+                            v-model="NoMandat">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">NoCause</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="NoCause"
+                            v-model="NoCause">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Lieu Detention</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="Lieu Detention"
+                            v-model="LieuDetention">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Fin de la sentence</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="date"
+                            placeholder="Fin de sentence"
+                            v-model="FinSentence">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Vu la Derniere Fois</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="Vu la Derniere Fois"
+                            v-model="dernierefois">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Agent Probation</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="Agent Probation"
+                            v-model="AgentProbation">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Agent Liberation</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="Agent Liberation"
+                            v-model="AgentLiberation">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Telephone</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="tel"
+                            placeholder="Telephone"
+                            v-model="Telephone">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="field">
+                        <label for="prenom2" class="label">Poste</label>
+                        <div class="control ">
+                            <input id = "prenom2" class="input" type="text"
+                            placeholder="Poste"
+                            v-model="Poste">
+                            <span>
+                            <i class=""></i>
+                            </span>
+                        </div>
+                        <p v-if="prenom2Error === true" class="help is-danger">
+                            Seulement des lettres sont valides</p>
+                    </div>
+                    <div class="has-text-centered">
+                        <button class="button is-info is-rounded"
+                        v-if="this.personne !== null"
+                        v-on:click="ajoutIPPE()">
+                            Ajout IPPE
+                        </button>
+                    </div>
+                </div>
+            </div>
+            </div>
             <p
               class="
                 is-size-5
@@ -26,38 +243,7 @@
             >
               MODIFICATION D'UNE RÉPONSE IPPE
             </p>
-          </header>
           <div v-if="this.infoPersonne">
-            <div class="has-text-centered card-content">
-              <div class="box has-background-info-light">
-                <div class="columns is-10 content has-text-link is-outlined">
-                  <table>
-                    <tr>
-                      <th>Nom de Famille:</th>
-                      <td id="nom">{{ this.infoPersonne.data.NomFamille }}</td>
-                      <th>Prénom 1:</th>
-                      <td id="prenom1">{{ this.infoPersonne.data.Prenom1 }}</td>
-                      <th>Prénom 2:</th>
-                      <td id="prenom2">{{ this.infoPersonne.data.Prenom2 }}</td>
-                    </tr>
-                    <tr>
-                      <th>Sexe:</th>
-                      <td
-                        v-if="this.infoPersonne.data.Masculin === true"
-                        id="sexe"
-                      >
-                        M
-                      </td>
-                      <td v-else id="sexe">F</td>
-                      <th>Date de naissance:</th>
-                      <td id="dateDeNaissance">
-                        {{ this.infoPersonne.data.DateNaissance.substr(0, 10) }}
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
 
             <div class="field is-horizontal" style="padding-right: 150px">
               <div class="field-label is-normal">
@@ -71,11 +257,11 @@
                         class="select"
                         id="reponseType"
                         v-model="visiblecomponent"
-                      >
+                      disabled>
                         <option
                           value="Négatif"
                           v-bind:selected="
-                            infoPersonne.data.TypeEvenement == 'Négatif'
+                            infoPersonne.TypeEvenement == 'Négatif'
                               ? (this.visiblecomponent = 'Négatif')
                               : this.visiblecomponent
                           "
@@ -85,7 +271,7 @@
                         <option
                           value="Recherché"
                           v-bind:selected="
-                            infoPersonne.data.TypeEvenement == 'Recherché'
+                            infoPersonne.TypeEvenement == 'Recherché'
                               ? (this.visiblecomponent = 'Recherché')
                               : this.visiblecomponent
                           "
@@ -95,7 +281,7 @@
                         <option
                           value="Sous observation"
                           v-bind:selected="
-                            infoPersonne.data.TypeEvenement ==
+                            infoPersonne.TypeEvenement ==
                             'Sous observation'
                               ? (this.visiblecomponent = 'Sous observation')
                               : this.visiblecomponent
@@ -106,7 +292,7 @@
                         <option
                           value="Accusé"
                           v-bind:selected="
-                            infoPersonne.data.TypeEvenement == 'Accusé'
+                            infoPersonne.TypeEvenement == 'Accusé'
                               ? (this.visiblecomponent = 'Accusé')
                               : this.visiblecomponent
                           "
@@ -116,7 +302,7 @@
                         <option
                           value="Probation"
                           v-bind:selected="
-                            infoPersonne.data.TypeEvenement == 'Probation'
+                            infoPersonne.TypeEvenement == 'Probation'
                               ? (this.visiblecomponent = 'Probation')
                               : this.visiblecomponent
                           "
@@ -126,7 +312,7 @@
                         <option
                           value="Libération Conditionnelle"
                           v-bind:selected="
-                            infoPersonne.data.TypeEvenement ==
+                            infoPersonne.TypeEvenement ==
                             'Libération Conditionnelle'
                               ? (this.visiblecomponent =
                                   'Libération Conditionnelle')
@@ -138,7 +324,7 @@
                         <option
                           value="Disparu"
                           v-bind:selected="
-                            infoPersonne.data.TypeEvenement == 'Disparu'
+                            infoPersonne.TypeEvenement == 'Disparu'
                               ? (this.visiblecomponent = 'Disparu')
                               : this.visiblecomponent
                           "
@@ -148,7 +334,7 @@
                         <option
                           value="Interdit"
                           v-bind:selected="
-                            infoPersonne.data.TypeEvenement == 'Interdit'
+                            infoPersonne.TypeEvenement == 'Interdit'
                               ? (this.visiblecomponent = 'Interdit')
                               : this.visiblecomponent
                           "
@@ -180,7 +366,7 @@
                       id="cour"
                       ref="cour"
                       @change="this.onChangeCour"
-                      v-bind:value="this.IPPE.cour"
+                      v-bind:value="this.IPPE.Cour"
                     >
                       <option id="null"></option>
                       <option id="courQuebec" value="Cour du Québec">
@@ -228,7 +414,7 @@
                       size="7"
                       disabled
                       aria-labelledby="numCause1"
-                      v-bind:value="this.IPPE.noCause"
+                      v-bind:value="this.IPPE.NoCause"
                     />
                   </div>
                   <div class="control is-black">
@@ -238,7 +424,7 @@
                       ref="numCause"
                       type="text"
                       aria-labelledby="numCause2"
-                      v-bind:value="this.IPPE.noCause1"
+                      v-bind:value="this.IPPE.NoCause1"
                     />
                   </div>
                 </div>
@@ -269,7 +455,7 @@
                         v-for="crime in crimes"
                         v-bind:key="crime.IdCrime"
                         :selected="
-                          this.infoPersonne.data.IdNatureCrime == crime.IdCrime
+                          this.infoPersonne.IdNatureCrime == crime.IdCrime
                         "
                       >
                         {{ crime.IdCrime }}-{{ crime.Nature }}
@@ -296,7 +482,7 @@
                       id="numEvenement"
                       ref="numEvenement"
                       required
-                      v-bind:value="this.IPPE.noEvenement"
+                      v-bind:value="this.IPPE.NoEvenement"
                       type="text"
                       aria-labelledby="numEvenement"
                     />
@@ -366,7 +552,7 @@
                   <div class="select">
                     <select class="select" name="Nature" ref="nature">
                       <option ref="NULL">
-                        {{ this.IPPE.nature }}
+                        {{ this.IPPE.Nature }}
                       </option>
                       <option ref="Arme à feu" value="Arme à feu">
                         Arme à feu
@@ -402,7 +588,7 @@
                       type="text"
                       aria-labelledby="numEvenement"
                       required
-                      v-bind:value="this.IPPE.noEvenement"
+                      v-bind:value="this.IPPE.NoEvenement"
                     />
                   </div>
                 </div>
@@ -419,25 +605,10 @@
                   class="input"
                   ref="derniereVu"
                   type="text"
-                  placeholder=""
                   aria-labelledby="derniereVu"
-                  v-bind:value="this.IPPE.VuDerniereFois"
+                  v-bind:value="this.IPPE.dernierefois"
                 />
               </div>
-            </div>
-            <div class="column is-7 is-left">
-              <p class="control">
-                <button
-                  class="button is-link"
-                  @click="
-                    this.$router.push(
-                      `/descriptionPersonne/${this.$route.params.idPersonne}`
-                    )
-                  "
-                >
-                  Ajouter une description
-                </button>
-              </p>
             </div>
           </div>
           <br />
@@ -458,7 +629,7 @@
                     type="text"
                     aria-labelledby="numEvenement"
                     required
-                    v-bind:value="this.IPPE.noEvenement"
+                    v-bind:value="this.IPPE.NoEvenement"
                   />
                 </div>
               </div>
@@ -475,9 +646,9 @@
                       name="mandat"
                       ref="mandat"
                       @change="onChangeMandat"
-                      v-bind:value="this.IPPE.mandat"
+                      v-bind:value="this.IPPE.Mandat"
                     >
-                      <option ref="null" disabled>{{this.IPPE.mandat}}</option>
+                      <option ref="null" disabled>{{this.IPPE.Mandat}}</option>
                       <option ref="Arrestation" value="Arrestation">
                         Arrestation
                       </option>
@@ -504,9 +675,9 @@
                       id="cour"
                       ref="cour"
                       @change="this.onChangeCour"
-                      v-bind:value="this.IPPE.cour"
+                      v-bind:value="this.IPPE.Cour"
                     >
-                      <option id="null" disabled>{{ this.IPPE.cour }}</option>
+                      <option id="null" disabled>{{ this.IPPE.Cour }}</option>
                       <option id="courQuebec" value="Cour du Québec">
                         Cour du Québec
                       </option>
@@ -548,7 +719,7 @@
                       size="7"
                       disabled
                       aria-labelledby="numMandat"
-                      v-bind:value="this.IPPE.noMandat"
+                      v-bind:value="this.IPPE.NoMandat"
                     />
                   </div>
                   <div class="control">
@@ -559,7 +730,7 @@
                       size="1"
                       disabled
                       aria-labelledby="numMandat"
-                      v-bind:value="this.IPPE.noMandat1"
+                      v-bind:value="this.IPPE.NoMandat1"
                     />
                   </div>
                   <div class="control">
@@ -569,7 +740,7 @@
                       type="text"
                       aria-labelledby="numMandat"
                       maxlength="5"
-                      v-bind:value="this.IPPE.noMandat2"
+                      v-bind:value="this.IPPE.NoMandat2"
                     />
                   </div>
                 </div>
@@ -597,7 +768,7 @@
                         v-bind:key="crime.IdCdrime"
                         v-bind:value="crime.IdCdrime"
                         :selected="
-                          this.infoPersonne.data.IdNatureCrime == crime.IdCrime
+                          this.infoPersonne.IdNatureCrime == crime.IdCrime
                         "
                       >
                         {{ crime.IdCrime }}-{{ crime.Nature }}
@@ -623,7 +794,7 @@
                       name="cour"
                       ref="cour"
                       @change="this.onChangeCour"
-                      v-bind:value="this.IPPE.cour"
+                      v-bind:value="this.IPPE.Cour"
                     >
                       <option></option>
                       <option ref="courQuebec" value="Cour du Québec">
@@ -668,7 +839,7 @@
                         size="7"
                         disabled
                         aria-labelledby="numCause"
-                        v-bind:value="this.IPPE.noCause"
+                        v-bind:value="this.IPPE.NoCause"
                       />
                     </div>
                     <div class="control">
@@ -679,7 +850,7 @@
                         pattern="/^[\d]{5}[-][\d]{3}$/"
                         maxlength="9"
                         aria-labelledby="numCause"
-                        v-bind:value="this.IPPE.noCause1"
+                        v-bind:value="this.IPPE.NoCause1"
                       />
                     </div>
                   </div>
@@ -707,7 +878,7 @@
                         v-bind:key="crime.IdCdrime"
                         v-bind:value="crime.IdCdrime"
                         :selected="
-                          this.infoPersonne.data.IdNatureCrime == crime.IdCrime
+                          this.infoPersonne.IdNatureCrime == crime.IdCrime
                         "
                       >
                         {{ crime.IdCrime }}-{{ crime.Nature }}
@@ -731,7 +902,7 @@
                       type="text"
                       aria-labelledby="numEvenement"
                       required
-                      v-bind:value="this.IPPE.noEvenement"
+                      v-bind:value="this.IPPE.NoEvenement"
                     />
                   </div>
                 </div>
@@ -752,7 +923,7 @@
                       ref="finSentence"
                       type="date"
                       aria-labelledby="finSentence"
-                      v-bind:value="this.IPPE.finSentence"
+                      v-bind:value="this.IPPE.FinSentence"
                     />
                   </div>
                 </div>
@@ -779,7 +950,7 @@
                         ref="Nom"
                         type="text"
                         aria-labelledby="agentProbation"
-                        v-bind:value="this.IPPE.agentProbation"
+                        v-bind:value="this.IPPE.AgentProbation"
                       />
                     </div>
                   </div>
@@ -797,7 +968,7 @@
                         maxlength="10"
                         pattern="[0-9]{10}"
                         aria-labelledby="telephone"
-                        v-bind:value="this.IPPE.telephone"
+                        v-bind:value="this.IPPE.Telephone"
                       />
                     </div>
                   </div>
@@ -815,7 +986,7 @@
                         maxlength="6"
                         pattern="[0-9]*"
                         aria-labelledby="poste"
-                        v-bind:value="this.IPPE.poste"
+                        v-bind:value="this.IPPE.oste"
                       />
                     </div>
                   </div>
@@ -886,7 +1057,7 @@
                       class="select"
                       name="motif"
                       ref="motif"
-                      v-bind:value="this.IPPE.motif"
+                      v-bind:value="this.IPPE.Motif"
                     >
                       <option ref="null" value=""></option>
                       <option value="Sous-enquête">Sous-enquête</option>
@@ -922,7 +1093,7 @@
                         v-bind:key="crime.IdCdrime"
                         v-bind:value="crime.IdCdrime"
                         :selected="
-                          this.infoPersonne.data.IdNatureCrime == crime.IdCrime
+                          this.infoPersonne.IdNatureCrime == crime.IdCrime
                         "
                       >
                         {{ crime.IdCrime }}-{{ crime.Nature }}
@@ -947,7 +1118,7 @@
                       aria-labelledby="numEvenement"
                       pattern="/^[\d]{3}[-][\d]{6}[-][\d]{4}$/"
                       required
-                      v-bind:value="this.IPPE.noEvenement"
+                      v-bind:value="this.IPPE.NoEvenement"
                     />
                   </div>
                 </div>
@@ -966,7 +1137,7 @@
                       class="select"
                       ref="dossierEnqueteSvrPol"
                       type="text"
-                      v-bind:value="this.IPPE.dossierEnquete"
+                      v-bind:value="this.IPPE.DossierEnquete"
                     >
                       <option ref="NULL"></option>
                       <option ref="NULL" value="MTL">MTL</option>
@@ -1033,7 +1204,7 @@
                         type="text"
                         aria-labelledby="numEvenement"
                         required
-                        v-bind:value="this.IPPE.noEvenement"
+                        v-bind:value="this.IPPE.NoEvenement"
                       />
                     </div>
                   </div>
@@ -1066,7 +1237,7 @@
                         type="text"
                         maxlength="9"
                         aria-labelledby="numCause"
-                        v-bind:value="this.IPPE.noCause1"
+                        v-bind:value="this.IPPE.NoCause1"
                       />
                     </div>
                   </div>
@@ -1094,7 +1265,7 @@
                           v-bind:key="crime.IdCdrime"
                           v-bind:value="crime.IdCdrime"
                           :selected="
-                            this.infoPersonne.data.IdNatureCrime ==
+                            this.infoPersonne.IdNatureCrime ==
                             crime.IdCrime
                           "
                         >
@@ -1116,7 +1287,7 @@
                         class="select"
                         name="lieuDetention"
                         ref="lieuDetention"
-                        v-bind:value="this.IPPE.lieuDetention"
+                        v-bind:value="this.IPPE.LieuDetention"
                       >
                         <option ref="null" value=""></option>
                         <option ref="prisonPortCartier">
@@ -1148,7 +1319,7 @@
                         ref="finSentence"
                         type="date"
                         aria-labelledby="finSentence"
-                        v-bind:value="this.IPPE.finSentence"
+                        v-bind:value="this.IPPE.FinSentence"
                       />
                     </div>
                   </div>
@@ -1180,7 +1351,7 @@
                           type="text"
                           size="3"
                           aria-labelledby="nomAgentLibConditionnelle"
-                          v-bind:value="this.IPPE.agentLiberation"
+                          v-bind:value="this.IPPE.AgentLiberation"
                         />
                       </div>
                     </div>
@@ -1203,7 +1374,7 @@
                           maxlength="10"
                           pattern="[0-9]{10}"
                           aria-labelledby="telephoneAgentLibConditionnelle"
-                          v-bind:value="this.IPPE.telephone"
+                          v-bind:value="this.IPPE.Telephone"
                         />
                       </div>
                     </div>
@@ -1275,7 +1446,7 @@
                         class="select"
                         name="Cour"
                         ref="nature"
-                        v-bind:value="this.IPPE.nature"
+                        v-bind:value="this.IPPE.Nature"
                       >
                         <option ref="null" value=""></option>
                         <option ref="courQuebec" value="Arme à feu">
@@ -1308,7 +1479,7 @@
                         name="Cour"
                         ref="cour"
                         @change="this.onChangeCour"
-                        v-bind:value="this.IPPE.cour"
+                        v-bind:value="this.IPPE.Cour"
                       >
                         <option ref="null" value=""></option>
                         <option ref="courQuebec" value="Cour du Québec">
@@ -1353,7 +1524,7 @@
                         size="7"
                         disabled
                         aria-labelledby="numCause"
-                        v-bind:value="this.IPPE.noCause"
+                        v-bind:value="this.IPPE.NoCause"
                       />
                     </div>
                     <div class="control is-black">
@@ -1364,7 +1535,7 @@
                         type="text"
                         maxlength="9"
                         aria-labelledby="numCause"
-                        v-bind:value="this.IPPE.noCause1"
+                        v-bind:value="this.IPPE.NoCause1"
                       />
                     </div>
                   </div>
@@ -1392,7 +1563,7 @@
                           v-bind:key="crime.IdCdrime"
                           v-bind:value="crime.IdCdrime"
                           :selected="
-                            this.infoPersonne.data.IdNatureCrime ==
+                            this.infoPersonne.IdNatureCrime ==
                             crime.IdCrime
                           "
                         >
@@ -1438,7 +1609,7 @@
                         type="text"
                         aria-labelledby="numEvenement"
                         required
-                        v-bind:value="this.IPPE.noEvenement"
+                        v-bind:value="this.IPPE.NoEvenement"
                       />
                     </div>
                   </div>
@@ -1554,6 +1725,8 @@
 </template>
 <script>
 import { connexion } from '@/stores/connexionStore';
+import { createToast } from 'mosha-vue-toastify';
+import 'mosha-vue-toastify/dist/style.css';
 
 export default {
     name: 'IPPEView',
@@ -1568,27 +1741,27 @@ export default {
             date: '',
             dataIPPE: [],
             IPPE: {
-                noEvenement: '',
-                typeEvenement: '',
-                mandat: '',
-                motif: '',
-                nature: '',
-                dossierEnquete: '',
-                dossierEnquete1: '',
+                NoEvenement: '',
+                TypeEvenement: '',
+                Mandat: '',
+                Motif: '',
+                Nature: '',
+                DossierEnquete: '',
+                DossierEnquete1: '',
                 cour: '',
-                natureCrime: null,
-                noMandat: '',
-                noMandat1: '',
-                noMandat2: '',
-                noCause: '',
-                noCause1: '',
+                NatureCrime: null,
+                NoMandat: '',
+                NoMandat1: '',
+                NoMandat2: '',
+                NoCause: '',
+                NoCause1: '',
                 lieuDetention: '',
-                finSentence: '',
-                vuDerniereFois: '',
-                agentProbation: '',
-                agentLiberation: '',
-                telephone: '',
-                poste: '',
+                FinSentence: '',
+                dernierefois: '',
+                AgentProbation: '',
+                AgentLiberation: '',
+                Telephone: '',
+                Poste: '',
                 idCondition: '',
             },
             regexNumTrait: /^(?=.*\d)(?=.*[-])[\d-]{2,15}$/,
@@ -1605,9 +1778,44 @@ export default {
         this.affichageInfoPersonne();
     },
     setup() {
+        const annuler = () => {
+            createToast(
+                'IPPE Supprimer',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
+        const modif = () => {
+            createToast(
+                'IPPE modifie',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
+        const creer = () => {
+            createToast(
+                'IPPE creer',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
         const store = connexion();
         // exposer l'objet store à la vue
-        return { store };
+        return {
+            store, annuler, creer, modif,
+        };
     },
     computed: {
         typeBouton() {
@@ -1651,124 +1859,151 @@ export default {
             }
         },
         async getCrime() {
-            const response = await fetch('http://localhost:3000/crimes');
+            const response = await fetch('http://localhost:3000/crimes', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: this.store.token,
+                },
+            });
             const data = await response.json();
             this.crimes = data;
-            console.log(data);
         },
         async affichageInfoPersonne() {
             if (this.$route.params.idIppe) {
-                const response = await fetch(
-                    `http://localhost:3000/ippes/infoPersonne/${this.$route.params.idPersonne}/${this.$route.params.idIppe}`,
-                );
+                const response = await fetch(`http://localhost:3000/ippes/${this.$route.params.idIppe}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: this.store.token,
+                    },
+                });
                 if (response.ok) {
                     this.infoPersonne = await response.json();
                     console.log(this.infoPersonne);
-                    this.IPPE.noEvenement = this.infoPersonne.data.NoEvenement;
-                    this.IPPE.typeEvenement = this.infoPersonne.data.TypeEvenement;
-                    this.IPPE.mandat = this.infoPersonne.data.Mandat;
-                    this.IPPE.motif = this.infoPersonne.data.Motif;
-                    this.IPPE.nature = this.infoPersonne.data.Nature;
-                    if (this.infoPersonne.data.DossierEnquete) {
-                        this.IPPE.dossierEnquete = this.infoPersonne.data.DossierEnquete
+                    this.IPPE.NoEvenement = this.infoPersonne.NoEvenement;
+                    this.IPPE.TypeEvenement = this.infoPersonne.TypeEvenement;
+                    this.IPPE.Mandat = this.infoPersonne.Mandat;
+                    this.IPPE.Motif = this.infoPersonne.Motif;
+                    this.IPPE.Nature = this.infoPersonne.Nature;
+                    if (this.infoPersonne.DossierEnquete) {
+                        this.IPPE.DossierEnquete = this.infoPersonne.DossierEnquete
                             .substr(0, 3);
-                        this.IPPE.dossierEnquete1 = this.infoPersonne.data
+                        this.IPPE.DossierEnquete1 = this.infoPersonne
                             .DossierEnquete
                             .substr(-6);
                     }
-                    this.IPPE.cour = this.infoPersonne.data.Cour;
-                    this.IPPE.IdnatureCrime = this.infoPersonne.data.IdNatureCrime;
-                    this.IPPE.natureCrime = this.infoPersonne.data.NatureCrime;
-                    if (this.infoPersonne.data.NoMandat) {
-                        this.IPPE.noMandat = this.infoPersonne.data.NoMandat.replace(
-                            this.infoPersonne.data.NoMandat.substr(-7),
+                    this.IPPE.Cour = this.infoPersonne.Cour;
+                    this.IPPE.IdNatureCrime = this.infoPersonne.IdNatureCrime;
+                    this.IPPE.NatureCrime = this.infoPersonne.NatureCrime;
+                    if (this.infoPersonne.NoMandat) {
+                        this.IPPE.NoMandat = this.infoPersonne.NoMandat.replace(
+                            this.infoPersonne.NoMandat.substr(-7),
                             '',
                         );
-                        this.IPPE.noMandat1 = this.infoPersonne.data.NoMandat.substr(
+                        this.IPPE.NoMandat1 = this.infoPersonne.NoMandat.substr(
                             -7,
-                        ).replace(this.infoPersonne.data.NoMandat.substr(-5), '');
-                        this.IPPE.noMandat2 = this.infoPersonne.data.NoMandat.substr(-5);
+                        ).replace(this.infoPersonne.NoMandat.substr(-5), '');
+                        this.IPPE.NoMandat2 = this.infoPersonne.NoMandat.substr(-5);
                     }
-                    this.IPPE.noCause1 = this.infoPersonne.data.NoCause.substr(-9);
-                    this.IPPE.noCause = this.infoPersonne.data.NoCause.replace(
-                        this.infoPersonne.data.NoCause.substr(-9),
-                        '',
-                    );
-                    console.log(this.IPPE.noCause1, this.IPPE.noCause);
-                    this.IPPE.lieuDetention = this.infoPersonne.data.LieuDetention;
-                    this.IPPE.finSentence = this.infoPersonne.data.DateNaissance.substr(
-                        0,
-                        10,
-                    );
-                    this.IPPE.vuDerniereFois = this.infoPersonne.data.VuDernierefois;
-                    this.IPPE.agentProbation = this.infoPersonne.data.AgentProbation;
-                    this.IPPE.agentLiberation = this.infoPersonne.data.AgentLiberation;
-                    this.IPPE.telephone = this.infoPersonne.data.Telephone;
-                    this.IPPE.poste = this.infoPersonne.data.Poste;
+                    if (this.infoPersonne.NoCause) {
+                        this.IPPE.NoCause1 = this.infoPersonne.NoCause.substr(-9);
+                        this.IPPE.NoCause = this.infoPersonne.NoCause.replace(
+                            this.infoPersonne.NoCause.substr(-9),
+                            '',
+                        );
+                    }
+                    if (this.infoPersonne.LieuDetention) {
+                        this.IPPE.LieuDetention = this.infoPersonne.LieuDetention;
+                        this.IPPE.FinSentence = this.infoPersonne.DateNaissance.substr(
+                            0,
+                            10,
+                        );
+                    }
+                    this.IPPE.VuDerniereFois = this.infoPersonne.VuDernierefois;
+                    this.IPPE.AgentProbation = this.infoPersonne.AgentProbation;
+                    this.IPPE.AgentLiberation = this.infoPersonne.AgentLiberation;
+                    this.IPPE.Telephone = this.infoPersonne.Telephone;
+                    this.IPPE.Poste = this.infoPersonne.Poste;
                 }
             } else {
                 const response = await fetch(
-                    `http://localhost:3000/personnes/${this.$route.params.idPersonne}`,
+                    `http://localhost:3000/ippes/${this.$route.params.idIppe}`,
                 );
                 if (response.ok) {
                     this.infoPersonne = await response.json();
-                    console.log(this.infoPersonne);
                 }
             }
         },
         async modifierIPPE(element) {
             const response = await fetch(
-                `http://localhost:3000/ippes/${this.$route.params.idPersonne}/${this.$route.params.idIppe}`,
+                `http://localhost:3000/ippes/${this.$route.params.idIppe}`,
                 {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
                     body: JSON.stringify({ element }),
+
                 },
             );
             const data = await response.json();
-            if (data.success === true) {
-                console.log(data);
-                alert(data.message);
+
+            if (data) {
+                this.modif();
                 this.$router.push(`/personne/${this.$route.params.idPersonne}`);
             } else {
-                alert(
-                    `Oups quelque chose n'a pas fonctionné, Le serveur indique: ${data.message}`,
-                );
+                this.$router.push(`/personne/${this.$route.params.idPersonne}`);
             }
         },
         async supprimerIPPE() {
-            const resultat = window.confirm('Voulez-vous continuer la suppression ?');
-            if (resultat === true) {
-                const response = await fetch(
-                    `http://localhost:3000/ippes/${this.$route.params.idPersonne}/${this.$route.params.idIppe}`,
-                    {
-                        method: 'DELETE',
-                        headers: { 'Content-Type': 'application/json' },
-                    },
-                );
-                const data = await response.json();
-                if (data.success === true) {
-                    alert(data.message);
-                    this.$router.push(`/personne/${this.$route.params.idPersonne}`);
-                } else {
-                    alert(
-                        `Oups quelque chose n'a pas fonctionné, Le serveur indique:${data.message}`,
-                    );
-                }
-            }
-        },
-        async ajoutIPPE(element) {
+            const token = (sessionStorage.getItem('token'));
             const response = await fetch(
-                `http://localhost:3000/ippes/${this.$route.params.idPersonne}`,
+                `http://localhost:3000/ippes/${this.$route.params.idIppe}`,
                 {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ element }),
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
+                    Authorization: token,
                 },
             );
             const data = await response.json();
             if (data.success === true) {
-                alert(data.message);
+                this.$router.push(`/personne/${this.$route.params.idPersonne}`);
+            } else {
+                this.annuler();
+                this.$router.push(`/personne/${this.$route.params.idPersonne}`);
+            }
+        },
+        async ajoutIPPE() {
+            const boy = {
+                TypeEvenement: this.typeEvenement,
+                NoEvenement: this.NoEvenement,
+                Mandat: this.Mandat,
+                Motif: this.Motif,
+                Nature: this.Nature,
+                DossierEnquete: this.DossierEnquete,
+                Cour: this.Cour,
+                NoMandat: this.NoMandat,
+                NoCause: this.NoCause,
+                LieuDetention: this.LieuDetention,
+                FinSentence: this.FinSentence,
+                VuDerniereFois: this.dernierefois,
+                AgentProbation: this.AgentProbation,
+                AgentLiberation: this.AgentLiberation,
+                Telephone: this.Telephone,
+                Poste: this.Poste,
+            };
+            console.log(boy);
+            const response = await fetch(
+                `http://localhost:3000/ippes/insertIppePersonne/${this.$route.params.idPersonne}`,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', Authorization: this.store.token },
+                    body: JSON.stringify(boy),
+                },
+            );
+            this.creer();
+            this.$router.push(`/personne/${this.$route.params.idPersonne}`);
+            const data = await response.json();
+            if (data.success === true) {
                 this.$router.push(`/personne/${this.$route.params.idPersonne}`);
             } else {
                 alert(
@@ -1800,7 +2035,6 @@ export default {
             const accuse = {
                 tableIPPE,
             };
-            console.log(accuse);
             if (this.$route.params.idIppe) await this.modifierIPPE(accuse);
             else await this.ajoutIPPE(accuse);
         },
@@ -1813,7 +2047,6 @@ export default {
             };
 
             const disparu = { tableIPPE };
-            console.log(disparu);
             if (this.$route.params.idIppe) await this.modifierIPPE(disparu);
             else await this.ajoutIPPE(disparu);
         },
@@ -1830,7 +2063,6 @@ export default {
                 NoEvenement: this.$refs.numEvenement.value,
             };
             const recherche = { tableIPPE };
-            console.log(recherche);
             if (this.$route.params.idIppe) await this.modifierIPPE(recherche);
             else await this.ajoutIPPE(recherche);
         },
@@ -1848,7 +2080,6 @@ export default {
                 IdNatureCrime: NatureCrime[0],
             };
             const probation = { tableIPPE };
-            console.log(probation);
             if (this.$route.params.idIppe) await this.modifierIPPE(probation);
             else await this.ajoutIPPE(probation);
         },
@@ -1864,7 +2095,6 @@ export default {
                 IdNatureCrime: NatureCrime[0],
             };
             const Interdit = { tableIPPE };
-            console.log(Interdit);
             if (this.$route.params.idIppe) await this.modifierIPPE(Interdit);
             else await this.ajoutIPPE(Interdit);
         },
@@ -1881,7 +2111,6 @@ export default {
                 IdNatureCrime: NatureCrime[0],
             };
             const SousObservation = { tableIPPE };
-            console.log(SousObservation);
             if (this.$route.params.idIppe) await this.modifierIPPE(SousObservation);
             else await this.ajoutIPPE(SousObservation);
         },
@@ -1898,7 +2127,6 @@ export default {
                 FinSentence: this.$refs.finSentence.value,
             };
             const LibConditionnelle = { tableIPPE };
-            console.log(LibConditionnelle);
             if (this.$route.params.idIppe) await this.modifierIPPE(LibConditionnelle);
             else await this.ajoutIPPE(LibConditionnelle);
         },

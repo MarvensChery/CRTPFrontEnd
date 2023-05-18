@@ -1,62 +1,122 @@
 <template>
-   <div class="container box mt-6">
-      <h2 class="title has-text-info-dark">IBVA - Recherche de valeurs</h2>
+  <div class="hero-body ">
+    <!--box gives it the shadow-->
+    <article v-if="this.$root.$data.erreurIPPE === true" class="column is-full message is-danger">
+          <div class="message-body">
+            Erreur, la Valeur recherché(e) n'existe pas
+          </div>
+    </article>
+    <div class="container box mt-6">
+      <h2 class="title has-text-info-dark">Interrogation Valeur - IBVA</h2>
       <form class="row columns is-multiline">
-
+        <!--noserie-->
+        <div class="column is-12">
+          <div class="field">
+            <label for="noserie" class="label">Numero de série/Nom de l'oeuvre
+              /Numéro de passeport/Nom de l'auteur</label>
+            <div class="control">
+              <input id="noserie" class="input" type="text"
+                     placeholder="Bsc230087/ROMANTIQUE OUTREMONT
+/GC872783/RICHARD SAVOIE" v-model="noserie" >
+            </div>
+          </div>
+        </div>
         <!--VALIDATION ERREUR-->
-        <!--P1-->
-        <div class="column is-12">
-          <div class="field">
-            <label for="prenom1" class="label">Numero de série</label>
-            <div class="control">
-              <input id="prenom1" class="input" type="text"
-                     placeholder="Numéro de série"  required>
-            </div>
+        <article v-if="erreur === true" class="column is-full message is-danger">
+          <div class="message-body">
+            Ce champ ne peut pas etre vide!
           </div>
-        </div>
-        <!--P2-->
-        <div class="column is-12">
-          <div class="field">
-            <label for="passeport" class="label">Numéro de passeport</label>
-            <div class="control">
-              <input id="passeport" class="input" type="text"
-                     placeholder="Numero de passeport" required>
-            </div>
-          </div>
-        </div>
-         <!--P2-->
-         <div class="column is-12">
-          <div class="field">
-            <label for="oeuvre" class="label">Titre de l’oeuvre d’art</label>
-            <div class="control">
-              <input id="oeuvre" class="input" type="text"
-                     placeholder="Titre de l’oeuvre d’art" required>
-            </div>
-          </div>
-        </div>
- <!--P2-->
-     <div class="column is-12">
-          <div class="field">
-            <label for="auteur" class="label">Nom de l'auteur</label>
-            <div class="control">
-              <input id="auteur" class="input" type="text"
-                     placeholder="Nom de l'auteur" required>
-            </div>
-          </div>
-        </div>
+        </article>
+        <!--BOUTON-->
         <div class="column is-12">
           <button id="form" class="button is-info is-fullwidth"
-                  type="button" value="Recherche" >
+                  type="button" value="Recherche" v-on:click="this.isValid()"
+                  v-on:keydown="this.isValid()">
             Recherche
           </button>
-          <div class="column is-12">
-          <button id="annuler" class="button is-danger " style="width: 30%; margin-left: 35%;"
-                  type="button" value="Annuler" v-on:click="$router.go(-1) "
-                  v-on:keydown="$router.go(-1)">
-            Annuler
-          </button>
         </div>
-        </div>
-    </form>
+        <div class="column is-12">
+      <button v-if="(this.store.Professeur)"
+                v-on:click="this.$router.push({ path: '/' })"
+                id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler" @click="annuler"
+                >Annuler</button>
+                <button v-if="(!this.store.Professeur)"
+                v-on:click="this.$router.push({ path: '/etudiant' })"
+                id="annuler" class="button is-danger is-fullwidth"
+                  type="button" value="Annuler" @click="annuler"
+                >Annuler</button>
+      </div>
+      </form>
+
     </div>
+  </div>
 </template>
+
+<script>
+import { connexion } from '@/stores/connexionStore';
+import { createToast } from 'mosha-vue-toastify';
+// import { capitalizeAllLetter } from '@/validations';
+
+export default {
+    name: 'RequeteIBVA',
+    data() {
+        return {
+            noserie: '',
+            auteur: '',
+            erreur: false,
+        };
+    },
+    setup() {
+        const annuler = () => {
+            createToast(
+                'annuler',
+                {
+                    position: 'bottom-right',
+                    type: 'success',
+                    transition: 'slide',
+                    timeout: 2000,
+                },
+            );
+        };
+        const store = connexion();
+        // exposer l'objet store à la vue
+        return {
+            store, annuler,
+        };
+    },
+    methods: {
+        checkToken() {
+            if (this.store.token === '') {
+                this.$router.push('/connexion');
+            }
+        },
+        // Fonction qui permet de vérifier si les champs sont valides
+        isValid() {
+            this.$root.$data.erreurIBOB = false;
+            let recherche = '';
+            if (this.noserie !== '') {
+                this.erreur = false;
+                recherche = this.noserie;
+                this.$router.push(`/reponseIBAV/${recherche}`);
+            } else if (this.auteur !== '') {
+                this.erreur = false;
+                recherche = this.auteur;
+                this.$router.push(`/reponseIBAV/${recherche}`);
+            } else {
+                this.erreur = true;
+                console.log('vous devez selectioner au moin un des 2');
+            }
+            // this.$router.push(`/reponseIBAV/${recherche}`);
+        },
+    },
+    async mounted() {
+        await this.checkToken();
+    },
+
+};
+
+</script>
+
+<style scoped>
+</style>
