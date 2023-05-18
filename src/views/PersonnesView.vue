@@ -31,9 +31,9 @@
                 <thead>
                   <tr>
                     <th class="is-info">Nom</th>
-                    <th class="is-info">Prenom1</th>
-                    <th class="is-info">Prenom2</th>
-                    <th class="is-info">Categorie</th>
+                    <th class="is-info">Prénom #1</th>
+                    <th class="is-info">Prénom #2</th>
+                    <th class="is-info">Catégorie</th>
                     <th class="borderNone">
                         <router-link to="/personne">
                             <i class="fas fa-user-plus"></i>
