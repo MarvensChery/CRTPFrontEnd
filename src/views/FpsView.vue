@@ -554,16 +554,22 @@ export default {
                     const rep = await fetch(`${svrURL}/fps`, requestOptions);
                     if (rep.status === 200) {
                         this.message = `L'ajout du numéro FPS ${this.numeroFPS}H est réussi !`;
-                        window.scrollTo(0, 0);
+                        setTimeout(() => {
+                        this.$router.push(`/personne/${this.$route.params.idPersonne}`);
+                    }, 500);
                     }
 
                     if (rep.status === 500) {
                         this.errorMsg = `Le numéro ${this.numeroFPS}H existe déjà !`;
-                        window.scrollTo(0, 0);
+                        setTimeout(() => {
+                        this.$router.push(`/personne/${this.$route.params.idPersonne}`);
+                    }, 500);
                     }
                 } catch (error) {
                     this.errorMsg = 'Une erreur est survenu avec la base de donnée !';
-                    window.scrollTo(0, 0);
+                    setTimeout(() => {
+                        this.$router.push(`/personne/${this.$route.params.idPersonne}`);
+                    }, 500);
                 }
             }
         },
@@ -608,8 +614,8 @@ export default {
                 const rep = await fetch(`${svrURL}/fps/${this.IdFPS}`, requestOptions);
                 if (rep.status === 200) {
                     this.message = `La suppression du FPS ${this.numeroFPS}H est réussi !`;
-                    window.scrollTo(0, 0);
-                    setTimeout(() => this.$router.push(`/personne/${{ a }}`), 2000);
+
+                    setTimeout(() => this.$router.push(`/personne/${a}`), 500);
                 }
             } catch (error) {
                 this.errorMsg = 'Une erreur est survenu avec la base de donnée !';
@@ -664,8 +670,8 @@ export default {
                     if (rep.status === 200) {
                         this.message = `La modifcation du FPS ${this.numeroFPS}H est réussi !`;
                         setTimeout(() => {
-                            this.$router.push('/personnes');
-                        }, 2000);
+                            this.$router.push(`/personne/${this.$route.params.idPersonne}`);
+                        }, 500);
                     }
 
                     if (rep.status === 500) {

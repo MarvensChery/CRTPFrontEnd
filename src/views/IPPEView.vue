@@ -606,7 +606,7 @@
                   ref="derniereVu"
                   type="text"
                   aria-labelledby="derniereVu"
-                  v-bind:value="this.IPPE.dernierefois"
+                  v-bind:value="this.IPPE.VuDerniereFois"
                 />
               </div>
             </div>
@@ -1757,7 +1757,7 @@ export default {
                 NoCause1: '',
                 lieuDetention: '',
                 FinSentence: '',
-                dernierefois: '',
+                VuDerniereFois: '',
                 AgentProbation: '',
                 AgentLiberation: '',
                 Telephone: '',
@@ -1920,7 +1920,7 @@ export default {
                             10,
                         );
                     }
-                    this.IPPE.VuDerniereFois = this.infoPersonne.VuDernierefois;
+                    this.IPPE.VuDerniereFois = this.infoPersonne.VuDerniereFois;
                     this.IPPE.AgentProbation = this.infoPersonne.AgentProbation;
                     this.IPPE.AgentLiberation = this.infoPersonne.AgentLiberation;
                     this.IPPE.Telephone = this.infoPersonne.Telephone;
@@ -1985,7 +1985,7 @@ export default {
                 NoCause: this.NoCause,
                 LieuDetention: this.LieuDetention,
                 FinSentence: this.FinSentence,
-                VuDerniereFois: this.dernierefois,
+                VuDerniereFois: this.VuDerniereFois,
                 AgentProbation: this.AgentProbation,
                 AgentLiberation: this.AgentLiberation,
                 Telephone: this.Telephone,

@@ -258,7 +258,6 @@
                             is-striped is-narrow is-hoverable" style="align-content: center;">
                                 <thead>
                                     <tr>
-                                        <th class="is-info">Comportement</th>
                                         <th class="is-info">Numéro</th>
                                         <th style="border:none;"
                                         v-if="this.personne !== null">
@@ -280,7 +279,7 @@
                                 <tbody v-if="this.ippe !== null && this.personne !== null">
                                     <tr v-for="i in this.fps"
                                     v-bind:key="i.IdFPS">
-                                        <td>{{i.Antecedents}}</td>
+
                                         <td>{{i.NoFPS}}</td>
                                         <td style="border:none;">
                                             <router-link v-bind:to="{name: 'ajoutFpsView',
